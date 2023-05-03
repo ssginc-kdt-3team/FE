@@ -1,0 +1,25 @@
+:root {
+  --main: #C30E2D;
+
+  /* bg */
+  --input-bg: #f9f9f9;
+
+
+  
+  --black: #222222;
+  --yellow: #f9bb00;
+  --gray: #9e9e9e;
+  --gray-150: #f3f5f7;
+  --red: #ca3232;
+
+  --bg: #f9fafc;
+  --font: #333;
+  --border: #ebebeb;
+  --price: #f95a00;
+
+  --description: #999;
+
+  --footer-bg: #f4f4f4;
+
+  --scrollbar: #ddd;
+}

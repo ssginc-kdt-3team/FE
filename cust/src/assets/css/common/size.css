@@ -1,0 +1,23 @@
+:root {
+  --device-s: 768px;
+
+  /* header */
+  --header-height: 90px;
+
+  /* footer */
+  --footer-height: 334px;
+
+  /* size */
+  --input-btn-height: 65px;
+  
+}
+
+.width-100 {
+  width: 100%;
+}
+.width-50 {
+  width: 50%;
+}
+.width-30 {
+  width: 30%;
+}
