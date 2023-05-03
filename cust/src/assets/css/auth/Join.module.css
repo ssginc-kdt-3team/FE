@@ -1,0 +1,41 @@
+.joinForm {
+  max-width: 1024px;
+  width: 75%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+}
+
+.joinForm > div:nth-child(1), .joinForm > div:nth-child(n+5):nth-child(-n+9) {
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+.joinForm > div:nth-child(3) {
+  position: relative;
+}
+.joinForm > div:nth-child(3) > div {
+  position: absolute;
+  bottom: 0;
+}
+
+label {
+  font-size: (--input-fontSize);
+  display: block;
+}
+
+.joinInput {
+  /* width: 50%; */
+  height: var(--input-btn-height);
+  padding: 15px 0 ;
+  border: 0;
+  border-bottom: 1px solid var(--main);
+  font-size: var(--input-fontSize);
+  /* margin-bottom: 10px; */
+  
+  box-sizing: border-box;
+}
+
+input[type=radio] {
+  height: var(--input-btn-height);
+}

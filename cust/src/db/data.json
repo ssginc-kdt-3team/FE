@@ -1,0 +1,52 @@
+{
+  "cust": [
+    {
+      "id": 1,
+      "name": "a",
+      "email": "a@a",
+      "password": "a",
+      "date": "2023-05-03",
+      "gender": true,
+      "zipCode": "11111",
+      "city": "a",
+      "district": "a",
+      "detail": "a"
+    },
+    {
+      "id": 2,
+      "name": "b",
+      "email": "b@b",
+      "password": "b",
+      "date": "2023-05-03",
+      "gender": true,
+      "zipCode": "11111",
+      "city": "b",
+      "district": "b",
+      "detail": "b"
+    },
+    {
+      "id": 3,
+      "name": "c",
+      "email": "c@c",
+      "password": "c",
+      "date": "2023-05-03",
+      "gender": true,
+      "zipCode": "11111",
+      "city": "c",
+      "district": "c",
+      "detail": "c"
+    },
+    {
+      "id": 4,
+      "name": "d",
+      "email": "d@d",
+      "password": "d",
+      "date": "2023-05-03",
+      "gender": true,
+      "zipCode": "11111",
+      "city": "d",
+      "district": "d",
+      "detail": "d"
+    }
+  ]
+}
