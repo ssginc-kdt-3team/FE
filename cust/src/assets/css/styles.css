@@ -1,5 +1,6 @@
 /* common */
 @import url(./common/color.css);
+@import url(./common/common.css);
 @import url(./common/layout.css);
 @import url(./common/size.css);
 @import url(./common/ui.css);

@@ -2,7 +2,7 @@
   --device-s: 768px;
 
   /* header */
-  --header-height: 90px;
+  --header-height: 180px;
 
   /* footer */
   --footer-height: 334px;
@@ -13,6 +13,7 @@
   
 }
 
+/* 너비 */
 .width-100 {
   width: 100%;
 }
@@ -21,4 +22,25 @@
 }
 .width-30 {
   width: 30%;
+}
+
+/* 패딩 */
+.pl-25 {
+  padding-left: 25px !important;
+}
+.pl-50 {
+  padding-left: 50px !important;
+}
+.pl-75 {
+  padding-left: 75px !important;
+}
+
+.pr-25 {
+  padding-right: 25px !important;
+}
+.pr-50 {
+  padding-right: 50px !important;
+}
+.pr-75 {
+  padding-right: 75px !important;
 }
