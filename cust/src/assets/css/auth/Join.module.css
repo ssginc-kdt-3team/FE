@@ -1,0 +1,46 @@
+.joinForm {
+  max-width: 800px;
+  width: 75%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+}
+
+/* 2칸 다 사용 */
+.joinForm > div:nth-child(n+10):nth-child(-n+12) {
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+/* 버튼 밑바닥으로 */
+.joinForm > div:nth-child(6) {
+  position: relative;
+}
+.joinForm > div:nth-child(6) > div {
+  position: absolute;
+  bottom: 0;
+}
+
+label {
+  font-size: (--input-fontSize);
+  display: block;
+}
+
+.joinInput {
+  /* width: 50%; */
+  height: var(--input-btn-height);
+  padding: 15px 0 ;
+  border: 0;
+  border-bottom: 1px solid var(--main);
+  font-size: var(--input-fontSize);
+  /* margin-bottom: 10px; */
+  
+  box-sizing: border-box;
+}
+.joinInput:focus {
+  outline: none;
+}
+
+input[type=radio] {
+  height: var(--input-btn-height);
+}

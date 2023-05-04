@@ -7,14 +7,21 @@
   text-align: center;
   background: var(--main);
   color: #fff;
-  border: none;
+  border: 1px solid var(--main);
   cursor: pointer;
   box-sizing: border-box;
   transition: 0.5s;
 }
-
 .button:hover {
   background-color: #fff;
   color: var(--main);
-  border: 1px solid var(--main);
+}
+
+.buttonReverse { /* button 클래스보다 우선순위 높다 << 뒤에 위치 */
+  background-color: #fff;
+  color: var(--main);
+}
+.buttonReverse:hover {
+  background-color: var(--main);
+  color: #fff;
 }
