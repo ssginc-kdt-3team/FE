@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PageTitle from '../../ui/PageTitle';
 import styles from '../../../assets/css/auth/Login.module.css';
 import { useSetRecoilState } from 'recoil';
@@ -42,6 +42,7 @@ function Login() {
         }
       })
       .catch(err => { // 오류 처리
+        alert("오류가 발생하였습니다.");
         console.log(err);
       });
     }
@@ -52,16 +53,20 @@ function Login() {
   return (
     <div className='container'>
       <div className='center flex-col'>
-        <PageTitle title="로그인" fontSize="1.8rem" marginBottom="75px"/>
+        <PageTitle title="로그인" fontSize="1.6rem" marginTop="80px" marginBottom="100px"/>
         <form className={styles.loginForm}>
           <input className={styles.loginInput} type='email' value={email} placeholder='이메일' onChange={(e) => setEmail(e.currentTarget.value)}/>
 
           <input className={styles.loginInput} type='password' value={password} placeholder='비밀번호' onChange={(e) => setPassword(e.currentTarget.value)}/>
 
           <div className='button' onClick={handleLogin}>로그인</div>
-          <div>
-            <div onClick={() => alert('아이디 찾기로 이동')}>아이디 찾기 &gt;</div>
-            <div onClick={() => alert('비밀번호 찾기로 이동')}>비밀번호 찾기 &gt;</div>
+          <div id={styles.findIdPasswordWrap}>
+            <div onClick={() => alert('아이디 찾기로 이동')}>
+              아이디 찾기<img src="https://www.josunhotel.com/static/home/images/ko/pc/common/ico_arr_7x13.png" alt="" />
+            </div>
+            <div onClick={() => alert('비밀번호 찾기로 이동')}>
+              비밀번호 찾기<img src="https://www.josunhotel.com/static/home/images/ko/pc/common/ico_arr_7x13.png" alt="" />
+            </div>
           </div>
           <div>아직 회원이 아니신가요? <span onClick={() => navigate('/join')}>회원가입</span></div>
         </form>

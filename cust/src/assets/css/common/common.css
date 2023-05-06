@@ -1,5 +1,6 @@
 * {
   font-family: 'Noto Sans KR', sans-serif;
+  box-sizing: border-box;
 }
 
 html {
@@ -51,3 +52,17 @@ header {
 /* input:focus {
   outline: 1px solid var(--main);
 } */
+
+input {
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 768px) {
+  #root {
+    margin-top: var(--mob-header-height);
+  }
+  
+  header {
+    height: var(--mob-header-height);
+  }
+}
