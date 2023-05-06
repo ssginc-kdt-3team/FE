@@ -7,13 +7,11 @@
 
 .loginInput {
   width: 100%;
-  height: 65px;
+  height: var(--input-height);
   padding: 15px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--input-border);
   font-size: var(--input-fontSize);
   /* margin-bottom: 10px; */
-  
-  box-sizing: border-box;
 }
 .loginInput:focus {
   outline: 1px solid var(--main);
@@ -24,22 +22,33 @@
 }
 
 /* 아이디 찾기/비밀번호 찾기 */
-.loginForm div:nth-child(4) {
+#findIdPasswordWrap {
   margin: 10px 0 20px 0;
   display: flex;
 }
-.loginForm > div > div {
+#findIdPasswordWrap > div {
   width: 50%;
   text-align: center;
   cursor: pointer;
 }
+#findIdPasswordWrap > div > img {
+  margin-left: 10px;
+}
 
 /* 회원가입 */
-.loginForm:last-child {
+.loginForm > div:last-child {
   text-align: center;
 }
-.loginForm:last-child span {
+.loginForm > div:last-child span {
   color: var(--main);
   font-weight: bold;
   cursor: pointer;
+}
+
+
+@media screen and (max-width: 768px) {
+  .loginForm {
+    width: 100%;
+    /* padding: 0 20px; */
+  }
 }

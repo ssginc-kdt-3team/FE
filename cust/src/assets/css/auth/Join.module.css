@@ -1,46 +1,134 @@
 .joinForm {
   max-width: 800px;
   width: 75%;
-  display: grid;
+  /* display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: 20px;
+  grid-row-gap: 40px;
+  grid-column-gap: 20px; */
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.joinInput {
+  /* width: 50%; */
+  height: var(--input-height);
+  padding: 15px 0 ;
+  border: 0;
+  border-bottom: 1px solid var(--input-border);
+  font-size: var(--input-fontSize);
+  /* margin-bottom: 10px; */
+}
+.joinInput:focus {
+  outline: none;
+  border-bottom: 1px solid var(--black);
+}
+
+#nameWrap > input, #phoneWrap > input, #birthWrap > input, #genderWrap > input {
+  width: calc(50% - 10px);
+}
+#emailWrap > input, #passwordWrap > input, #confirmPasswordWrap > input {
+  width: 100%;
 }
 
 /* 2칸 다 사용 */
-.joinForm > div:nth-child(n+10):nth-child(-n+12) {
+/* .joinForm > div:nth-child(n+10):nth-child(-n+12) {
   grid-column-start: 1;
   grid-column-end: 3;
-}
+} */
 
+/* 이메일 중복확인 버튼 */
 /* 버튼 밑바닥으로 */
-.joinForm > div:nth-child(6) {
+#confirmDupBtnWrap {
   position: relative;
 }
-.joinForm > div:nth-child(6) > div {
+#confirmDupBtn {
+  width: 50%;
   position: absolute;
   bottom: 0;
 }
 
 label {
-  font-size: (--input-fontSize);
+  font-weight: 500;
   display: block;
 }
 
-.joinInput {
-  /* width: 50%; */
-  height: var(--input-btn-height);
-  padding: 15px 0 ;
-  border: 0;
-  border-bottom: 1px solid var(--main);
+/* 성별 */
+#genderWrap span {
+  height: var(--input-height);
+  line-height: var(--input-height);
   font-size: var(--input-fontSize);
-  /* margin-bottom: 10px; */
-  
-  box-sizing: border-box;
+  margin: 0 20px 0 10px;
 }
-.joinInput:focus {
-  outline: none;
+/* 라디오 버튼 */
+input[type=radio] {
+  width: var(--input-fontSize);
+  height: var(--input-height);
+  margin: 0;
+  accent-color: var(--main);
 }
 
-input[type=radio] {
-  height: var(--input-btn-height);
+/* 주소 input */
+#addressWrap input {
+  width: 30%;
+  margin-right: 20px;
+}
+#addressWrap > div > input:last-child {
+  margin: 0;
+}
+
+/* 취소/확인 버튼 */
+#buttonWrap {
+  margin-top: 40px;
+}
+#buttonWrap > div {
+  width: calc(25% - 5px);
+}
+
+
+@media screen and (max-width: 768px) {
+  .joinForm {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* 한 줄에 2개인 거 1개로 */
+  .joinForm > div:nth-child(n+3):nth-child(-n+4) {
+    display: flex;
+    flex-direction: column;
+  }
+  .joinForm > div:nth-child(n+3) {
+    gap: 15px;
+  }
+
+  /* 이메일 중복확인 버튼 */
+  /* 원상태로*/
+  #confirmDupBtnWrap {
+    position: static;
+  }
+  #confirmDupBtn {
+    width: 100%;
+    position: static;
+  }
+
+  #nameWrap > input, #phoneWrap > input, #birthWrap > input, #genderWrap > input {
+    width: 100%;
+  }
+  #emailWrap > input, #passwordWrap > input, #confirmPasswordWrap > input {
+    width: 100%;
+  }
+
+  /* 주소 input */
+  #addressWrap input {
+    width: calc((100% - 40px) / 3);
+  }
+
+  /* 취소/확인 버튼 */
+  #buttonWrap {
+    flex-direction: column;
+  }
+  #buttonWrap > div {
+    width: 100%;
+  }
 }

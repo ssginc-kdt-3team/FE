@@ -1,9 +1,9 @@
 .button {
-  height: var(--input-btn-height);
+  height: var(--input-height);
   padding: 0;
-  font-size: 22px;
+  font-size: var(--input-fontSize);
   font-weight: 500;
-  line-height: var(--input-btn-height);
+  line-height: var(--input-height);
   text-align: center;
   background: var(--main);
   color: #fff;
@@ -21,7 +21,7 @@
   background-color: #fff;
   color: var(--main);
 }
-.buttonReverse:hover {
+/* .buttonReverse:hover {
   background-color: var(--main);
   color: #fff;
-}
+} */

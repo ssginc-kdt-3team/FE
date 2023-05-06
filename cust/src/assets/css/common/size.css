@@ -3,13 +3,14 @@
 
   /* header */
   --header-height: 180px;
+  --mob-header-height: 90px;
 
   /* footer */
   --footer-height: 334px;
 
   /* size */
   --input-fontSize: 18px;
-  --input-btn-height: 65px;
+  --input-height: 60px;
   
 }
 
