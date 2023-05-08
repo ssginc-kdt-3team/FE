@@ -48,5 +48,97 @@
       "district": "d",
       "detail": "d"
     }
+  ],
+  "possible" : [
+    {
+      "id" : 1,
+      "time" : "10:00",
+      "possible" : true
+    },
+    {
+      "id" : 2,
+      "time" : "10:30",
+      "possible" : false
+    },
+    {
+      "id" : 3,
+      "time" : "11:00",
+      "possible" : false
+    },
+    {
+      "id" : 4,
+      "time" : "11:30",
+      "possible" : true
+    },
+    {
+      "id" : 5,
+      "time" : "12:00",
+      "possible" : false
+    },
+    {
+      "id" : 6,
+      "time" : "12:30",
+      "possible" : true
+    },
+    {
+      "id" : 7,
+      "time" : "13:00",
+      "possible" : true
+    },
+    {
+      "id" : 8,
+      "time" : "13:30",
+      "possible" : true
+    },
+    {
+      "id" : 9,
+      "time" : "14:00",
+      "possible" : true
+    },
+    {
+      "id" : 10,
+      "time" : "14:30",
+      "possible" : false
+    },
+    {
+      "id" : 11,
+      "time" : "17:00",
+      "possible" : false
+    },
+    {
+      "id" : 12,
+      "time" : "17:30",
+      "possible" : false
+    },
+    {
+      "id" : 13,
+      "time" : "18:00",
+      "possible" : false
+    },
+    {
+      "id" : 14,
+      "time" : "18:30",
+      "possible" : true
+    },
+    {
+      "id" : 15,
+      "time" : "19:00",
+      "possible" : true
+    },
+    {
+      "id" : 16,
+      "time" : "19:30",
+      "possible" : true
+    },
+    {
+      "id" : 17,
+      "time" : "20:00",
+      "possible" : false
+    },
+    {
+      "id" : 18,
+      "time" : "20:30",
+      "possible" : true
+    }
   ]
 }
