@@ -10,7 +10,13 @@
   /* align-items: center; */
 }
 
-.grid {
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.grid-2c {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-row-gap: 40px;
@@ -20,10 +26,23 @@
 .flex-col {  
   flex-direction: column;
 }
+.flex-row {  
+  flex-direction: row;
+}
 
+.flex-basis-100 {
+  flex-basis: 100px;
+}
+
+.flex-gap-10 {
+  gap: 10px;
+}
 .flex-gap-20 {
   gap: 20px;
 }
 .flex-gap-45 {
   gap: 45px;
+}
+.flex-gap-75 {
+  gap: 75px;
 }

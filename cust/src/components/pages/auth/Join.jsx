@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useReducer, useRef, useState } from 'react';
 import PageTitle from '../../ui/PageTitle';
-import styles from '../../../assets/css/auth/Join.module.css';
+import styles from '../../../assets/css/pages/auth/Join.module.css';
 import { useNavigate } from 'react-router-dom';
 
 // action에 따라 안에 데이터를 어떻게 변화시킬지 설정
@@ -134,7 +134,7 @@ function Join() {
           </div>
 
           {/* 이메일 */}
-          <div className='grid'>
+          <div className='grid-2c'>
             <div id={styles.emailWrap}>
               <label>EMAIL</label>
               <input className={styles.joinInput} name="email" type='email' placeholder='이메일' onChange={handleInput}/>
@@ -146,7 +146,7 @@ function Join() {
           </div>
 
           {/* 비밀번호 */}
-          <div className='grid'>
+          <div className='grid-2c'>
             <div id={styles.passwordWrap}>
               <label>PASSWORD</label>
               <input className={styles.joinInput} name="password" type='password' placeholder='비밀번호' onChange={handleInput}/>

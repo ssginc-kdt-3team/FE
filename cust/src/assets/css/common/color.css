@@ -4,9 +4,16 @@
   /* bg */
   --input-bg: #f9f9f9;
 
-
+  /* border */
   --input-border: #ccc;
+  --devider: #aeaeae;
+
+  /* font */
+  --font: #333;
+  --topMenu-font: #555555;
   
+
+
   --black: #222222;
   --yellow: #f9bb00;
   --gray: #9e9e9e;
@@ -14,7 +21,6 @@
   --red: #ca3232;
 
   --bg: #f9fafc;
-  --font: #333;
   --border: #ebebeb;
   --price: #f95a00;
 
