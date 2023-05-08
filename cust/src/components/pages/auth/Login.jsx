@@ -1,10 +1,11 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import PageTitle from '../../ui/PageTitle';
-import styles from '../../../assets/css/auth/Login.module.css';
+import styles from '../../../assets/css/pages/auth/Login.module.css';
 import { useSetRecoilState } from 'recoil';
 import { loginState } from '../../../state/loginState';
 import { useNavigate } from 'react-router-dom';
+import next from '../../../assets/images/icons/next.png';
 
 function Login() {
   const setLoginState = useSetRecoilState(loginState);
@@ -62,10 +63,12 @@ function Login() {
           <div className='button' onClick={handleLogin}>로그인</div>
           <div id={styles.findIdPasswordWrap}>
             <div onClick={() => alert('아이디 찾기로 이동')}>
-              아이디 찾기<img src="https://www.josunhotel.com/static/home/images/ko/pc/common/ico_arr_7x13.png" alt="" />
+              아이디 찾기
+              <img src={next} alt="find id" />
             </div>
             <div onClick={() => alert('비밀번호 찾기로 이동')}>
-              비밀번호 찾기<img src="https://www.josunhotel.com/static/home/images/ko/pc/common/ico_arr_7x13.png" alt="" />
+              비밀번호 찾기
+              <img src={next} alt="find password" />
             </div>
           </div>
           <div>아직 회원이 아니신가요? <span onClick={() => navigate('/join')}>회원가입</span></div>

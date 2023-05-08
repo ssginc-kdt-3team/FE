@@ -1,0 +1,92 @@
+#headerWrap {
+  max-width: 1280px;
+  width: 100%;
+  height: var(--header-height);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* 로그인/회원가입 */
+#topWrap {
+  /* height: 30px; */
+  height: 15%;
+  padding: 0 20px;
+}
+#topWrap > a {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  color: var(--topMenu-font);
+}
+/* 구분선 */
+#topWrap > a:first-child::after {
+  width: 1px;
+  height: 10px;
+  content: "";
+  background: var(--devider);
+  margin: 0 20px;
+  display: inline-block;
+}
+
+/* 로고 */
+#middleWrap {
+  /* height: 90px; */
+  height: 55%;
+}
+#middleWrap > a, #logo {
+  height: 80px;
+}
+#middleWrap h1 {
+  display: none;
+}
+
+/* nav 버튼 */
+.navBtn {
+  display: none;
+  width: 25px;
+  transition: 0.5s;
+}
+
+.navBtn img {
+  width: 25px;
+}
+
+/* 메뉴 */
+#bottomWrap {
+  /* height: 60px; */
+  height: 30%;
+  font-weight: bold;
+}
+#bottomWrap > a {
+  flex-basis: 120px;
+  text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  #headerWrap {
+    height: var(--mob-header-height);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #topWrap, #bottomWrap {
+    display: none;
+  }
+
+  /* 로고 */
+  #middleWrap {
+    height: 100%;
+    width: calc(100% - 25px);
+    margin-left: 25px;
+    /* background-color: white; */
+  }
+  #middleWrap > a, #logo {
+    height: 65px;
+  }
+
+  /* nav 버튼 */
+  .navBtn {
+    display: block;
+  }
+}

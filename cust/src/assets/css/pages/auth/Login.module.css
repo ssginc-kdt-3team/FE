@@ -23,15 +23,24 @@
 
 /* 아이디 찾기/비밀번호 찾기 */
 #findIdPasswordWrap {
+  height: 25px;
   margin: 10px 0 20px 0;
   display: flex;
 }
 #findIdPasswordWrap > div {
   width: 50%;
   text-align: center;
+  line-height: 25px;
   cursor: pointer;
 }
+/* #findIdPasswordWrap > div:first-child {
+  border-right: 0.25px solid var(--font);
+}
+#findIdPasswordWrap > div:last-child {
+  border-left: 0.25px solid var(--font)
+} */
 #findIdPasswordWrap > div > img {
+  width: 12px;
   margin-left: 10px;
 }
 
