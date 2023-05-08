@@ -2,7 +2,7 @@
   width: 350px;
   /* height: 100vh; */
   height: calc(100vh - var(--mob-header-height));
-  background-color: blue;
+  background-color: white;
   /* opacity: 0.2; */
   /* margin: 0; */
   margin: var(--mob-header-height) 0 0 0;

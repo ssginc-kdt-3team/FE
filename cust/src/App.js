@@ -5,6 +5,7 @@ import './App.css';
 import Join from "./components/pages/auth/Join";
 import { RecoilRoot } from "recoil";
 import Heaader from "./components/layout/Header";
+import ResvAdd from "./components/pages/reservation/ResvAdd";
 
 function App() {
   return ( // 이 안에 JSX 문법 적용
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<Main/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/join" element={<Join/>}/>
+          <Route path="/resv/add" element={<ResvAdd/>}/>
         </Routes>
       </BrowserRouter>
     </RecoilRoot>

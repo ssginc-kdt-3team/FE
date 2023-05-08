@@ -24,7 +24,7 @@
   height: 10px;
   content: "";
   background: var(--devider);
-  margin: 0 20px;
+  margin: 0 15px;
   display: inline-block;
 }
 

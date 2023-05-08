@@ -4,11 +4,13 @@ import PageTitle from '../../ui/PageTitle';
 import styles from '../../../assets/css/pages/auth/Login.module.css';
 import { useSetRecoilState } from 'recoil';
 import { loginState } from '../../../state/loginState';
+import { userInfo } from '../../../state/userInfo';
 import { useNavigate } from 'react-router-dom';
 import next from '../../../assets/images/icons/next.png';
 
 function Login() {
   const setLoginState = useSetRecoilState(loginState);
+  const setUserInfo = useSetRecoilState(userInfo);
 
   const [email, setEmail] = useState(''); // 사용자가 입력한 email
   const [password, setPassword] = useState(''); // 사용자가 입력한 password                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
@@ -38,6 +40,12 @@ function Login() {
           alert('로그인에 실패하였습니다.\n아이디와 비밀번호를 확인하세요.');
         else {
           setLoginState(true); // 로그인된 상태로 변경
+          setUserInfo({ // 사용자 정보 저장
+            // Parsing
+            id: 1,
+            name: "temp.name",
+            email: "temp.email"
+          })
           alert('로그인에 성공하였습니다.');
           navigate('/'); // 메인화면으로 이동
         }
