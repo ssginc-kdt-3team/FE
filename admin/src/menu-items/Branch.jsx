@@ -8,20 +8,19 @@ const icons = {
 
 // ==============================|| MENU ITEMS - DASHBOARD ||============================== //
 
-const store = {
-    id: 'store',
+const branch = {
+    id: 'branch',
     title: '지점관리',
     type: 'group',
     children: [
         {
-            id: 'storelist',
+            id: 'branchlist',
             title: '지점리스트',
             type: 'item',
-            url: '/store/list',
+            url: '/branch/list',
             icon: icons.ShopOutlined
-            // breadcrumbs: false
         }
     ]
 };
 
-export default store;
+export default branch;

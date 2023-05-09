@@ -6,7 +6,7 @@ function ShopList() {
   const [shopList, setShopList] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:8080/admin/shop/findAll")
+    axios.get(`http://localhost:8080/admin/shop/findAll`)
       .then((response) => {
         setShopList(response.data.content);
       })
