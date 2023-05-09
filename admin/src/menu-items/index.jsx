@@ -4,7 +4,7 @@ import profile from './Profile';
 import resv from './Resv';
 import cust from './Cust';
 import owner from './Owner';
-import store from './Store';
+import branch from './Branch';
 import shop from './Shop';
 import utilities from './utilities';
 import notitext from './Notitext';
@@ -16,7 +16,7 @@ import cupon from './Cupon';
 // ==============================|| MENU ITEMS ||============================== //
 
 const menuItems = {
-    items: [pages, profile, resv, cust, owner, shop, store, notitext, grade, cupon, utilities],
+    items: [pages, profile, resv, cust, owner, shop, branch, notitext, grade, cupon, utilities],
     breadcrumbs: false
 };
 

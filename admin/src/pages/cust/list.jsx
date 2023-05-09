@@ -6,7 +6,7 @@ function CustList() {
   const [custList, setCustList] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:8080/admin/cust/findAll")
+    axios.get("http://localhost:8080/admin/Customer/findAll")
       .then((response) => {
         setCustList(response.data.content);
       })
@@ -21,7 +21,7 @@ function CustList() {
       <ul>
         {custList.map((cust) => (
           <li key={cust.id}>
-            <Link to={`/cust/detail/${cust.id}`}>{cust.name}, {cust.email}</Link>
+            <Link to={`/cust/detail/${cust.id}`}>{cust.grade}, {cust.name}, {cust.email}, {cust.status}</Link>
           </li>
         ))}
       </ul>

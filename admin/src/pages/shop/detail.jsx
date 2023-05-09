@@ -25,7 +25,7 @@ function  ShopDetail() {
         <h1>매장 상세 정보</h1>
         <ul>
           <li><h1>{shop.name}</h1></li>
-          <li><p>Email: {String(shop.status)}</p></li>
+          <li><p>Email: {String(shop.email)}</p></li>
           <li><p>매장위치: {String(shop.location)}</p></li>
           <li><p>사업자등록번호: {String(shop.business_name)}</p></li>
           <li><p>Birthday: {shop.birthday.toString()}</p></li>    

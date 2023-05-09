@@ -16,7 +16,7 @@ const Resv = {
     children: [
         {
             id: 'resvlist',
-            title: '예약내역리스트',
+            title: '예약 내역 조회',
             type: 'item',
             url: '/resv/list',
             icon: icons.HistoryOutlined
@@ -24,7 +24,7 @@ const Resv = {
         },
         {
             id: 'depositlist',
-            title: '예약금내역리스트',
+            title: '예약금 내역 조회',
             type: 'item',
             url: '/resv/deposit',
             icon: icons.CopyrightOutlined

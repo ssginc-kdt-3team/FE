@@ -5,18 +5,19 @@ import Loadable from 'components/Loadable';
 import MainLayout from 'layout/MainLayout';
 import Profile from '../pages/admin/profile';
 import ResvList from '../pages/resv/list';
+import ResvDetail from '../pages/resv/detail';
 import ResvDeposit from '../pages/resv/deposit';
 import CustList from '../pages/cust/list';
 import CustDetail from '../pages/cust/detail';
 import OwnerList from '../pages/owner/list';
 import OwnerDetail from '../pages/owner/detail';
-import OwnerReg from '../pages/owner/register';
+import OwnerJoin from '../pages/owner/join';
 import ShopList from '../pages/shop/list';
 import ShopDetail from '../pages/shop/detail';
 import ShopReview from '../pages/shop/review';
 import ShopMenu from '../pages/shop/menu';
 import ShopReg from '../pages/shop/reg';
-import StoreList from '../pages/shop/list';
+// import BranchList from '../pages/branch/list'; 추가되면 다시 import 하기
 import NotitextList from '../pages/notitext/list';
 import NotitextReg from '../pages/notitext/reg';
 import GradeList from '../pages/grade/list';
@@ -68,7 +69,7 @@ const MainRoutes = {
                 },
                 {
                     path: '/owner/reg',
-                    element: <OwnerReg />
+                    element: <OwnerJoin />
                 },
                 {
                     path: '/owner/detail/:id',
@@ -81,11 +82,15 @@ const MainRoutes = {
             children: [
                 {
                     path: '/resv/list',
-            element: <ResvList />
+                    element: <ResvList />
+                },
+                {
+                    path: '/resv/detail/:id',
+                    element: <ResvDetail />
                 },
                 {
                     path: '/resv/deposit',
-            element: <ResvDeposit />
+                    element: <ResvDeposit />
                 }
             ]
         },
@@ -114,19 +119,15 @@ const MainRoutes = {
         },
             ]
         },
-        {
-            path: '/store',
-            children: [
-        {
-            path: '/store/list',
-            element: <StoreList />
-        },
-        {
-            path: '/store/list',
-            element: <StoreList />
-        },
-            ]
-        },
+        // {
+        //     path: '/branch',
+        //     children: [
+        //     {
+        //     path: '/branch/list',
+        //     element: <BranchList />
+        //     }
+        //     ]
+        // },
         {
             path: '/notitext',
             children: [
