@@ -1,3 +1,4 @@
+/* 태그 */
 * {
   font-family: 'Noto Sans KR', sans-serif;
   box-sizing: border-box;
@@ -31,7 +32,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 header {
-  width: 100%;
+  width: 100vw;
   height: var(--header-height);
   background-color: white;
   /* background: rgba(255, 255, 255, 0.85); */
@@ -57,11 +58,6 @@ a {
   color: var(--font);
 }
 
-.container {
-  margin: 0 auto;
-  padding: 20px 20px 60px 20px;
-}
-
 /* input:focus {
   outline: 1px solid var(--main);
 } */
@@ -69,6 +65,27 @@ a {
 input {
   box-sizing: border-box;
 }
+
+
+/* 클래스 */
+.container {
+  width: 100%;
+  min-height: 100%;
+  margin: 0 auto;
+  padding: 20px 20px 60px 20px;
+}
+
+.background {
+  background-color: var(--bg2);
+}
+
+/* .list-2c {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-row-gap: 40px;
+  grid-column-gap: 20px;
+} */
+
 
 @media screen and (max-width: 768px) {
   #root {

@@ -2,6 +2,8 @@
   --main: #C30E2D;
 
   /* bg */
+  --bg: #f9fafc;
+  --bg2: #f8f9fb;
   --input-bg: #f9f9f9;
 
   /* border */
@@ -20,7 +22,6 @@
   --gray-150: #f3f5f7;
   --red: #ca3232;
 
-  --bg: #f9fafc;
   --border: #ebebeb;
   --price: #f95a00;
 

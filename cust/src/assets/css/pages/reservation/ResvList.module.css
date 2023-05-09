@@ -1,0 +1,12 @@
+#list {
+  max-width: 800px;
+  width: 75%;
+  column-gap: 40px;
+}
+
+
+@media screen and (max-width: 768px) {
+  #list {
+    width: 100%;
+  }
+}

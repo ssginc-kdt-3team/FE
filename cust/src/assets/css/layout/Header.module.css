@@ -31,7 +31,7 @@
 /* 로고 */
 #middleWrap {
   /* height: 90px; */
-  height: 55%;
+  height: 50%;
 }
 #middleWrap > a, #logo {
   height: 80px;
@@ -54,7 +54,7 @@
 /* 메뉴 */
 #bottomWrap {
   /* height: 60px; */
-  height: 30%;
+  height: 35%;
   font-weight: bold;
 }
 #bottomWrap > a {
