@@ -46,3 +46,10 @@
 .flex-gap-75 {
   gap: 75px;
 }
+
+
+@media screen and (max-width: 768px) {
+  .grid-2c {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

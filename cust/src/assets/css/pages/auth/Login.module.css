@@ -10,6 +10,7 @@
   height: var(--input-height);
   padding: 15px;
   border: 1px solid var(--input-border);
+  border-radius: 10px;
   font-size: var(--input-fontSize);
   /* margin-bottom: 10px; */
 }

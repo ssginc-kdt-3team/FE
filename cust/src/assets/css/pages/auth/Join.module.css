@@ -89,17 +89,19 @@ input[type=radio] {
 @media screen and (max-width: 768px) {
   .joinForm {
     width: 100%;
-    display: flex;
-    flex-direction: column;
   }
 
   /* 한 줄에 2개인 거 1개로 */
-  .joinForm > div:nth-child(n+3):nth-child(-n+4) {
+  /* .joinForm > div:nth-child(n+3):nth-child(-n+4) {
     display: flex;
     flex-direction: column;
-  }
-  .joinForm > div:nth-child(n+3) {
+  } */
+  /* 한 줄에 2개인 거 1개로 바꾸고 간격 처리 */
+  .joinForm > div:nth-child(3) {
     gap: 15px;
+  }
+  .joinForm > div:nth-child(4) {
+    gap: 40px;
   }
 
   /* 이메일 중복확인 버튼 */

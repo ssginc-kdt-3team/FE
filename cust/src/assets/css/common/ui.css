@@ -8,6 +8,7 @@
   background: var(--main);
   color: #fff;
   border: 1px solid var(--main);
+  border-radius: 10px;
   cursor: pointer;
   box-sizing: border-box;
   transition: 0.5s;
