@@ -7,8 +7,8 @@ function Count({title, peopleCount, setPeopleCount, childCount, setChildCount, i
         alert("최소 예약인원 수는 1명 입니다.");
         return;
       }
-      else if(peopleCount - childCount >= 1) {
-        alert("유아가 있을 경우 최소 1명의 성인이 있어야합니다.");
+      else if(peopleCount - childCount <= 1) {
+        alert("유아의 수는 예약인원 수보다 많을 수 없습니다.");
         return;
       }
       setPeopleCount(peopleCount - 1);
@@ -28,7 +28,7 @@ function Count({title, peopleCount, setPeopleCount, childCount, setChildCount, i
     }
     else { // 유아 수 카운트
       if(peopleCount - childCount <= 1) {
-        alert("유아가 있을 경우 최소 1명의 성인이 있어야합니다.");
+        alert("유아의 수는 예약인원 수보다 많을 수 없습니다.");
         return;
       }
       setChildCount(childCount + 1);
@@ -38,9 +38,9 @@ function Count({title, peopleCount, setPeopleCount, childCount, setChildCount, i
   return (
     <div className='center flex-gap-10'>
       {title}
-      <ion-icon name="remove-outline" onClick={handleMinus}></ion-icon>
+      <ion-icon name="remove-circle" onClick={handleMinus}></ion-icon>
       <p>{isPeopleCount ? peopleCount : childCount}</p>
-      <ion-icon name="add-outline" onClick={handlePlus}></ion-icon>
+      <ion-icon name="add-circle" onClick={handlePlus}></ion-icon>
     </div>
   );
 }
