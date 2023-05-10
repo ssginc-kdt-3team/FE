@@ -18,7 +18,7 @@ function ResvList() {
     axios.get(`http://localhost:8080/customer/reservation/listAll/2/${currentPage}`) // 2는 사용자 id
     .then(res => {
       console.log(res.data);
-      setResvList(res.data.content); // 최신 순으로 정렬
+      setResvList(res.data.content); // 
       setTotalItems(res.data.totalElements); // 총 아이템 수 설정
       setItemsPerPage(res.data.numberOfElements); // 페이지당 아이템 수 설정
     })

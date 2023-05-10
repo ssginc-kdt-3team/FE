@@ -8,6 +8,7 @@ import Heaader from "./components/layout/Header";
 import ResvAdd from "./components/pages/reservation/ResvAdd";
 import ResvList from "./components/pages/reservation/ResvList";
 import Resv from "./components/pages/reservation/Resv";
+import ResvUpdate from "./components/pages/reservation/ResvUpdate";
 
 function App() {
   return ( // 이 안에 JSX 문법 적용
@@ -21,6 +22,7 @@ function App() {
           <Route path="/resv/add" element={<ResvAdd/>}/>
           <Route path="/resv" element={<ResvList/>}/>
           <Route path="/resv/:resvId" element={<Resv/>}/>
+          <Route path="/resv/update/:resvId" element={<ResvUpdate/>}/>
         </Routes>
       </BrowserRouter>
     </RecoilRoot>
