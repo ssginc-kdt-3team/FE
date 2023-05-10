@@ -119,7 +119,7 @@ function Join() {
   return (
     <div className='container'>
       <div className='center flex-col'>
-        <PageTitle title="회원가입" fontSize="1.6rem" marginTop="80px" marginBottom="100px"/>
+        <PageTitle title="회원가입" fontSize="1.6rem" marginTop="60px" marginBottom="80px"/>
         <form className={styles.joinForm}>
           {/* 이름 */}
           <div id={styles.nameWrap}>

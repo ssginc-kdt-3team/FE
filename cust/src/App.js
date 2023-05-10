@@ -7,6 +7,7 @@ import { RecoilRoot } from "recoil";
 import Heaader from "./components/layout/Header";
 import ResvAdd from "./components/pages/reservation/ResvAdd";
 import ResvList from "./components/pages/reservation/ResvList";
+import Resv from "./components/pages/reservation/Resv";
 
 function App() {
   return ( // 이 안에 JSX 문법 적용
@@ -19,6 +20,7 @@ function App() {
           <Route path="/join" element={<Join/>}/>
           <Route path="/resv/add" element={<ResvAdd/>}/>
           <Route path="/resv" element={<ResvList/>}/>
+          <Route path="/resv/:resvId" element={<Resv/>}/>
         </Routes>
       </BrowserRouter>
     </RecoilRoot>

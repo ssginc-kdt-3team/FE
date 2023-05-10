@@ -29,18 +29,17 @@ function ResvList() {
   return (
     <div className='container background'>
       <div className='center flex-col'>
-        <PageTitle title="예약 내역" fontSize="1.6rem" marginTop="40px" marginBottom="60px"/>
+        <PageTitle title="예약 내역" fontSize="1.6rem" marginTop="60px" marginBottom="80px"/>
 
         <ul id={styles.list} className='grid-2c'>
           {
             resvList && resvList.map( data => (
-              // <li key={data.id}>{data.name}</li>
               <ResvCard key={data.id} data={data}/>
             ))
           }
         </ul>
 
-        <Paging currentPage={currentPage} totalItems={totalItems} itemsPerPage={itemsPerPage} setCurrentPage={setCurrentPage} setResvList={setResvList}/>
+        <Paging currentPage={currentPage} totalItems={totalItems} itemsPerPage={itemsPerPage} setCurrentPage={setCurrentPage}/>
       </div>
     </div>
   );
