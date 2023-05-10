@@ -2,41 +2,41 @@ import { Table, Tag } from "antd";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Paging from "components/pagination/paging";
+import { current } from "../../../node_modules/@reduxjs/toolkit/dist/index";
 
 const CustListTable = () => {
   const [custList, setCustList] = useState([]);
-  const [pagination, setPagination] = useState({
-    current: 1,
-    pageSize: 10,
-  });
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalItems, setTotalItems] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
 
   useEffect(() => {
     fetchCustomerList();
-  }, [pagination]);
+  }, [currentPage]); // Include currentPage in the dependency array
 
   const fetchCustomerList = () => {
+    setLoading(true);
     axios
-      .get("http://localhost:8080/admin/customer/findAll", {
-        params: {
-          page: pagination.current,
-          size: pagination.pageSize,
-        },
-      })
+      .get(`http://localhost:8080/admin/customer/findAll/${currentPage}`)
       .then((response) => {
         setCustList(response.data.content);
-        setPagination((prevPagination) => ({
-          ...prevPagination,
-          total: response.data.totalElements,
-        }));
+        setTotalItems(response.data.totalElements);
+        setItemsPerPage(response.data.numberOfElements);
+        setLoading(false);
+        console.log(custList);
       })
       .catch((error) => {
         console.log(error);
+        setLoading(false);
       });
   };
 
-  const handleTableChange = (pagination) => {
-    setPagination(pagination);
-  };
+
+  // const handlePageChange = (page) => {
+  //   setCurrentPage(page);
+  // };
 
   const columns = [
     {
@@ -66,14 +66,6 @@ const CustListTable = () => {
       ),
     },
     {
-      title: "고객명",
-      dataIndex: "name",
-      key: "name",
-      render: (text, record) => (
-        <Link to={`/cust/detail/${record.id}`}>{text}</Link>
-      ),
-    },
-    {
       title: "이메일",
       dataIndex: "email",
       key: "email",
@@ -90,13 +82,22 @@ const CustListTable = () => {
   ];
 
   return (
-    <Table
-      columns={columns}
-      dataSource={custList}
-      pagination={pagination}
-      onChange={handleTableChange}
-    />
+    <>
+      <Table
+        columns={columns}
+        dataSource={custList}
+        pagination={false}
+        loading={loading}
+      />
+      <Paging
+        page={currentPage}
+        itemsPerPage={itemsPerPage}
+        totalItems={totalItems}
+        setPage={setCurrentPage}
+      />
+    </>
   );
 };
+
 
 export default CustListTable;
