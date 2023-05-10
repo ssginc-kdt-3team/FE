@@ -4,3 +4,6 @@
 @import url(./assets/css/common/layout.css);
 @import url(./assets/css/common/size.css);
 @import url(./assets/css/common/ui.css);
+
+/* Paging */
+@import url(./assets/css/ui/Paging.css);
