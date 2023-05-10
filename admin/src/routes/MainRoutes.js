@@ -6,7 +6,11 @@ import MainLayout from 'layout/MainLayout';
 import Profile from '../pages/admin/profile';
 import ResvList from '../pages/resv/list';
 import ResvDetail from '../pages/resv/detail';
-import ResvDeposit from '../pages/resv/deposit';
+// import Deposit from '../pages/deposit/index';
+import DepositBranch from '../pages/deposit/branch';
+// import DepositLayout from '../pages/deposit/Layout'; // 추가된 부분
+import DepositList from '../pages/deposit/list';
+import DepositFilter from '../pages/deposit/filter'; 
 import CustList from '../pages/cust/list';
 import CustDetail from '../pages/cust/detail';
 import OwnerList from '../pages/owner/list';
@@ -17,7 +21,7 @@ import ShopDetail from '../pages/shop/detail';
 import ShopReview from '../pages/shop/review';
 import ShopMenu from '../pages/shop/menu';
 import ShopReg from '../pages/shop/reg';
-// import BranchList from '../pages/branch/list'; 추가되면 다시 import 하기
+import BranchList from '../pages/branch/list';
 import NotitextList from '../pages/notitext/list';
 import NotitextReg from '../pages/notitext/reg';
 import GradeList from '../pages/grade/list';
@@ -30,7 +34,7 @@ const DashboardDefault = Loadable(lazy(() => import('pages/dashboard')));
 
 // render - utilities
 const Typography = Loadable(lazy(() => import('pages/components-overview/Typography')));
-const Color = Loadable(lazy(() => import('pages/components-overview/Color')));
+// const Color = Loadable(lazy(() => import('pages/components-overview/Color')));
 const AntIcons = Loadable(lazy(() => import('pages/components-overview/AntIcons')));
 
 // ==============================|| MAIN ROUTING ||============================== //
@@ -48,6 +52,10 @@ const MainRoutes = {
             element: <Profile />
         },
         {
+            path: '/deposit/branch/:id',
+            element: <DepositBranch />
+        },
+        {
             path: '/cust',
             children: [
                 {
@@ -59,6 +67,19 @@ const MainRoutes = {
                     element: <CustDetail />
                 }
             ]
+        },
+        {
+                path: '/deposit',
+                children: [
+                    {
+                        path: '/deposit/list',
+                        element: <DepositList />
+                    },
+                    {
+                        path: '/deposit/filter',
+                        element: <DepositFilter />
+                    }
+                ]
         },
         {
             path: '/owner',
@@ -87,10 +108,6 @@ const MainRoutes = {
                 {
                     path: '/resv/detail/:id',
                     element: <ResvDetail />
-                },
-                {
-                    path: '/resv/deposit',
-                    element: <ResvDeposit />
                 }
             ]
         },
@@ -119,15 +136,15 @@ const MainRoutes = {
         },
             ]
         },
-        // {
-        //     path: '/branch',
-        //     children: [
-        //     {
-        //     path: '/branch/list',
-        //     element: <BranchList />
-        //     }
-        //     ]
-        // },
+        {
+            path: '/branch',
+            children: [
+            {
+            path: '/branch/list',
+            element: <BranchList />
+            }
+            ]
+        },
         {
             path: '/notitext',
             children: [

@@ -4,15 +4,15 @@ import { useNavigate } from 'react-router-dom';
 
 function LoginForm() {
 
-  const [email, setEmail] = useState('');
+  const [id, setid] = useState('');
   const [password, setPassword] = useState('');
   const [redirectTo, setRedirectTo] = useState(null); // 이동할 페이지 URL
 
-  const [loginTitle, setLoginTitle] = useState('Login');
+  // const [loginTitle, setLoginTitle] = useState('Login');
   const navigate = useNavigate();
 
-  const isInputEmpty = (email, password) => {
-    if(email === "" || password === "") {
+  const isInputEmpty = (id, password) => {
+    if(id === "" || password === "") {
       alert('내용을 입력하세요.');
       return true;
     }
@@ -21,9 +21,9 @@ function LoginForm() {
 
   const handleLogin = (e) => {
     e.preventDefault(); // 기본 동작 방지
-    if(!isInputEmpty(email, password)) {
+    if(!isInputEmpty(id, password)) {
       axios.post('http://localhost:8080/admin/login', {
-        email: email,
+        id: id,
         password: password,
       })
       .then(res => {
@@ -32,7 +32,7 @@ function LoginForm() {
         } else {
           alert('로그인에 성공하였습니다.');
           setRedirectTo('/'); // 이동할 페이지 URL 설정
-          setLoginTitle(res.data.adminName);
+          // setLoginTitle(res.data.adminName);
         }
       })
       .catch(err => {
@@ -53,20 +53,15 @@ function LoginForm() {
     <div className='container'>
       <div className='center flex-col'>
         <form onSubmit={handleLogin}>
-          <input  type='email' value={email} placeholder='이메일' onChange={(e) => setEmail(e.currentTarget.value)}/>
+          <input  type='id' value={id} placeholder='이메일' onChange={(e) => setid(e.currentTarget.value)}/>
 
           <input type='password' value={password} placeholder='비밀번호' onChange={(e) => setPassword(e.currentTarget.value)}/>
 
           <button type='submit'>로그인</button>
-          <div>
-            <div onClick={() => alert('아이디 찾기로 이동')}>아이디 찾기 &gt;</div>
-            <div onClick={() => alert('비밀번호 찾기로 이동')}>비밀번호 찾기 &gt;</div>
-          </div>
-          <div>아직 회원이 아니신가요? <span onClick={() => navigate('/join')}>회원가입</span></div>
         </form>
       </div>
     </div>
   );
 }
 
-export default LoginForm;
+export default LoginForm;  

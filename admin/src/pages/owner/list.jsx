@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { Table, Tag, Space } from "antd";
 
 function OwnerList() {
   const [ownerList, setOwnerList] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:8080/admin/owner/findAll")
+    axios
+      .get("http://localhost:8080/admin/owner/findAll")
       .then((response) => {
         setOwnerList(response.data.content);
       })
@@ -15,16 +17,31 @@ function OwnerList() {
       });
   }, []);
 
+  const columns = [
+    {
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+      render: (text, record) => (
+        <Link to={`/owner/detail/${record.id}`}>{text}</Link>
+      ),
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+    }
+  ];
+
   return (
     <div>
       <h1>점주 리스트</h1>
-      <ul>
-        {ownerList.map((owner) => (
-          <li key={owner.id}>
-            <Link to ={`/owner/detail/${owner.id}`}>{owner.name}, {owner.email}</Link>
-          </li>
-        ))}
-      </ul>
+      <Table columns={columns} dataSource={ownerList} />
     </div>
   );
 }
