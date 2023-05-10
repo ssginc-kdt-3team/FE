@@ -6,7 +6,7 @@ import ResvCard from '../../ui/ResvCard';
 import Paging from '../../ui/Paging';
 
 function ResvList() {
-  const [currentPage, setCurrentPage] = useState(0); // 현재 페이지
+  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   const [totalItems, setTotalItems] = useState(0); // 총 아이템 수
   const [itemsPerPage, setItemsPerPage] = useState(8) // 페이지당 아이템 수
   // let totalPage = 0;
@@ -18,8 +18,7 @@ function ResvList() {
     axios.get(`http://localhost:8080/customer/reservation/listAll/2/${currentPage}`) // 2는 사용자 id
     .then(res => {
       console.log(res.data);
-      setResvList(res.data.content.reverse()); // 최신 순으로 정렬
-      setCurrentPage(res.data.number); // 현재 페이지 설정
+      setResvList(res.data.content); // 최신 순으로 정렬
       setTotalItems(res.data.totalElements); // 총 아이템 수 설정
       setItemsPerPage(res.data.numberOfElements); // 페이지당 아이템 수 설정
     })

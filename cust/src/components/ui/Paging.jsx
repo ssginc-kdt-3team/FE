@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect } from 'react';
 import Pagination from "react-js-pagination";
 
-function Paging({currentPage=0, totalItems=0, itemsPerPage=0, setCurrentPage=() => console.log('함수 없음'), setResvList=() => console.log('함수 없음')}) {
+function Paging({currentPage=1, totalItems=10, itemsPerPage=5, setCurrentPage=() => console.log('함수 없음'), setResvList=() => console.log('함수 없음')}) {
   const handlePage = () => {
     
 
