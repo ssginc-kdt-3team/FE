@@ -50,30 +50,26 @@ function ResvAdd() {
   const [peopleCount, setPeopleCount] = useState(1); // 예약 인원 카운트
   const [childCount, setChildCount] = useState(0); // 유아 수 카운트
 
-  // 지점 정보 가져오기
+  // 지점 정보, 지점별 매장 정보 가져오기
   useEffect(() => {
-    axios.get('http://localhost:8080/branch/all')
-    .then(res => {
-      console.log(res.data);
-      setBranchList(res.data);
-    })
-    .catch(err => {
-      console.log(err);
-    });
-  }, [])
+    const fetchData = async () => { // async는 함수 앞에 붙여서 해당 함수가 Promise를 반환하는 비동기 함수임을 나타냄
+      try {
+        const [branchRes, storeRes] = await Promise.all([ // await는 Promise가 실행 될 때까지 대기
+          axios.get('http://localhost:8080/branch/all'),
+          axios.get(`http://localhost:8080/admin/shop/findAll/${branchId}`)
+        ]);
+        console.log(branchRes.data);
+        console.log(storeRes.data);
+        setBranchList(branchRes.data);
+        setStoreList(storeRes.data.content);
+      }
+      catch (err) {
+        console.log(err);
+      }
+    };
   
-  // 지점별 매장 정보 가져오기
-  useEffect(() => {
-    axios.get(`http://localhost:8080/admin/shop/findAll/${branchId}`)
-    .then(res => {
-      console.log(res);
-      setStoreList(res.data.content);
-    })
-    .catch(err => {
-      console.log(err);
-    });
-
-  }, [branchId]) // 지점 정보가 변할 때 마다 리렌더링
+    fetchData(); // 처음 렌더링 시에도 실행되도록 함
+    }, [branchId]); // 지점 정보가 변할 때 마다 리렌더링
 
   // 시간 정보 가져오기
   useEffect(() => {
