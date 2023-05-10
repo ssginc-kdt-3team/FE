@@ -9,7 +9,7 @@ function OwnerDetail() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/admin/owner/findById/${id}`)
+      .get(`http://localhost:8080/admin/owner/findOne/${id}`)
       .then((res) => {
         setOwner(res.data);
       })
@@ -26,8 +26,8 @@ function OwnerDetail() {
         <ul>
           <li><h1>{owner.name}</h1></li>
           <li><p>이메일 : {String(owner.email)}</p></li>
-          <li><p>주소 : {String(owner.address)}</p></li>
-          <li><p>등급 : {String(owner.grade)}</p></li>
+          <li><p>전화번호 : {owner.phone}</p></li>
+          <li><p>주소 : {String(owner.city)}, {String(owner.detail)}, {String(owner.district)}</p></li>
           <li><p>생년월일 : {owner.birthday.toString()}</p></li>
         </ul>
       </>

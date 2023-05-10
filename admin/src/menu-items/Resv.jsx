@@ -21,14 +21,6 @@ const Resv = {
             url: '/resv/list',
             icon: icons.HistoryOutlined
             // breadcrumbs: false
-        },
-        {
-            id: 'depositlist',
-            title: '예약금 내역 조회',
-            type: 'item',
-            url: '/resv/deposit',
-            icon: icons.CopyrightOutlined
-            // breadcrumbs: false
         }
     ]
 };

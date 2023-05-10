@@ -9,7 +9,7 @@ function CustDetail() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/admin/Customer/findById/${id}`)
+      .get(`http://localhost:8080/admin/customer/findById/${id}`)
       .then((res) => {
         setCust(res.data);
       })

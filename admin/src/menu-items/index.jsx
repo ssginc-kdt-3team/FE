@@ -10,13 +10,13 @@ import utilities from './utilities';
 import notitext from './Notitext';
 import grade from './Grade';
 import cupon from './Cupon';
-// import deposit from './Deposit';
+import deposit from './Deposit';
 
 
 // ==============================|| MENU ITEMS ||============================== //
 
 const menuItems = {
-    items: [pages, profile, resv, cust, owner, shop, branch, notitext, grade, cupon, utilities],
+    items: [pages, profile, resv, deposit, cust, owner, shop, branch, notitext, grade, cupon, utilities],
     breadcrumbs: false
 };
 
