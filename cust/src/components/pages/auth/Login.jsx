@@ -29,13 +29,13 @@ function Login() {
   // 로그인 처리
   const handleLogin = (e) => {
     if(!isInputEmpty(email, password)) { // 입력칸이 모두 채워져 있으면
-      axios.post('http://localhost:8080/admin/login', {
+      axios.post('http://localhost:8080/customer/login', {
         email: email, // email
         password: password, // password
       })
       .then(res => { // 받아오는 정보가 있다
         // console.log(res);
-        // console.log(res.data);
+        console.log(res.data);
         if(res.data === "")
           alert('로그인에 실패하였습니다.\n아이디와 비밀번호를 확인하세요.');
         else {
@@ -62,7 +62,7 @@ function Login() {
   return (
     <div className='container'>
       <div className='center flex-col'>
-        <PageTitle title="로그인" fontSize="1.6rem" marginTop="80px" marginBottom="100px"/>
+        <PageTitle title="로그인" fontSize="1.6rem" marginTop="60px" marginBottom="80px"/>
         <form className={styles.loginForm}>
           <input className={styles.loginInput} type='email' value={email} placeholder='이메일' onChange={(e) => setEmail(e.currentTarget.value)}/>
 
