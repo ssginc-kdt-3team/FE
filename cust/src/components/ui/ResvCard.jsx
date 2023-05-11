@@ -6,7 +6,7 @@ function ResvCard({data}) {
   return (
     <li>
       <Link to={`/resv/${data.id}`}>
-        <div id={styles.resvCardWrap}>
+        <div id={styles.resvCardWrap} className='box'>
           <div id={styles.topWrap}>
             {data.shopName}
             {/* <span></span> */}

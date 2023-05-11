@@ -4,7 +4,7 @@ import Calendar from 'react-calendar';
 import moment from 'moment';
 import styles from '../../../assets/css/pages/reservation/ResvAdd.module.css';
 import 'react-calendar/dist/Calendar.css'; // css import
-import Count from '../../ui/Count';
+import Counter from '../../ui/Counter';
 
 const initialResvInfo = { // 초기값을 가지는 객체
   reservationDate: "",
@@ -136,7 +136,7 @@ function ResvAdd() {
 
         {/* 상세정보 */}
         {/* 예약 인원 */}
-        <Count 
+        <Counter
           title='예약 인원' 
           peopleCount={peopleCount} 
           setPeopleCount={setPeopleCount} 
@@ -146,7 +146,7 @@ function ResvAdd() {
         />
         
         {/* 유아 수 */}
-        <Count 
+        <Counter 
           title='유아' 
           peopleCount={peopleCount} 
           setPeopleCount={setPeopleCount} 

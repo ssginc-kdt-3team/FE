@@ -1,9 +1,37 @@
 #resvInfoWrap {
   width: 100%;
-  height: 500px;
-  background-color: blue;
+  height: fit-content; /* 높이 내용에 맞게 */
+  /* padding: 20px; */
   grid-row-start: 1;
   grid-row-end: 3;
+}
+
+/* 상단 */
+#topWrap {
+  width: 100%;
+  align-items: center;
+}
+#topWrap > div:first-child {
+  font-size: 22px;
+}
+
+/* 중간 */
+#middleWrap > p > span {
+  color: var(--description);
+  margin-right: 20px;
+}
+
+/* 하단 */
+#bottomWrap {
+  display: flex;
+  gap: 10px;
+}
+/* 버튼 */
+#bottomWrap > div {
+  width: 100px;
+  height: 40px;
+  font-size: 16px;
+  line-height: 38px; /* 경계값 만큼 빼주어야 << 버튼이 border-box이다 */
 }
 
 

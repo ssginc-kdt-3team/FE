@@ -1,5 +1,16 @@
 #custInfoWrap {
   width: 100%;
-  height: 200px;
-  background-color: green;
+  height: fit-content; /* 높이 내용에 맞게 */
+  /* padding: 20px; */
+}
+
+/* 상단 */
+#topWrap {
+  font-size: 22px;
+}
+
+/* 하단 */
+#bottomWrap > p > span {
+  color: var(--description);
+  margin-right: 20px;
 }

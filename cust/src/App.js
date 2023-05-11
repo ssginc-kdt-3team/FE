@@ -9,6 +9,11 @@ import ResvAdd from "./components/pages/reservation/ResvAdd";
 import ResvList from "./components/pages/reservation/ResvList";
 import Resv from "./components/pages/reservation/Resv";
 import ResvUpdate from "./components/pages/reservation/ResvUpdate";
+import axios from "axios";
+
+export const axiosWithBaseUrl = axios.create({
+  baseURL: 'http://localhost:8080',
+});
 
 function App() {
   return ( // 이 안에 JSX 문법 적용

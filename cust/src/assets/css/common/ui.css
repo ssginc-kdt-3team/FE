@@ -1,16 +1,23 @@
+.box {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.05);
+}
+
+/* 버튼 */
 .button {
   height: var(--input-height);
   padding: 0;
   font-size: var(--input-fontSize);
   font-weight: 500;
-  line-height: var(--input-height);
+  line-height: calc(var(--input-height) - 2px);
   text-align: center;
   background: var(--main);
   color: #fff;
   border: 1px solid var(--main);
   border-radius: 10px;
   cursor: pointer;
-  box-sizing: border-box;
   transition: 0.5s;
 }
 .button:hover {
