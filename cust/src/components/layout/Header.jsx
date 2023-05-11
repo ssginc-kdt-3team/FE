@@ -26,7 +26,7 @@ function Heaader() {
   // };
 
   return (
-    <>
+    <div className='fixed-top' style={{zIndex: '99'}}>
       <header>
         <div id={styles.headerWrap}>
           {/* 로그인/회원가입/프로필 */}
@@ -68,7 +68,7 @@ function Heaader() {
 
       {/* 모바일 Nav */}
       <MobNav isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen}/>
-    </>
+    </div>
   );
 }
 

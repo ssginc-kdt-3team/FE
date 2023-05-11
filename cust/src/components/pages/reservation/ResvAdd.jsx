@@ -27,7 +27,7 @@ function ResvAdd() {
   }
 
   // 메모 처리
-  const handleInput = (e) => {
+  const handleTextArea = (e) => {
     let { name, value } = e.target;
 
     setResvInfo({
@@ -36,15 +36,15 @@ function ResvAdd() {
     })
   };
 
-  const [branchList, setBranchList] = useState();
-  const [storeList, setStoreList] = useState();
+  const [branchList, setBranchList] = useState(null);
+  const [storeList, setStoreList] = useState(null);
 
   const [branchId, setBranchId] = useState(1); // 선택된 지점 id
-  const [storeId, setStoreId] = useState(); // 선택된 매장 id
+  const [storeId, setStoreId] = useState(1); // 선택된 매장 id
 
   const [selectedDate, setSelectedDate] = useState(new Date()); // 선택된 날짜
 
-  const [possibleTimeList, setPossibleTimeList] = useState();
+  const [possibleTimeList, setPossibleTimeList] = useState(null);
   const [selectedTime, setSelectedTime] = useState("00:00"); // 선택된 시간
 
   const [peopleCount, setPeopleCount] = useState(1); // 예약 인원 카운트
@@ -147,7 +147,7 @@ function ResvAdd() {
         
         {/* 유아 수 */}
         <Count 
-          title='유아 수' 
+          title='유아' 
           peopleCount={peopleCount} 
           setPeopleCount={setPeopleCount} 
           childCount={childCount} 
@@ -156,13 +156,20 @@ function ResvAdd() {
         />
 
         {/* 요구사항 */}
-        <textarea name='memo' type='text' cols={50} rows={10} onChange={handleInput}></textarea>
+        <textarea name='memo' type='text' cols={50} rows={3} maxlength="100" onChange={handleTextArea}></textarea>
 
         {/* 시간 선택 */}
         <div>
           {
             possibleTimeList && possibleTimeList.map( time => (
-              <span key={time.id} style={{background: time.possible ? 'white' : 'aqua', marginRight:'20px'}} onClick={() => selectTime(time.time)}>{time.time}</span>
+              <button 
+                type="button" 
+                key={time.id} 
+                onClick={() => selectTime(time.time)} 
+                disabled={!time.possible}
+              >
+                {time.time}
+              </button>
             ))
           }
         </div>

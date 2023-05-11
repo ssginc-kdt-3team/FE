@@ -20,7 +20,7 @@ function ResvList() {
       console.log(res.data);
       setResvList(res.data.content); // 
       setTotalItems(res.data.totalElements); // 총 아이템 수 설정
-      setItemsPerPage(res.data.numberOfElements); // 페이지당 아이템 수 설정
+      setItemsPerPage(res.data.pageable.pageSize); // 페이지당 아이템 수 설정
     })
     .catch(err => console.log(err))
   }, [currentPage]);
