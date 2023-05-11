@@ -8,14 +8,14 @@
   /* margin: 0; */
   margin: var(--header-height) 0 0 0;
   padding: 20px;
-  /* box-sizing: border-box; */
+  box-sizing: border-box;
 
   position: absolute;
   top: 0;
   /* bottom: 0; */
   left: 0;
   right: 0;
-  z-index: 98;
+  z-index: 97;
   transition: transform 0.75s;
   transform: translateY(-100vh);
 }
