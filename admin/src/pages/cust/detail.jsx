@@ -6,12 +6,14 @@ function CustDetail() {
   const { id } = useParams(); // useParams을 사용해서 id 값을 가져옴
   console.log(id);
   const [cust, setCust] = useState(null);
+  const [adress, setAdress] = useState(null);
 
   useEffect(() => {
     axios
       .get(`http://localhost:8080/admin/customer/findById/${id}`)
       .then((res) => {
         setCust(res.data);
+        console.log(res.data);
       })
       .catch((error) => {
         console.log(error);
@@ -26,8 +28,8 @@ function CustDetail() {
         <ul>
           <li><h1>{cust.name}</h1></li>
           <li><p>이메일: {String(cust.email)}</p></li>
-          <li><p>주소: {String(cust.address)}</p></li>
-          <li><p>등급: {String(cust.grade)}</p></li>
+          <li><p>주소: {`${cust.address.city} ${cust.address.district} ${cust.address.detail} ${cust.addresszipCode}`}</p></li>
+          <li><p>등급: {String(cust.grade.name)}</p></li>
           <li><p>생년월일: {cust.birthday.toString()}</p></li>
         </ul>
       </>

@@ -5,26 +5,26 @@ import { useEffect, useState } from "react";
 import Paging from "components/pagination/paging";
 import { current } from "../../../node_modules/@reduxjs/toolkit/dist/index";
 
-const CustListTable = () => {
-  const [custList, setCustList] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalItems, setTotalItems] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
+const CustList = () => {
+  const [custList, setCustList] = useState([]);           //현재 펭지의 고객 목록을 저장 
+  const [loading, setLoading] = useState(false);          //데이터를 불러오는 동안의 로딩 상태를 저장
+  const [currentPage, setCurrentPage] = useState(1);      // 현재 페이지 번호를 저장
+  const [totalItems, setTotalItems] = useState(0);        // 전체 고객 수를 저장
+  const [itemsPerPage, setItemsPerPage] = useState(10);   // 한 페이지에 보여줄 고객 수 저장
 
   useEffect(() => {
-    fetchCustomerList();
-  }, [currentPage]); // Include currentPage in the dependency array
+    fetchCustomerList();                                // 함수를 호출하여 페이지가 변경될 때마다 고객 목록을 가져옴
+  }, [currentPage]);                                     //currentPage가 변경될 때마다 fetchCustomerList 함수가 호출
 
   const fetchCustomerList = () => {
     setLoading(true);
     axios
-      .get(`http://localhost:8080/admin/customer/findAll/${currentPage}`)
-      .then((response) => {
+      .get(`http://localhost:8080/admin/customer/findAll/${currentPage}`)    //axios를 사용하여 API 엔드포인트로 GET 요청
+      .then((response) => {                                                  //응답받은 데이터를 사용하여 업데이트
         setCustList(response.data.content);
         setTotalItems(response.data.totalElements);
         setItemsPerPage(response.data.numberOfElements);
-        setLoading(false);
+        setLoading(false);      //로딩상태 표시
         console.log(custList);
       })
       .catch((error) => {
@@ -33,17 +33,12 @@ const CustListTable = () => {
       });
   };
 
-
-  // const handlePageChange = (page) => {
-  //   setCurrentPage(page);
-  // };
-
-  const columns = [
+  const columns = [           //table의 columm정의
     {
-      title: "고객 등급",
-      dataIndex: "grade",
-      key: "grade",
-      render: (text) => {
+      title: "고객 등급",      //  columm 제목
+      dataIndex: "grade",     // data 속성키
+      key: "grade",           //columm 식별자
+      render: (text) => {     //열 내용 render
         let color;
         if (text === "Gold") {
           color = "gold";
@@ -60,6 +55,7 @@ const CustListTable = () => {
     {
       title: "고객명",
       dataIndex: "name",
+      width: 300,
       key: "name",
       render: (text, record) => (
         <Link to={`/cust/detail/${record.id}`}>{text}</Link>
@@ -83,13 +79,13 @@ const CustListTable = () => {
 
   return (
     <>
-      <Table
+      <Table   
         columns={columns}
         dataSource={custList}
         pagination={false}
         loading={loading}
       />
-      <Paging
+      <Paging     
         page={currentPage}
         itemsPerPage={itemsPerPage}
         totalItems={totalItems}
@@ -100,4 +96,4 @@ const CustListTable = () => {
 };
 
 
-export default CustListTable;
+export default CustList;

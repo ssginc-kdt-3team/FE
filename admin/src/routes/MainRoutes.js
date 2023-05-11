@@ -22,6 +22,7 @@ import ShopReview from '../pages/shop/review';
 import ShopMenu from '../pages/shop/menu';
 import ShopReg from '../pages/shop/reg';
 import BranchList from '../pages/branch/list';
+import BranchDetail from 'pages/branch/detail';
 import NotitextList from '../pages/notitext/list';
 import NotitextReg from '../pages/notitext/reg';
 import GradeList from '../pages/grade/list';
@@ -142,7 +143,11 @@ const MainRoutes = {
             {
             path: '/branch/list',
             element: <BranchList />
-            }
+            },
+            {
+                path: '/branch/detail/:id',
+                element: <BranchDetail />
+                }
             ]
         },
         {
