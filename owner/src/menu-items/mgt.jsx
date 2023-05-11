@@ -30,7 +30,7 @@ const mgt = {
         },
         {
             id: 'mgtdeposit',
-            title: '예약금 내역 조회',
+            title: '매장 정보 수정',
             type: 'item',
             url: '/mgt/update',
             icon: icons.ChromeOutlined

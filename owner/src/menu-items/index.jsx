@@ -2,14 +2,14 @@
 import pages from './pages';
 import utilities from './utilities';
 import shop from './shop';
-import rsvd from './rsvd';
+import resv from './resv';
 import mgt from './mgt';
 
 
 // ==============================|| MENU ITEMS ||============================== //
 
 const menuItems = {
-    items: [pages, rsvd, mgt, shop, utilities]
+    items: [pages, resv, mgt, shop, utilities]
 };
 
 export default menuItems;
