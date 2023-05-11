@@ -46,7 +46,7 @@ function ResvUpdate() {
       setChildCount(res.data.child); // 유아 수
       setMemo(res.data.memo); // 메모
       // console.log(selectedTime);
-      memoTextarea.current.value = res.data.memo; // 메모 데이터 Textarea에 뿌린다
+      memoTextarea.current.value = res.data.memo; // 메모 데이터 TextArea에 뿌린다
     })
     .catch(err => {
       console.log(err);
@@ -159,7 +159,7 @@ function ResvUpdate() {
         />
 
         {/* 요구사항 */}
-        <textarea name='memo' type='text' cols={50} rows={5} maxlength="100" ref={memoTextarea} onChange={(e) => setMemo(e.target.value)}></textarea>        
+        <textarea name='memo' type='text' cols={50} rows={3} maxlength="100" ref={memoTextarea} onChange={(e) => setMemo(e.target.value)}></textarea>        
 
         {/* 시간 선택 */}
         <div>

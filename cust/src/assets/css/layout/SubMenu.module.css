@@ -15,7 +15,7 @@
   /* bottom: 0; */
   left: 0;
   right: 0;
-  z-index: 98;
+  z-index: 97;
   transition: transform 0.75s;
   transform: translateY(-100vh);
 }
