@@ -4,8 +4,9 @@ import Calendar from 'react-calendar';
 import moment from 'moment';
 import styles from '../../../assets/css/pages/reservation/ResvUpdate.module.css';
 import 'react-calendar/dist/Calendar.css'; // css import
-import Count from '../../ui/Count';
+import Counter from '../../ui/Counter';
 import { useParams } from 'react-router-dom';
+import { axiosWithBaseUrl } from '../../../App'
 
 function ResvUpdate() {
   const { resvId } = useParams();
@@ -65,6 +66,7 @@ function ResvUpdate() {
     const lastDateOfNextMonth = new Date(currentDate.getFullYear(), currentMonth + 2, 0); // 다음 달 마지막 날
 
     let minSelectableDate, maxSelectableDate;
+
     if (currentDate < middleDateOfCurrentMonth) { // 1일 ~ 14일 사이이면 예약 가능 범위는
       minSelectableDate = firstDateOfCurrentMonth; // 이번 달 1일 부터
       maxSelectableDate = middleDateOfNextMonth; // 다음 달 15일까지
@@ -79,7 +81,10 @@ function ResvUpdate() {
 
   // 시간 정보 가져오기
   useEffect(() => {
-    axios.get(`http://localhost:3001/possible`)
+    axiosWithBaseUrl.post('/customer/reservation/possible', {
+      shopId: 1 ,
+      date: "2023-05-11"
+    })
     .then(res => {
       console.log(res.data);
       setPossibleTimeList(res.data);
@@ -139,7 +144,7 @@ function ResvUpdate() {
 
         {/* 상세정보 */}
         {/* 예약 인원 */}
-        <Count 
+        <Counter 
           title='예약 인원' 
           peopleCount={peopleCount} 
           setPeopleCount={setPeopleCount} 
@@ -149,7 +154,7 @@ function ResvUpdate() {
         />
         
         {/* 유아 수 */}
-        <Count 
+        <Counter 
           title='유아' 
           peopleCount={peopleCount} 
           setPeopleCount={setPeopleCount} 

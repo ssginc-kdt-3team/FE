@@ -13,6 +13,13 @@
   /* font */
   --font: #333;
   --topMenu-font: #555555;
+  --description: #999;
+  
+  /* scrollbar */
+  --scrollbar: #ddd;
+
+
+
   
 
 
@@ -25,9 +32,7 @@
   --border: #ebebeb;
   --price: #f95a00;
 
-  --description: #999;
 
   --footer-bg: #f4f4f4;
 
-  --scrollbar: #ddd;
 }

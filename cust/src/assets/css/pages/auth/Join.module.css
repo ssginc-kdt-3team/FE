@@ -98,7 +98,7 @@ input[type=radio] {
   } */
   /* 한 줄에 2개인 거 1개로 바꾸고 간격 처리 */
   .joinForm > div:nth-child(3) {
-    gap: 15px;
+    gap: 10px;
   }
   .joinForm > div:nth-child(4) {
     gap: 40px;
@@ -129,6 +129,7 @@ input[type=radio] {
   /* 취소/확인 버튼 */
   #buttonWrap {
     flex-direction: column;
+    gap: 10px;
   }
   #buttonWrap > div {
     width: 100%;
