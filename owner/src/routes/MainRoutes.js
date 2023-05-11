@@ -7,11 +7,11 @@ import ShopReg from '../pages/shop/reg';
 import MgtInfo from '../pages/mgt/info';
 import MgtReview from '../pages/mgt/review';
 import MgtUpdate from '../pages/mgt/update';
-import RsvdRtList from '../pages/rsvd/rtlist';
-import RsvdList from '../pages/rsvd/list';
-import RsvdDeposit from '../pages/rsvd/deposit';
-
-
+import ResvAcList from '../pages/resv/aclist/index';
+import ResvList from '../pages/resv/list/index';
+import ResTdList from '../pages/resv/tdlist/index';
+import ResvDeposit from '../pages/deposit/deposit';
+import ResvDetail from '../pages/resv/detail/index';
 
 
 
@@ -41,20 +41,28 @@ const MainRoutes = {
             element: <ShopReg />
         },
         {
-            path: '/rsvd',
+            path: '/resv',
             children: [
                 {
-                    path: '/rsvd/rtlist',
-                    element: <RsvdRtList />
+                    path: '/resv/tdlist',
+                    element: <ResTdList />
                 },
                 {
-                    path: '/rsvd/list',
-                    element: <RsvdList />
+                    path: '/resv/aclist',
+                    element: <ResvAcList />
                 },
                 {
-                    path: '/rsvd/deposit',
-                    element: <RsvdDeposit />
-                }
+                    path: '/resv/list',
+                    element: <ResvList />
+                },
+                {
+                    path: '/resv/deposit',
+                    element: <ResvDeposit />
+                },
+                {
+                    path: '/resv/detail/:id',
+                    element: <ResvDetail />
+                }        
             ]
         },
         {
