@@ -5,7 +5,7 @@ import styles from '../../assets/css/ui/ResvCard.module.css'
 function ResvCard({data}) {
   return (
     <li>
-      <Link to={`/resv/${data.id}`}>
+      <Link to={`/resv/${data.reservationId}`}>
         <div id={styles.resvCardWrap} className='box'>
           <div id={styles.topWrap}>
             {data.shopName}
