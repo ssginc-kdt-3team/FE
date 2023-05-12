@@ -2,8 +2,10 @@ import React from 'react';
 import styles from '../../../assets/css/widget/reservation/ResvInfoCard.module.css';
 import ResvStatus from '../../ui/ResvStatus';
 import ResvStatusTag from '../../ui/ResvStatusTag';
+import { Link } from 'react-router-dom';
 
-function ResvInfoCard({data}) {
+function ResvInfoCard({data, resvId}) {
+  // console.log('resvId :' + resvId);
   return (
     <>
       {
@@ -23,7 +25,7 @@ function ResvInfoCard({data}) {
             </div>
 
             <div id={styles.bottomWrap} className='center'>
-              <div className='button buttonReverse'>예약 변경</div>
+              <Link to={`/resv/update/${resvId}`}><div className='button buttonReverse'>예약 변경</div></Link>
               <div className='button'>예약 취소</div>
             </div>
           </div>
