@@ -1,15 +1,18 @@
+import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Table from "./table";
-import Filter from "./filter";
+import DateFilter from "./datefilter";
+import StatusFilter from "./statusfilter";
 
-const ResvList = () => {
-  return (
-  <div>
-  <Outlet/>
-  <Filter/>
-  <Table />;
-  </div>
-  )
-};
+function ResvList() {
+  return ( 
+          <div>    
+            <DateFilter />
+            <StatusFilter />
+            <Table />
+            <Outlet />
+          </div>
+  );
+}
 
 export default ResvList;
