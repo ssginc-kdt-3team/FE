@@ -1,31 +1,40 @@
+import { useState, useEffect } from "react";
+import { axiosWithBaseUrl } from "App";
 import { Table, Tag } from "antd";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import { useEffect, useState } from "react";
 import Paging from "components/pagination/paging";
+import DateFilter from "./datefilter";
+import StatusFilter from "./statusfilter";
 
-
-const ResvList = () => {
-  const [resvList, setResvList] = useState([]);           //현재 페이지의 예약 목록을 저장 
-  const [loading, setLoading] = useState(false);          //데이터를 불러오는 동안의 로딩 상태를 저장
-  const [currentPage, setCurrentPage] = useState(1);      // 현재 페이지 번호를 저장
-  const [totalItems, setTotalItems] = useState(0);        // 전체 고객 수를 저장
-  const [itemsPerPage, setItemsPerPage] = useState(10);   // 한 페이지에 보여줄 고객 수 저장
+const ResvTable = () => {
+  const [resvList, setResvList] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalItems, setTotalItems] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedTime, setSelectedTime] = useState(null);
+  const [statusFilter, setStatusFilter] = useState(null);
 
   useEffect(() => {
-    fetchResvList();                                     // 함수를 호출하여 페이지가 변경될 때마다 고객 목록을 가져옴
-  }, [currentPage]);                                     //currentPage가 변경될 때마다 fetchCustomerList 함수가 호출
+    fetchResvList();
+  }, [currentPage, selectedDate, selectedTime, statusFilter]);
 
   const fetchResvList = () => {
     setLoading(true);
-    axios
-      .get("http://localhost:8080/owner/reserve")         //axios를 사용하여 API 엔드포인트로 GET 요청
-      .then((response) => {                               //응답받은 데이터를 사용하여 업데이트                                  
-        console.log(response.data)                     //responese.data: 전체 data, respone.data.content : 특정 data
+    const params = {
+      page: currentPage,
+      date: selectedDate ? selectedDate.toISOString() : null,
+      status: statusFilter,
+      time: selectedTime ? selectedTime.toISOString() : null,
+    };
+    axiosWithBaseUrl
+      .get("/owner/reserve", { params })
+      .then((response) => {
         setResvList(response.data);
         setTotalItems(response.data.totalElements);
         setItemsPerPage(response.data.numberOfElements);
-        setLoading(false);                                //로딩상태 표시
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
@@ -33,22 +42,42 @@ const ResvList = () => {
       });
   };
 
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+    console.log(date);
+  };
+
+  const handleTimeChange = (time) => {
+    setSelectedTime(time);
+  };
+
+  const handleStatusFilter = (status) => {
+    setStatusFilter(status);
+    console.lig(status);
+  };
+
+  const handleFilterClick = () => {
+    fetchResvList();
+  };
+
   const columns = [
+    {
+      title: "변동일자",
+      dataIndex: "reservationDate",
+      key: "reservationDate",
+    },
     {
       title: "예약일자",
       dataIndex: "reservationDate",
       key: "reservationDate",
-      width: 250
     },
     {
       title: "예약상태",
       dataIndex: "status",
       key: "status",
-      width: 200,
-      align: "center",
-      render: (text) => {     //열 내용 render
-        let color;
-        let content;
+      render: (text) => {
+        let color, content;
+
         if (text === "NOSHOW") {
           color = "volcano";
           content = "노쇼";
@@ -59,12 +88,13 @@ const ResvList = () => {
           color = "gold";
           content = "취소";
         } else if (text === "IMMINENT") {
-            color = "magenta";
-            content = "취소";
+          color = "magenta";
+          content = "취소";
         } else {
           color = "blue";
           content = "예약 중";
         }
+
         return <Tag color={color}>{content}</Tag>;
       },
     },
@@ -72,46 +102,52 @@ const ResvList = () => {
       title: "예약자명",
       dataIndex: "name",
       key: "name",
-      width: 150,
       render: (text, record) => (
-        <Link to={`/resv/detail/${record.id}`}>{text}</Link>
+        <Link to={`/resv/detail/${record.reserveId}`}>{text}</Link>
       ),
     },
     {
       title: "예약자 번호",
       dataIndex: "phoneNumber",
       key: "phoneNumber",
-      width: 200
     },
     {
       title: "예약인원",
       dataIndex: "people",
       key: "people",
-      width: 150
     },
+    // child 바꾸기 
     {
-      title: "유아 수",
+      title: "예약금",
       dataIndex: "child",
        key: "child",
-       width: 150
-      },
-      {
-        title: "버튼",
-        dataIndex: "date",
-        key: "date",
-      },
+    },
+    {
+        title: "위약금",
+        dataIndex: "child",
+         key: "child",
+    }
   ];
 
   return (
     <>
-      <Table   
+      <DateFilter
+        selectedDate={selectedDate}
+        onDateChange={handleDateChange}
+        onFilterClick={handleFilterClick}
+      />
+       <StatusFilter
+        selectedStatus={statusFilter}
+        onStatusChange={handleStatusFilter}
+        onFilterClick={handleFilterClick}
+      />
+      <Table
         columns={columns}
         dataSource={resvList}
         pagination={false}
         loading={loading}
-        x='max-content'
       />
-      <Paging     
+      <Paging
         page={currentPage}
         itemsPerPage={itemsPerPage}
         totalItems={totalItems}
@@ -122,4 +158,4 @@ const ResvList = () => {
 };
 
 
-export default ResvList;
+export default ResvTable;
