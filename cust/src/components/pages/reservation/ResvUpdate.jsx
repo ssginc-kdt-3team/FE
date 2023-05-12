@@ -5,7 +5,7 @@ import moment from 'moment';
 import styles from '../../../assets/css/pages/reservation/ResvUpdate.module.css';
 import 'react-calendar/dist/Calendar.css'; // css import
 import Counter from '../../ui/Counter';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { axiosWithBaseUrl } from '../../../App'
 
 function ResvUpdate() {
@@ -35,6 +35,8 @@ function ResvUpdate() {
   const [childCount, setChildCount] = useState(0); // 유아 수 카운트
 
   const [memo, setMemo] = useState('');
+  
+  const navigate = useNavigate(); // 페이지 이동을 위한 Hook
 
   // 지점 정보 가져오기
   useEffect(() => {
@@ -111,6 +113,9 @@ function ResvUpdate() {
     axiosWithBaseUrl.post(`/customer/reservation/update/${resvId}`, resvInfo)
       .then(res => {
         console.log(res);
+        alert('수정이 완료되었습니다.');
+        navigate(`/resv/${resvId}`); // 예약상세 화면으로 이동
+
       })
       .catch(err => console.log(err))
   }

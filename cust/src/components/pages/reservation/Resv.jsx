@@ -55,7 +55,7 @@ function Resv() {
         <PageTitle title="예약 상세" fontSize="1.6rem" marginTop="60px" marginBottom="80px"/>
         <div id={styles.detailWrap}>
           {/* 예약 정보 */}
-          <ResvInfoCard data={resvInfo}/>
+          <ResvInfoCard data={resvInfo} resvId={resvId}/>
 
           {/* 예약자 정보 */}
           <CustInfoCard data={custInfo}/>
