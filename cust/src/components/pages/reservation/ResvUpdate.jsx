@@ -1,4 +1,4 @@
-import axios from 'axios';
+// import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
 import Calendar from 'react-calendar';
 import moment from 'moment';
@@ -24,11 +24,12 @@ function ResvUpdate() {
   const memoTextarea = useRef(null); // Textarea
 
   const [previousResvInfo, setPreviousResvInfo] = useState(null); // 이전 데이터
+  const [shopId, setShopId] = useState(null); // 매장id
 
-  const [selectedDate, setSelectedDate] = useState("2023-05-14"); // 선택된 날짜
+  const [selectedDate, setSelectedDate] = useState(null); // 선택된 날짜
 
-  const [possibleTimeList, setPossibleTimeList] = useState();
-  const [selectedTime, setSelectedTime] = useState("00:00"); // 선택된 시간
+  const [possibleTimeList, setPossibleTimeList] = useState(null);
+  const [selectedTime, setSelectedTime] = useState("00:00:00"); // 선택된 시간
 
   const [peopleCount, setPeopleCount] = useState(1); // 예약 인원 카운트
   const [childCount, setChildCount] = useState(0); // 유아 수 카운트
@@ -37,16 +38,16 @@ function ResvUpdate() {
 
   // 지점 정보 가져오기
   useEffect(() => {
-    axios.get(`http://localhost:8080/customer/reservation/update/${resvId}`)
+    axiosWithBaseUrl.get(`/customer/reservation/update/${resvId}`)
     .then(res => {
       console.log(res.data);
       setPreviousResvInfo(res.data);
+      setShopId(res.data.shopId);
       setSelectedDate(res.data.reservationDateTime.split(" ")[0]); // 날짜
-      setSelectedTime(res.data.reservationDateTime.split(" ")[1].slice(0, 5)); // 시간
+      setSelectedTime(res.data.reservationDateTime.split(" ")[1]); // 시간
       setPeopleCount(res.data.people); // 예약인원
       setChildCount(res.data.child); // 유아 수
       setMemo(res.data.memo); // 메모
-      // console.log(selectedTime);
       memoTextarea.current.value = res.data.memo; // 메모 데이터 TextArea에 뿌린다
     })
     .catch(err => {
@@ -71,7 +72,7 @@ function ResvUpdate() {
       minSelectableDate = firstDateOfCurrentMonth; // 이번 달 1일 부터
       maxSelectableDate = middleDateOfNextMonth; // 다음 달 15일까지
     }
-    else { // 15일 ~ 말일 사이라면 예약 가능 범위는
+    else { // 15일 ~ 말일 사이라면 예약 가능 범위는 
       minSelectableDate = middleDateOfCurrentMonth; // 이번 달 15일 부터
       maxSelectableDate = lastDateOfNextMonth; // 다음 달 마지막 날까지
     }
@@ -82,38 +83,32 @@ function ResvUpdate() {
   // 시간 정보 가져오기
   useEffect(() => {
     axiosWithBaseUrl.post('/customer/reservation/possible', {
-      shopId: 1 ,
-      date: "2023-05-11"
+      shopId: shopId ,
+      date: moment(selectedDate).format("YYYY-MM-DD")
     })
     .then(res => {
       console.log(res.data);
       setPossibleTimeList(res.data);
     })
     .catch(err => console.log(err));
-  }, [])
-  
-  // 시간 선택
-  const selectTime = (time) => {
-    console.log(time);
-    setSelectedTime(time);
-  }
+  }, [shopId, selectedDate]);
 
   // 시간, 날짜, 예약인원, 유아 수가 바뀔 때마다 resvInfo 업데이트
   useEffect(() => {
-    setResvInfo({
-      ...resvInfo,
-      reservationDateTime: moment(selectedDate).format("YYYY-MM-DD") + " " + selectedTime + ":00",
+    setResvInfo( prevResvInfo => ({ // setResvInfo 함수를 호출하면 현재의 resvInfo 상태값을 이전 상태값인 prevResvInfo 매개변수로 전달
+      ...prevResvInfo, // 기존 값 복사
+      reservationDateTime: moment(selectedDate).format("YYYY-MM-DD") + " " + selectedTime,
       people: peopleCount,
       child: childCount,
       memo: memo
-    })
+    }))
   }, [selectedDate, selectedTime, peopleCount, childCount, memo])
 
   // 예약하기 처리
   const handleReserve = () => {
     console.log(resvInfo);
 
-    axios.post(`http://localhost:8080/customer/reservation/update/${resvId}`, resvInfo)
+    axiosWithBaseUrl.post(`/customer/reservation/update/${resvId}`, resvInfo)
       .then(res => {
         console.log(res);
       })
@@ -173,10 +168,10 @@ function ResvUpdate() {
               <button 
                 type="button" 
                 key={time.id} 
-                onClick={() => selectTime(time.time)} 
+                onClick={() => setSelectedTime(time.time)} 
                 disabled={!time.possible}
               >
-                {time.time}
+                {time.time.slice(0, 5)}
               </button>
             ))
           }

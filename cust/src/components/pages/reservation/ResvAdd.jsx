@@ -57,7 +57,7 @@ function ResvAdd() {
   useEffect(() => {
     const fetchData = async () => { // async는 함수 앞에 붙여서 해당 함수가 Promise를 반환하는 비동기 함수임을 나타냄
       try {
-        const [branchRes, shopRes, possibleTimeListRes] = await Promise.all([ // await는 Promise가 실행 될 때까지 대기
+        const [res1, res2, res3] = await Promise.all([ // await는 Promise가 실행 될 때까지 대기
           axiosWithBaseUrl.get('/branch/all'),
           axiosWithBaseUrl.get(`/branch/shops/${branchId}`),
           axiosWithBaseUrl.post('/customer/reservation/possible', {
@@ -65,11 +65,11 @@ function ResvAdd() {
             date: moment(selectedDate).format("YYYY-MM-DD")
           })
         ]);
-        console.log(branchRes.data);
-        console.log(shopRes.data);
-        setBranchList(branchRes.data);
-        setShopList(shopRes.data);
-        setPossibleTimeList(possibleTimeListRes.data);
+        console.log(res1.data);
+        console.log(res2.data);
+        setBranchList(res1.data);
+        setShopList(res2.data);
+        setPossibleTimeList(res3.data);
       }
       catch (err) {
         console.log(err);
