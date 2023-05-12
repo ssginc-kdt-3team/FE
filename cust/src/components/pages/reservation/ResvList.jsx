@@ -31,10 +31,10 @@ function ResvList() {
       <div className='center flex-col'>
         <PageTitle title="예약 내역" fontSize="1.6rem" marginTop="60px" marginBottom="80px"/>
 
-        <ul id={styles.list} className='grid-2c'>
+        <ul id={styles.list} className='flex flex-col flex-gap-40'>
           {
             resvList && resvList.map( data => (
-              <ResvCard key={data.id} data={data}/>
+              <ResvCard key={data.reservationId} data={data}/>
             ))
           }
         </ul>
