@@ -7,6 +7,8 @@ import 'react-calendar/dist/Calendar.css'; // css import
 import Counter from '../../ui/Counter';
 import { useNavigate, useParams } from 'react-router-dom';
 import { axiosWithBaseUrl } from '../../../App'
+import TimePicker from '../../ui/TimePicker';
+import { blockCalendar } from '../../../utils/reservation/blockCalendar';
 
 function ResvUpdate() {
   const { resvId } = useParams();
@@ -57,31 +59,6 @@ function ResvUpdate() {
     });
   }, [resvId])
 
-  // 달력 block
-  const tileDisabled = ({ date }) => {
-    // const currentDate = new Date(2023, 4, 14, 15, 30, 0);
-    const currentDate = new Date(); // 오늘 날짜
-    const currentMonth = currentDate.getMonth(); // 이번 달
-
-    const firstDateOfCurrentMonth = new Date(currentDate.getFullYear(), currentMonth, 1); // 이번 달 1일
-    const middleDateOfCurrentMonth = new Date(currentDate.getFullYear(), currentMonth, 15); // 이번 달 15일
-    const middleDateOfNextMonth = new Date(currentDate.getFullYear(), currentMonth + 1, 15); // 다음 달 15일
-    const lastDateOfNextMonth = new Date(currentDate.getFullYear(), currentMonth + 2, 0); // 다음 달 마지막 날
-
-    let minSelectableDate, maxSelectableDate;
-
-    if (currentDate < middleDateOfCurrentMonth) { // 1일 ~ 14일 사이이면 예약 가능 범위는
-      minSelectableDate = firstDateOfCurrentMonth; // 이번 달 1일 부터
-      maxSelectableDate = middleDateOfNextMonth; // 다음 달 15일까지
-    }
-    else { // 15일 ~ 말일 사이라면 예약 가능 범위는 
-      minSelectableDate = middleDateOfCurrentMonth; // 이번 달 15일 부터
-      maxSelectableDate = lastDateOfNextMonth; // 다음 달 마지막 날까지
-    }
-    
-    return date < minSelectableDate || date > maxSelectableDate || date < currentDate; // 범위에서 벗어나고 현재 일 보다 이전은 선택 불가능
-  };
-
   // 시간 정보 가져오기
   useEffect(() => {
     axiosWithBaseUrl.post('/customer/reservation/possible', {
@@ -110,14 +87,14 @@ function ResvUpdate() {
   const handleReserve = () => {
     console.log(resvInfo);
 
-    axiosWithBaseUrl.post(`/customer/reservation/update/${resvId}`, resvInfo)
-      .then(res => {
-        console.log(res);
-        alert('수정이 완료되었습니다.');
-        navigate(`/resv/${resvId}`); // 예약상세 화면으로 이동
+    // axiosWithBaseUrl.post(`/customer/reservation/update/${resvId}`, resvInfo)
+    //   .then(res => {
+    //     console.log(res);
+    //     alert('수정이 완료되었습니다.');
+    //     navigate(`/resv/${resvId}`); // 예약상세 화면으로 이동
 
-      })
-      .catch(err => console.log(err))
+    //   })
+    //   .catch(err => console.log(err))
   }
 
   return (
@@ -140,7 +117,7 @@ function ResvUpdate() {
         </select>
       
         {/* 캘린더 */}
-        <Calendar onChange={setSelectedDate} value={selectedDate} tileDisabled={tileDisabled}/>
+        <Calendar onChange={setSelectedDate} value={selectedDate} tileDisabled={blockCalendar}/>
 
         {/* 상세정보 */}
         {/* 예약 인원 */}
@@ -167,20 +144,7 @@ function ResvUpdate() {
         <textarea name='memo' type='text' cols={50} rows={3} maxlength="100" ref={memoTextarea} onChange={(e) => setMemo(e.target.value)}></textarea>        
 
         {/* 시간 선택 */}
-        <div>
-          {
-            possibleTimeList && possibleTimeList.map( time => (
-              <button 
-                type="button" 
-                key={time.id} 
-                onClick={() => setSelectedTime(time.time)} 
-                disabled={!time.possible}
-              >
-                {time.time.slice(0, 5)}
-              </button>
-            ))
-          }
-        </div>
+        <TimePicker possibleTimeList={possibleTimeList} defaultValue={selectedTime} setSelectedTime={setSelectedTime}/>
 
         <div onClick={handleReserve}>완료</div>
       </form>

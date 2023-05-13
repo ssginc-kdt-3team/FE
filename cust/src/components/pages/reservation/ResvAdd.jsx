@@ -6,6 +6,8 @@ import styles from '../../../assets/css/pages/reservation/ResvAdd.module.css';
 import 'react-calendar/dist/Calendar.css'; // css import
 import Counter from '../../ui/Counter';
 import { axiosWithBaseUrl } from '../../../App'
+import TimePicker from '../../ui/TimePicker';
+import { blockCalendar } from '../../../utils/reservation/blockCalendar';
 
 const initialResvInfo = { // 초기값을 가지는 객체
   reservationDate: "",
@@ -20,7 +22,7 @@ function ResvAdd() {
   const [resvInfo, setResvInfo] = useState(initialResvInfo);
 
   // 선택 상자 처리
-  const handleSelect = (e) => {
+  const handleShopSelect = (e) => { // 매장 정보가 변경될 때 마다
     setResvInfo({ // 예약 정보 업데이트
       ...resvInfo,
       shopId: e.target.value
@@ -77,52 +79,16 @@ function ResvAdd() {
     };
   
     fetchData(); // 처음 렌더링 시에도 실행되도록 함
-    }, [branchId, shopId, selectedDate]); // 지점 정보가 변할 때 마다 리렌더링
+    }, [branchId, shopId, selectedDate]); // 지점, 매장, 날짜가 변할 때 마다 리렌더링
 
-    // 지점이 바뀌면 매장 id를 1로 설정한다
-    useEffect(() => {
-      setShopId(1);
-    }, [branchId])
+  // 지점이 바뀌면 매장 id를 1로 설정한다, 날짜는 그대로
+  useEffect(() => {
+    setShopId(1);
+  }, [branchId])
 
-  // 시간 정보 가져오기
-  // useEffect(() => {
-  //   axiosWithBaseUrl.post(`/customer/reservation/possible`, {
-  //     shopId: shopId,
-  //     date: moment(selectedDate).format("YYYY-MM-DD")
-  //   })
-  //   .then(res => {
-  //     console.log(res.data);
-  //     setPossibleTimeList(res.data);
-  //   })
-  //   .catch(err => console.log(err));
-  // }, [shopId, selectedDate])
-
+  // 매장이 바뀌면 지점, 날짜는 그대로
+  // 날짜가 바뀌면 지점, 매장은 그대로
   
-  // 달력 block
-  const tileDisabled = ({ date }) => {
-    // const currentDate = new Date(2023, 4, 14, 15, 30, 0);
-    const currentDate = new Date(); // 오늘 날짜
-    const currentMonth = currentDate.getMonth(); // 이번 달
-
-    const firstDateOfCurrentMonth = new Date(currentDate.getFullYear(), currentMonth, 1); // 이번 달 1일
-    const middleDateOfCurrentMonth = new Date(currentDate.getFullYear(), currentMonth, 15); // 이번 달 15일
-    const middleDateOfNextMonth = new Date(currentDate.getFullYear(), currentMonth + 1, 15); // 다음 달 15일
-    const lastDateOfNextMonth = new Date(currentDate.getFullYear(), currentMonth + 2, 0); // 다음 달 마지막 날
-
-    let minSelectableDate, maxSelectableDate;
-
-    if (currentDate < middleDateOfCurrentMonth) { // 1일 ~ 14일 사이이면 예약 가능 범위는
-      minSelectableDate = firstDateOfCurrentMonth; // 이번 달 1일 부터
-      maxSelectableDate = middleDateOfNextMonth; // 다음 달 15일까지
-    }
-    else { // 15일 ~ 말일 사이라면 예약 가능 범위는
-      minSelectableDate = middleDateOfCurrentMonth; // 이번 달 15일 부터
-      maxSelectableDate = lastDateOfNextMonth; // 다음 달 마지막 날까지
-    }
-    
-    return date < minSelectableDate || date > maxSelectableDate || date < currentDate; // 범위에서 벗어나고 현재 일 보다 이전은 선택 불가능
-  };
-
   // 시간, 날짜, 예약인원, 유아 수가 바뀔 때마다 resvInfo 업데이트
   useEffect(() => {
     setResvInfo( prevResvInfo => ({ // setResvInfo 함수를 호출하면 현재의 resvInfo 상태값을 이전 상태값인 prevResvInfo 매개변수로 전달
@@ -137,12 +103,12 @@ function ResvAdd() {
   const handleReserve = () => {
     console.log(resvInfo);
 
-    axiosWithBaseUrl.post('/customer/reservation/add', resvInfo)
-      .then(res => {
-        console.log(res);
-        alert('예약이 등록되었습니다.');
-      })
-      .catch(err => console.log(err))
+    // axiosWithBaseUrl.post('/customer/reservation/add', resvInfo)
+    // .then(res => {
+    //   console.log(res);
+    //   alert('예약이 등록되었습니다.');
+    // })
+    // .catch(err => console.log(err))
   }
 
   return (
@@ -160,7 +126,7 @@ function ResvAdd() {
         </select>
 
         {/* 매장 선택 */}   
-        <select onChange={handleSelect}>
+        <select onChange={handleShopSelect}>
           {
             shopList && shopList.map( shop => (
               <option key={shop.id} value={shop.id}>{shop.name}</option>
@@ -169,7 +135,7 @@ function ResvAdd() {
         </select>
       
         {/* 캘린더 */}
-        <Calendar onChange={setSelectedDate} value={selectedDate} tileDisabled={tileDisabled}/>
+        <Calendar onChange={setSelectedDate} value={selectedDate} tileDisabled={blockCalendar}/>
 
         {/* 상세정보 */}
         {/* 예약 인원 */}
@@ -196,20 +162,12 @@ function ResvAdd() {
         <textarea name='memo' type='text' cols={50} rows={3} maxlength="100" onChange={handleTextArea}></textarea>
 
         {/* 시간 선택 */}
-        <div>
-          {
-            possibleTimeList && possibleTimeList.map( time => (
-              <button 
-                type="button" 
-                key={time.id} 
-                onClick={() => setSelectedTime(time.time)} 
-                disabled={!time.possible}
-              >
-                {time.time.slice(0, 5)}
-              </button>
-            ))
-          }
-        </div>
+        <TimePicker 
+          possibleTimeList={possibleTimeList} 
+          defaultValue="00:00" 
+          setSelectedTime={setSelectedTime} 
+          selectedDate={moment(selectedDate).format("YYYY-MM-DD")}
+        />
 
         <div onClick={handleReserve}>완료</div>
       </form>

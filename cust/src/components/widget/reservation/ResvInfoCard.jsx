@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from '../../../assets/css/widget/reservation/ResvInfoCard.module.css';
-import ResvStatus from '../../ui/ResvStatus';
 import ResvStatusTag from '../../ui/ResvStatusTag';
 import { Link } from 'react-router-dom';
 

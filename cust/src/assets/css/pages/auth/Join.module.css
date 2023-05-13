@@ -25,7 +25,7 @@
 }
 
 #nameWrap > input, #phoneWrap > input, #birthWrap > input, #genderWrap > input {
-  width: calc(50% - 10px);
+  width: calc(50% - 20px);
 }
 #emailWrap > input, #passwordWrap > input, #confirmPasswordWrap > input {
   width: 100%;
@@ -71,7 +71,7 @@ input[type=radio] {
 /* 주소 input */
 #addressWrap input {
   width: 30%;
-  margin-right: 20px;
+  margin-right: 40px;
 }
 #addressWrap > div > input:last-child {
   margin: 0;
@@ -124,6 +124,7 @@ input[type=radio] {
   /* 주소 input */
   #addressWrap input {
     width: calc((100% - 40px) / 3);
+    margin-right: 20px;
   }
 
   /* 취소/확인 버튼 */
