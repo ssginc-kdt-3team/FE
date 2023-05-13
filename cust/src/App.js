@@ -10,6 +10,10 @@ import ResvList from "./components/pages/reservation/ResvList";
 import Resv from "./components/pages/reservation/Resv";
 import ResvUpdate from "./components/pages/reservation/ResvUpdate";
 import axios from "axios";
+import FindId from "./components/pages/auth/FindId";
+import FindIdResult from "./components/pages/auth/FindIdResult";
+import FindPw from "./components/pages/auth/FindPw";
+import FindPwResult from "./components/pages/auth/FindPWResult";
 
 export const axiosWithBaseUrl = axios.create({
   baseURL: 'http://localhost:8080',
@@ -23,6 +27,10 @@ function App() {
         <Routes>       
           <Route path="/" element={<Main/>}/>
           <Route path="/login" element={<Login/>}/>
+          <Route path="/find-id" element={<FindId/>}/>
+          <Route path="/find-id/result" element={<FindIdResult/>}/>
+          <Route path="/find-pw" element={<FindPw/>}/>
+          <Route path="/find-pw/result" element={<FindPwResult/>}/>
           <Route path="/join" element={<Join/>}/>
           <Route path="/resv/add" element={<ResvAdd/>}/>
           <Route path="/resv" element={<ResvList/>}/>

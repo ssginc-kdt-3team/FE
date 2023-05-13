@@ -25,6 +25,17 @@
   width: 30%;
 }
 
+/* 마진 */
+.mt-45 {
+  margin-top: 45px;
+}
+.mt-75 {
+  margin-top: 75px;
+}
+.mt-90 {
+  margin-top: 90px;
+}
+
 /* 패딩 */
 .pl-25 {
   padding-left: 25px !important;

@@ -1,7 +1,7 @@
 const menuData = [
   {
     id: 1,
-    name: "점포소개",
+    name: "지점소개",
     link: "/"
   },
   {
@@ -23,7 +23,7 @@ const menuData = [
   },
   {
     id: 3,
-    name: "매장안내",
+    name: "매장",
     link: "/"
   },
   {
