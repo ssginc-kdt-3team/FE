@@ -8,7 +8,7 @@ function TimePicker({possibleTimeList, defaultValue, setSelectedTime, selectedDa
 
   const onChange = (value) => {
     console.log(`선택된 시간값: ${value}`);
-    console.log(moment(new Date()).format("HH:mm:SS"));
+    // console.log(moment(new Date()).format("HH:mm:SS"));
   };
 
   const handleOptionChange = (e) => {
@@ -21,13 +21,13 @@ function TimePicker({possibleTimeList, defaultValue, setSelectedTime, selectedDa
   };
 
   return (
-    <div id={styles.radioWrap} className='flex flex-col'>
+    <div id={styles.radioWrap} className='flex flex-col flex-gap-20'>
       <div id={styles.amWrap} className='grid-5c'>
         {
           possibleTimeList && possibleTimeList.map( time => 
             time.time < "12:00:00" // 오전이면
             ? (
-              <TimeBtn time={time} selectedOption={selectedOption} handleOptionChange={handleOptionChange} selectedDate={selectedDate}/>
+              <TimeBtn key={time.id} time={time} selectedOption={selectedOption} handleOptionChange={handleOptionChange} selectedDate={selectedDate}/>
             )
             : ''
           )

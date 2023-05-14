@@ -13,7 +13,7 @@ function TimeBtn({time, selectedOption, handleOptionChange, selectedDate}) {
     <label 
       key={time.id} 
       className={`center ${styles.radioButton} ${selectedOption === time.time ? styles.selected : ''}`} 
-      style={!time.possible || selectedDate + " " + time.time <= dateTime ? { opacity: '0.5' } : {}}
+      style={!time.possible || selectedDate + " " + time.time <= dateTime ? { opacity: '0.25' } : {}}
     >
       <input
         type="radio"
