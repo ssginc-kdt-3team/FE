@@ -21,7 +21,7 @@
 }
 .joinInput:focus {
   outline: none;
-  border-bottom: 1px solid var(--black);
+  border-bottom: 1px solid var(--main);
 }
 
 #nameWrap > input, #phoneWrap > input, #birthWrap > input, #genderWrap > input {
@@ -43,7 +43,7 @@
   position: relative;
 }
 #confirmDupBtn {
-  width: 50%;
+  width: var(--button-width);
   position: absolute;
   bottom: 0;
 }
@@ -82,7 +82,7 @@ input[type=radio] {
   margin-top: 40px;
 }
 #buttonWrap > div {
-  width: calc(25% - 5px);
+  width: var(--button-width);
 }
 
 
