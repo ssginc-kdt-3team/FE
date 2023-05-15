@@ -1,91 +1,107 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Select, Button } from "antd";
+import DepositShopList from "../deposit/shop";
+import DepositList from "../deposit/list";
 
-const Filter = () => {
-  const [branchId, setBranchId] = useState('');
-  const [branchName, setBranchName] = useState('');
-  const [shopId, setShopId] = useState('');
-  const [shopName, setShopName] = useState('');
-  const [depositList, setDepositList] = useState([]);
+const { Option } = Select;
+
+function Filter() {
+  const [branchID, setBranchID] = useState("");
+  const [shopID, setShopID] = useState("");
+  const [branchOptions, setBranchOptions] = useState([]);
+  const [shopOptions, setShopOptions] = useState([]);
+  const [selectedBranchName, setSelectedBranchName] = useState("");
+  const [selectedShopName, setSelectedShopName] = useState("");
+  const [isFiltering, setIsFiltering] = useState(false);
+  
+  // Define the state and setState function for depositBranchID
+  const [depositBranchID, setDepositBranchID] = useState("");
 
   useEffect(() => {
-    if (branchId) {
-      axios.get(`http://localhost:8080/admin/branch/${branchId}`)
-        .then((response) => {
-          setBranchName(response.data.branchName);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-    if (shopId) {
-      axios.get(`http://localhost:8080/admin/shop/${shopId}`)
-        .then((response) => {
-          setShopName(response.data.shopName);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  }, [branchId, shopId]);
+    axios
+      .get("http://localhost:8080/branch/all")
+      .then((response) => {
+        setBranchOptions(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
-  const handleFilter = async () => {
-    try {
-      if (branchId) {
-        const res = await axios.get(`http://localhost:8080/admin/deposit/branchName/${branchName}`);
-        setDepositList(res.data.content);
-      } else if (shopId) {
-        const res = await axios.get(`http://localhost:8080/admin/deposit/shopName/${shopName}`);
-        setDepositList(res.data.content);
-      }
-    } catch (err) {
-      console.log(err);
+
+  const handleBranchIDChange = (value) => {
+    setBranchID(value);
+    setSelectedBranchName(branchOptions.find((branch) => branch.id === value)?.name || "");
+    setShopID("");
+    setSelectedShopName("");
+    if (value) {
+      axios
+        .get(`http://localhost:8080/admin/deposit/branch/${value}`)
+        .then((response) => {
+          setShopOptions(response.data.content);
+          console.log(response.data.content);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      setShopOptions([]);
     }
+    // Update the branchID value in DepositList component
+    setDepositBranchID(value);
   };
+
+  const handleShopIDChange = (value) => {
+    setShopID(value);
+    setSelectedShopName(shopOptions.find((shop) => shop.id === value)?.name || "");
+  };
+
+  const handleSearch = () => {
+    setIsFiltering(true);
+  };
+
+  useEffect(() => {
+    if (isFiltering) {
+      console.log("Filtering...");
+      setIsFiltering(false);
+    }
+  }, [isFiltering]);
 
   return (
     <div>
-      <label htmlFor="branchId">Branch ID:</label>
-      <input
-        type="text"
-        id="branchId"
-        value={branchId}
-        onChange={(e) => setBranchId(e.target.value)}
-      />
-      <label htmlFor="branchName">Branch Name:</label>
-      <input
-        type="text"
-        id="branchName"
-        value={branchName}
-        onChange={(e) => setBranchName(e.target.value)}
-      />
-      <label htmlFor="shopId">Shop ID:</label>
-      <input
-        type="text"
-        id="shopId"
-        value={shopId}
-        onChange={(e) => setShopId(e.target.value)}
-      />
-      <label htmlFor="shopName">Shop Name:</label>
-      <input
-        type="text"
-        id="shopName"
-        value={shopName}
-        onChange={(e) => setShopName(e.target.value)}
-      />
-      <button onClick={handleFilter}>조회하기</button>
+      <h1>Filter</h1>
+      <Select value={branchID} onChange={handleBranchIDChange}>
+        {branchOptions.map((branch) => (
+        <Option key={branch.id} value={branch.id}>
+        {branch.name}
+        </Option>
+        ))}
+      </Select>
 
-      {depositList.length > 0 ? (
-        <ul>
-          {depositList.map((deposit) => (
-            <li key={deposit.id}>{deposit.reservationId}</li>
-          ))}
-        </ul>
-      ) : (
-        <p>데이터가 없습니다.</p>
+      <Select value={shopID} onChange={handleShopIDChange}>
+        {shopOptions.map((shop) => (
+        <Option key={shop.id} value={shop.id}>
+        {shop.name}
+        </Option>
+        ))}
+      </Select>
+
+      <Button type="primary" onClick={handleSearch}>
+        Search
+      </Button>
+
+      {selectedBranchName && selectedShopName && (
+        <>
+          <h2>Selected Branch: {selectedBranchName}</h2>
+          <h2>Selected Shop: {selectedShopName}</h2>
+          <DepositList branchID={branchID} />
+          <DepositShopList shopID={shopID} />
+        </>
       )}
     </div>
   );
-};
+}
 
 export default Filter;
+

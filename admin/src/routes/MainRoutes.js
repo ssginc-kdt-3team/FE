@@ -7,10 +7,12 @@ import Profile from '../pages/admin/profile';
 import ResvList from '../pages/resv/list';
 import ResvDetail from '../pages/resv/detail';
 // import Deposit from '../pages/deposit/index';
-import DepositBranch from '../pages/deposit/branch';
+// import DepositList from '../pages/deposit/list';
 // import DepositLayout from '../pages/deposit/Layout'; // 추가된 부분
+import Deposit from '../pages/deposit/index';
 import DepositList from '../pages/deposit/list';
 import DepositFilter from '../pages/deposit/filter'; 
+import DepositShopList from '../pages/deposit/shop';
 import CustList from '../pages/cust/list';
 import CustDetail from '../pages/cust/detail';
 import OwnerList from '../pages/owner/list';
@@ -53,10 +55,6 @@ const MainRoutes = {
             element: <Profile />
         },
         {
-            path: '/deposit/branch/:id',
-            element: <DepositBranch />
-        },
-        {
             path: '/cust',
             children: [
                 {
@@ -73,8 +71,16 @@ const MainRoutes = {
                 path: '/deposit',
                 children: [
                     {
-                        path: '/deposit/list',
+                        path: '/deposit',
+                        element: <Deposit />
+                    },
+                    {
+                        path: '/deposit/list/:id',
                         element: <DepositList />
+                    },
+                    {
+                        path: '/deposit/list/shop/:id',
+                        element: <DepositShopList />
                     },
                     {
                         path: '/deposit/filter',
