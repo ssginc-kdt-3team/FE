@@ -4,24 +4,27 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import Paging from "components/pagination/paging";
 import { Table } from 'antd';
 
-function DepositList() {
-  const { id } = useParams(); 
+function DepositShopList() {
+  const { shopID } = useParams(); 
   const [depositList, setDepositList] = useState([]);
+    const [page, setPage] = useState(1);
+  const itemsPerPage = 10;
+
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/admin/deposit/branch/${id}`)
+      .get(`http://localhost:8080/admin/deposit/shop/${shopID}/${page}`)
       .then((response) => {
         setDepositList(response.data.content);
-        //확인용 지우기
         console.log(response.data.content);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [id]);
+  }, [shopID, page]);
 
   const columns = [
     {
@@ -33,13 +36,23 @@ function DepositList() {
       ),
     },
     {
-      title: "고객 ID",
-      dataIndex: "customerId",
-      key: "customerId",
-      render: (text, record) => (
-        <Link to={`/cust/detail/${record.customerId}`}>{text}</Link>
-      ),
-    },
+        title: "고객 ID",
+        dataIndex: "customerId",
+        key: "customerId",
+        render: (text, record) => (
+          <Link to={`/cust/detail/${record.customerId}`}>{text}</Link>
+        ),
+      },
+    {
+        title: "지점명",
+        dataIndex: "branchName",
+        key: "branchName",
+      },
+      {
+        title: "매장명",
+        dataIndex: "shopName",
+        key: "shopName",
+      },
     {
       title: "초기 예약금",
       dataIndex: "originDeposit",
@@ -78,14 +91,26 @@ function DepositList() {
     <div>
       {depositList.length > 0 ? (
         <>
-          <h1>지점별 예약금 리스트</h1>
-          <Table dataSource={depositList} columns={columns} bordered />
+          <h1>매장별 예약금 리스트</h1>
+          <Table 
+          dataSource={depositList} 
+          columns={columns} bordered 
+          pagination={false}
+          />
+           <Paging
+           
+            page={page}
+            itemsPerPage={itemsPerPage}
+            totalItems={depositList.length}
+            setPage={setPage}
+          />
         </>
       ) : (
         <p>Loading deposit details...</p>
       )}
     </div>
+    
   );
 }
 
-export default DepositList;
+export default DepositShopList;
