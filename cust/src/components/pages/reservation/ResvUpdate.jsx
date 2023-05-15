@@ -1,12 +1,16 @@
-// import axios from 'axios';
+import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
 import Calendar from 'react-calendar';
 import moment from 'moment';
-import styles from '../../../assets/css/pages/reservation/ResvUpdate.module.css';
-import 'react-calendar/dist/Calendar.css'; // css import
+import dayjs from 'dayjs';
+import styles from '../../../assets/css/pages/reservation/ResvAdd.module.css';
+import '../../../assets/css/widget/Calendar.css'; // css import
 import Counter from '../../ui/Counter';
 import { useNavigate, useParams } from 'react-router-dom';
-import { axiosWithBaseUrl } from '../../../App'
+// import { axiosWithBaseUrl } from '../../../App'
+import TimePicker from '../../ui/TimePicker';
+import { blockCalendar } from '../../../utils/reservation/blockCalendar';
+import PageTitle from '../../ui/PageTitle';
 
 function ResvUpdate() {
   const { resvId } = useParams();
@@ -38,9 +42,9 @@ function ResvUpdate() {
   
   const navigate = useNavigate(); // 페이지 이동을 위한 Hook
 
-  // 지점 정보 가져오기
+  // 예약 정보 가져오기
   useEffect(() => {
-    axiosWithBaseUrl.get(`/customer/reservation/update/${resvId}`)
+    axios.get(`/customer/reservation/update/${resvId}`)
     .then(res => {
       console.log(res.data);
       setPreviousResvInfo(res.data);
@@ -57,42 +61,19 @@ function ResvUpdate() {
     });
   }, [resvId])
 
-  // 달력 block
-  const tileDisabled = ({ date }) => {
-    // const currentDate = new Date(2023, 4, 14, 15, 30, 0);
-    const currentDate = new Date(); // 오늘 날짜
-    const currentMonth = currentDate.getMonth(); // 이번 달
-
-    const firstDateOfCurrentMonth = new Date(currentDate.getFullYear(), currentMonth, 1); // 이번 달 1일
-    const middleDateOfCurrentMonth = new Date(currentDate.getFullYear(), currentMonth, 15); // 이번 달 15일
-    const middleDateOfNextMonth = new Date(currentDate.getFullYear(), currentMonth + 1, 15); // 다음 달 15일
-    const lastDateOfNextMonth = new Date(currentDate.getFullYear(), currentMonth + 2, 0); // 다음 달 마지막 날
-
-    let minSelectableDate, maxSelectableDate;
-
-    if (currentDate < middleDateOfCurrentMonth) { // 1일 ~ 14일 사이이면 예약 가능 범위는
-      minSelectableDate = firstDateOfCurrentMonth; // 이번 달 1일 부터
-      maxSelectableDate = middleDateOfNextMonth; // 다음 달 15일까지
-    }
-    else { // 15일 ~ 말일 사이라면 예약 가능 범위는 
-      minSelectableDate = middleDateOfCurrentMonth; // 이번 달 15일 부터
-      maxSelectableDate = lastDateOfNextMonth; // 다음 달 마지막 날까지
-    }
-    
-    return date < minSelectableDate || date > maxSelectableDate || date < currentDate; // 범위에서 벗어나고 현재 일 보다 이전은 선택 불가능
-  };
-
   // 시간 정보 가져오기
   useEffect(() => {
-    axiosWithBaseUrl.post('/customer/reservation/possible', {
-      shopId: shopId ,
-      date: moment(selectedDate).format("YYYY-MM-DD")
-    })
-    .then(res => {
-      console.log(res.data);
-      setPossibleTimeList(res.data);
-    })
-    .catch(err => console.log(err));
+    if(shopId !== null && selectedDate !== null) {
+      axios.post('/customer/reservation/possible', {
+        shopId: shopId ,
+        date: moment(selectedDate).format("YYYY-MM-DD")
+      })
+      .then(res => {
+        console.log(res.data);
+        setPossibleTimeList(res.data);
+      })
+      .catch(err => console.log(err));
+    }
   }, [shopId, selectedDate]);
 
   // 시간, 날짜, 예약인원, 유아 수가 바뀔 때마다 resvInfo 업데이트
@@ -106,13 +87,14 @@ function ResvUpdate() {
     }))
   }, [selectedDate, selectedTime, peopleCount, childCount, memo])
 
-  // 예약하기 처리
+  // 예약수정 처리
   const handleReserve = () => {
     console.log(resvInfo);
 
-    axiosWithBaseUrl.post(`/customer/reservation/update/${resvId}`, resvInfo)
+    axios.post(`/customer/reservation/update/${resvId}`, resvInfo)
       .then(res => {
         console.log(res);
+        console.log(resvInfo);
         alert('수정이 완료되었습니다.');
         navigate(`/resv/${resvId}`); // 예약상세 화면으로 이동
 
@@ -122,68 +104,97 @@ function ResvUpdate() {
 
   return (
     <div className='container'>
-      {/* 지점, 매장 */}
-      {/* 지점이랑 매장의 id, 이름 가져와서 option 안에 넣는다 */}
-      <form>
-        {/* 지점 선택 */}
-        <select disabled>
-          {
-            previousResvInfo && (<option value={previousResvInfo.branchName} selected>{previousResvInfo.branchName}</option>)
-          }          
-        </select>
+      <div className='center flex-col'>
+        <PageTitle title="예약변경" fontSize="1.6rem" marginTop="60px" marginBottom="80px"/>
 
-        {/* 매장 선택 */}   
-        <select disabled>
-          {
-            previousResvInfo && (<option value={previousResvInfo.shopName} selected>{previousResvInfo.shopName}</option>)
-          }
-        </select>
-      
-        {/* 캘린더 */}
-        <Calendar onChange={setSelectedDate} value={selectedDate} tileDisabled={tileDisabled}/>
+        {/* 지점, 매장 */}
+        {/* 지점이랑 매장의 id, 이름 가져와서 option 안에 넣는다 */}
+        <form id={styles.resvForm} className='flex flex-col flex-gap-40'>
+          <div id={styles.topWrap} className='flex flex-gap-40'>
+            {/* 지점 선택 */}
+            <select disabled>
+              {
+                previousResvInfo && (<option value={previousResvInfo.branchName} selected>{previousResvInfo.branchName}</option>)
+              }          
+            </select>
 
-        {/* 상세정보 */}
-        {/* 예약 인원 */}
-        <Counter 
-          title='예약 인원' 
-          peopleCount={peopleCount} 
-          setPeopleCount={setPeopleCount} 
-          childCount={childCount} 
-          setChildCount={setChildCount} 
-          isPeopleCount={true}
-        />
+            {/* 매장 선택 */}   
+            <select disabled>
+              {
+                previousResvInfo && (<option value={previousResvInfo.shopName} selected>{previousResvInfo.shopName}</option>)
+              }
+            </select>
+          </div>
         
-        {/* 유아 수 */}
-        <Counter 
-          title='유아' 
-          peopleCount={peopleCount} 
-          setPeopleCount={setPeopleCount} 
-          childCount={childCount} 
-          setChildCount={setChildCount} 
-          isPeopleCount={false}
-        />
+          <div id={styles.middleWrap} className='grid-2c flex-gap-80'>
+            {/* 캘린더 */}
+            <Calendar 
+              onChange={setSelectedDate} 
+              value={selectedDate} 
+              next2Label={null}
+              prev2Label={null}
+              formatDay ={(locale, date) => dayjs(date).format('DD')}
+              showNeighboringMonth={false}
+              tileDisabled={blockCalendar}
+            />
 
-        {/* 요구사항 */}
-        <textarea name='memo' type='text' cols={50} rows={3} maxlength="100" ref={memoTextarea} onChange={(e) => setMemo(e.target.value)}></textarea>        
+            {/* 상세정보 */}
+            <div id={styles.detailWrap} className='flex flex-col flex-gap-40'>
+              <div>
+                <label>인원 선택</label>
+                <div className='flex flex-gap-40'>
+                  {/* 예약 인원 */}
+                  <Counter
+                    title='예약 인원' 
+                    peopleCount={peopleCount} 
+                    setPeopleCount={setPeopleCount} 
+                    childCount={childCount} 
+                    setChildCount={setChildCount} 
+                    isPeopleCount={true}
+                  />
+                  
+                  {/* 유아 수 */}
+                  <Counter 
+                    title='유아' 
+                    peopleCount={peopleCount} 
+                    setPeopleCount={setPeopleCount} 
+                    childCount={childCount} 
+                    setChildCount={setChildCount} 
+                    isPeopleCount={false}
+                  />
+                </div>
+              </div>
 
-        {/* 시간 선택 */}
-        <div>
-          {
-            possibleTimeList && possibleTimeList.map( time => (
-              <button 
-                type="button" 
-                key={time.id} 
-                onClick={() => setSelectedTime(time.time)} 
-                disabled={!time.possible}
-              >
-                {time.time.slice(0, 5)}
-              </button>
-            ))
-          }
-        </div>
+              {/* 시간 선택 */}
+              <div>
+                <label>시간 선택</label>
+                <TimePicker 
+                  possibleTimeList={possibleTimeList} 
+                  defaultValue={selectedTime}
+                  setSelectedTime={setSelectedTime} 
+                  selectedDate={moment(selectedDate).format("YYYY-MM-DD")}
+                />
+              </div>
 
-        <div onClick={handleReserve}>완료</div>
-      </form>
+              {/* 요구사항 */}
+              <div>
+                <label>요구사항 <span>* 100자 이하로 작성해주세요.</span></label>
+                <textarea name='memo' type='text' cols={50} rows={3} maxLength="100" ref={memoTextarea} onChange={(e) => setMemo(e.target.value)}></textarea> 
+              </div>       
+
+              {/* 시간 선택 */}
+              {/* <TimePicker possibleTimeList={possibleTimeList} defaultValue={selectedTime} setSelectedTime={setSelectedTime}/> */}
+            </div>
+          </div>
+
+          {/* 버튼 */}
+          <div id={styles.buttonWrap} className='center width-100 flex-gap-20'>
+            <div className='button buttonReverse' onClick={() => navigate(-1)}>취소</div>
+            <div className='button' onClick={handleReserve}>완료</div>
+          </div>
+          
+        </form>
+      </div>
     </div>
   );
 }

@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect  } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { Card } from 'antd';
+
 
 function CustDetail() {
   const { id } = useParams(); // useParams을 사용해서 id 값을 가져옴
   console.log(id);
   const [cust, setCust] = useState(null);
-  const [adress, setAdress] = useState(null);
+
 
   useEffect(() => {
     axios
@@ -20,24 +22,31 @@ function CustDetail() {
       });
   }, [id]);
 
+
   return (
     <div>
-    {cust ? (
-      <>
-        <h1>고객 상세 정보</h1>
-        <ul>
-          <li><h1>{cust.name}</h1></li>
-          <li><p>이메일: {String(cust.email)}</p></li>
-          <li><p>주소: {`${cust.address.city} ${cust.address.district} ${cust.address.detail} ${cust.addresszipCode}`}</p></li>
-          <li><p>등급: {String(cust.grade.name)}</p></li>
-          <li><p>생년월일: {cust.birthday.toString()}</p></li>
-        </ul>
-      </>
-    ) : (
-      <p>Loading customer details...</p>
-    )}
-  </div>
+      {cust ? (
+        <Card title="고객 상세 정보" size="large">
+          <ul>
+            
+            <li><h1>{cust.id}</h1></li>
+            <li><p>{cust.name}</p></li>
+            <li><p>이메일: {(cust.email)}</p></li>
+            <li><p>전화번호: {(cust.phoneNumber)}</p></li>
+            <li><p>생년월일: {cust.birthday}</p></li>
+            <li><p>성별: {cust.gender}</p></li>
+            <li><p>주소: {`${cust.address.city} ${cust.address.district} ${cust.address.detail} ${cust.address.zipCode}`}</p></li>
+            <li><p>등급: {(cust.grade.name)}</p></li>
+            <li><p>상태: {cust.status}</p></li>
+            <li><p>포인트: {cust.status}</p></li>
+            <li><p>충전금: {cust.status}</p></li>
+          </ul>
+        </Card>
+        
+      ) : (
+        <p>Loading customer details...</p>
+      )}
+    </div>
   );
 }
-
 export default CustDetail;

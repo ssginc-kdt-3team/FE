@@ -1,4 +1,6 @@
 import React from 'react';
+import plus from '../../assets/images/icons/plus.png';
+import minus from '../../assets/images/icons/minus.png';
 
 function Count({title, peopleCount, setPeopleCount, childCount, setChildCount, isPeopleCount}) {
   const handleMinus = () => {
@@ -35,12 +37,25 @@ function Count({title, peopleCount, setPeopleCount, childCount, setChildCount, i
     };
   }
 
+  const buttonStyle = {
+    width: '20px', 
+    height: '20px', 
+    backgroundPosition: 'center',
+    backgroundSize: 'contain',
+    backgroundRepeat: 'no-repeat',
+    color: 'var(--main)',
+    cursor: 'pointer'
+  };
+
+
   return (
-    <div className='center flex-gap-10'>
+    <div className='flex flex-gap-10' style={{alignItems: 'center'}}>
       {title}
-      <ion-icon name="remove-circle" onClick={handleMinus}></ion-icon>
-      <p>{isPeopleCount ? peopleCount : childCount}</p>
-      <ion-icon name="add-circle" onClick={handlePlus}></ion-icon>
+      <ion-icon name="remove" onClick={handleMinus} style={{...buttonStyle, marginLeft: '10px'}}></ion-icon>
+      {/* <div onClick={handleMinus} style={{...buttonStyle, backgroundImage: `url(${minus})`, marginLeft: '10px'}}></div> */}
+      <p style={{width: '20px', fontSize: '18px', textAlign: 'center'}}>{isPeopleCount ? peopleCount : childCount}</p>
+      {/* <div onClick={handlePlus} style={{...buttonStyle, backgroundImage: `url(${plus})`}}></div> */}
+      <ion-icon name="add" onClick={handlePlus} style={buttonStyle}></ion-icon>
     </div>
   );
 }

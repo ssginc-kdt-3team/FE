@@ -11,7 +11,16 @@
   /* size */
   --input-fontSize: 18px;
   --input-height: 50px;
-  
+  --button-width: 180px;
+
+
+  /* resvForm */
+  --resvForm-max-width: 1024px;
+  --resvForm-width: 75vw;
+
+  /* Calendar */
+  --calendar-max-width: calc((var(--resvForm-max-width) - 80px) / 2);
+  --calendar-width: calc((var(--resvForm-width) - 80px) / 2);
 }
 
 /* 너비 */
@@ -23,6 +32,17 @@
 }
 .width-30 {
   width: 30%;
+}
+
+/* 마진 */
+.mt-45 {
+  margin-top: 45px;
+}
+.mt-75 {
+  margin-top: 75px;
+}
+.mt-90 {
+  margin-top: 90px;
 }
 
 /* 패딩 */

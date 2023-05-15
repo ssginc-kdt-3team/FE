@@ -66,6 +66,19 @@ a {
   box-sizing: border-box;
 } */
 
+select {
+  width: 200px;
+  padding: 5px 0;
+  border: 0;
+  border-bottom: 1px solid var(--input-border);
+  /* border-radius: 10px; */
+  font-size: var(--input-fontSize);
+  outline: none;
+}
+.select:focus {
+  border-bottom: 1px solid var(--main);
+}
+
 
 /* 클래스 */
 .container {
@@ -94,5 +107,10 @@ a {
   
   header {
     height: var(--mob-header-height);
+  }
+
+  .container {
+    width: 100vw;
+    min-height: calc(100vh - var(--mob-header-height));
   }
 }

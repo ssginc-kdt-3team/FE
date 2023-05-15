@@ -1,43 +1,66 @@
-.gr {
-  color: #808080;
-}
 .pagination {
-  display: flex;
-  justify-content: center;
-  margin-top: 15px;
-}
-ul {
   list-style: none;
-  padding: 0;
-}
-ul.pagination li {
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-
+  margin: 0;
+  /* padding: 20px 0 60px 0; */
+  padding-top: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1rem;
+  gap: 10px;
 }
 
-ul.pagination li a {
+.pagination > li {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  font-size: 18px;
+  text-align: center;
+  line-height: 20px;
+  /* font-weight: 400; */
+}
+
+.pagination > li:first-child, .pagination > li:last-child {
+  display: none;
+}
+
+.pagination > li:nth-child(2), .pagination > li:nth-last-child(2) {
+  width: 20px;
+  height: 20px;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+/* 이전 */
+.pagination > li:nth-child(n+2):nth-child(-n+2) {
+  background-image: url('../../images/icons/next.png');
+  transform: scaleX(-1);
+  cursor: pointer;
+}
+.pagination > li:nth-child(n+2):nth-child(-n+2):active {
+  background-image: url('../../images/icons/nextActive.png');
+  transform: scaleX(-1);
+}
+
+/* 다음 */
+.pagination > li:nth-last-child(2) {
+  background-image: url('../../images/icons/next.png');
+  cursor: pointer;
+}
+.pagination > li:nth-last-child(2):active {
+  background-image: url('../../images/icons/nextActive.png');
+}
+
+.pagination > li a {
   text-decoration: none;
-  color: #808080;
-  font-size: 1rem;
+  color: var(--font);
 }
-ul.pagination li.active a {
-  font-weight: 800;
+
+.pagination > li.active a { /* 눌려져 있을 때 */
+  color: var(--main);
+  font-weight: bold;
 }
-ul.pagination li.active {
-  font-weight: 800;
-}
-ul.pagination li a:hover,
-ul.pagination li a.active {
-  color: #808080;
-}
-.page-selection {
-  width: 48px;
-  height: 30px;
-  color: #808080;
+
+.pagination > li a:hover, .pagination > a.active {
+  color: var(--main);
 }

@@ -12,7 +12,8 @@ const Paging = ({ page, itemsPerPage, totalItems, setPage }) => {
       current={page}
       pageSize={itemsPerPage}
       total={totalItems}
-      showSizeChanger={false}
+      showSizeChanger={false}    
+      showLessItems={5}     
       onChange={handlePageChange}
       style={{ display: 'flex', justifyContent: 'center', marginTop: '16px' }}
     
