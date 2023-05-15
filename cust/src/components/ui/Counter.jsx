@@ -53,7 +53,7 @@ function Count({title, peopleCount, setPeopleCount, childCount, setChildCount, i
       {title}
       <ion-icon name="remove" onClick={handleMinus} style={{...buttonStyle, marginLeft: '10px'}}></ion-icon>
       {/* <div onClick={handleMinus} style={{...buttonStyle, backgroundImage: `url(${minus})`, marginLeft: '10px'}}></div> */}
-      <p style={{fontSize: '18px'}}>{isPeopleCount ? peopleCount : childCount}</p>
+      <p style={{width: '20px', fontSize: '18px', textAlign: 'center'}}>{isPeopleCount ? peopleCount : childCount}</p>
       {/* <div onClick={handlePlus} style={{...buttonStyle, backgroundImage: `url(${plus})`}}></div> */}
       <ion-icon name="add" onClick={handlePlus} style={buttonStyle}></ion-icon>
     </div>

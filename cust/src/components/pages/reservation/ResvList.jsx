@@ -5,7 +5,7 @@ import PageTitle from '../../ui/PageTitle';
 import ResvCard from '../../ui/ResvCard';
 import Paging from '../../ui/Paging';
 
-function ResvList() {
+function ResvList({isActiveList}) {
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   const [totalItems, setTotalItems] = useState(0); // 총 아이템 수
   const [itemsPerPage, setItemsPerPage] = useState(8) // 페이지당 아이템 수
@@ -15,7 +15,7 @@ function ResvList() {
   // 사용자 예약 내역 호출
   // 첫 렌더링 때 데이터 가져온다
   useEffect(() => {
-    axios.get(`http://localhost:8080/customer/reservation/listAll/2/${currentPage}`) // 2는 사용자 id
+    axios.get(`/customer/reservation/${isActiveList ? 'listActive' : 'listAll'}/2/${currentPage}`) // 2는 사용자 id
     .then(res => {
       console.log(res.data);
       setResvList(res.data.content); // 

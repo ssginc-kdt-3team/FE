@@ -1,4 +1,4 @@
-// import axios from 'axios';
+import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
 import Calendar from 'react-calendar';
 import moment from 'moment';
@@ -7,7 +7,7 @@ import styles from '../../../assets/css/pages/reservation/ResvAdd.module.css';
 import '../../../assets/css/widget/Calendar.css'; // css import
 import Counter from '../../ui/Counter';
 import { useNavigate, useParams } from 'react-router-dom';
-import { axiosWithBaseUrl } from '../../../App'
+// import { axiosWithBaseUrl } from '../../../App'
 import TimePicker from '../../ui/TimePicker';
 import { blockCalendar } from '../../../utils/reservation/blockCalendar';
 import PageTitle from '../../ui/PageTitle';
@@ -42,9 +42,9 @@ function ResvUpdate() {
   
   const navigate = useNavigate(); // 페이지 이동을 위한 Hook
 
-  // 지점 정보 가져오기
+  // 예약 정보 가져오기
   useEffect(() => {
-    axiosWithBaseUrl.get(`/customer/reservation/update/${resvId}`)
+    axios.get(`/customer/reservation/update/${resvId}`)
     .then(res => {
       console.log(res.data);
       setPreviousResvInfo(res.data);
@@ -64,7 +64,7 @@ function ResvUpdate() {
   // 시간 정보 가져오기
   useEffect(() => {
     if(shopId !== null && selectedDate !== null) {
-      axiosWithBaseUrl.post('/customer/reservation/possible', {
+      axios.post('/customer/reservation/possible', {
         shopId: shopId ,
         date: moment(selectedDate).format("YYYY-MM-DD")
       })
@@ -87,18 +87,19 @@ function ResvUpdate() {
     }))
   }, [selectedDate, selectedTime, peopleCount, childCount, memo])
 
-  // 예약하기 처리
+  // 예약수정 처리
   const handleReserve = () => {
     console.log(resvInfo);
 
-    // axiosWithBaseUrl.post(`/customer/reservation/update/${resvId}`, resvInfo)
-    //   .then(res => {
-    //     console.log(res);
-    //     alert('수정이 완료되었습니다.');
-    //     navigate(`/resv/${resvId}`); // 예약상세 화면으로 이동
+    axios.post(`/customer/reservation/update/${resvId}`, resvInfo)
+      .then(res => {
+        console.log(res);
+        console.log(resvInfo);
+        alert('수정이 완료되었습니다.');
+        navigate(`/resv/${resvId}`); // 예약상세 화면으로 이동
 
-    //   })
-    //   .catch(err => console.log(err))
+      })
+      .catch(err => console.log(err))
   }
 
   return (

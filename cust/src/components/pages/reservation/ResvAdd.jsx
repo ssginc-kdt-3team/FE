@@ -1,12 +1,12 @@
-// import axios from 'axios';
-import React, { useState, useEffect, useReducer } from 'react';
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import moment from 'moment';
 import dayjs from 'dayjs';
 import styles from '../../../assets/css/pages/reservation/ResvAdd.module.css';
 import '../../../assets/css/widget/Calendar.css'; // css import
 import Counter from '../../ui/Counter';
-import { axiosWithBaseUrl } from '../../../App'
+// import { axiosWithBaseUrl } from '../../../App'
 import TimePicker from '../../ui/TimePicker';
 import { blockCalendar } from '../../../utils/reservation/blockCalendar';
 import PageTitle from '../../ui/PageTitle';
@@ -64,9 +64,9 @@ function ResvAdd() {
     const fetchData = async () => { // async는 함수 앞에 붙여서 해당 함수가 Promise를 반환하는 비동기 함수임을 나타냄
       try {
         const [res1, res2, res3] = await Promise.all([ // await는 Promise가 실행 될 때까지 대기
-          axiosWithBaseUrl.get('/branch/all'),
-          axiosWithBaseUrl.get(`/branch/shops/${branchId}`),
-          axiosWithBaseUrl.post('/customer/reservation/possible', {
+          axios.get('/branch/all'),
+          axios.get(`/branch/shops/${branchId}`),
+          axios.post('/customer/reservation/possible', {
             shopId: shopId,
             date: moment(selectedDate).format("YYYY-MM-DD")
           })
@@ -109,7 +109,7 @@ function ResvAdd() {
   const handleReserve = () => {
     console.log(resvInfo);
 
-    // axiosWithBaseUrl.post('/customer/reservation/add', resvInfo)
+    // axios.post('/customer/reservation/add', resvInfo)
     // .then(res => {
     //   console.log(res);
     //   alert('예약이 등록되었습니다.');

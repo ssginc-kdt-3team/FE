@@ -1,4 +1,4 @@
-// import axios from 'axios';
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from '../../../assets/css/pages/reservation/Resv.module.css'
@@ -6,7 +6,7 @@ import PageTitle from '../../ui/PageTitle';
 import StoreInfoCard from '../../widget/reservation/StoreInfoCard';
 import CustInfoCard from '../../widget/reservation/CustInfoCard';
 import ResvInfoCard from '../../widget/reservation/ResvInfoCard';
-import { axiosWithBaseUrl } from '../../../App'
+// import { axiosWithBaseUrl } from '../../../App'
 
 function Resv() {
   const { resvId } = useParams();
@@ -16,7 +16,7 @@ function Resv() {
   const [storeInfo, setStoreInfo] = useState(null);
 
   useEffect(() => {
-    axiosWithBaseUrl.get(`customer/reservation/${resvId}`)
+    axios.get(`customer/reservation/${resvId}`)
     .then(res => {
       console.log(res.data);
 

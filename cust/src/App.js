@@ -9,15 +9,15 @@ import ResvAdd from "./components/pages/reservation/ResvAdd";
 import ResvList from "./components/pages/reservation/ResvList";
 import Resv from "./components/pages/reservation/Resv";
 import ResvUpdate from "./components/pages/reservation/ResvUpdate";
-import axios from "axios";
+// import axios from "axios";
 import FindId from "./components/pages/auth/FindId";
 import FindIdResult from "./components/pages/auth/FindIdResult";
 import FindPw from "./components/pages/auth/FindPw";
 import FindPwResult from "./components/pages/auth/FindPWResult";
 
-export const axiosWithBaseUrl = axios.create({
-  baseURL: 'http://localhost:8080',
-});
+// export const axiosWithBaseUrl = axios.create({
+//   baseURL: 'http://localhost:8080',
+// });
 
 function App() {
   return ( // 이 안에 JSX 문법 적용
@@ -33,7 +33,8 @@ function App() {
           <Route path="/find-pw/result" element={<FindPwResult/>}/>
           <Route path="/join" element={<Join/>}/>
           <Route path="/resv/add" element={<ResvAdd/>}/>
-          <Route path="/resv" element={<ResvList/>}/>
+          <Route path="/resv" element={<ResvList isActiveList={false}/>}/>
+          <Route path="/resv/active" element={<ResvList isActiveList={true}/>}/>
           <Route path="/resv/:resvId" element={<Resv/>}/>
           <Route path="/resv/update/:resvId" element={<ResvUpdate/>}/>
         </Routes>
