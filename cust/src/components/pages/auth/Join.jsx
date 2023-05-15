@@ -100,7 +100,7 @@ function Join() {
         return;
       }
 
-      axios.post('http://localhost:8080/cust/join', userInfo)
+      axios.post('/cust/join', userInfo)
       .then(res => { // 받아오는 정보가 있다
         console.log(res.data);
         if(res.data === "")

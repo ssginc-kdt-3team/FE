@@ -29,26 +29,26 @@ function Login() {
   // 로그인 처리
   const handleLogin = (e) => {
     if(!isInputEmpty(email, password)) { // 입력칸이 모두 채워져 있으면
-      axios.post('http://localhost:8080/customer/login', {
+      axios.post('/customer/login', {
         email: email, // email
         password: password, // password
-      })
+      }, { withCredentials: true })
       .then(res => { // 받아오는 정보가 있다
-        // console.log(res);
+        console.log(res);
         console.log(res.data);
-        if(res.data === "")
-          alert('로그인에 실패하였습니다.\n아이디와 비밀번호를 확인하세요.');
-        else {
-          setLoginState(true); // 로그인된 상태로 변경
-          setUserInfo({ // 사용자 정보 저장
-            // Parsing
-            id: 1,
-            name: "temp.name",
-            email: "temp.email"
-          })
-          alert('로그인에 성공하였습니다.');
-          navigate('/'); // 메인화면으로 이동
-        }
+        // if(res.data === "")
+        //   alert('로그인에 실패하였습니다.\n아이디와 비밀번호를 확인하세요.');
+        // else {
+        //   setLoginState(true); // 로그인된 상태로 변경
+        //   setUserInfo({ // 사용자 정보 저장
+        //     // Parsing
+        //     id: 1,
+        //     name: "temp.name",
+        //     email: "temp.email"
+        //   })
+        //   alert('로그인에 성공하였습니다.');
+        //   navigate('/'); // 메인화면으로 이동
+        // }
       })
       .catch(err => { // 오류 처리
         alert("오류가 발생하였습니다.");

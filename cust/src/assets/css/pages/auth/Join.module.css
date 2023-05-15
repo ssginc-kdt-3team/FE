@@ -70,7 +70,8 @@ input[type=radio] {
 
 /* 주소 input */
 #addressWrap input {
-  width: 30%;
+  /* width: 30%; */
+  width: calc((90% - 80px) / 3);
   margin-right: 40px;
 }
 #addressWrap > div > input:last-child {

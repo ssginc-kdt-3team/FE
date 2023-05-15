@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 import styles from '../../../assets/css/widget/reservation/ResvInfoCard.module.css';
 import ResvStatusTag from '../../ui/ResvStatusTag';
@@ -16,9 +17,24 @@ function ResvInfoCard({data, resvId}) {
     return true;
   };
 
+  // const cancelBtn = {
+  //   opacity: '0.25',
+  //   ':hover': {
+  //     backgroundColor: 'var(--main)'
+  //   }
+  // };
+
   const confirmDelete = () => {
     if(window.confirm('예약을 취소하시겠습니까?')) {
-      console.log('삭제')
+      axios.post(`/customer/reservation/cancel/${resvId}`)
+      .then(res => {
+        alert("예약이 취소되었습니다.");
+        navigate('/resv');
+      })
+      .catch(err => { // 오류 처리
+        alert("오류가 발생하였습니다.");
+        console.log(err);
+      });
     }
     else 
       return;
@@ -35,8 +51,8 @@ function ResvInfoCard({data, resvId}) {
             </div>
 
             <div id={styles.middleWrap}>
-              <p><span>예약 인원</span>{data.people}명 (유아 {data.child}명)</p>
               <p><span>예약 시간</span>{data.expectedTime}</p>
+              <p><span>예약 인원</span>{data.people}명 (유아 {data.child}명)</p>
               <p><span>요청 사항</span>{data.memo}</p>
             </div>
 
