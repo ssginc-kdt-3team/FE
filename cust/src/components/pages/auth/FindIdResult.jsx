@@ -21,7 +21,7 @@ function FindIdResult() {
   return (
     <div className='container'>
       <div className='center flex-col'>
-        <PageTitle title="아이디 찾기" fontSize="1.6rem" marginTop="60px" marginBottom="80px"/>
+        <PageTitle title="아이디 찾기"/>
         <div className={styles.loginForm} style={{gap: '10px'}}>
           <p style={{textAlign: 'center', marginTop: 0}}>OOO님의 정보와 일치하는 아이디(이메일) 입니다.</p>
           <ResultP>OOOOO@OOOO.OOO</ResultP>

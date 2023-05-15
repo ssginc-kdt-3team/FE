@@ -105,7 +105,7 @@ function ResvUpdate() {
   return (
     <div className='container'>
       <div className='center flex-col'>
-        <PageTitle title="예약변경" fontSize="1.6rem" marginTop="60px" marginBottom="80px"/>
+        <PageTitle title="예약변경"/>
 
         {/* 지점, 매장 */}
         {/* 지점이랑 매장의 id, 이름 가져와서 option 안에 넣는다 */}

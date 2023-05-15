@@ -16,7 +16,7 @@ function FindPw() {
   return (
     <div className='container'>
       <div className='center flex-col'>
-        <PageTitle title="비밀번호 찾기" fontSize="1.6rem" marginTop="60px" marginBottom="80px"/>
+        <PageTitle title="비밀번호 찾기"/>
         <form className={styles.loginForm}>
           <div>
             <label>NAME</label>

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styles from '../../assets/css/ui/TimePicker.module.css';
-import moment from 'moment';
 import TimeBtn from './TimeBtn';
 
 function TimePicker({possibleTimeList, defaultValue, setSelectedTime, selectedDate}) {
@@ -39,7 +38,7 @@ function TimePicker({possibleTimeList, defaultValue, setSelectedTime, selectedDa
           possibleTimeList && possibleTimeList.map( time => 
             time.time >= "12:00:00" // 오후면
             ? (
-              <TimeBtn time={time} selectedOption={selectedOption} handleOptionChange={handleOptionChange} selectedDate={selectedDate}/>
+              <TimeBtn key={time.id} time={time} selectedOption={selectedOption} handleOptionChange={handleOptionChange} selectedDate={selectedDate}/>
             )
             : ''
           )
