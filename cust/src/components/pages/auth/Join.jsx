@@ -3,6 +3,7 @@ import React, { useEffect, useReducer, useRef, useState } from 'react';
 import PageTitle from '../../ui/PageTitle';
 import styles from '../../../assets/css/pages/auth/Join.module.css';
 import { useNavigate } from 'react-router-dom';
+import { isEmailValid } from '../../../utils/auth/isEmailValid';
 
 // action에 따라 안에 데이터를 어떻게 변화시킬지 설정
 const reducer = (state, action) => {
@@ -95,10 +96,14 @@ function Join() {
     console.log(userInfo);
 
     if(!isInputEmpty(userInfo)) { // 빈칸 확인
-      if(!isPasswordConfirmed) { // 비밀번호 확인
-        alert("비밀번호를 확인해주세요.");
-        return;
+      if(isEmailValid(userInfo.email)) { // 이메일 검증
+        if(!isPasswordConfirmed) { // 비밀번호 확인
+          alert("비밀번호를 확인해주세요.");
+          return;
+        }
       }
+      else
+        return;
 
       axios.post('/cust/join', userInfo)
       .then(res => { // 받아오는 정보가 있다
@@ -107,6 +112,7 @@ function Join() {
           alert("회원가입에 실패하였습니다.");
         else {
           alert('회원가입에 성공하였습니다.');
+          navigate('/login', { replace: true });
         }
       })
       .catch(err => { // 오류 처리
@@ -119,7 +125,7 @@ function Join() {
   return (
     <div className='container'>
       <div className='center flex-col'>
-        <PageTitle title="회원가입" fontSize="1.6rem" marginTop="60px" marginBottom="80px"/>
+        <PageTitle title="회원가입"/>
         <form className={styles.joinForm}>
           {/* 이름 */}
           <div id={styles.nameWrap}>

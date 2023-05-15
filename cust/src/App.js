@@ -15,10 +15,6 @@ import FindIdResult from "./components/pages/auth/FindIdResult";
 import FindPw from "./components/pages/auth/FindPw";
 import FindPwResult from "./components/pages/auth/FindPWResult";
 
-// export const axiosWithBaseUrl = axios.create({
-//   baseURL: 'http://localhost:8080',
-// });
-
 function App() {
   return ( // 이 안에 JSX 문법 적용
     <RecoilRoot>

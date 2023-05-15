@@ -14,7 +14,7 @@ function SubMenu({isSubMenuOpen, setIsSubMenuOpen}) {
       <ul className='center flex-gap-45'>
         {
           menuData && menuData.map( data => (
-            <li>
+            <li key={data.id}>
             {
               data.subMenu ? (
                 <ul id={styles.subMenu}>

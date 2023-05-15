@@ -1,15 +1,20 @@
 import React from "react";
+import styled from 'styled-components';
 
-function PageTitle({title, fontSize, marginTop, marginBottom}) {
+const TitleDiv = styled.div`
+  font-size: 26px;
+  font-weight: 500;
+  margin: 70px 0 100px 0;
+
+  @media screen and (max-width: 768px) {
+    font-size: 24px;
+    margin: 60px 0 80px 0;
+  }
+`;
+
+function PageTitle({title}) {
   return (
-    <div style={{ 
-      fontSize: fontSize, 
-      fontWeight: '500', 
-      marginTop: marginTop,
-      marginBottom: marginBottom 
-    }}>
-      {title}
-    </div>
+    <TitleDiv>{title}</TitleDiv>
   );
 }
 
