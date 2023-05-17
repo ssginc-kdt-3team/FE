@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Paging from "components/pagination/paging";
 import { axiosWithBaseUrl } from "App";
-import Enter from "components/modal/enter";
-import Noshow from "components/modal/noshow";
+import Enter from "pages/resv/tdlist/enterbtn";
+import Noshow from "pages/resv/tdlist/noshowbtn";
 
 const ResvTdTable = () => {
   const [resvList, setResvList] = useState([]);           // 현재 페이지의 예약 목록을 저장 
@@ -12,7 +12,7 @@ const ResvTdTable = () => {
   const [currentPage, setCurrentPage] = useState(1);      // 현재 페이지 번호를 저장
   const [totalItems, setTotalItems] = useState(0);        // 전체 고객 수를 저장
   const [itemsPerPage, setItemsPerPage] = useState(10);   // 한 페이지에 보여줄 고객 수 저장
-  const [selectedType, setSelectedType] = useState("");   // 기본 값 E
+  const [selectedType, setSelectedType] = useState("E");   // 기본 값 E
 
   useEffect(() => {
     fetchResTdvList();                                     // 함수를 호출하여 페이지가 변경될 때마다 고객 목록을 가져옴
@@ -23,7 +23,7 @@ const ResvTdTable = () => {
   const fetchResTdvList = () => {
     setLoading(true);
     axiosWithBaseUrl
-      .get(`/owner/reservation/activetime/${selectedType}/${3}/${currentPage}`) // Use the selectedType value in the URL
+      .get(`/owner/reservation/activetime/${3}/${selectedType}/${currentPage}`) // Use the selectedType value in the URL
       .then((response) => {
         setResvList(response.data.content);
         console.log(response.data);
@@ -68,7 +68,6 @@ const ResvTdTable = () => {
   };
   
 
-  
   const columns = [
     {
       title: "예약일자",

@@ -1,98 +1,291 @@
-import { Button, Checkbox, Form, Input } from 'antd';
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { axiosWithBaseUrl } from "App";
+import { useDispatch } from 'react-redux';
+import { LOGIN } from "store/reducers/actions";
+import { Form, Input, Button, Checkbox } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import { isEmailValid } from '../../../utils/auth';
 
 const LoginForm = () => {
-  const [redirectTo, setRedirectTo] = useState(null); // 이동할 페이지 URL
-  const navigate = useNavigate();
-
-  const isInputEmpty = (email, password) => {
-    if (email === '' || password === '') {
-      alert('내용을 입력하세요.');
-      return true;
-    }
-    return false;
-  };
-
-  const handleLogin = (values) => {
-    const { email, password } = values;
-    if (!isInputEmpty(email, password)) {
-      axios
-        .post('http://localhost:8080/admin/login', {
-          email: email,
-          password: password,
-        })
-        .then((res) => {
-          if (res.data === '') {
-            alert('로그인에 실패하였습니다.\n아이디와 비밀번호를 확인하세요.');
-          } else {
-            alert('로그인에 성공하였습니다.');
-            setRedirectTo('/'); // 이동할 페이지 URL 설정
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  };
-
-  useEffect(() => {
-    if (redirectTo) {
-      navigate(redirectTo); // 페이지 이동
-      setRedirectTo(null); // 상태(state) 초기화
-    }
-  }, [redirectTo, navigate]);
-
-  return (
-    <div className="container">
-      <div className="center flex-col">
-        <Form name="basic" onFinish={handleLogin}>
-          <Form.Item
-            label="이메일"
-            name="email"
-            rules={[
-              {
-                required: true,
-                message: '이메일을 입력하세요.',
-              },
-            ]}
-          >
-            <Input type="email" placeholder="이메일" />
-          </Form.Item>
-
-          <Form.Item
-            label="비밀번호"
-            name="password"
-            rules={[
-              {
-                required: true,
-                message: '비밀번호를 입력하세요.',
-              },
-            ]}
-          >
-            <Input.Password placeholder="비밀번호" />
-          </Form.Item>
-
-          <Form.Item
-            wrapperCol={{
-              offset: 8,
-              span: 16,
-            }}
-          >
-            <Button type="primary" htmlType="submit">
-              로그인
-            </Button>
-          </Form.Item>
-        </Form>
-
-        <div>
-          <div onClick={() => alert('아이디 찾기로 이동')}>아이디 찾기 &gt;</div>
-          <div onClick={() => alert('비밀번호 찾기로 이동')}>비밀번호 찾기 &gt;</div>
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+  
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+  
+    const onFinish = (values) => {
+      const { username, password } = values;
+      if (isEmailValid(username)) {
+        dispatch(
+          LOGIN({
+            email: username,
+            password: password,
+          })
+        )
+          .then((res) => {
+            if (res === '') {
+              alert('로그인에 실패하였습니다.\n아이디와 비밀번호를 확인하세요.');
+            } else {
+              alert('로그인에 성공하였습니다.');
+              navigate('/', { replace: true });
+            }
+          })
+          .catch((err) => {
+            alert('오류가 발생하였습니다.');
+            console.log(err);
+          });
+      }
+    };
+  
+    const onFinishFailed = (errorInfo) => {
+      console.log('Failed:', errorInfo);
+    };
+  
+    const isInputEmpty = (email, password) => {
+      return email.trim() === '' || password.trim() === '';
+    };
+  
+    const setLoginInfo = (info) => {
+      // Implement your logic to set the login info
+      console.log('Setting login info:', info);
+    };
+  
+    // 로그인 처리
+    const handleLogin = () => {
+      if (!isInputEmpty(email, password)) { // 입력칸이 모두 채워져 있으면
+        if (isEmailValid(email)) {
+          axiosWithBaseUrl
+            .post('/customer/login', {
+              email: email, // email
+              password: password, // password
+            })
+            .then(res => { // 받아오는 정보가 있다
+              console.log(res.data.id);
+              if (res.data === "")
+                alert('로그인에 실패하였습니다.\n아이디와 비밀번호를 확인하세요.');
+              else {
+                setLoginInfo({ // 로그인된 상태로 변경
+                  id: res.data.id,
+                  isLoggedin: true
+                });
+                alert('로그인에 성공하였습니다.');
+                navigate('/', { replace: true }); // 메인화면으로 이동
+              }
+            })
+            .catch(err => { // 오류 처리
+              alert("오류가 발생하였습니다.");
+              console.log(err);
+            });
+        }
+      }
+    };
+  
+    return (
+      <div className="container">
+        <div className="center flex-col">
+          <Form onFinish={onFinish} onFinishFailed={onFinishFailed}>
+            <Form.Item
+              label="이메일"
+              name="username"
+              rules={[
+                {
+                  required: true,
+                  message: '이메일을 입력하세요.',
+                },
+              ]}
+            >
+              <Input
+                type="email"
+                placeholder="이메일"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </Form.Item>
+  
+            <Form.Item
+              label="비밀번호"
+              name="password"
+              rules={[
+                {
+                  required: true,
+                  message: '비밀번호를 입력하세요.',
+                },
+              ]}
+            >
+              <Input.Password
+                placeholder="비밀번호"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </Form.Item>
+  
+            <Form.Item
+              name="remember"
+              valuePropName="checked"
+              wrapperCol={{
+                offset: 8,
+                span: 16,
+              }}
+            >
+            </Form.Item>
+  
+            <Form.Item
+              wrapperCol={{
+                offset: 8,
+                span: 16,
+              }}
+            >
+              <Button onClick={handleLogin} className="button mt-45" type="primary" htmlType="submit">
+                로그인
+              </Button>
+            </Form.Item>
+          </Form>
+  
+          <div>
+            <div onClick={() => navigate('/find-id')}>
+              아이디 찾기
+            </div>
+            <div onClick={() => navigate('/find-pw')}>
+              비밀번호 찾기
+            </div>
+          </div>
+          <div>
+            아직 회원이 아니신가요?{' '}
+            <span onClick={() => navigate('/join')}>회원가입</span>
+          </div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  };
+  
+  export default LoginForm;
 
-export default LoginForm;
+
+// import React, { useState } from 'react';
+// import { useDispatch } from 'react-redux';
+// import { loginAction } from '../../../redux/actions/loginAction';
+// import { Form, Input, Button, Checkbox } from 'antd';
+// import { useNavigate } from 'react-router-dom';
+// import { isEmailValid } from '../../../utils/auth/isEmailValid';
+
+
+// const LoginForm = () => {
+//   const dispatch = useDispatch();
+//   const navigate = useNavigate();
+
+//   const [email, setEmail] = useState('');
+//   const [password, setPassword] = useState('');
+
+//   const onFinish = (values) => {
+//     const { username, password, remember } = values;
+//     if (isEmailValid(username)) {
+//       dispatch(
+//         loginAction({
+//           email: username,
+//           password: password,
+//         })
+//       )
+//         .then((res) => {
+//           if (res === '') {
+//             alert('로그인에 실패하였습니다.\n아이디와 비밀번호를 확인하세요.');
+//           } else {
+//             alert('로그인에 성공하였습니다.');
+//             navigate('/', { replace: true });
+//           }
+//         })
+//         .catch((err) => {
+//           alert('오류가 발생하였습니다.');
+//           console.log(err);
+//         });
+//     }
+//   };
+
+//   const onFinishFailed = (errorInfo) => {
+//     console.log('Failed:', errorInfo);
+//   };
+
+//   return (
+//     <div className="container">
+//       <div className="center flex-col">
+//         <Form
+//           onFinish={onFinish}
+//           onFinishFailed={onFinishFailed}
+//         >
+//           <Form.Item
+//             label="이메일"
+//             name="username"
+//             rules={[
+//               {
+//                 required: true,
+//                 message: '이메일을 입력하세요.',
+//               },
+//             ]}
+//           >
+//             <Input
+//               type="email"
+//               placeholder="이메일"
+//               value={email}
+//               onChange={(e) => setEmail(e.target.value)}
+//             />
+//           </Form.Item>
+
+//           <Form.Item
+//             label="비밀번호"
+//             name="password"
+//             rules={[
+//               {
+//                 required: true,
+//                 message: '비밀번호를 입력하세요.',
+//               },
+//             ]}
+//           >
+//             <Input.Password
+//               placeholder="비밀번호"
+//               value={password}
+//               onChange={(e) => setPassword(e.target.value)}
+//             />
+//           </Form.Item>
+
+//           <Form.Item
+//             name="remember"
+//             valuePropName="checked"
+//             wrapperCol={{
+//               offset: 8,
+//               span: 16,
+//             }}
+//           >
+//             <Checkbox>Remember me</Checkbox>
+//           </Form.Item>
+
+//           <Form.Item
+//             wrapperCol={{
+//               offset: 8,
+//               span: 16,
+//             }}
+//           >
+//             <Button className="button mt-45" type="primary" htmlType="submit">
+//               로그인
+//             </Button>
+//           </Form.Item>
+//         </Form>
+
+//         <div >
+//           <div onClick={() => navigate('/find-id')}>
+//             아이디 찾기
+     
+//           </div>
+//           <div onClick={() => navigate('/find-pw')}>
+//             비밀번호 찾기
+     
+//           </div>
+//         </div>
+//         <div>
+//           아직 회원이 아니신가요?{' '}
+//           <span onClick={() => navigate('/join')}>회원가입</span>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default LoginForm;

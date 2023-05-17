@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 import { axiosWithBaseUrl } from "App";
-import { Table, Tag } from "antd";
+import { Table, Tag, Button } from "antd";
 import { Link } from "react-router-dom";
 import Paging from "components/pagination/paging";
-import DateFilter from "./datefilter";
-import StatusFilter from "./statusfilter";
 import { DatePicker, Space } from 'antd';
 
 const { RangePicker } = DatePicker;
@@ -15,30 +13,31 @@ const ResvTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(10);
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedTime, setSelectedTime] = useState(null);
-  const [statusFilter, setStatusFilter] = useState(null);
+  const [selectedDate, setSelectedDate] = useState({start:"1800-01-01", end:"2300-01-01"});
+  const [selectedType, setSelectedType] = useState("all");
 
   useEffect(() => {
     fetchResvList();
-  }, [currentPage, selectedDate, selectedTime, statusFilter]);
+  }, [currentPage, selectedDate, selectedType]);
 
   const fetchResvList = () => {
     setLoading(true);
     const currentPageInt = parseInt(currentPage, 10); // Convert currentPage to an integer
-    const params = {
-      page: currentPageInt,
-    };
     const requestBody = {
-      status: statusFilter,
-      date: selectedDate ? selectedDate.toISOString() : null,
-      time: selectedTime ? selectedTime.toISOString() : null,
+      start: selectedDate.start,                       // selectedDate 객체에서 시작 날짜에 접근합니다.
+      end: selectedDate.end,                           // selectedDate 객체에서 종료 날짜에 접근합니다.
     };
+    // let type = selectedType;
+    // if (selectedType === "all") {
+    //   type = "noshow, reservation, done, cancel, imminent";
+    // }
+
     axiosWithBaseUrl
-      .get(`/owner/reservation/getall/${3}/${currentPageInt}`, { params, data: requestBody })
+       .post(`/owner/reservation/list/${3}/${selectedType}/${currentPageInt}`, requestBody)
+      // .get(`/owner/reservation/list/${3}/noshoww/${currentPageInt}`, { params, data: requestBody })
       .then((response) => {
         setResvList(response.data.content);
-         console.log(response.data.content);
+        console.log(response.data.content);
         setTotalItems(response.data.totalElements);
         setItemsPerPage(response.data.numberOfElements);
         setLoading(false);
@@ -49,20 +48,18 @@ const ResvTable = () => {
       });
   };
 
-  const handleStatusFilter = (status) => {
-    setStatusFilter(status);
-    console.log(status);
+  const handleRangePickerChange = (dates, dateStrings) => {
+    setSelectedDate({ start: dateStrings[0], end: dateStrings[1] });
+    console.log(dateStrings);
+    fetchResvList(); // 날짜 선택 시 예약 리스트를 가져옵니다.
   };
 
-  const handleFilterClick = () => {
-    fetchResvList();
-    setCurrentPage(1);
+    const handleTypeChange = (type) => {
+    setSelectedType(type);
+    console.log(type);
+    // fetchResvList();
   };
-
-  const handleRangePickerChange = (value, dateString) => {
-    setSelectedDate(dateString[0]);
-    setSelectedTime(dateString[1]);
-  };
+  
 
   const columns = [
     {
@@ -117,30 +114,28 @@ const ResvTable = () => {
       },
       {
         title: "예약금",
-        dataIndex: "child",
-        key: "child",
+        dataIndex: "originValue",
+        key: "originValue",
       },
       {
         title: "위약금",
-        dataIndex: "child",
-        key: "child",
+        dataIndex: "penaltyValue",
+        key: "penaltyValue",
       }
     ];
   
     return (
       <>
         <RangePicker
-          showTime={{
-            format: 'HH:mm',
-          }}
-          format="YYYY-MM-DD HH:mm"
+          format="YYYY-MM-DD"
           onChange={handleRangePickerChange}
         />
-        <StatusFilter
-          selectedStatus={statusFilter}
-          onStatusChange={handleStatusFilter}
-          onFilterClick={handleFilterClick}
-        />
+          <Button onClick={() => handleTypeChange("all")}>전체</Button>
+          <Button onClick={() => handleTypeChange("reservation")}>예약중</Button>
+          <Button onClick={() => handleTypeChange("done")}>완료</Button>
+          <Button onClick={() => handleTypeChange("noshow")}>노쇼</Button>
+          <Button onClick={() => handleTypeChange("cancel")}>정상취소</Button>
+          <Button onClick={() => handleTypeChange("imminent")}>취소</Button>
         <Table
           columns={columns}
           dataSource={resvList}

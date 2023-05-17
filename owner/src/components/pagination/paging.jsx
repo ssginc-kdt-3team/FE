@@ -7,12 +7,14 @@ const Paging = ({ page, itemsPerPage, totalItems, setPage }) => {
     setPage(newPage);
   };
 
+
   return (
     <Pagination
       current={page}
       pageSize={itemsPerPage}
       total={totalItems}
       showSizeChanger={false}
+      pageRange = {5}
       onChange={handlePageChange}
       style={{ display: 'flex', justifyContent: 'center', marginTop: '16px' }}
     />

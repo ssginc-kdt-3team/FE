@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Card } from 'antd';
-import Reject from "components/modal/reject";
+import Reject from "pages/resv/detail/rejectbtn";
 
 function ResvDetail() {
   const { id } = useParams();
