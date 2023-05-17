@@ -22,16 +22,20 @@ const ResvTable = () => {
 
   const fetchResvList = () => {
     setLoading(true);
+    const currentPageInt = parseInt(currentPage, 10); // Convert currentPage to an integer
     const params = {
-      page: currentPage,
-      date: selectedDate ? selectedDate.toISOString() : null,
+      page: currentPageInt,
+    };
+    const requestBody = {
       status: statusFilter,
+      date: selectedDate ? selectedDate.toISOString() : null,
       time: selectedTime ? selectedTime.toISOString() : null,
     };
     axiosWithBaseUrl
-      .get("/owner/reserve", { params })
+      .get(`/owner/reservation/getall/${3}/${currentPageInt}`, { params, data: requestBody })
       .then((response) => {
-        setResvList(response.data);
+        setResvList(response.data.content);
+         console.log(response.data.content);
         setTotalItems(response.data.totalElements);
         setItemsPerPage(response.data.numberOfElements);
         setLoading(false);
@@ -49,23 +53,20 @@ const ResvTable = () => {
 
   const handleTimeChange = (time) => {
     setSelectedTime(time);
+    console.log(time);
   };
 
   const handleStatusFilter = (status) => {
     setStatusFilter(status);
-    console.lig(status);
+    console.log(status);
   };
 
   const handleFilterClick = () => {
     fetchResvList();
+    setCurrentPage(1);
   };
 
   const columns = [
-    {
-      title: "변동일자",
-      dataIndex: "reservationDate",
-      key: "reservationDate",
-    },
     {
       title: "예약일자",
       dataIndex: "reservationDate",
@@ -94,7 +95,6 @@ const ResvTable = () => {
           color = "blue";
           content = "예약 중";
         }
-
         return <Tag color={color}>{content}</Tag>;
       },
     },
@@ -103,8 +103,9 @@ const ResvTable = () => {
       dataIndex: "name",
       key: "name",
       render: (text, record) => (
-        <Link to={`/resv/detail/${record.reserveId}`}>{text}</Link>
-      ),
+        <Link to={`/resv/detail/${record.id}`}>{text}</Link>
+      ),                                                                        
+      
     },
     {
       title: "예약자 번호",
@@ -116,16 +117,15 @@ const ResvTable = () => {
       dataIndex: "people",
       key: "people",
     },
-    // child 바꾸기 
     {
       title: "예약금",
       dataIndex: "child",
-       key: "child",
+      key: "child",
     },
     {
-        title: "위약금",
-        dataIndex: "child",
-         key: "child",
+      title: "위약금",
+      dataIndex: "child",
+      key: "child",
     }
   ];
 
@@ -136,7 +136,7 @@ const ResvTable = () => {
         onDateChange={handleDateChange}
         onFilterClick={handleFilterClick}
       />
-       <StatusFilter
+      <StatusFilter
         selectedStatus={statusFilter}
         onStatusChange={handleStatusFilter}
         onFilterClick={handleFilterClick}
@@ -156,6 +156,5 @@ const ResvTable = () => {
     </>
   );
 };
-
 
 export default ResvTable;

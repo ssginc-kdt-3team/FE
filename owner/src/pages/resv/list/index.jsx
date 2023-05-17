@@ -7,8 +7,8 @@ import StatusFilter from "./statusfilter";
 function ResvList() {
   return ( 
           <div>    
-            <DateFilter />
-            <StatusFilter />
+            {/* <DateFilter />
+            <StatusFilter /> */}
             <Table />
             <Outlet />
           </div>
