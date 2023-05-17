@@ -126,19 +126,19 @@ function Join() {
               <input name="email" type='email' placeholder='이메일' onChange={handleInput}/>
             </div>
             <div >
-              <div  className='button buttonReverse' onClick={() => alert('이메일 중복확인')}>이메일 중복확인</div>
+              <div className='button buttonReverse' onClick={() => alert('이메일 중복확인')}>이메일 중복확인</div>
             </div>
           </div>
           {/* 비밀번호 */}
           <div className='grid'>
             <div >
               <label>PASSWORD</label>
-              <input  name="password" type='password' placeholder='비밀번호' onChange={handleInput}/>
+              <input name="password" type='password' placeholder='비밀번호' onChange={handleInput}/>
               <div ref={passwordConfirm}></div>
             </div>
             <div >
               <label>CONFIRM PASSWORD</label>
-              <input  name="confirmPassword" type='password' placeholder='비밀번호 확인' onChange={(e) => setConfirmPassword(e.currentTarget.value)}/>
+              <input name="confirmPassword" type='password' placeholder='비밀번호 확인' onChange={(e) => setConfirmPassword(e.currentTarget.value)}/>
             </div>
           </div>
           {/* 생년월일 */}

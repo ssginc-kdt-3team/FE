@@ -21,13 +21,13 @@ const resv = {
             url: '/resv/tdlist',
             icon: icons.ChromeOutlined
         },
-        {
-            id: 'resvrtlist',
-            title: '예약 중 조회(이름바꾸기)',
-            type: 'item',
-            url: '/resv/aclist',
-            icon: icons.ChromeOutlined
-        },
+        // {
+        //     id: 'resvrtlist',
+        //     title: '예약 중 조회(이름바꾸기)',
+        //     type: 'item',
+        //     url: '/resv/aclist',
+        //     icon: icons.ChromeOutlined
+        // },
         {
             id: 'resvlist',
             title: '예약 내역 조회',
