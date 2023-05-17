@@ -8,7 +8,10 @@ function FindId() {
   const [phone, setPhone] = useState("");
 
   // const [result, setResult] = useState(null);
-  const result = '토큰';
+  const result = {
+    name: 'name',
+    id : 'id'
+  };
 
   const navigate = useNavigate();
 
@@ -27,7 +30,8 @@ function FindId() {
             <input className={styles.loginInput} type='phone' value={phone} placeholder='휴대폰 번호' onChange={(e) => setPhone(e.currentTarget.value)}/>
           </div>
 
-          <div className='button mt-45' onClick={() => navigate(`/find-id/result?userId=${result}`)}>아이디 찾기</div>
+          {/* <div className='button mt-45' onClick={() => navigate(`/find-id/result?userId=${result}`)}>아이디 찾기</div> */}
+          <div className='button mt-45' onClick={() => navigate(`/find-id/result`, { state: result })}>아이디 찾기</div>
         </form>
       </div>
     </div>

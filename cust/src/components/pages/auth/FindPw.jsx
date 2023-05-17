@@ -9,7 +9,10 @@ function FindPw() {
   const [phone, setPhone] = useState("");
 
   // const [result, setResult] = useState(null);
-  const result = '토큰';
+  const result = {
+    name: 'name',
+    pw: 'pw'
+  };
 
   const navigate = useNavigate();
 
@@ -33,7 +36,7 @@ function FindPw() {
             <input className={styles.loginInput} type='phone' value={phone} placeholder='휴대폰 번호' onChange={(e) => setPhone(e.currentTarget.value)}/>
           </div>
 
-          <div className='button mt-45' onClick={() => navigate(`/find-pw/result?userId=${result}`)}>비밀번호 찾기</div>
+          <div className='button mt-45' onClick={() => navigate(`/find-pw/result`, { state : result })}>비밀번호 찾기</div>
         </form>
       </div>
     </div>

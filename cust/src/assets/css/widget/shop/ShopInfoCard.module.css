@@ -1,0 +1,34 @@
+/* #shopInfoWrap > img {
+} */
+
+/* 매장 이미지 */
+#topWrap > img {
+  width: 300px;
+  border-radius: 10px;
+}
+
+#topWrap p > span {
+  color: var(--description);
+  margin-right: 20px;
+}
+
+
+@media screen and (max-width: 768px) {
+  #topWrap {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* 매장 이미지 */
+  #topWrap > img {
+    width: 100%;
+  }
+
+  /* 상세 정보 */
+  #topWrap > div > p:first-child {
+    margin-top: 0;
+  }
+  #topWrap > div > p:last-child {
+    margin-bottom: 0;
+  }
+}

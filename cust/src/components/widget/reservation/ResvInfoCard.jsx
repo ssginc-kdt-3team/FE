@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import styles from '../../../assets/css/widget/reservation/ResvInfoCard.module.css';
-import ResvStatusTag from '../../ui/ResvStatusTag';
+import ResvStatusTag from '../../ui/reservation/ResvStatusTag';
 import { Link, useNavigate } from 'react-router-dom';
 
 function ResvInfoCard({data, resvId}) {

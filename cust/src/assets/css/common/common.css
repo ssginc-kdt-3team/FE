@@ -79,6 +79,9 @@ select {
   border-bottom: 1px solid var(--main);
 }
 
+label {
+  margin-bottom: 5px;
+}
 
 /* 클래스 */
 .container {

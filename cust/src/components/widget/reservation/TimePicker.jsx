@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import styles from '../../assets/css/ui/TimePicker.module.css';
-import TimeBtn from './TimeBtn';
+import styles from '../../../assets/css/widget/reservation/TimePicker.module.css';
+import TimeBtn from '../../ui/reservation/TimeBtn';
 
 function TimePicker({possibleTimeList, defaultValue, setSelectedTime, selectedDate}) {
   const [selectedOption, setSelectedOption] = useState(defaultValue);
@@ -21,7 +21,7 @@ function TimePicker({possibleTimeList, defaultValue, setSelectedTime, selectedDa
 
   return (
     <div id={styles.radioWrap} className='flex flex-col flex-gap-20'>
-      <div id={styles.amWrap} className='grid-5c'>
+      <div id={styles.amWrap} className='grid-5c flex-gap-5'>
         {
           possibleTimeList && possibleTimeList.map( time => 
             time.time < "12:00:00" // 오전이면
@@ -33,7 +33,7 @@ function TimePicker({possibleTimeList, defaultValue, setSelectedTime, selectedDa
         }
       </div>
 
-      <div id={styles.fmWrap} className='grid-5c'>
+      <div id={styles.fmWrap} className='grid-5c flex-gap-5'>
         {
           possibleTimeList && possibleTimeList.map( time => 
             time.time >= "12:00:00" // 오후면

@@ -140,7 +140,7 @@ function Join() {
           </div>
 
           {/* 이메일 */}
-          <div className='grid-2c'>
+          <div className='grid-2c flex-gap-40'>
             <div id={styles.emailWrap}>
               <label>EMAIL</label>
               <input className={styles.joinInput} name="email" type='email' placeholder='이메일' onChange={handleInput}/>
@@ -152,7 +152,7 @@ function Join() {
           </div>
 
           {/* 비밀번호 */}
-          <div className='grid-2c'>
+          <div className='grid-2c flex-gap-40'>
             <div id={styles.passwordWrap}>
               <label>PASSWORD</label>
               <input className={styles.joinInput} name="password" type='password' placeholder='비밀번호' onChange={handleInput}/>

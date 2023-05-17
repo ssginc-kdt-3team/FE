@@ -28,8 +28,8 @@
 }
 /* 버튼 */
 #bottomWrap button {
-  width: 100px;
-  height: 40px;
+  width: var(--button-width-sm);
+  height: var(--button-height-sm);
   font-size: 16px;
   line-height: 38px; /* 경계값 만큼 빼주어야 << 버튼이 border-box이다 */
 }

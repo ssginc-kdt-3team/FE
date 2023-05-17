@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import PageTitle from '../../ui/PageTitle';
 import styles from '../../../assets/css/pages/auth/Login.module.css';
 import { useSetRecoilState } from 'recoil';
-import { token } from '../../../state/token';
+import { loginInfo } from '../../../state/loginInfo';
 import { userInfo } from '../../../state/userInfo';
 import { useNavigate } from 'react-router-dom';
 import next from '../../../assets/images/icons/next.png';
@@ -11,7 +11,7 @@ import { isEmailValid } from '../../../utils/auth/isEmailValid';
 import { axiosWithToken } from '../../../index';
 
 function Login() {
-  const setToken = useSetRecoilState(token);
+  const setLoginInfo = useSetRecoilState(loginInfo);
   const setUserInfo = useSetRecoilState(userInfo);
 
   const [email, setEmail] = useState(''); // 사용자가 입력한 email
@@ -31,41 +31,43 @@ function Login() {
   // 로그인 처리
   const handleLogin = (e) => {
     if(!isInputEmpty(email, password)) { // 입력칸이 모두 채워져 있으면
-      // if(isEmailValid(email)) {
-        axios.post('/admin/login', {
-          loginId: email, // email
+      if(isEmailValid(email)) {
+        axios.post('/customer/login', {
+          email: email, // email
           password: password, // password
         })
         .then(res => { // 받아오는 정보가 있다
-          console.log('res: ' + res);
-          console.log('res.data.token: ' + res.data.token);
-          setToken(res.data.token); // 로그인된 상태로 변경
+          console.log(res.data.id);
+          // console.log('res.data.token: ' + res.data.token);
           
-          const accessToken = res.data.token;
-          console.log('accessToken: ' + accessToken);
+          // const accessToken = res.data.token;
+          // console.log('accessToken: ' + accessToken);
 
           // axiosWithToken 헤더에 accessToken 담아 보내도록 설정, 토큰이 필요한 요청은 axiosWithToken으로 
-          axiosWithToken.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
+          // axiosWithToken.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
 
-          // if(res.data === "")
-          //   alert('로그인에 실패하였습니다.\n아이디와 비밀번호를 확인하세요.');
-          // else {
-          //   setLoginState(true); // 로그인된 상태로 변경
-          //   setUserInfo({ // 사용자 정보 저장
-          //     // Parsing
-          //     id: 1,
-          //     name: "temp.name",
-          //     email: "temp.email"
-          //   })
-          //   alert('로그인에 성공하였습니다.');
-          //   navigate('/', { replace: true }); // 메인화면으로 이동
-          // }
+          if(res.data === "")
+            alert('로그인에 실패하였습니다.\n아이디와 비밀번호를 확인하세요.');
+          else {
+            setLoginInfo({ // 로그인된 상태로 변경
+              id: res.data.id,
+              isLoggedin: true
+            });
+            // setUserInfo({ // 사용자 정보 저장
+            //   // Parsing
+            //   id: 1,
+            //   name: "temp.name",
+            //   email: "temp.email"
+            // })
+            alert('로그인에 성공하였습니다.');
+            navigate('/', { replace: true }); // 메인화면으로 이동
+          }
         })
         .catch(err => { // 오류 처리
           alert("오류가 발생하였습니다.");
           console.log(err);
         });
-      // }
+      }
     }
     else
       return;

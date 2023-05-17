@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import styles from '../../../assets/css/pages/reservation/ResvList.module.css';
 import PageTitle from '../../ui/PageTitle';
-import ResvCard from '../../ui/ResvCard';
+import ResvCard from '../../widget/reservation/ResvCard';
 import Paging from '../../ui/Paging';
 import { axiosWithToken } from '../../../index';
 

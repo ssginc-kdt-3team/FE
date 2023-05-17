@@ -58,9 +58,9 @@
 
 
 /* 아이디/비밀번호 찾기 화면 */
-.loginForm > div > label {
-  margin-bottom: 5px;;
-}
+/* .loginForm > div > label {
+  margin-bottom: 5px;
+} */
 
 
 @media screen and (max-width: 768px) {
