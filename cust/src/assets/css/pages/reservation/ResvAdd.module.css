@@ -3,9 +3,9 @@
   width: var(--resvForm-width);
 }
 
-#resvForm label {
+/* #resvForm label {
   margin-bottom: 5px;
-}
+} */
 #resvForm label > span {
   font-size: 12px;
   margin-left: 10px;

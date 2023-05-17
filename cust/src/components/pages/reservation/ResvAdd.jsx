@@ -5,27 +5,42 @@ import moment from 'moment';
 import dayjs from 'dayjs';
 import styles from '../../../assets/css/pages/reservation/ResvAdd.module.css';
 import '../../../assets/css/widget/Calendar.css'; // css import
-import Counter from '../../ui/Counter';
+import Counter from '../../widget/reservation/Counter';
 // import { axiosWithBaseUrl } from '../../../App'
-import TimePicker from '../../ui/TimePicker';
+import TimePicker from '../../widget/reservation/TimePicker';
 import { blockCalendar } from '../../../utils/reservation/blockCalendar';
 import PageTitle from '../../ui/PageTitle';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { loginInfo } from '../../../state/loginInfo';
 
 const initialResvInfo = { // 초기값을 가지는 객체
   reservationDate: "",
   people: 1, 
   child: 0,
   memo: "",
-  userId: 2, // 사용자 id
+  userId: 0, // 사용자 id
   shopId: 2 // 매장 id
 };
 
 function ResvAdd() {
+  let { state } = useLocation();
+  console.log(state);
+
+  const loginState = useRecoilValue(loginInfo);
+  initialResvInfo.userId = loginState.id;
+
   const navigate = useNavigate();
   const [resvInfo, setResvInfo] = useState(initialResvInfo);
 
-  // 선택 상자 처리
+  // 지점 선택 처리
+  const handleBranchSelect = (value) => {
+    setBranchId(value); // 지점 id 변경
+    // setShopId(shopList.length !== 0 ? shopList[0].id : null); // 매장 id 초기화
+    state = null; // 초기값을 null로
+  }
+
+  // 매장 선택 처리
   const handleShopSelect = (e) => { // 매장 정보가 변경될 때 마다
     setResvInfo({ // 예약 정보 업데이트
       ...resvInfo,
@@ -33,6 +48,7 @@ function ResvAdd() {
     })
 
     setShopId(e.target.value); // 매장 id 변경
+    state = null; // 초기값을 null로
   }
 
   // 메모 처리
@@ -48,8 +64,8 @@ function ResvAdd() {
   const [branchList, setBranchList] = useState(null);
   const [shopList, setShopList] = useState(null);
 
-  const [branchId, setBranchId] = useState(1); // 선택된 지점 id
-  const [shopId, setShopId] = useState(1); // 선택된 매장 id
+  const [branchId, setBranchId] = useState(state ? state.branchId : 1); // 선택된 지점 id, state가 있으면 초기값을 state의 branchId로 설정
+  const [shopId, setShopId] = useState(state ? state.shopId : 1); // 선택된 매장 id, state가 있으면 초기값을 state의 shopId로 설정
 
   const [selectedDate, setSelectedDate] = useState(moment(new Date()).format("YYYY-MM-DD")); // 선택된 날짜
 
@@ -59,6 +75,8 @@ function ResvAdd() {
   const [peopleCount, setPeopleCount] = useState(1); // 예약 인원 카운트
   const [childCount, setChildCount] = useState(0); // 유아 수 카운트
 
+  console.log(branchId, shopId)
+  // console.log(shopList ? shopList[0] : '')
   // 지점 정보, 지점별 매장 정보 가져오기
   useEffect(() => {
     const fetchData = async () => { // async는 함수 앞에 붙여서 해당 함수가 Promise를 반환하는 비동기 함수임을 나타냄
@@ -75,6 +93,7 @@ function ResvAdd() {
         console.log(res2.data);
         setBranchList(res1.data);
         setShopList(res2.data);
+        // setShopId(res2.data[0].id);
         setPossibleTimeList(res3.data);
         console.log(res3.data)
       }
@@ -85,11 +104,6 @@ function ResvAdd() {
   
     fetchData(); // 처음 렌더링 시에도 실행되도록 함
     }, [branchId, shopId, selectedDate]); // 지점, 매장, 날짜가 변할 때 마다 리렌더링
-
-  // 지점이 바뀌면 매장 id를 1로 설정한다, 날짜는 그대로
-  useEffect(() => {
-    setShopId(1);
-  }, [branchId])
 
   // 매장이 바뀌면 지점, 날짜는 그대로
   // 날짜가 바뀌면 지점, 매장은 그대로
@@ -109,12 +123,12 @@ function ResvAdd() {
   const handleReserve = () => {
     console.log(resvInfo);
 
-    // axios.post('/customer/reservation/add', resvInfo)
-    // .then(res => {
-    //   console.log(res);
-    //   alert('예약이 등록되었습니다.');
-    // })
-    // .catch(err => console.log(err))
+    axios.post('/customer/reservation/add', resvInfo)
+    .then(res => {
+      console.log(res);
+      alert('예약이 등록되었습니다.');
+    })
+    .catch(err => console.log(err))
   }
 
   return (
@@ -127,7 +141,7 @@ function ResvAdd() {
         <form id={styles.resvForm} className='flex flex-col flex-gap-40'>
           <div id={styles.topWrap} className='flex flex-gap-40'>
             {/* 지점 선택 */}
-            <select onChange={(e) => setBranchId(e.target.value)}>
+            <select onChange={(e) => handleBranchSelect(e.target.value)} value={branchId}>
               {
                 branchList && branchList.map( branch => (
                   <option key={branch.id} value={branch.id}>{branch.name}</option>
@@ -135,8 +149,8 @@ function ResvAdd() {
               }
             </select>
 
-            {/* 매장 선택 */}   
-            <select onChange={handleShopSelect}>
+            {/* 매장 선택 */}
+            <select onChange={handleShopSelect} value={shopId}>
               {
                 shopList && shopList.map( shop => (
                   <option key={shop.id} value={shop.id}>{shop.name}</option>

@@ -1,13 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
+import { loginInfo } from '../../state/loginInfo';
 
 function Main() {
+  const setLoginInfo = useSetRecoilState(loginInfo);
+
+  const handleLogout = () => {
+    setLoginInfo({
+      id: -1,
+      isLoggedin: false
+    });
+  }
+
   return (
-    <ul>
-      <li><Link to={"/resv/add"}>예약하기</Link></li>
-      <li><Link to={"/resv"}>예약내역</Link></li>
-      <li><Link to={"/resv/active"}>유효한 예약내역</Link></li>
-    </ul>
+    <>
+      메인화면
+      <button type='button' onClick={handleLogout}>로그아웃</button>
+    </>
+    // <ul>
+    //   <li><Link to={"/resv/add"}>예약하기</Link></li>
+    //   <li><Link to={"/resv"}>예약내역</Link></li>
+    //   <li><Link to={"/resv/active"}>유효한 예약내역</Link></li>
+    // </ul>
   );
 }
 

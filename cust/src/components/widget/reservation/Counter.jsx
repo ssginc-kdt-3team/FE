@@ -1,6 +1,6 @@
 import React from 'react';
-import plus from '../../assets/images/icons/plus.png';
-import minus from '../../assets/images/icons/minus.png';
+import plus from '../../../assets/images/icons/plus.png';
+import minus from '../../../assets/images/icons/minus.png';
 
 function Count({title, peopleCount, setPeopleCount, childCount, setChildCount, isPeopleCount}) {
   const handleMinus = () => {

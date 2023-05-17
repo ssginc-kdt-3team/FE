@@ -24,8 +24,16 @@
   background-color: #fff;
   color: var(--main);
 }
+.button:disabled:hover {
+  background-color: var(--main);
+  color: #fff;
+}
 
 .buttonReverse { /* button 클래스보다 우선순위 높다 << 뒤에 위치 */
+  background-color: #fff;
+  color: var(--main);
+}
+.buttonReverse:disabled:hover {
   background-color: #fff;
   color: var(--main);
 }
@@ -33,3 +41,19 @@
   background-color: var(--main);
   color: #fff;
 } */
+
+.buttonTransparent {
+  color: #fff;
+  border: 1px solid #fff;
+  background-color: rgba(0, 0, 0, 0);
+}
+.buttonTransparent:hover {
+  color: var(--main);
+  border: 1px solid var(--main);
+  background-color: rgba(0, 0, 0, 0);
+}
+.buttonTransparent:disabled:hover {
+  color: #fff;
+  border: 1px solid #fff;
+  background-color: rgba(0, 0, 0, 0);
+}

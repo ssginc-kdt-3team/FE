@@ -5,10 +5,10 @@ import moment from 'moment';
 import dayjs from 'dayjs';
 import styles from '../../../assets/css/pages/reservation/ResvAdd.module.css';
 import '../../../assets/css/widget/Calendar.css'; // css import
-import Counter from '../../ui/Counter';
+import Counter from '../../widget/reservation/Counter';
 import { useNavigate, useParams } from 'react-router-dom';
 // import { axiosWithBaseUrl } from '../../../App'
-import TimePicker from '../../ui/TimePicker';
+import TimePicker from '../../widget/reservation/TimePicker';
 import { blockCalendar } from '../../../utils/reservation/blockCalendar';
 import PageTitle from '../../ui/PageTitle';
 
