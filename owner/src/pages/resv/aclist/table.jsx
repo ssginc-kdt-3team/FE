@@ -1,4 +1,4 @@
-import { Table } from "antd";
+import { Table, Tag } from "antd";
 import { Link } from "react-router-dom";
 // import axios from "axios";
 import { useEffect, useState } from "react";
@@ -20,7 +20,7 @@ const ResvAcList = () => {
   const fetchResvAcList = () => {
     setLoading(true);
     axiosWithBaseUrl
-      .get("/owner/reserve")         //axios를 사용하여 API 엔드포인트로 GET 요청
+      .get("/owner/reservation/active")         //axios를 사용하여 API 엔드포인트로 GET 요청
       .then((response) => {                               //응답받은 데이터를 사용하여 업데이트                                  
         console.log(response.data)                     //responese.data: 전체 data, respone.data.content : 특정 data
         setResvAcList(response.data);
@@ -37,26 +37,50 @@ const ResvAcList = () => {
   const columns = [
     {
       title: "예약일자",
-      dataIndex: "date",
-      key: "date",
+      dataIndex: "reservationDate",
+      key: "reservationDate",
     },
     {
       title: "예약상태",
       dataIndex: "status",
       key: "status",
+      render: (text) => {
+        let color, content;
+        if (text === "NOSHOW") {
+          color = "volcano";
+          content = "노쇼";
+        } else if (text === "DONE") {
+          color = "green";
+          content = "완료";
+        } else if (text === "CANCEL") {
+          color = "gold";
+          content = "취소";
+        } else if (text === "IMMINENT") {
+          color = "magenta";
+          content = "취소";
+        } else if (text === "RESERVATION") {
+          color = "blue";
+          content = "예약 중";
+        } else {
+          color = "blue";
+          content = "예약 중";
+        }
+
+        return <Tag color={color}>{content}</Tag>;
+      },
     },
     {
       title: "예약자명",
       dataIndex: "name",
       key: "name",
       render: (text, record) => (
-        <Link to={`/resv/detail/${record.reserveId}`}>{text}</Link>
+        <Link to={`/resv/detail/${record.id}`}>{text}</Link>
       ),
     },
     {
       title: "예약자 번호",
-      dataIndex: "phone",
-      key: "phone",
+      dataIndex: "phoneNumber",
+      key: "phoneNumber",
     },
     {
       title: "예약인원",

@@ -7,7 +7,7 @@ const ResvTdList = () => {
   <div>
   <Outlet/>
   <Filter/>
-  <Table />;
+  <Table />
   </div>
   )
 };
