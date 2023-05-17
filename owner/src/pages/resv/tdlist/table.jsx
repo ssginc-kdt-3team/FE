@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Paging from "components/pagination/paging";
 import { axiosWithBaseUrl } from "App";
+import Enter from "components/modal/enter";
+import Noshow from "components/modal/noshow";
 
 const ResvTdTable = () => {
   const [resvList, setResvList] = useState([]);           // 현재 페이지의 예약 목록을 저장 
@@ -21,9 +23,9 @@ const ResvTdTable = () => {
   const fetchResTdvList = () => {
     setLoading(true);
     axiosWithBaseUrl
-      .get(`/owner/reservation/activetime/${selectedType}`) // Use the selectedType value in the URL
+      .get(`/owner/reservation/activetime/${selectedType}/${3}/${currentPage}`) // Use the selectedType value in the URL
       .then((response) => {
-        setResvList(response.data);
+        setResvList(response.data.content);
         console.log(response.data);
         setTotalItems(response.data.totalElements);
         setItemsPerPage(response.data.numberOfElements);
@@ -35,31 +37,31 @@ const ResvTdTable = () => {
       });
   };
 
-  const handleEnter = (id) => {
-    axiosWithBaseUrl
-      .post(`/owner/reservation/enter/${id}`)
-      .then((res) => {
-        console.log(res.data);
-        // setResv({ ...resv, status: "DONE" }); // 예약 상태를"CANCEL"로 업데이트
-        console.log("Reservation done");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  // const handleEnter = (id) => {
+  //   axiosWithBaseUrl
+  //     .post(`/owner/reservation/enter/${id}`)
+  //     .then((res) => {
+  //       console.log(res.data);
+  //       // setResv({ ...resv, status: "DONE" }); // 예약 상태를"CANCEL"로 업데이트
+  //       console.log("Reservation done");
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
 
-  const handleNoshow = (id) => {
-    axiosWithBaseUrl
-      .post(`/owner/reservation/noshow/${id}`)
-      .then((res) => {
-        console.log(res.data);
-        // setResv({ ...resv, status: "NOSHOW" }); // 예약 상태를"CANCEL"로 업데이트
-        console.log("Reservation noshow");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  // const handleNoshow = (id) => {
+  //   axiosWithBaseUrl
+  //     .post(`/owner/reservation/noshow/${id}`)
+  //     .then((res) => {
+  //       console.log(res.data);
+  //       // setResv({ ...resv, status: "NOSHOW" }); // 예약 상태를"CANCEL"로 업데이트
+  //       console.log("Reservation noshow");
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
 
   const handleTypeChange = (type) => {
     setSelectedType(type);
@@ -135,8 +137,10 @@ const ResvTdTable = () => {
         key: "",
         render: (_, record) => (
           <>
-            <Button type="primary" onClick={() => handleEnter(record.id)}>입장</Button>
-            <Button danger onClick={() => handleNoshow(record.id)}>노쇼</Button>
+            <Enter id={record.id}/>
+            <Noshow id={record.id}/>
+            {/* <Button type="primary" onClick={() => handleEnter(record.id)}>입장</Button> */}
+            {/* <Button danger onClick={() => handleNoshow(record.id)}>노쇼</Button> */}
           </>
         ),
       },

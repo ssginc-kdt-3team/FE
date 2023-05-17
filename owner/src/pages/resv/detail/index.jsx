@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Card } from 'antd';
+import Reject from "components/modal/reject";
 
 function ResvDetail() {
   const { id } = useParams();
@@ -19,24 +20,24 @@ function ResvDetail() {
       });
   }, [id]);
 
-  const handleReject = () => {
-    axios
-      .post(`http://localhost:8080/owner/reservation/reject/${id}`)
-      .then((res) => {
-        console.log(res.data);
-        // setResv({ ...resv, status: "CANCEL" }); // 예약 상태를"CANCEL"로 업데이트
-        console.log("Reservation rejected");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  // const handleReject = () => {
+  //   axios
+  //     .post(`http://localhost:8080/owner/reservation/reject/${id}`)
+  //     .then((res) => {
+  //       console.log(res.data);
+  //       // setResv({ ...resv, status: "CANCEL" }); // 예약 상태를"CANCEL"로 업데이트
+  //       console.log("Reservation rejected");
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
 
   return (
     <Card
       title="예약 상세 정보"
     //   예약 중일 때만 거절하기 버튼 보임
-      extra={resv && resv.status === "RESERVATION" ? <button onClick={handleReject}>거절하기</button> : null}
+      extra={resv && resv.status === "RESERVATION" ? <Reject id={id}/> : null}
       style={{
         width: 800,
       }}

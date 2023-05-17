@@ -5,6 +5,9 @@ import { Link } from "react-router-dom";
 import Paging from "components/pagination/paging";
 import DateFilter from "./datefilter";
 import StatusFilter from "./statusfilter";
+import { DatePicker, Space } from 'antd';
+
+const { RangePicker } = DatePicker;
 
 const ResvTable = () => {
   const [resvList, setResvList] = useState([]);
@@ -46,16 +49,6 @@ const ResvTable = () => {
       });
   };
 
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-    console.log(date);
-  };
-
-  const handleTimeChange = (time) => {
-    setSelectedTime(time);
-    console.log(time);
-  };
-
   const handleStatusFilter = (status) => {
     setStatusFilter(status);
     console.log(status);
@@ -64,6 +57,11 @@ const ResvTable = () => {
   const handleFilterClick = () => {
     fetchResvList();
     setCurrentPage(1);
+  };
+
+  const handleRangePickerChange = (value, dateString) => {
+    setSelectedDate(dateString[0]);
+    setSelectedTime(dateString[1]);
   };
 
   const columns = [
@@ -96,65 +94,67 @@ const ResvTable = () => {
           content = "예약 중";
         }
         return <Tag color={color}>{content}</Tag>;
+      }
       },
-    },
-    {
-      title: "예약자명",
-      dataIndex: "name",
-      key: "name",
-      render: (text, record) => (
-        <Link to={`/resv/detail/${record.id}`}>{text}</Link>
-      ),                                                                        
-      
-    },
-    {
-      title: "예약자 번호",
-      dataIndex: "phoneNumber",
-      key: "phoneNumber",
-    },
-    {
-      title: "예약인원",
-      dataIndex: "people",
-      key: "people",
-    },
-    {
-      title: "예약금",
-      dataIndex: "child",
-      key: "child",
-    },
-    {
-      title: "위약금",
-      dataIndex: "child",
-      key: "child",
-    }
-  ];
-
-  return (
-    <>
-      <DateFilter
-        selectedDate={selectedDate}
-        onDateChange={handleDateChange}
-        onFilterClick={handleFilterClick}
-      />
-      <StatusFilter
-        selectedStatus={statusFilter}
-        onStatusChange={handleStatusFilter}
-        onFilterClick={handleFilterClick}
-      />
-      <Table
-        columns={columns}
-        dataSource={resvList}
-        pagination={false}
-        loading={loading}
-      />
-      <Paging
-        page={currentPage}
-        itemsPerPage={itemsPerPage}
-        totalItems={totalItems}
-        setPage={setCurrentPage}
-      />
-    </>
-  );
-};
-
-export default ResvTable;
+      {
+        title: "예약자명",
+        dataIndex: "name",
+        key: "name",
+        render: (text, record) => (
+          <Link to={`/resv/detail/${record.id}`}>{text}</Link>
+        ),                                                                        
+        
+      },
+      {
+        title: "예약자 번호",
+        dataIndex: "phoneNumber",
+        key: "phoneNumber",
+      },
+      {
+        title: "예약인원",
+        dataIndex: "people",
+        key: "people",
+      },
+      {
+        title: "예약금",
+        dataIndex: "child",
+        key: "child",
+      },
+      {
+        title: "위약금",
+        dataIndex: "child",
+        key: "child",
+      }
+    ];
+  
+    return (
+      <>
+        <RangePicker
+          showTime={{
+            format: 'HH:mm',
+          }}
+          format="YYYY-MM-DD HH:mm"
+          onChange={handleRangePickerChange}
+        />
+        <StatusFilter
+          selectedStatus={statusFilter}
+          onStatusChange={handleStatusFilter}
+          onFilterClick={handleFilterClick}
+        />
+        <Table
+          columns={columns}
+          dataSource={resvList}
+          pagination={false}
+          loading={loading}
+        />
+        <Paging
+          page={currentPage}
+          itemsPerPage={itemsPerPage}
+          totalItems={totalItems}
+          setPage={setCurrentPage}
+        />
+      </>
+    );
+  };
+  
+  export default ResvTable;
