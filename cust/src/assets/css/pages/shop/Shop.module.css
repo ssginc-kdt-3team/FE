@@ -1,0 +1,64 @@
+#tileWrap {
+  max-width: var(--resvForm-max-width);
+  width: var(--resvForm-width);
+}
+/* 데스크탑 모드에서 더보기 삭제 */
+#tileWrap+div {
+  display: none;
+}
+
+#tile {
+  max-width: calc((var(--resvForm-max-width) - 30px) / 4);
+  width: calc((var(--resvForm-width) - 30px) / 4);
+  max-height: calc((var(--resvForm-max-width) - 30px) / 4);
+  height: calc((var(--resvForm-width) - 30px) / 4);
+}
+
+@media screen and (max-width: 768px) {
+  #tileWrap {
+    max-width: 100%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  #tileWrap.menuTileWrap {
+    max-width: 100%;
+    width: 100%;
+    overflow: hidden;
+    
+    /* 스크롤 가능 */
+    /* overflow: auto;
+    white-space: nowrap;  */
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px
+  }
+  #tileWrap+div {
+    display: block;
+  }
+
+  #tile {
+    max-width: 100%;
+    width: 100%;
+    max-height: calc((100vw - 40px) * 0.6);
+    height: calc((100vw - 40px) * 0.6);
+  }
+  #tile.menuTile {
+    max-width: 100%;
+    width: 100%;
+    max-height: calc((100vw - 50px) * 0.5);
+    height: calc((100vw - 50px) * 0.5);
+  }
+  
+
+  .open {
+    height: auto;
+  }
+
+  .close {
+    height: calc((100vw - 50px) * 0.75);
+  }
+}

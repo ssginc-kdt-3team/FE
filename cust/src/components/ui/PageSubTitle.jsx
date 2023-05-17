@@ -1,21 +1,21 @@
 import React from "react";
 import styled from 'styled-components';
 
-const TitleH1 = styled.h1`
+const TitleH2 = styled.h2`
   font-size: 26px;
   font-weight: 500;
-  margin: 70px 0 100px 0;
+  margin: 60px 0 60px 0;
 
   @media screen and (max-width: 768px) {
     font-size: 24px;
-    margin: 60px 0 80px 0;
+    margin: 40px 0 40px 0;
   }
 `;
 
-function PageTitle({title}) {
+function PageSubTitle({title}) {
   return (
-    <TitleH1>{title}</TitleH1>
+    <TitleH2>{title}</TitleH2>
   );
 }
 
-export default PageTitle;
+export default PageSubTitle;

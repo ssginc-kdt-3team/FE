@@ -10,6 +10,10 @@ export const axiosWithToken = axios.create({
   baseURL: 'http://localhost:8080',
 });
 
+export const axiosForJson = axios.create({
+  baseURL: 'http://localhost:3001',
+});
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
