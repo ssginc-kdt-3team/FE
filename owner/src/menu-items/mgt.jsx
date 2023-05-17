@@ -23,7 +23,7 @@ const mgt = {
         },
         {
             id: 'mgtlist',
-            title: '예약 내역 조회',
+            title: '매장 후기 조회',
             type: 'item',
             url: '/mgt/review',
             icon: icons.ChromeOutlined
