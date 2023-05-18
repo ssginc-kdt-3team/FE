@@ -36,6 +36,7 @@ const Join = () => {
 
   const handleInput = (e) => {
     const { name, value } = e.target;
+    console.log('name: ' + name + " value: " + value)
 
     switch (name) {
       case 'name':
@@ -74,35 +75,39 @@ const Join = () => {
   };
 
   const handleJoin = () => {
-    // Perform your registration logic here
-    // You can access the form values using the state variables
+    console.log(name, password, email);
 
     const data = {
-      name,
-      phone,
-      email,
-      password,
-      birthday,
-      gender,
-      zipCode,
-      city,
-      district,
-      detail,
+      name: name,
+      phone: phone,
+      email: email,
+      password: password,
+      birthday :birthday,
+      gender: gender,
+      zipCode: zipCode,
+      city: city,
+      district: district,
+      detail:detail,
     };
 
     // Send the data to your API endpoint for registration
     // You can use axios or fetch for this
     // Example using axios:
-    axios.post('http://localhost:8080/owner/join', data)
-      .then((res) => {
-        // Handle the successful response
-        console.log(res.data);
-      })
-      .catch((err) => {
-        // Handle any errors
-        console.log(err);
-      });
-  };
+
+    console.log(data);
+    axios
+    .post('http://localhost:8080/owner/join', data)
+    .then((res) => {
+      // Handle the successful response
+      console.log(res.data);
+      navigate('/login'); // 회원가입 성공 시 로그인 페이지로 이동
+    })
+    .catch((err) => {
+      // Handle any errors
+      console.log(err);
+    });
+};
+
 
   return (
     <div className='container' >
@@ -126,7 +131,7 @@ const Join = () => {
               },
             ]}
           >
-            <Input placeholder='이름' onChange={handleInput} />
+            <Input placeholder='이름' onChange={handleInput} name='name' />
           </Form.Item>
 
           <Form.Item
@@ -138,7 +143,7 @@ const Join = () => {
               },
             ]}
           >
-            <Input placeholder='휴대폰 번호' onChange={handleInput} />
+            <Input placeholder='휴대폰 번호' onChange={handleInput}  name='phone'/>
           </Form.Item>
 
           <Form.Item
@@ -150,7 +155,7 @@ const Join = () => {
               },
             ]}
           >
-            <Input placeholder='이메일' onChange={handleInput} />
+            <Input placeholder='이메일' onChange={handleInput} name='email'/>
           </Form.Item>
 
           <Form.Item
@@ -162,7 +167,7 @@ const Join = () => {
               },
             ]}
           >
-            <Input.Password placeholder='비밀번호' onChange={handleInput} />
+            <Input.Password placeholder='비밀번호' onChange={handleInput} name='password' />
           </Form.Item>
 
           <Form.Item
@@ -185,14 +190,16 @@ const Join = () => {
               }),
             ]}
           >
-            <Input.Password placeholder='비밀번호 확인' onChange={handleInput} />
+            <Input.Password placeholder='비밀번호 확인' onChange={handleInput} name='confirmPassword'/>
           </Form.Item>
 
           <Form.Item name='birthday' label='생년월일'>
-            <Input type='date' onChange={handleInput} />
+            <Input type='date' onChange={handleInput} name='birthday'/>
           </Form.Item>
 
-          <Form.Item name='gender' label='성별'>
+          <Form.Item 
+          name='gender' 
+          label='성별'>
             <div style={{ display: 'flex' }}>
               <Radio.Group onChange={handleInput}>
                 <Radio value='남'>남</Radio>
@@ -202,26 +209,26 @@ const Join = () => {
           </Form.Item>
 
           <Form.Item name='zipCode' label='우편번호'>
-            <Input placeholder='우편번호' onChange={handleInput} />
+            <Input placeholder='우편번호' onChange={handleInput} name='zipCode'/>
           </Form.Item>
 
           <Form.Item name='city' label='도시'>
-            <Input placeholder='시' onChange={handleInput} />
+            <Input placeholder='시' onChange={handleInput} name='city'/>
           </Form.Item>
 
           <Form.Item name='district' label='구'>
-            <Input placeholder='구' onChange={handleInput} />
+            <Input placeholder='구' onChange={handleInput} name='district'/>
           </Form.Item>
 
           <Form.Item name='detail' label='상세주소'>
-            <Input placeholder='상세주소' onChange={handleInput} />
+            <Input placeholder='상세주소' onChange={handleInput} name='detail'/>
           </Form.Item>
 
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
             <Button type='primary' htmlType='submit' style={{ marginLeft: '120px' }}>
               완료
             </Button>
-            <Button onClick={() => navigate(-1)} style={{ marginLeft: '10px' }} >취소</Button>
+            <Button onClick={() => navigate('/')} style={{ marginLeft: '10px' }} >취소</Button>
           </Form.Item>
         </Form>
       </div>
