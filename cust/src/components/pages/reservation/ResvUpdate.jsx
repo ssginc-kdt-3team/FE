@@ -96,7 +96,7 @@ function ResvUpdate() {
         console.log(res);
         console.log(resvInfo);
         alert('수정이 완료되었습니다.');
-        navigate(`/resv/${resvId}`); // 예약상세 화면으로 이동
+        navigate(`/resv/${resvId}`, { replace: true }); // 예약상세 화면으로 이동
 
       })
       .catch(err => console.log(err))

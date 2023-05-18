@@ -18,6 +18,11 @@
   max-height: calc((var(--resvForm-max-width) - 30px) / 4);
   height: calc((var(--resvForm-width) - 30px) / 4);
 }
+/* 더보기 */
+#moreBtn {
+  margin-top: 10px;
+  display: none;
+}
 
 /* 후기 */
 #reviewWrap {
@@ -91,6 +96,11 @@
     width: 100%;
     max-height: calc((100vw - 50px) * 0.5);
     height: calc((100vw - 50px) * 0.5);
+  }
+
+  /* 더보기 */
+  #moreBtn {
+    display: block;
   }
 
   /* 후기 */

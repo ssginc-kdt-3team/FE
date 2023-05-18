@@ -104,7 +104,7 @@ function ResvAdd() {
     };
   
     fetchData(); // 처음 렌더링 시에도 실행되도록 함
-  }, [branchId, selectedDate]); // 지점, 매장, 날짜가 변할 때 마다 리렌더링
+  }, [branchId, selectedDate, state]); // 지점, 매장, 날짜가 변할 때 마다 리렌더링
 
 
   // 매장별 예약 가능 시간 정보 가져오기
@@ -125,15 +125,16 @@ function ResvAdd() {
   // 매장이 바뀌면 지점, 날짜는 그대로
   // 날짜가 바뀌면 지점, 매장은 그대로
   
-  // 시간, 날짜, 예약인원, 유아 수가 바뀔 때마다 resvInfo 업데이트
+  // 시간, 날짜, 예약인원, 유아 수, 매장id가 바뀔 때마다 resvInfo 업데이트
   useEffect(() => {
     setResvInfo( prevResvInfo => ({ // setResvInfo 함수를 호출하면 현재의 resvInfo 상태값을 이전 상태값인 prevResvInfo 매개변수로 전달
       ...prevResvInfo, // 기존 값 복사
       reservationDate: moment(selectedDate).format("YYYY-MM-DD") + " " + selectedTime,
       people: peopleCount,
-      child: childCount
+      child: childCount,
+      shopId: shopId
     }))
-  }, [selectedDate, selectedTime, peopleCount, childCount])
+  }, [selectedDate, selectedTime, peopleCount, childCount, shopId])
 
 
   // 예약하기 처리
@@ -145,13 +146,13 @@ function ResvAdd() {
       return;
     }
 
-    // axios.post('/customer/reservation/add', resvInfo)
-    // .then(res => {
-    //   console.log(res);
-    //   alert('예약이 등록되었습니다.');
-    //   navigate("/resv", { replace: true });
-    // })
-    // .catch(err => console.log(err))
+    axios.post('/customer/reservation/add', resvInfo)
+    .then(res => {
+      console.log(res);
+      alert('예약이 등록되었습니다.');
+      navigate("/resv", { replace: true });
+    })
+    .catch(err => console.log(err))
   }
 
   return (
