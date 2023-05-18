@@ -66,7 +66,7 @@ function ResvAdd() {
   const [shopList, setShopList] = useState(null);
 
   const [branchId, setBranchId] = useState(state ? state.branchId : 1); // 선택된 지점 id, state가 있으면 초기값을 state의 branchId로 설정
-  const [shopId, setShopId] = useState(state ? state.shopId : 1); // 선택된 매장 id, state가 있으면 초기값을 state의 shopId로 설정
+  const [shopId, setShopId] = useState(state ? state.shopId : 0); // 선택된 매장 id, state가 있으면 초기값을 state의 shopId로 설정
   initialResvInfo.shopId = shopId; // 초기값의 shopId 설정
 
   const [selectedDate, setSelectedDate] = useState(moment(new Date()).format("YYYY-MM-DD")); // 선택된 날짜
@@ -77,27 +77,26 @@ function ResvAdd() {
   const [peopleCount, setPeopleCount] = useState(1); // 예약 인원 카운트
   const [childCount, setChildCount] = useState(0); // 유아 수 카운트
 
-  console.log(branchId, shopId)
+  console.log('지점id: ' + branchId + '    매장id: ' + shopId)
   // console.log(shopList ? shopList[0] : '')
   // 지점 정보, 지점별 매장 정보 가져오기
   useEffect(() => {
     const fetchData = async () => { // async는 함수 앞에 붙여서 해당 함수가 Promise를 반환하는 비동기 함수임을 나타냄
       try {
-        const [res1, res2, res3] = await Promise.all([ // await는 Promise가 실행 될 때까지 대기
+        const [res1, res2] = await Promise.all([ // await는 Promise가 실행 될 때까지 대기
           axios.get('/branch/all'),
           axios.get(`/branch/shops/${branchId}`),
-          axios.post('/customer/reservation/possible', {
-            shopId: shopId,
-            date: moment(selectedDate).format("YYYY-MM-DD")
-          })
         ]);
         console.log(res1.data);
         console.log(res2.data);
         setBranchList(res1.data);
         setShopList(res2.data);
-        // setShopId(res2.data[0].id);
-        setPossibleTimeList(res3.data);
-        console.log(res3.data)
+        if(state === null) {
+          console.log('state 있음')
+          setShopId(res2.data[0].id);
+        }
+        // setPossibleTimeList(res3.data);
+        // console.log(res3.data)
       }
       catch (err) {
         console.log(err);
@@ -105,15 +104,23 @@ function ResvAdd() {
     };
   
     fetchData(); // 처음 렌더링 시에도 실행되도록 함
-  }, [branchId, shopId, selectedDate]); // 지점, 매장, 날짜가 변할 때 마다 리렌더링
+  }, [branchId, selectedDate]); // 지점, 매장, 날짜가 변할 때 마다 리렌더링
 
 
-  // 지점이 바뀌면 매장 초기화
-  // useEffect(() => {
-  //   if (shopList !== null) {
-  //     setShopId(state ? state.shopId : shopList[0].id);
-  //   }
-  // }, [shopList, state]);
+  // 매장별 예약 가능 시간 정보 가져오기
+  useEffect(() => {
+    axios.post('/customer/reservation/possible', {
+      shopId: shopId,
+      date: moment(selectedDate).format("YYYY-MM-DD")
+    })
+    .then(res => {
+      console.log(res.data);
+      setPossibleTimeList(res.data);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }, [shopId, selectedDate]);
 
   // 매장이 바뀌면 지점, 날짜는 그대로
   // 날짜가 바뀌면 지점, 매장은 그대로
@@ -132,14 +139,19 @@ function ResvAdd() {
   // 예약하기 처리
   const handleReserve = () => {
     console.log(resvInfo);
+    console.log(resvInfo.reservationDate.slice(11, ));
+    if(resvInfo.reservationDate.slice(11, ) === "00:00:00") { // 시간 선택 검증
+      alert("시간을 선택하세요.");
+      return;
+    }
 
-    axios.post('/customer/reservation/add', resvInfo)
-    .then(res => {
-      console.log(res);
-      alert('예약이 등록되었습니다.');
-      navigate("/resv", { replace: true });
-    })
-    .catch(err => console.log(err))
+    // axios.post('/customer/reservation/add', resvInfo)
+    // .then(res => {
+    //   console.log(res);
+    //   alert('예약이 등록되었습니다.');
+    //   navigate("/resv", { replace: true });
+    // })
+    // .catch(err => console.log(err))
   }
 
   return (
@@ -163,7 +175,7 @@ function ResvAdd() {
             {/* 매장 선택 */}
             <select onChange={handleShopSelect} value={shopId}>
               {
-                shopList && shopList.map( shop => (
+                 shopList && shopList.map( (shop, index) => (
                   <option key={shop.id} value={shop.id}>{shop.name}</option>
                 ))
               }

@@ -1,7 +1,3 @@
-#shopInfoWrap {
-  width: calc(100% - 40px);
-}
-
 /* 매장 이미지 */
 #topWrap > img {
   width: 300px;
@@ -15,6 +11,10 @@
 
 
 @media screen and (max-width: 768px) {
+  #shopInfoWrap {
+    width: calc(100% - 40px);
+  }
+  
   #topWrap {
     flex-direction: column;
     gap: 20px;

@@ -19,7 +19,7 @@ const Title = styled.div`
   color: white;
   transition: all 0.5s;
   /* opacity: 0; */
-  z-index: 95;
+  z-index: 94;
 `;
 
 const Img = styled.img`
@@ -29,12 +29,12 @@ const Img = styled.img`
   /*object-fit: contain; /* 여백 O */
   object-fit: cover; /* 여백 X */
   transition: all 0.5s;
-  z-index: 95;
+  z-index: 94;
 `;
 
 const Price = styled.div`
   color: white;
-  z-index: 96;
+  z-index: 95;
 `;
 
 const Li = styled.li`
@@ -69,8 +69,8 @@ function MenuCard({data}) {
     <Li id={styles.tile} className={styles.menuTile}>
       <Img src={noImage} alt=''/>
       <ContentWrap className='center flex-col flex-gap-20'>
-        <Title>{data.name}</Title>
-        <Price>{data.price}원</Price>
+        <Title>{data.menuName}</Title>
+        <Price>{data.menuPrice}원</Price>
       </ContentWrap>
     </Li>
   );
