@@ -23,33 +23,47 @@ function Shop() {
     axios.get(`/shop/detail/${shopId}`)    
     .then(res => {
       console.log(res.data);
+      setShopInfo({
+        shopId: res.data.shopId,
+        shopName: res.data.shopName,
+        shopInfo: res.data.shopInfo,
+        shopImg: res.data.shopImg,
+        shopLocation: res.data.shopLocation,
+        shopCall: res.data.shopCall,
+        shopStatus: res.data.shopStatus,
+        shopOpenTime: res.data.shopOpenTime,
+        shopCloseTime: res.data.shopCloseTime,
+        shopOrderCloseTime: res.data.shopOrderCloseTime
+      });
+
+      setMenuList(res.data.menus);
     })
     .catch(err => { // 오류 처리
       // alert("오류가 발생하였습니다.");
       console.log(err);
     })
 
-    setShopInfo({
-      shopId: 1,
-      shopName: 'Shop1',
-      shopInfo: 'This is Shop1',
-      shopImg: 'shop1.png',
-      shopLocation: 'A3',
-      shopCall: '0000000000',
-      shopStatus: 'OPEN',
-      shopOpenTime: '10:30',
-      shopCloseTime: '20:00',
-      shopOrderCloseTime: '19:00'
-    });
+    // setShopInfo({
+    //   shopId: 1,
+    //   shopName: 'Shop1',
+    //   shopInfo: 'This is Shop1',
+    //   shopImg: 'shop1.png',
+    //   shopLocation: 'A3',
+    //   shopCall: '0000000000',
+    //   shopStatus: 'OPEN',
+    //   shopOpenTime: '10:30',
+    //   shopCloseTime: '20:00',
+    //   shopOrderCloseTime: '19:00'
+    // });
 
-    axiosForJson.get('/products')
-    .then(res => {
-      console.log(res.data);
-      setMenuList(res.data);
-    })
-    .catch(err => {
-      console.log(err);
-    })
+    // axiosForJson.get('/products')
+    // .then(res => {
+    //   console.log(res.data);
+    //   setMenuList(res.data);
+    // })
+    // .catch(err => {
+    //   console.log(err);
+    // })
 
     axiosForJson.get('/reviews')
     .then(res => {
@@ -59,7 +73,7 @@ function Shop() {
     .catch(err => {
       console.log(err);
     })
-  }, [])
+  }, [shopId])
 
   return (
     <div className='container flex flex-col' style={{padding: '20px 0px 0px 0px'}}>
@@ -71,13 +85,16 @@ function Shop() {
         {/* 메뉴 */}
         <div id={styles.menuWrap} className='center flex-col'>
           <PageSubTitle title='메뉴'/>
-          <ul id={styles.tileWrap} className={`${styles.menuTileWrap} grid-4c flex-gap-10 ${isTileWrapOpen ? styles.open : styles.close}`}>
-            {
-              menuList && menuList.map( menu => (
-                <MenuCard data={menu}/>
-              )).slice(0, 8)
-            }
-          </ul>
+          <div style={{position: 'relative'}}>
+            <div id={isTileWrapOpen ? '' : styles.menuForegroud}></div>
+            <ul id={styles.tileWrap} className={`${styles.menuTileWrap} grid-4c flex-gap-10 ${isTileWrapOpen ? styles.open : styles.close}`}>
+              {
+                menuList && menuList.map( menu => (
+                  <MenuCard key={menu.menuId} data={menu}/>
+                )).slice(0, 8)
+              }
+            </ul>
+          </div>
           <div onClick={() => setIsTileWrapOpen(!isTileWrapOpen)} style={isTileWrapOpen ? { display: 'none' } : {}}>더보기</div>
         </div>
 
