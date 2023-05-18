@@ -77,7 +77,7 @@ function Shop() {
 
   return (
     <div className='container flex flex-col' style={{padding: '20px 0px 0px 0px'}}>
-      <PageTitle title='Shop1'/>
+      <PageTitle title={shopInfo && shopInfo.shopName}/>
       <div id={styles.contentWrap} className='center flex-col flex-gap-40'>
         {/* 매장 정보 */}
         <ShopInfoCard data={shopInfo}/>
@@ -95,7 +95,7 @@ function Shop() {
               }
             </ul>
           </div>
-          <div onClick={() => setIsTileWrapOpen(!isTileWrapOpen)} style={isTileWrapOpen ? { display: 'none' } : {}}>더보기</div>
+          <div id={styles.moreBtn} onClick={() => setIsTileWrapOpen(!isTileWrapOpen)} style={isTileWrapOpen ? { display: 'none' } : {}}>더보기</div>
         </div>
 
         {/* 리뷰 */}

@@ -1,9 +1,27 @@
-#titleWrap > h2 {
-  
+/* 상단 */
+#titleWrap > div:first-child {
+  width: 75%;
+}
+#titleWrap span {
+  font-size: 18px;
+  margin-right: 20px;
+}
+#titleWrap h3 {
+  width: 75%;
 }
 
+/* 내용 */
 #contentWrap {
-
+  width: 100%;
+  margin-top: 15px;
+  border-top: 1px solid var(--input-border);
+}
+#contentWrap span {
+  font-size: 13px;
+  color: var(--input-border);
+}
+#contentWrap p {
+  width: 100%;
 }
 
 .open {

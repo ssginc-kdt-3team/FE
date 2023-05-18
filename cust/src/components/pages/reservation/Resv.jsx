@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from '../../../assets/css/pages/reservation/Resv.module.css'
 import PageTitle from '../../ui/PageTitle';
-import StoreInfoCard from '../../widget/reservation/StoreInfoCard';
+import ShopInfoCardR from '../../widget/reservation/ShopInfoCardR';
 import CustInfoCard from '../../widget/reservation/CustInfoCard';
 import ResvInfoCard from '../../widget/reservation/ResvInfoCard';
 // import { axiosWithBaseUrl } from '../../../App'
@@ -13,7 +13,7 @@ function Resv() {
   
   const [resvInfo, setResvInfo] = useState(null);
   const [custInfo, setCustInfo] = useState(null);
-  const [storeInfo, setStoreInfo] = useState(null);
+  const [shopInfo, setShopInfo] = useState(null);
 
   useEffect(() => {
     axios.get(`customer/reservation/${resvId}`)
@@ -40,7 +40,7 @@ function Resv() {
       });
 
       // 매장 정보 저장
-      setStoreInfo({
+      setShopInfo({
         shopImgUrl: res.data.shopImgUrl,
         shopName: res.data.shopName,
         shopLocation: res.data.shopLocation
@@ -61,7 +61,7 @@ function Resv() {
           <CustInfoCard data={custInfo}/>
 
           {/* 매장 정보 */}
-          <StoreInfoCard data={storeInfo}/>
+          <ShopInfoCardR data={shopInfo}/>
         </div>
       </div>
     </div>

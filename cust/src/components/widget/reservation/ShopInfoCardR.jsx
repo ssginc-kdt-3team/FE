@@ -1,13 +1,13 @@
 import React from 'react';
-import styles from '../../../assets/css/widget/reservation/StoreInfoCard.module.css';
+import styles from '../../../assets/css/widget/reservation/ShopInfoCardR.module.css';
 import noImage from '../../../assets/images/no_image.jpg';
 
-function StoreInfoCard({data}) {
+function ShopInfoCardR({data}) {
   return (
     <>
       {
         data && (
-          <div id={styles.storeInfoWrap} className='box flex flex-col flex-gap-20'>
+          <div id={styles.shopInfoWrap} className='box flex flex-col flex-gap-20'>
             <div id={styles.topWrap}>매장 정보</div>
 
             <div id={styles.bottomWrap}>
@@ -22,4 +22,4 @@ function StoreInfoCard({data}) {
   );
 }
 
-export default StoreInfoCard;
+export default ShopInfoCardR;
