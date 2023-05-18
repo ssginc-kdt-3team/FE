@@ -1,8 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import Table from "./table";
-import Filter from "./filter";
 
-const ResvTdList = () => {
+const DepositList = () => {
   return (
   <div>
   <Outlet/>
@@ -12,4 +11,4 @@ const ResvTdList = () => {
   )
 };
 
-export default ResvTdList;
+export default DepositList;

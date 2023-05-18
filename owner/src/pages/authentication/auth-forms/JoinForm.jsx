@@ -1,178 +1,232 @@
 import axios from 'axios';
 import React, { useEffect, useReducer, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Button, Form, Input, InputNumber, Radio } from 'antd';
 
+const Join = () => {
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [birthday, setBirthday] = useState('');
+  const [gender, setGender] = useState('');
+  const [zipCode, setZipCode] = useState('');
+  const [city, setCity] = useState('');
+  const [district, setDistrict] = useState('');
+  const [detail, setDetail] = useState('');
 
-// action에 따라 안에 데이터를 어떻게 변화시킬지 설정
-const reducer = (state, action) => {
-  return {
-    ...state,
-    [action.name]: action.value,
+  const navigate = useNavigate();
+
+  const layout = {
+    labelCol: {
+      span: 8,
+    },
+    wrapperCol: {
+      span: 16,
+    },
   };
-}
 
+  const validateMessages = {
+    required: '${label} is required!',
+    types: {
+      email: '${label} is not a valid email!',
+    },
+  };
 
-const initialUserInfo = { // 초기값을 가지는 객체
-  name: "",
-  phone: "", 
-  email: "",
-  password: "",
-  birthday: "",
-  gender: null,
-  zipCode: "",
-  city: "",
-  district: "",
-  detail: ""
-};
-function Join() {
-  const [userInfo, dispatch] = useReducer(reducer, initialUserInfo);
   const handleInput = (e) => {
-    // console.log(e.target);
-    dispatch(e.target); // 데이터를 변화시키기 위한 동작을 할 dispatch, action 값을 보냄
+    const { name, value } = e.target;
+
+    switch (name) {
+      case 'name':
+        setName(value);
+        break;
+      case 'phone':
+        setPhone(value);
+        break;
+      case 'email':
+        setEmail(value);
+        break;
+      case 'password':
+        setPassword(value);
+        break;
+      case 'birthday':
+        setBirthday(value);
+        break;
+      case 'gender':
+        setGender(value);
+        break;
+      case 'zipCode':
+        setZipCode(value);
+        break;
+      case 'city':
+        setCity(value);
+        break;
+      case 'district':
+        setDistrict(value);
+        break;
+      case 'detail':
+        setDetail(value);
+        break;
+      default:
+        break;
+    }
   };
-  const password = userInfo.password; // 사용자가 입력한 password
-  const [confirmPassword, setConfirmPassword] = useState(""); // 사용자가 입력한 확인용 password
-  const navigate = useNavigate(); // 페이지 이동을 위한 Hook
-  // 빈 칸 처리
-  const isInputEmpty = (userInfo) => {
-    for (let key in userInfo) {
-      if(userInfo[key] === "" || userInfo[key] === null) {
-        alert('내용을 입력하세요.');
-        return true;
-      }
-    }
-    return false;
-  }
-  // 비밀번호 확인
-  const passwordConfirm = useRef(); // 참고  
-  const [isPasswordConfirmed, setIsPasswordConfirmed] = useState(false);
-  
-  // 비밀번호 조건 확인
-    const isPasswordValid = (password, target, stateSetter) => {
-      // console.log(password.length);
-      if(password.length >= 8 && password.length <= 16)
-        return true;
-      else {
-        if(password.length === 0)
-          passwordConfirm.current.innerText = ""; // 초기 상태에서는 안내 문구 안보이게
-        else
-          passwordConfirm.current.innerText = "비밀번호는 8자리 이상 16자리 이하로 설정해주세요.";
-        target.current.style.color = 'red';
-        stateSetter(false);
-        return false;
-      }
-    }
-    useEffect(() => {
-      // console.log(isPasswordValid(password))
-      if(isPasswordValid(password, passwordConfirm, setIsPasswordConfirmed)) {
-        passwordConfirm.current.innerText = "";
-        if(password !== "" && confirmPassword !== "") {
-          if(password === confirmPassword) {
-            passwordConfirm.current.innerText = "비밀번호가 일치합니다.";
-            passwordConfirm.current.style.color = 'blue';
-            setIsPasswordConfirmed(true);
-          }
-          else {
-            passwordConfirm.current.innerText = "비밀번호가 일치하지 않습니다.";
-            passwordConfirm.current.style.color = 'red';
-            setIsPasswordConfirmed(false);
-          }
-        }
-      }
-    }, [password, confirmPassword])
-  // 회원가입 처리  
+
   const handleJoin = () => {
-    console.log(userInfo);
-    if(!isInputEmpty(userInfo)) { // 빈칸 확인
-      if(!isPasswordConfirmed) { // 비밀번호 확인
-        alert("비밀번호를 확인해주세요.");
-        return;
-      }
-      axios.post('http://localhost:8080/owner/join', userInfo)
-      .then(res => { // 받아오는 정보가 있다
+    // Perform your registration logic here
+    // You can access the form values using the state variables
+
+    const data = {
+      name,
+      phone,
+      email,
+      password,
+      birthday,
+      gender,
+      zipCode,
+      city,
+      district,
+      detail,
+    };
+
+    // Send the data to your API endpoint for registration
+    // You can use axios or fetch for this
+    // Example using axios:
+    axios.post('http://localhost:8080/owner/join', data)
+      .then((res) => {
+        // Handle the successful response
         console.log(res.data);
-        if(res.data === "")
-          alert("회원가입에 실패하였습니다.");
-        else {
-          alert('회원가입에 성공하였습니다.');
-        }
       })
-      .catch(err => { // 오류 처리
-        alert("오류가 발생하였습니다.");
+      .catch((err) => {
+        // Handle any errors
         console.log(err);
       });
-    }
-  }
-  return (
-    <div className='container'>
-      <div className='center flex-col'>
+  };
 
-        <form>
-          {/* 이름 */}
-          <div >
-            <label>NAME</label>
-            <input  name="name" type='text' placeholder='이름' onChange={handleInput}/>
-          </div>
-          
-          {/* 휴대폰 번호 */}
-          <div >
-            <label>PHONE</label>
-            <input  name="phone" type='text' placeholder='휴대폰 번호' onChange={handleInput}/>
-          </div>
-          {/* 이메일 */}
-          <div className='grid'>
-            <div >
-              <label>EMAIL</label>
-              <input name="email" type='email' placeholder='이메일' onChange={handleInput}/>
-            </div>
-            <div >
-              <div className='button buttonReverse' onClick={() => alert('이메일 중복확인')}>이메일 중복확인</div>
-            </div>
-          </div>
-          {/* 비밀번호 */}
-          <div className='grid'>
-            <div >
-              <label>PASSWORD</label>
-              <input name="password" type='password' placeholder='비밀번호' onChange={handleInput}/>
-              <div ref={passwordConfirm}></div>
-            </div>
-            <div >
-              <label>CONFIRM PASSWORD</label>
-              <input name="confirmPassword" type='password' placeholder='비밀번호 확인' onChange={(e) => setConfirmPassword(e.currentTarget.value)}/>
-            </div>
-          </div>
-          {/* 생년월일 */}
-          <div >
-            <label>BIRTH</label>
-            <input name="birthday" type='date' onChange={handleInput}/>
-          </div>
-          
-          {/* 생별 */}
-          <div >
-            <label>GENDER</label>
+  return (
+    <div className='container' >
+      <div className='center flex-col'>
+        <Form
+          {...layout}
+          name='nest-messages'
+          onFinish={handleJoin}
+          style={{
+            width: 600,
+            alignItems: "center"
+          }}
+          validateMessages={validateMessages}
+        >
+          <Form.Item
+            name='name'
+            label='이름'
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Input placeholder='이름' onChange={handleInput} />
+          </Form.Item>
+
+          <Form.Item
+            name='phone'
+            label='휴대폰 번호'
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Input placeholder='휴대폰 번호' onChange={handleInput} />
+          </Form.Item>
+
+          <Form.Item
+            name='email'
+            label='이메일'
+            rules={[
+              {
+                type: 'email',
+              },
+            ]}
+          >
+            <Input placeholder='이메일' onChange={handleInput} />
+          </Form.Item>
+
+          <Form.Item
+            name='password'
+            label='비밀번호'
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Input.Password placeholder='비밀번호' onChange={handleInput} />
+          </Form.Item>
+
+          <Form.Item
+            name='confirmPassword'
+            label='비밀번호 확인'
+            rules={[
+              {
+                required: true,
+                message: 'Please confirm your password!',
+              },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue('password') === value) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(
+                    new Error('비밀번호가 같지 않습니다.')
+                  );
+                },
+              }),
+            ]}
+          >
+            <Input.Password placeholder='비밀번호 확인' onChange={handleInput} />
+          </Form.Item>
+
+          <Form.Item name='birthday' label='생년월일'>
+            <Input type='date' onChange={handleInput} />
+          </Form.Item>
+
+          <Form.Item name='gender' label='성별'>
             <div style={{ display: 'flex' }}>
-            <input type="radio" name="gender" value="true" onChange={handleInput}/><span>남</span>
-            <input type="radio" name="gender" value="false" onChange={handleInput}/><span>여</span>
+              <Radio.Group onChange={handleInput}>
+                <Radio value='남'>남</Radio>
+                <Radio value='여'>여</Radio>
+              </Radio.Group>
             </div>
-          </div>
-          {/* 주소 */}
-          <div>
-            <label>ADDRESS</label>
-            <input name="zipCode" type='text' placeholder='우편번호' onChange={handleInput}/>
-            <div>
-              <input name="city" type='text' placeholder='시' onChange={handleInput}/>
-              <input name="district" type='text' placeholder='구' onChange={handleInput}/>
-              <input name="detail" type='text' placeholder='상세주소' onChange={handleInput}/>
-            </div>
-          </div>
-          {/* 버튼 */}
-          <div className='center width-100 flex-gap-20'>
-            <div className='button buttonReverse' onClick={() => navigate(-1)}>취소</div>
-            <div className='button' onClick={handleJoin}>완료</div>
-          </div>
-        </form>
+          </Form.Item>
+
+          <Form.Item name='zipCode' label='우편번호'>
+            <Input placeholder='우편번호' onChange={handleInput} />
+          </Form.Item>
+
+          <Form.Item name='city' label='도시'>
+            <Input placeholder='시' onChange={handleInput} />
+          </Form.Item>
+
+          <Form.Item name='district' label='구'>
+            <Input placeholder='구' onChange={handleInput} />
+          </Form.Item>
+
+          <Form.Item name='detail' label='상세주소'>
+            <Input placeholder='상세주소' onChange={handleInput} />
+          </Form.Item>
+
+          <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+            <Button type='primary' htmlType='submit' style={{ marginLeft: '120px' }}>
+              완료
+            </Button>
+            <Button onClick={() => navigate(-1)} style={{ marginLeft: '10px' }} >취소</Button>
+          </Form.Item>
+        </Form>
       </div>
     </div>
   );
 }
+
 export default Join;

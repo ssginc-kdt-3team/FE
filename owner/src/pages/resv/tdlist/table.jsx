@@ -26,7 +26,7 @@ const ResvTdTable = () => {
       .get(`/owner/reservation/activetime/${3}/${selectedType}/${currentPage}`) // Use the selectedType value in the URL
       .then((response) => {
         setResvList(response.data.content);
-        console.log(response.data);
+        console.log(response.data.content);
         setTotalItems(response.data.totalElements);
         setItemsPerPage(response.data.numberOfElements);
         setLoading(false);
@@ -73,7 +73,7 @@ const ResvTdTable = () => {
       title: "예약일자",
       dataIndex: "reservationDate",
       key: "reservationDate",
-      width: 250
+      width: 250,
     },
     {
       title: "예약상태",
@@ -81,7 +81,7 @@ const ResvTdTable = () => {
       key: "status",
       width: 200,
       align: "center",
-      render: (text) => {                          //열 내용 render
+      render: (text) => {
         let color;
         let content;
         if (text === "NOSHOW") {
@@ -94,8 +94,8 @@ const ResvTdTable = () => {
           color = "gold";
           content = "취소";
         } else if (text === "IMMINENT") {
-            color = "magenta";
-            content = "취소";
+          color = "magenta";
+          content = "취소";
         } else {
           color = "blue";
           content = "예약 중";
@@ -116,35 +116,40 @@ const ResvTdTable = () => {
       title: "예약자 번호",
       dataIndex: "phoneNumber",
       key: "phoneNumber",
-      width: 200
+      width: 200,
     },
     {
       title: "예약인원",
       dataIndex: "people",
       key: "people",
-      width: 150
+      width: 150,
     },
     {
       title: "유아 수",
       dataIndex: "child",
-       key: "child",
-       width: 150
+      key: "child",
+      width: 150,
+    },
+    {
+      title: "버튼",
+      dataIndex: "status",
+      key: "buttons",
+      render: (text, record) => {
+        if (text === "RESERVATION") {
+          return (
+            <>
+              <Enter id={record.id} />
+              <Noshow id={record.id} />
+              {/* <Button type="primary" onClick={() => handleEnter(record.id)}>입장</Button> */}
+              {/* <Button danger onClick={() => handleNoshow(record.id)}>노쇼</Button> */}
+            </>
+          );
+        }
+        return null;
       },
-      {
-        title: "버튼",
-        dataIndex: "",
-        key: "",
-        render: (_, record) => (
-          <>
-            <Enter id={record.id}/>
-            <Noshow id={record.id}/>
-            {/* <Button type="primary" onClick={() => handleEnter(record.id)}>입장</Button> */}
-            {/* <Button danger onClick={() => handleNoshow(record.id)}>노쇼</Button> */}
-          </>
-        ),
-      },
+    },
   ];
-
+  
   return (
     <>
       <Button onClick={() => handleTypeChange("E")}>전체</Button>
@@ -152,14 +157,14 @@ const ResvTdTable = () => {
       <Button onClick={() => handleTypeChange("B")}>3시간</Button>
       <Button onClick={() => handleTypeChange("C")}>점심시간</Button>
       <Button onClick={() => handleTypeChange("D")}>저녁시간</Button>
-      <Table   
+      <Table
         columns={columns}
         dataSource={resvList}
         pagination={false}
         loading={loading}
-        x='max-content'
+        x="max-content"
       />
-      <Paging     
+      <Paging
         page={currentPage}
         itemsPerPage={itemsPerPage}
         totalItems={totalItems}
@@ -167,7 +172,6 @@ const ResvTdTable = () => {
       />
     </>
   );
-};
-
+}
 
 export default ResvTdTable;

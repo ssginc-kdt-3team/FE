@@ -24,7 +24,7 @@ const Logo = () => {
          *
          */
         <Link to="/">
-        <img src={logo.png} alt="Stafield"  /> 
+       <img src={logo} alt="Stafield" style={{ height: 'auto', width: '140px', marginLeft: '26px'}} />
         </Link>
     );
 };
