@@ -8,6 +8,7 @@ import { axiosForJson } from '../../../index';
 import styles from '../../../assets/css/pages/shop/Shop.module.css';
 import styled from 'styled-components';
 import PageSubTitle from '../../ui/PageSubTitle';
+import axios from 'axios';
 
 function Shop() {
   const { shopId } = useParams();
@@ -19,6 +20,15 @@ function Shop() {
   const [isTileWrapOpen, setIsTileWrapOpen] = useState(false);
 
   useEffect(() => {
+    axios.get(`/shop/detail/${shopId}`)    
+    .then(res => {
+      console.log(res.data);
+    })
+    .catch(err => { // 오류 처리
+      // alert("오류가 발생하였습니다.");
+      console.log(err);
+    })
+
     setShopInfo({
       shopId: 1,
       shopName: 'Shop1',
@@ -52,33 +62,35 @@ function Shop() {
   }, [])
 
   return (
-    <div className='container'>
-      <div className='center flex-col'>
-        <PageTitle title='Shop1'/>
-        <div id={styles.tileWrap} className='flex flex-col flex-gap-40'>
-          {/* 매장 정보 */}
-          <ShopInfoCard data={shopInfo}/>
-          
-          {/* 메뉴 */}
-          <div className='center flex-col'>
-            <PageSubTitle title='메뉴'/>
-            <ul id={styles.tileWrap} className={`${styles.menuTileWrap} grid-4c flex-gap-10 ${isTileWrapOpen ? styles.open : styles.close}`}>
-              {
-                menuList && menuList.map( menu => (
-                  <MenuCard data={menu}/>
-                )).slice(0, 8)
-              }
-            </ul>
-            <div onClick={() => setIsTileWrapOpen(!isTileWrapOpen)} style={isTileWrapOpen ? { display: 'none' } : {}}>더보기</div>
-          </div>
+    <div className='container flex flex-col' style={{padding: '20px 0px 0px 0px'}}>
+      <PageTitle title='Shop1'/>
+      <div id={styles.contentWrap} className='center flex-col flex-gap-40'>
+        {/* 매장 정보 */}
+        <ShopInfoCard data={shopInfo}/>
+        
+        {/* 메뉴 */}
+        <div id={styles.menuWrap} className='center flex-col'>
+          <PageSubTitle title='메뉴'/>
+          <ul id={styles.tileWrap} className={`${styles.menuTileWrap} grid-4c flex-gap-10 ${isTileWrapOpen ? styles.open : styles.close}`}>
+            {
+              menuList && menuList.map( menu => (
+                <MenuCard data={menu}/>
+              )).slice(0, 8)
+            }
+          </ul>
+          <div onClick={() => setIsTileWrapOpen(!isTileWrapOpen)} style={isTileWrapOpen ? { display: 'none' } : {}}>더보기</div>
+        </div>
 
-          {/* 리뷰 */}
-          <div className='center flex-col'>
-            <PageSubTitle title='후기'/>
-            <ul>
-              <ReviewCard/>
-            </ul>
-          </div>
+        {/* 리뷰 */}
+        <div id={styles.reviewWrap} className='center flex-col'>
+          <PageSubTitle title='후기'/>
+          <ul id={styles.reviewCardWrap} className='flex flex-col flex-gap-40'>
+            {
+              reviewList && reviewList.map( review => (
+                <ReviewCard data={review}/>
+              ))
+            }
+          </ul>
         </div>
       </div>
     </div>

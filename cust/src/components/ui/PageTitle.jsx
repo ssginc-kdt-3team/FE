@@ -4,6 +4,7 @@ import styled from 'styled-components';
 const TitleH1 = styled.h1`
   font-size: 26px;
   font-weight: 500;
+  text-align: center;
   margin: 70px 0 100px 0;
 
   @media screen and (max-width: 768px) {

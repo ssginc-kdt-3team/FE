@@ -5,8 +5,13 @@ import PageTitle from '../../ui/PageTitle';
 import ResvCard from '../../widget/reservation/ResvCard';
 import Paging from '../../ui/Paging';
 import { axiosWithToken } from '../../../index';
+import { useRecoilValue } from 'recoil';
+import { loginInfo } from '../../../state/loginInfo';
 
 function ResvList({isActiveList}) {
+  const loginState = useRecoilValue(loginInfo);
+  const userId = loginState.id;
+
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   const [totalItems, setTotalItems] = useState(0); // 총 아이템 수
   const [itemsPerPage, setItemsPerPage] = useState(8) // 페이지당 아이템 수
@@ -16,7 +21,7 @@ function ResvList({isActiveList}) {
   // 사용자 예약 내역 호출
   // 첫 렌더링 때 데이터 가져온다
   useEffect(() => {
-    axiosWithToken.get(`/customer/reservation/${isActiveList ? 'listActive' : 'listAll'}/2/${currentPage}`) // 2는 사용자 id
+    axiosWithToken.get(`/customer/reservation/${isActiveList ? 'listActive' : 'listAll'}/${userId}/${currentPage}`) // 2는 사용자 id
     .then(res => {
       console.log(res.data);
       setResvList(res.data.content); // 
@@ -24,7 +29,7 @@ function ResvList({isActiveList}) {
       setItemsPerPage(res.data.pageable.pageSize); // 페이지당 아이템 수 설정
     })
     .catch(err => console.log(err))
-  }, [isActiveList, currentPage]);
+  }, [isActiveList, userId, currentPage]);
 
   console.log(totalItems);
   return (

@@ -10,7 +10,8 @@
   width: 100%;
   align-items: center;
 }
-#topWrap > div:first-child {
+#topWrap > h1:first-child {
+  width: 75%;
   font-size: 22px;
 }
 

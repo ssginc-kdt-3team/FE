@@ -20,7 +20,7 @@ const initialResvInfo = { // 초기값을 가지는 객체
   child: 0,
   memo: "",
   userId: 0, // 사용자 id
-  shopId: 2 // 매장 id
+  shopId: 0 // 매장 id
 };
 
 function ResvAdd() {
@@ -28,7 +28,7 @@ function ResvAdd() {
   console.log(state);
 
   const loginState = useRecoilValue(loginInfo);
-  initialResvInfo.userId = loginState.id;
+  initialResvInfo.userId = loginState.id; // 초기값의 userId 설정
 
   const navigate = useNavigate();
   const [resvInfo, setResvInfo] = useState(initialResvInfo);
@@ -42,6 +42,7 @@ function ResvAdd() {
 
   // 매장 선택 처리
   const handleShopSelect = (e) => { // 매장 정보가 변경될 때 마다
+    console.log(e.target.value);
     setResvInfo({ // 예약 정보 업데이트
       ...resvInfo,
       shopId: e.target.value
@@ -66,6 +67,7 @@ function ResvAdd() {
 
   const [branchId, setBranchId] = useState(state ? state.branchId : 1); // 선택된 지점 id, state가 있으면 초기값을 state의 branchId로 설정
   const [shopId, setShopId] = useState(state ? state.shopId : 1); // 선택된 매장 id, state가 있으면 초기값을 state의 shopId로 설정
+  initialResvInfo.shopId = shopId; // 초기값의 shopId 설정
 
   const [selectedDate, setSelectedDate] = useState(moment(new Date()).format("YYYY-MM-DD")); // 선택된 날짜
 
@@ -103,7 +105,15 @@ function ResvAdd() {
     };
   
     fetchData(); // 처음 렌더링 시에도 실행되도록 함
-    }, [branchId, shopId, selectedDate]); // 지점, 매장, 날짜가 변할 때 마다 리렌더링
+  }, [branchId, shopId, selectedDate]); // 지점, 매장, 날짜가 변할 때 마다 리렌더링
+
+
+  // 지점이 바뀌면 매장 초기화
+  // useEffect(() => {
+  //   if (shopList !== null) {
+  //     setShopId(state ? state.shopId : shopList[0].id);
+  //   }
+  // }, [shopList, state]);
 
   // 매장이 바뀌면 지점, 날짜는 그대로
   // 날짜가 바뀌면 지점, 매장은 그대로
@@ -127,6 +137,7 @@ function ResvAdd() {
     .then(res => {
       console.log(res);
       alert('예약이 등록되었습니다.');
+      navigate("/resv", { replace: true });
     })
     .catch(err => console.log(err))
   }
