@@ -10,7 +10,7 @@ import MgtUpdate from '../pages/mgt/update';
 import ResvAcList from '../pages/resv/aclist/index';
 import ResvList from '../pages/resv/list/index';
 import ResTdList from '../pages/resv/tdlist/index';
-import ResvDeposit from '../pages/deposit/deposit';
+import ResvDeposit from '../pages/deposit/table';
 import ResvDetail from '../pages/resv/detail/index';
 
 

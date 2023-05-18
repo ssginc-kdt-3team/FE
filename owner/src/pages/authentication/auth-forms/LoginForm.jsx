@@ -55,7 +55,7 @@ const LoginForm = () => {
       if (!isInputEmpty(email, password)) { // 입력칸이 모두 채워져 있으면
         if (isEmailValid(email)) {
           axiosWithBaseUrl
-            .post('/customer/login', {
+            .post('/owner/login', {
               email: email, // email
               password: password, // password
             })
@@ -135,23 +135,19 @@ const LoginForm = () => {
                 span: 16,
               }}
             >
-              <Button onClick={handleLogin} className="button mt-45" type="primary" htmlType="submit">
+              <Button onClick={handleLogin} className="button mt-45" type="primary" htmlType="submit" style={{ marginLeft:'30px' }}>
                 로그인
               </Button>
             </Form.Item>
           </Form>
   
-          <div>
-            <div onClick={() => navigate('/find-id')}>
-              아이디 찾기
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '5px', marginLeft:'80px' }}>
+           <div onClick={() => navigate('/find-id')}>
+             아이디 찾기
             </div>
             <div onClick={() => navigate('/find-pw')}>
-              비밀번호 찾기
-            </div>
-          </div>
-          <div>
-            아직 회원이 아니신가요?{' '}
-            <span onClick={() => navigate('/join')}>회원가입</span>
+             비밀번호 찾기
+             </div>
           </div>
         </div>
       </div>
@@ -159,133 +155,3 @@ const LoginForm = () => {
   };
   
   export default LoginForm;
-
-
-// import React, { useState } from 'react';
-// import { useDispatch } from 'react-redux';
-// import { loginAction } from '../../../redux/actions/loginAction';
-// import { Form, Input, Button, Checkbox } from 'antd';
-// import { useNavigate } from 'react-router-dom';
-// import { isEmailValid } from '../../../utils/auth/isEmailValid';
-
-
-// const LoginForm = () => {
-//   const dispatch = useDispatch();
-//   const navigate = useNavigate();
-
-//   const [email, setEmail] = useState('');
-//   const [password, setPassword] = useState('');
-
-//   const onFinish = (values) => {
-//     const { username, password, remember } = values;
-//     if (isEmailValid(username)) {
-//       dispatch(
-//         loginAction({
-//           email: username,
-//           password: password,
-//         })
-//       )
-//         .then((res) => {
-//           if (res === '') {
-//             alert('로그인에 실패하였습니다.\n아이디와 비밀번호를 확인하세요.');
-//           } else {
-//             alert('로그인에 성공하였습니다.');
-//             navigate('/', { replace: true });
-//           }
-//         })
-//         .catch((err) => {
-//           alert('오류가 발생하였습니다.');
-//           console.log(err);
-//         });
-//     }
-//   };
-
-//   const onFinishFailed = (errorInfo) => {
-//     console.log('Failed:', errorInfo);
-//   };
-
-//   return (
-//     <div className="container">
-//       <div className="center flex-col">
-//         <Form
-//           onFinish={onFinish}
-//           onFinishFailed={onFinishFailed}
-//         >
-//           <Form.Item
-//             label="이메일"
-//             name="username"
-//             rules={[
-//               {
-//                 required: true,
-//                 message: '이메일을 입력하세요.',
-//               },
-//             ]}
-//           >
-//             <Input
-//               type="email"
-//               placeholder="이메일"
-//               value={email}
-//               onChange={(e) => setEmail(e.target.value)}
-//             />
-//           </Form.Item>
-
-//           <Form.Item
-//             label="비밀번호"
-//             name="password"
-//             rules={[
-//               {
-//                 required: true,
-//                 message: '비밀번호를 입력하세요.',
-//               },
-//             ]}
-//           >
-//             <Input.Password
-//               placeholder="비밀번호"
-//               value={password}
-//               onChange={(e) => setPassword(e.target.value)}
-//             />
-//           </Form.Item>
-
-//           <Form.Item
-//             name="remember"
-//             valuePropName="checked"
-//             wrapperCol={{
-//               offset: 8,
-//               span: 16,
-//             }}
-//           >
-//             <Checkbox>Remember me</Checkbox>
-//           </Form.Item>
-
-//           <Form.Item
-//             wrapperCol={{
-//               offset: 8,
-//               span: 16,
-//             }}
-//           >
-//             <Button className="button mt-45" type="primary" htmlType="submit">
-//               로그인
-//             </Button>
-//           </Form.Item>
-//         </Form>
-
-//         <div >
-//           <div onClick={() => navigate('/find-id')}>
-//             아이디 찾기
-     
-//           </div>
-//           <div onClick={() => navigate('/find-pw')}>
-//             비밀번호 찾기
-     
-//           </div>
-//         </div>
-//         <div>
-//           아직 회원이 아니신가요?{' '}
-//           <span onClick={() => navigate('/join')}>회원가입</span>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default LoginForm;
