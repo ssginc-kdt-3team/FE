@@ -1,0 +1,15 @@
+#titleWrap > h2 {
+  
+}
+
+#contentWrap {
+
+}
+
+.open {
+  display: block;
+}
+
+.close {
+  display: none;
+}

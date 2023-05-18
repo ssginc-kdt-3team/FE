@@ -105,7 +105,7 @@ function Join() {
       else
         return;
 
-      axios.post('/cust/join', userInfo)
+      axios.post('/customer/join', userInfo)
       .then(res => { // 받아오는 정보가 있다
         console.log(res.data);
         if(res.data === "")

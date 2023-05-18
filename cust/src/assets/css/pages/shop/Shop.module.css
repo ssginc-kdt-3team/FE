@@ -1,3 +1,8 @@
+/* 메뉴 */
+#menuWrap {
+  padding: 0 20px 40px 20px;
+}
+
 #tileWrap {
   max-width: var(--resvForm-max-width);
   width: var(--resvForm-width);
@@ -14,7 +19,23 @@
   height: calc((var(--resvForm-width) - 30px) / 4);
 }
 
+/* 후기 */
+#reviewWrap {
+  width: 100%;
+  background-color: var(--bg2);
+  padding-bottom: 60px;
+}
+
+#reviewCardWrap {
+  max-width: 800px;
+  width: 75%;
+}
+
 @media screen and (max-width: 768px) {
+  #contentWrap {
+    gap: 0;
+  }
+
   #tileWrap {
     max-width: 100%;
     width: 100%;
@@ -51,6 +72,13 @@
     width: 100%;
     max-height: calc((100vw - 50px) * 0.5);
     height: calc((100vw - 50px) * 0.5);
+  }
+
+  /* 후기 */
+  #reviewCardWrap {
+    max-width: calc(100% - 40px);
+    width: calc(100% - 40px);
+    gap: 20px;
   }
   
 

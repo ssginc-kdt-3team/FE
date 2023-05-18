@@ -1,5 +1,6 @@
-/* #shopInfoWrap > img {
-} */
+#shopInfoWrap {
+  width: calc(100% - 40px);
+}
 
 /* 매장 이미지 */
 #topWrap > img {
