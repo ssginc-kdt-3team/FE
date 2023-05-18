@@ -55,6 +55,7 @@ function ResvAdd() {
   // 메모 처리
   const handleTextArea = (e) => {
     let { name, value } = e.target;
+    console.log('name: ' + name + ' value: ' + value);
 
     setResvInfo({
       ...resvInfo,
@@ -77,7 +78,7 @@ function ResvAdd() {
   const [peopleCount, setPeopleCount] = useState(1); // 예약 인원 카운트
   const [childCount, setChildCount] = useState(0); // 유아 수 카운트
 
-  console.log('지점id: ' + branchId + '    매장id: ' + shopId)
+  console.log('지점id: ' + branchId + ' 매장id: ' + shopId)
   // console.log(shopList ? shopList[0] : '')
   // 지점 정보, 지점별 매장 정보 가져오기
   useEffect(() => {
@@ -104,7 +105,7 @@ function ResvAdd() {
     };
   
     fetchData(); // 처음 렌더링 시에도 실행되도록 함
-  }, [branchId, selectedDate, state]); // 지점, 매장, 날짜가 변할 때 마다 리렌더링
+  }, [branchId, state]); // 지점, 매장, 날짜가 변할 때 마다 리렌더링
 
 
   // 매장별 예약 가능 시간 정보 가져오기
