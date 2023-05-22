@@ -29,7 +29,8 @@ function Resv() {
         memo: res.data.memo,
         reservationStatus: res.data.reservationStatus,
         deposit: res.data.deposit,
-        cancelReason: res.data.cancelReason
+        cancelReason: res.data.cancelReason,
+        canReview: res.data.canReview
       });
 
       // 사용자 정보 저장
