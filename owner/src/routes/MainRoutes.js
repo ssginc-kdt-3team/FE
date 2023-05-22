@@ -3,10 +3,16 @@ import { lazy } from 'react';
 // project import
 import Loadable from 'components/Loadable';
 import MainLayout from 'layout/MainLayout';
+import MyProfile from '../pages/profile/myprofile';
+import ProfileUpdate from '../pages/profile/update';
 import ShopReg from '../pages/shop/reg';
 import MgtInfo from '../pages/mgt/info';
 import MgtReview from '../pages/mgt/review';
-import MgtUpdate from '../pages/mgt/update';
+import MenuReg from '../pages/mgt/menu/menureg';
+import MgtInfoUpdate from '../pages/mgt/infoupdate';
+import MenuList from '../pages/mgt/menu/menulist';
+import MenuDetail from '../pages/mgt/menu/menudetail';
+import MenuUpdate from '../pages/mgt/menu/menuupdate';
 import ResvAcList from '../pages/resv/aclist/index';
 import ResvList from '../pages/resv/list/index';
 import ResTdList from '../pages/resv/tdlist/index';
@@ -35,6 +41,20 @@ const MainRoutes = {
         {
             path: '/',
             element: <DashboardDefault />
+        },
+        {
+            path: '/profile',
+            children: [
+                
+                {
+           		 path: '/profile/',
+          		 element: <MyProfile />
+        	       },
+                {
+                    path: '/profile/update/',
+                    element: <ProfileUpdate />
+                }, 
+            ]
         },
         {
             path: '/shop/reg',
@@ -73,12 +93,28 @@ const MainRoutes = {
                     element: <MgtInfo />
                 },
                 {
+                    path: '/mgt/info/update',
+                    element: <MgtInfoUpdate />
+                },
+                {
                     path: '/mgt/review',
                     element: <MgtReview />
                 },
                 {
-                    path: '/mgt/update',
-                    element: <MgtUpdate />
+                    path: '/mgt/menu/list',
+                    element: <MenuList />
+                },
+                {
+                    path: '/mgt/menu/register',
+                    element: <MenuReg />
+                },
+                {
+                    path: '/mgt/menu/detail',
+                    element: <MenuDetail />
+                },
+                {
+                    path: '/mgt/menu/update',
+                    element: <MenuUpdate />
                 }
             ]
         },

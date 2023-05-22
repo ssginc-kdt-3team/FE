@@ -1,8 +1,8 @@
 import React from 'react';
 
-function MgtUpdate() {
+function MgtInfoUpdate() {
   return ( <div>매장 정보 수정 페이지</div>
   );
 }
 
-export default MgtUpdate;
+export default MgtInfoUpdate;

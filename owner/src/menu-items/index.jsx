@@ -4,12 +4,13 @@ import pages from './pages';
 import shop from './shop';
 import resv from './resv';
 import mgt from './mgt';
+import profile from './profile';
 
 
 // ==============================|| MENU ITEMS ||============================== //
 
 const menuItems = {
-    items: [pages, resv, mgt, shop]
+    items: [pages, profile, resv, mgt, shop]
 };
 
 export default menuItems;
