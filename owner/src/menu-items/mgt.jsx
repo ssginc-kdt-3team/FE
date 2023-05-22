@@ -29,10 +29,17 @@ const mgt = {
             icon: icons.ChromeOutlined
         },
         {
-            id: 'mgtdeposit',
-            title: '매장 정보 수정',
+            id: 'menulist',
+            title: '메뉴 조회',
             type: 'item',
-            url: '/mgt/update',
+            url: '/mgt/menu/list',
+            icon: icons.ChromeOutlined
+        },
+        {
+            id: 'menureg',
+            title: '메뉴 등록',
+            type: 'item',
+            url: '/mgt/menu/register',
             icon: icons.ChromeOutlined
         }
     ]

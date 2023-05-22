@@ -15,11 +15,12 @@ const profile = {
     children: [
         {
             id: 'profile',
-            title: 'profile',
+            title:'profile',
             type: 'item',
-            url: '/owner/profile',
+            url: '/profile',
             icon: icons.UserOutlined
         }
+        
     ]
 };
 
