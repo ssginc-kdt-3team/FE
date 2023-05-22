@@ -1,13 +1,17 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useState } from 'react';
 import styles from '../../../assets/css/widget/reservation/ResvInfoCard.module.css';
 import ResvStatusTag from '../../ui/reservation/ResvStatusTag';
 import { Link, useNavigate } from 'react-router-dom';
+import ReviewAdd from '../../modal/ReviewAdd';
 
 function ResvInfoCard({data, resvId}) {
   // console.log('resvId :' + resvId);
 
   const navigate = useNavigate();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isReviewed, setIsReviewed] = useState(false); // 새로고침을 대신하여 후기가 등록되면 후기등록 버튼 없앤다
 
   const isDisabled = (status) => {
     console.log('isDisabled :' + status);
@@ -74,10 +78,21 @@ function ResvInfoCard({data, resvId}) {
               >
                 예약 취소
               </button>
+
+              <button 
+                className='button' 
+                onClick={() => setIsModalOpen(true)}
+                style={!isReviewed && (data.reservationStatus === 'DONE' && data.canReview) ? { display: 'block' } : { display: 'none' }}
+              >
+                후기 등록
+              </button>
             </div>
           </div>
         )
       }
+
+      {/* 리뷰 등록 모달 */}
+      <ReviewAdd isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} isReviewed={isReviewed} setIsReviewed={setIsReviewed}/>
     </>
   );
 }

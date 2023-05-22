@@ -55,40 +55,40 @@ function Join() {
   const [isPasswordConfirmed, setIsPasswordConfirmed] = useState(false);
   
   // 비밀번호 조건 확인
-    const isPasswordValid = (password, target, stateSetter) => {
-      // console.log(password.length);
-      if(password.length >= 8 && password.length <= 16)
-        return true;
-      else {
-        if(password.length === 0)
-          passwordConfirm.current.innerText = ""; // 초기 상태에서는 안내 문구 안보이게
-        else
-          passwordConfirm.current.innerText = "비밀번호는 8자리 이상 16자리 이하로 설정해주세요.";
-        target.current.style.color = 'red';
+  const isPasswordValid = (password, target, stateSetter) => {
+    // console.log(password.length);
+    if(password.length >= 8 && password.length <= 16)
+      return true;
+    else {
+      if(password.length === 0)
+        passwordConfirm.current.innerText = ""; // 초기 상태에서는 안내 문구 안보이게
+      else
+        passwordConfirm.current.innerText = "비밀번호는 8자리 이상 16자리 이하로 설정해주세요.";
+      target.current.style.color = 'red';
 
-        stateSetter(false);
-        return false;
-      }
+      stateSetter(false);
+      return false;
     }
+  }
 
-    useEffect(() => {
-      // console.log(isPasswordValid(password))
-      if(isPasswordValid(password, passwordConfirm, setIsPasswordConfirmed)) {
-        passwordConfirm.current.innerText = "";
-        if(password !== "" && confirmPassword !== "") {
-          if(password === confirmPassword) {
-            passwordConfirm.current.innerText = "비밀번호가 일치합니다.";
-            passwordConfirm.current.style.color = 'blue';
-            setIsPasswordConfirmed(true);
-          }
-          else {
-            passwordConfirm.current.innerText = "비밀번호가 일치하지 않습니다.";
-            passwordConfirm.current.style.color = 'red';
-            setIsPasswordConfirmed(false);
-          }
+  useEffect(() => {
+    // console.log(isPasswordValid(password))
+    if(isPasswordValid(password, passwordConfirm, setIsPasswordConfirmed)) {
+      passwordConfirm.current.innerText = "";
+      if(password !== "" && confirmPassword !== "") {
+        if(password === confirmPassword) {
+          passwordConfirm.current.innerText = "비밀번호가 일치합니다.";
+          passwordConfirm.current.style.color = 'blue';
+          setIsPasswordConfirmed(true);
+        }
+        else {
+          passwordConfirm.current.innerText = "비밀번호가 일치하지 않습니다.";
+          passwordConfirm.current.style.color = 'red';
+          setIsPasswordConfirmed(false);
         }
       }
-    }, [password, confirmPassword])
+    }
+  }, [password, confirmPassword])
 
 
   // 회원가입 처리  

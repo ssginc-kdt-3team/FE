@@ -1,0 +1,97 @@
+.modalWrap {
+  width: 420px !important;
+}
+
+/* 모달 */
+.modalWrap > div:nth-child(2) {
+  width: 100%;
+  border-radius: 10px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* x 버튼 삭제 */
+.modalWrap > div:nth-child(2) > button {
+  display: none;
+}
+
+/* 모달 헤더 */
+.modalWrap > div:nth-child(2) > div:nth-child(2) {
+  margin: 60px 0;
+}
+.modalWrap > div:nth-child(2) > div:nth-child(2) > div {
+  font-size: 22px;
+}
+
+
+/* 모달 본문 */
+.modalWrap > div:nth-child(2) > div:nth-child(3) {
+  width: 100%;
+}
+
+.modalWrap > div:nth-child(2) > div:nth-child(3) > form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+/* 후기 제목 */
+#reviewTitle {
+  width: 100%;
+  height: var(--input-height);
+  padding: 15px 0 ;
+  border: 0;
+  border-bottom: 1px solid var(--input-border);
+  font-size: var(--input-fontSize);
+}
+#reviewTitle:focus {
+  outline: none;
+  /* border-bottom: 1px solid var(--main); */
+}
+/* 후기 내용 */
+#reviewContent {
+  width: 100%;
+  padding: 0 0 15px 0;
+  /* border: 1px solid var(--input-border); */
+  border: 0;
+  /* border-radius: 10px; */
+  font-size: var(--input-fontSize);
+  /* margin-bottom: 10px; */
+  resize: none;
+}
+#reviewContent:focus {
+  outline: none;
+  /* outline: 1px solid var(--main); */
+}
+
+
+/* 모달 푸터(기존 버튼) */
+.modalWrap > div:nth-child(2) > div:nth-child(4) {
+  display: none;
+}
+
+/* 버튼 */
+#bottomWrap {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+#bottomWrap > button {
+  width: var(--button-width-sm);
+  height: var(--button-height-sm);
+  font-size: 16px;
+  line-height: 38px; /* 경계값 만큼 빼주어야 << 버튼이 border-box이다 */
+}
+
+
+@media screen and (max-width: 768px) {
+
+}

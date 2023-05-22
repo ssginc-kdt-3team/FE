@@ -39,4 +39,8 @@
   #resvInfoWrap {
     grid-row-end: 2;
   }
+
+  #bottomWrap > button {
+    width: calc((100% - 20px) / 3);
+  }
 }
