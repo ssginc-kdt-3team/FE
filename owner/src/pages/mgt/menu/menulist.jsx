@@ -47,6 +47,14 @@ function MenuList() {
       render: (price) => {
         return price + '원'
       }
+    },
+    {
+      title: "수정",
+      dataIndex: "",
+      key: "",
+      render: row => (
+        <Button type="primary" onClick={() => navigate(`/mgt/menu/update/${row.id}`, { state: row })}>수정</Button>
+      )
     }
   ];
 
@@ -67,11 +75,11 @@ function MenuList() {
       dataSource={menuList}
       pagination={false}
       loading={loading}
-      onRow={row => {
-        return {
-          onClick: () => { navigate(`/mgt/menu/detail/${row.id}`) }
-        }
-      }}
+      // onRow={row => {
+      //   return {
+      //     onClick: () => { navigate(`/mgt/menu/detail/${row.id}`) }
+      //   }
+      // }}
     />
   );
 }

@@ -17,13 +17,6 @@ const Span = styled.span`
 function ShopDetail({data}) {
   const navigate = useNavigate();
 
-  const grid = {
-    width: '100%',
-    display: 'grid',
-    gridTemplateColumns : 'repeat(2, 1fr)',
-    gap: '40px'
-  };
-
   return (
     <>
       {
@@ -32,7 +25,7 @@ function ShopDetail({data}) {
             {/* title="Default size card" 
             extra={<Button type="primary" onClick={() => navigate(`/mgt/info/update/${'아이디'}`)}>수정</Button>}  */}
             
-            <div style={grid}>
+            <div className='grid-2c flex-gap-40 width-100'>
               <Img src={data.shopImgUrl} alt={data.shopName}/>
 
               <div>
