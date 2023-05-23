@@ -152,7 +152,7 @@ const MainRoutes = {
             element: <BranchList />
             },
             {
-                path: '/branch/detail/:id',
+                path: '/branch/detail/1',
                 element: <BranchDetail />
             },
             {
