@@ -9,6 +9,7 @@ import styles from '../../../assets/css/pages/shop/Shop.module.css';
 import styled from 'styled-components';
 import PageSubTitle from '../../ui/PageSubTitle';
 import axios from 'axios';
+import Paging from '../../ui/Paging';
 
 function Shop() {
   const { shopId } = useParams();
@@ -16,6 +17,10 @@ function Shop() {
   const [shopInfo, setShopInfo] = useState(null);
   const [menuList, setMenuList] = useState(null);
   const [reviewList, setReviewList] = useState(null);
+  
+  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
+  const [totalItems, setTotalItems] = useState(0); // 총 아이템 수
+  const [itemsPerPage, setItemsPerPage] = useState(8) // 페이지당 아이템 수
 
   const [isTileWrapOpen, setIsTileWrapOpen] = useState(false);
 
@@ -37,44 +42,26 @@ function Shop() {
       });
 
       setMenuList(res.data.menus);
-      setReviewList(res.data.reviewDto.content);
     })
     .catch(err => { // 오류 처리
-      // alert("오류가 발생하였습니다.");
+      alert("오류가 발생하였습니다.");
       console.log(err);
     })
-
-    // setShopInfo({
-    //   shopId: 1,
-    //   shopName: 'Shop1',
-    //   shopInfo: 'This is Shop1',
-    //   shopImg: 'shop1.png',
-    //   shopLocation: 'A3',
-    //   shopCall: '0000000000',
-    //   shopStatus: 'OPEN',
-    //   shopOpenTime: '10:30',
-    //   shopCloseTime: '20:00',
-    //   shopOrderCloseTime: '19:00'
-    // });
-
-    // axiosForJson.get('/products')
-    // .then(res => {
-    //   console.log(res.data);
-    //   setMenuList(res.data);
-    // })
-    // .catch(err => {
-    //   console.log(err);
-    // })
-
-    // axiosForJson.get('/reviews')
-    // .then(res => {
-    //   console.log(res.data);
-    //   setReviewList(res.data);
-    // })
-    // .catch(err => {
-    //   console.log(err);
-    // })
   }, [shopId])
+
+  useEffect(() => {
+    axios.get(`/shop/detail/review/${shopId}/${currentPage}`)    
+    .then(res => {
+      console.log(res.data);
+      setReviewList(res.data.content);
+      setTotalItems(res.data.totalElements); // 총 아이템 수 설정
+      setItemsPerPage(res.data.pageable.pageSize); // 페이지당 아이템 수 설정
+    })
+    .catch(err => { // 오류 처리
+      alert("오류가 발생하였습니다.");
+      console.log(err);
+    })
+  }, [shopId, currentPage])
 
   return (
     <div className='container flex flex-col' style={{padding: '20px 0px 0px 0px'}}>
@@ -109,6 +96,9 @@ function Shop() {
               ))
             }
           </ul>
+          
+          {/* 페이지 */}
+          <Paging currentPage={currentPage} totalItems={totalItems} itemsPerPage={itemsPerPage} setCurrentPage={setCurrentPage}/>
         </div>
 
       </div>
