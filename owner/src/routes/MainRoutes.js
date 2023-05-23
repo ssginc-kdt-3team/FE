@@ -113,7 +113,7 @@ const MainRoutes = {
                     element: <MenuDetail />
                 },
                 {
-                    path: '/mgt/menu/update',
+                    path: '/mgt/menu/update/:id',
                     element: <MenuUpdate />
                 }
             ]
