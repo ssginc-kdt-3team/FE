@@ -12,7 +12,7 @@ function DepositList() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/admin/branch/${id}/${page}`)
+      .get(`http://localhost:8080/admin/branch/`)
       .then((response) => {
         setDepositList(response.data.content);
         console.log(response.data.content);
@@ -87,7 +87,7 @@ function DepositList() {
           />
         </>
       ) : (
-        <p>Loading deposit details...</p>
+        <p>Loading branch list...</p>
       )}
     </div>
   );

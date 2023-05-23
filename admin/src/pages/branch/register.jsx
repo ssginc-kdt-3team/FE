@@ -1,46 +1,64 @@
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 import { Card, Button, DatePicker, TimePicker, Form, Input, Upload } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import dayjs from 'dayjs';
 
+//시간 형식
 const format = 'HH:mm';
 
 const normFile = (e) => {
   if (Array.isArray(e)) {
     return e;
   }
-  return e?.fileList;
+  return e.fileList;
 };
 
-function BranchReg() {
-  const formRef = useRef(null); // Reference to the form
+function BranchRegNew() {
+  // form data 상태변수
+  const [branchName, setBranchName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [zipCode, setZipCode] = useState('');
+  const [city, setCity] = useState('');
+  const [district, setDistrict] = useState('');
+  const [detail, setDetail] = useState('');
+  const [openingTime, setOpeningTime] = useState(dayjs('12:00', format));
+  const [closingTime, setClosingTime] = useState(dayjs('12:00', format));
+  const [openingDate, setOpeningDate] = useState(dayjs()); 
+  const [photos, setPhotos] = useState([]);
 
-  const onFileUpload = (fileList) => {
-    const formData = new FormData();
-
-    fileList.forEach((file) => {
-      // 파일 데이터 저장
-      formData.append('multipartFiles', file.originFileObj);
-    });
-
-    axios.post('http://localhost:8080/uploadFiles', formData);
-  };
-
-  const onFinish = (values) => {
-    const requestBody = {
-      branchImg: values.photos[0].originFileObj,
+  const onFileUpload = () => {
+    const branchData = {
       address: {
-        // Set address properties as needed
+        city,
+        district,
+        detail,
+        zipCode,
       },
-      name: values.branchName,
-      phone: values.phone,
-      openTime: values.openingTime.format(format),
-      closeTime: values.closingTime.format(format),
-      openDay: values.openingDate.format('YYYY-MM-DD'),
+      name: branchName,
+      phone,
+      openTime: openingTime.format(format),
+      closeTime: closingTime.format(format),
+      openDay: openingDate.format('YYYY-MM-DD'),
     };
 
-    axios.post('http://localhost:8080/admin/branch/add', requestBody)
+    // const formData = new FormData();
+    // formData.append('branchData', JSON.stringify(branchData));
+    
+    const formData = new FormData();
+    const json = JSON.stringify(branchData);
+    const blob = new Blob([json], { type: "application/json" });
+    formData.append("branchData", blob);
+
+    photos.forEach((file) => {
+    formData.append('branchImg', file.originFileObj);
+    });
+
+    axios.post('http://localhost:8080/admin/branch/add', formData, {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      }
+    })
       .then((response) => {
         console.log(response);
       })
@@ -49,13 +67,17 @@ function BranchReg() {
       });
   };
 
+  const onFinish = () => {
+    // Handle form submission if needed
+  };
+
   const handleFileChange = (info) => {
     const fileList = normFile(info);
-    onFileUpload(fileList);
+    setPhotos(fileList);
   };
 
   const handleSubmit = () => {
-    formRef.current.submit(); // Submit the form
+    onFileUpload();
   };
 
   return (
@@ -66,7 +88,6 @@ function BranchReg() {
       }}
     >
       <Form
-        ref={formRef} // Set the ref to the form
         labelCol={{
           span: 4,
         }}
@@ -84,8 +105,9 @@ function BranchReg() {
         }}
         onFinish={onFinish}
       >
+
         <Form.Item label="지점명" name="branchName" required>
-          <Input />
+          <Input value={branchName} onChange={(e) => setBranchName(e.target.value)} />
         </Form.Item>
         <Form.Item
           label="전화번호"
@@ -95,16 +117,24 @@ function BranchReg() {
             { len: 11, message: '전화번호는 11자리여야 합니다.' },
           ]}
         >
-          <Input />
+          <Input value={phone} onChange={(e) => setPhone(e.target.value)} />
         </Form.Item>
+
+        <Form.Item name="address" label="주소">
+          <Input placeholder="우편번호" name="zipCode" value={zipCode} onChange={(e) => setZipCode(e.target.value)} />
+          <Input placeholder="시" name="city" value={city} onChange={(e) => setCity(e.target.value)} />
+          <Input placeholder="구" name="district" value={district} onChange={(e) => setDistrict(e.target.value)} />
+          <Input placeholder="상세주소" name="detail" value={detail} onChange={(e) => setDetail(e.target.value)} />
+        </Form.Item>
+
         <Form.Item label="개장시간" name="openingTime" required>
-          <TimePicker format={format} />
+          <TimePicker format={format} value={openingTime} onChange={setOpeningTime} />
         </Form.Item>
         <Form.Item label="폐장시간" name="closingTime" required>
-          <TimePicker format={format} />
+          <TimePicker format={format} value={closingTime} onChange={setClosingTime} />
         </Form.Item>
         <Form.Item label="개점일" name="openingDate" required>
-          <DatePicker />
+          <DatePicker value={openingDate} onChange={setOpeningDate} />
         </Form.Item>
         <Form.Item
           label="지점 사진"
@@ -115,27 +145,29 @@ function BranchReg() {
           ]}
           valuePropName="fileList"
           getValueFromEvent={normFile}
-          >
+        >
           <Upload
+            name="photo"
             action="/upload.do"
             listType="picture-card"
             beforeUpload={() => false} // Disable automatic upload
             onChange={handleFileChange}
+            fileList={photos}
           >
             <div>
               <PlusOutlined />
               <div style={{ marginTop: 8 }}></div>
             </div>
           </Upload>
-          </Form.Item>
-          <Form.Item>
+        </Form.Item>
+        <Form.Item>
           <Button type="primary" onClick={handleSubmit}>
-             등록하기
+            등록하기
           </Button>
-          </Form.Item>
-          </Form>
-          </Card>
-          );
-          }
-          
-          export default BranchReg;
+        </Form.Item>
+      </Form>
+    </Card>
+  );
+}
+
+export default BranchRegNew;

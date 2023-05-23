@@ -9,7 +9,7 @@ function  BranchDetail() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/branch/${id}`)
+      .get(`http://localhost:8080/branch/${1}`)
       .then((res) => {
         setBranch(res.data);
       })
