@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { Card } from 'antd';
 
 function  BranchDetail() {
   const { id } = useParams(); // useParams을 사용해서 id 값을 가져옴
@@ -9,7 +10,7 @@ function  BranchDetail() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/branch/${1}`)
+      .get(`http://localhost:8080/admin/branch/detail/${id}`)
       .then((res) => {
         setBranch(res.data);
       })
@@ -21,22 +22,27 @@ function  BranchDetail() {
   return (
     <div>
     {branch ? (
-      <>
-        <h1>지점 상세 정보</h1>
+      <Card title="지점 상세 정보" size="large">
         <ul>
-          <li><h1>지점명 : {branch.name}</h1></li>
-          {/* <li><p>Email: {String(branch.email)}</p></li> */}
-          <li><p>지점주소: {String(branch.adress)}</p></li>
-          <p>대표번호: ({branch.phone.slice(0, 3)}) {branch.phone.slice(3, 6)}-{branch.phone.slice(6)}</p>
-          <li><p>영업 상태: {String(branch.status)}</p></li>    
-          {/* <li><p>Opening Hours: {shop.operationInfo && shop.operationInfo.open_time && shop.operationInfo.close_time ?
-                                  `${shop.operationInfo.open_time.toString()} ~ ${shop.operationInfo.close_time.toString()}` : 'Not available'}</p></li>
-          <li><p>Order Deadline: {shop.operationInfo && shop.operationInfo.order_close ? 
-                                  shop.operationInfo.order_close.toString() : 'Not available'}</p></li> */}
+          
+          <li><h1>{branch.id}</h1></li>
+          <li><p>지점명: {branch.name}</p></li>
+          <li><p>지점사진</p>
+              <img src={branch.branchImgUrl} alt="지점 이미지" width="200"/>
+          </li>
+          <li><p>전화번호: {(branch.phone)}</p></li>
+          <li><p>주소: {`${branch.address.city} ${branch.address.district} ${branch.address.detail} ${branch.address.zipCode}`}</p></li>
+          <li><p>상태: {branch.status}</p></li>
+          <li><p>개장시간: {branch.openTime}</p></li>
+          <li><p>폐장시간: {branch.closeTime}</p></li>
+          <li><p>상태: {branch.status}</p></li>
+          <li><p>개점일: {branch.openDay}</p></li>
+          <li><p>폐점일: {branch.outDay}</p></li>
         </ul>
-      </>
+      </Card>
+      
     ) : (
-      <p>Loading shop details...</p>
+      <p>Loading branch details...</p>
     )}
   </div>
   );
