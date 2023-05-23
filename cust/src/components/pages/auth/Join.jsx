@@ -34,6 +34,7 @@ function Join() {
     dispatch(e.target); // 데이터를 변화시키기 위한 동작을 할 dispatch, action 값을 보냄
   };
 
+  const [isEmailDuplicated, setIsEmailDuplicated] = useState(true);
   const password = userInfo.password; // 사용자가 입력한 password
   const [confirmPassword, setConfirmPassword] = useState(""); // 사용자가 입력한 확인용 password
 
@@ -48,6 +49,34 @@ function Join() {
       }
     }
     return false;
+  }
+
+  // 이메일 중복 확인
+  const checkEmailDup = () => {
+    console.log('중복 확인용 이메일: ' + userInfo.email);
+
+    if(isEmailValid(userInfo.email)) { // 이메일 형식이 맞으면
+      axios.post('/customer/emailCheck', { // 이메일 중복 확인 수행
+        email: userInfo.email
+      })
+      .then(res => { // 받아오는 정보가 있다
+        console.log(res.data);
+        if(res.data === true) {
+          alert("사용가능한 이메일 입니다.");
+          setIsEmailDuplicated(false);
+        }
+        else {
+          alert('이미 사용중인 이메일 입니다.');
+          userInfo.email = ""; // 이메일 정보 초기화
+          setIsEmailDuplicated(true);
+        }
+      })
+      .catch(err => { // 오류 처리
+        alert("오류가 발생하였습니다.");
+        console.log(err);
+      });
+    }
+    return false;  
   }
 
   // 비밀번호 확인
@@ -93,32 +122,34 @@ function Join() {
 
   // 회원가입 처리  
   const handleJoin = () => {
-    console.log(userInfo);
-
     if(!isInputEmpty(userInfo)) { // 빈칸 확인
-      if(isEmailValid(userInfo.email)) { // 이메일 검증
-        if(!isPasswordConfirmed) { // 비밀번호 확인
-          alert("비밀번호를 확인해주세요.");
-          return;
-        }
-      }
-      else
+      // if(isEmailValid(userInfo.email)) { // 이메일 검증
+      if(isEmailDuplicated) { // 이메일이 이미 사용중이면
+        alert("이메일 중복확인을 해주세요.");
         return;
+      }
+      
+      if(!isPasswordConfirmed) { // 비밀번호 확인
+        alert("비밀번호를 확인해주세요.");
+        return;
+      }
+      
+      console.log(userInfo);
 
-      axios.post('/customer/join', userInfo)
-      .then(res => { // 받아오는 정보가 있다
-        console.log(res.data);
-        if(res.data === "")
-          alert("회원가입에 실패하였습니다.");
-        else {
-          alert('회원가입에 성공하였습니다.');
-          navigate('/login', { replace: true });
-        }
-      })
-      .catch(err => { // 오류 처리
-        alert("오류가 발생하였습니다.");
-        console.log(err);
-      });
+      // axios.post('/customer/join', userInfo)
+      // .then(res => { // 받아오는 정보가 있다
+      //   console.log(res.data);
+      //   if(res.data === "")
+      //     alert("회원가입에 실패하였습니다.");
+      //   else {
+      //     alert('회원가입에 성공하였습니다.');
+      //     navigate('/login', { replace: true });
+      //   }
+      // })
+      // .catch(err => { // 오류 처리
+      //   alert("오류가 발생하였습니다.");
+      //   console.log(err);
+      // });
     }
   }
 
@@ -143,11 +174,11 @@ function Join() {
           <div className='grid-2c flex-gap-40'>
             <div id={styles.emailWrap}>
               <label>EMAIL</label>
-              <input className={styles.joinInput} name="email" type='email' placeholder='이메일' onChange={handleInput}/>
+              <input className={styles.joinInput} name="email" type='email' value={userInfo.email} placeholder='이메일' onChange={handleInput}/>
             </div>
 
             <div id={styles.confirmDupBtnWrap}>
-              <div id={styles.confirmDupBtn} className='button buttonReverse' onClick={() => alert('이메일 중복확인')}>이메일 중복확인</div>
+              <div id={styles.confirmDupBtn} className='button buttonReverse' onClick={() => checkEmailDup()}>이메일 중복확인</div>
             </div>
           </div>
 
