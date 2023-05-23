@@ -37,6 +37,7 @@ function Shop() {
       });
 
       setMenuList(res.data.menus);
+      setReviewList(res.data.reviewDto.content);
     })
     .catch(err => { // 오류 처리
       // alert("오류가 발생하였습니다.");
@@ -65,14 +66,14 @@ function Shop() {
     //   console.log(err);
     // })
 
-    axiosForJson.get('/reviews')
-    .then(res => {
-      console.log(res.data);
-      setReviewList(res.data);
-    })
-    .catch(err => {
-      console.log(err);
-    })
+    // axiosForJson.get('/reviews')
+    // .then(res => {
+    //   console.log(res.data);
+    //   setReviewList(res.data);
+    // })
+    // .catch(err => {
+    //   console.log(err);
+    // })
   }, [shopId])
 
   return (
@@ -98,17 +99,18 @@ function Shop() {
           <div id={styles.moreBtn} onClick={() => setIsTileWrapOpen(!isTileWrapOpen)} style={isTileWrapOpen ? { display: 'none' } : {}}>더보기</div>
         </div>
 
-        {/* 리뷰 */}
+        {/* 후기 */}
         <div id={styles.reviewWrap} className='center flex-col'>
           <PageSubTitle title='후기'/>
           <ul id={styles.reviewCardWrap} className='flex flex-col flex-gap-40'>
             {
-              reviewList && reviewList.map( review => (
-                <ReviewCard data={review}/>
+              reviewList && reviewList.map( (review, index) => (
+                <ReviewCard key={index} data={review}/>
               ))
             }
           </ul>
         </div>
+
       </div>
     </div>
   );
