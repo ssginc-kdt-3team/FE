@@ -26,6 +26,7 @@ import ShopReg from '../pages/shop/reg';
 import BranchList from '../pages/branch/list';
 import BranchDetail from 'pages/branch/detail';
 import BranchReg from '../pages/branch/register'
+import BranchUpdate from '../pages/branch/update'
 import NotitextList from '../pages/notitext/list';
 import NotitextReg from '../pages/notitext/reg';
 import GradeList from '../pages/grade/list';
@@ -154,6 +155,10 @@ const MainRoutes = {
             {
                 path: '/branch/detail/:id',
                 element: <BranchDetail />
+            },
+            {
+                path: '/branch/update/:id',
+                element: <BranchUpdate />
             },
             {
                 path: '/branch/register',
