@@ -85,7 +85,7 @@ function ReviewAdd({isModalOpen, setIsModalOpen, isReviewed, setIsReviewed}) {
       open={isModalOpen}
     >
       <form>
-        <Rate onChange={handlePoint} value={reviewInfo.point}></Rate>
+        <Rate onChange={handlePoint} value={reviewInfo.point} style={{ fontSize: '30px' }}></Rate>
         <input 
           id={styles.reviewTitle} 
           name='title' onChange={handleOnChange} 
