@@ -4,7 +4,7 @@ import pages from './pages';
 import shop from './shop';
 import resv from './resv';
 import mgt from './mgt';
-import profile from './profile';
+import profile from './Profile';
 
 
 // ==============================|| MENU ITEMS ||============================== //
