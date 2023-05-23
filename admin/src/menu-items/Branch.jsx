@@ -19,6 +19,13 @@ const branch = {
             type: 'item',
             url: '/branch/list',
             icon: icons.ShopOutlined
+        },
+        {
+            id: 'branchreg',
+            title: '지점등록',
+            type: 'item',
+            url: '/branch/register',
+            icon: icons.ShopOutlined
         }
     ]
 };
