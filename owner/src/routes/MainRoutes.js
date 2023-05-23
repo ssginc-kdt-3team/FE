@@ -10,7 +10,7 @@ import MgtInfo from '../pages/mgt/info';
 import MgtReview from '../pages/mgt/review';
 import MenuReg from '../pages/mgt/menu/menureg';
 import MgtInfoUpdate from '../pages/mgt/infoupdate';
-import MenuList from '../pages/mgt/menu/menulist';
+// import MenuList from '../pages/mgt/menu/mefnulist';
 import MenuDetail from '../pages/mgt/menu/menudetail';
 import MenuUpdate from '../pages/mgt/menu/menuupdate';
 import ResvAcList from '../pages/resv/aclist/index';
@@ -47,11 +47,11 @@ const MainRoutes = {
             children: [
                 
                 {
-           		 path: '/profile/',
+           		 path: '/profile',
           		 element: <MyProfile />
         	       },
                 {
-                    path: '/profile/update/',
+                    path: '/profile/update/:id',
                     element: <ProfileUpdate />
                 }, 
             ]
@@ -100,16 +100,16 @@ const MainRoutes = {
                     path: '/mgt/review',
                     element: <MgtReview />
                 },
-                {
-                    path: '/mgt/menu/list',
-                    element: <MenuList />
-                },
+                // {
+                //     path: '/mgt/menu/list',
+                //     element: <MenuList />
+                // },
                 {
                     path: '/mgt/menu/register',
                     element: <MenuReg />
                 },
                 {
-                    path: '/mgt/menu/detail',
+                    path: '/mgt/menu/detail/:id',
                     element: <MenuDetail />
                 },
                 {
