@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
-import { Card } from 'antd';
+import { useParams, useNavigate  } from "react-router-dom";
+import { Card, Button } from 'antd';
 
 function  BranchDetail() {
   const { id } = useParams(); // useParams을 사용해서 id 값을 가져옴
   console.log(id);
   const [branch, setBranch] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -19,10 +20,17 @@ function  BranchDetail() {
       });
   }, [id]);
 
+  const handleEdit = () => {
+    const branchId = '지점의 ID'; // 지점의 ID를 어떻게 가져올지에 따라서 수정해주세요.
+    navigate(`/branch/update/${id}`);
+  };
+
+
   return (
     <div>
     {branch ? (
-      <Card title="지점 상세 정보" size="large">
+      <Card title="지점 상세 정보" size="large" >
+         <Button onClick={handleEdit}>수정하기</Button>
         <ul>
           
           <li><h1>{branch.id}</h1></li>
