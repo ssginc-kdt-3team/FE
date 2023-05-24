@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Tag, Button } from "antd";
+import { Table, Button } from "antd";
 import { Link } from 'react-router-dom';
 import { axiosWithBaseUrl } from 'App';
-import axios from '../../../../node_modules/axios/index';
+import axios from 'axios';
 import styled from 'styled-components';
 import { useNavigate } from '../../../../node_modules/react-router-dom/dist/index';
 
@@ -44,7 +44,7 @@ function MenuList() {
       title: "가격",
       dataIndex: "price",
       key: "price",
-      render: (price) => {
+      render: price => {
         return price + '원'
       }
     },
