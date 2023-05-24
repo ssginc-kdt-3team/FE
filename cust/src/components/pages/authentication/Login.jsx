@@ -1,14 +1,15 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import PageTitle from '../../ui/PageTitle';
-import styles from '../../../assets/css/pages/auth/Login.module.css';
+import styles from '../../../assets/css/pages/authentication/Login.module.css';
 import { useSetRecoilState } from 'recoil';
 import { loginInfo } from '../../../state/loginInfo';
 import { userInfo } from '../../../state/userInfo';
 import { useNavigate } from 'react-router-dom';
 import next from '../../../assets/images/icons/next.png';
-import { isEmailValid } from '../../../utils/auth/isEmailValid';
+import { isEmailValid } from '../../../utils/authentication/emailValidation';
 import { axiosWithToken } from '../../../index';
+import { isInputEmpty } from '../../../utils/authentication/loginValidation';
 
 function Login() {
   const setLoginInfo = useSetRecoilState(loginInfo);
@@ -19,14 +20,6 @@ function Login() {
 
   const navigate = useNavigate(); // 페이지 이동을 위한 Hook
 
-  // 빈 칸 처리
-  const isInputEmpty = (email, password) => {
-    if(email === "" || password === "") {
-      alert('내용을 입력하세요.');
-      return true;
-    }
-    return false;
-  }
 
   // 로그인 처리
   const handleLogin = (e) => {
