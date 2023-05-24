@@ -17,6 +17,7 @@ import FindPwResult from "./components/pages/authentication/FindPwdResult";
 import BranchList from "./components/pages/shop/BranchList";
 import ShopList from "./components/pages/shop/ShopList";
 import Shop from "./components/pages/shop/Shop";
+import Review from "./components/pages/profile/Review";
 
 function App() {
   return ( // 이 안에 JSX 문법 적용
@@ -27,7 +28,7 @@ function App() {
           {/* 메인 */}
           <Route path="/" element={<Main/>}/>
 
-          {/* auth */}
+          {/* authentication */}
           <Route path="/login" element={<Login/>}/>
           <Route path="/find-id" element={<FindId/>}/>
           <Route path="/find-id/result" element={<FindIdResult/>}/>
@@ -47,6 +48,8 @@ function App() {
           <Route path="/shop/:branchId" element={<ShopList/>}/>
           <Route path="/shop/:branchId/:shopId" element={<Shop/>}/>
 
+          {/* profile */}
+          <Route path="/profile/:userId/review" element={<Review/>}/>
         </Routes>
       </BrowserRouter>
     </RecoilRoot>
