@@ -4,6 +4,7 @@ import { Card, Button, DatePicker, TimePicker, Form, Input, Upload, Modal } from
 import { PlusOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import dayjs from 'dayjs';
+import Postcode from 'components/daumpostcode/postcode';
 
 //시간 형식
 const format = 'HH:mm';
@@ -15,19 +16,19 @@ const normFile = (e) => {
   return e.fileList;
 };
 
-
-
 function BranchReg() {
   // form data 상태변수
   const [branchName, setBranchName] = useState('');
   const [phone, setPhone] = useState('');
-  const [zipCode, setZipCode] = useState('');
-  const [city, setCity] = useState('');
-  const [district, setDistrict] = useState('');
-  const [detail, setDetail] = useState('');
+  const [address, setAddress] = useState({
+    zipCode: '',
+    city: '',
+    district: '',
+    detail: '',
+  });
   const [openingTime, setOpeningTime] = useState(dayjs('12:00', format));
   const [closingTime, setClosingTime] = useState(dayjs('12:00', format));
-  const [openingDate, setOpeningDate] = useState(dayjs()); 
+  const [openingDate, setOpeningDate] = useState(dayjs());
   const [photos, setPhotos] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
@@ -36,10 +37,10 @@ function BranchReg() {
   const onFileUpload = async () => {
     const branchData = {
       address: {
-        city,
-        district,
-        detail,
-        zipCode,
+        city: address.city,
+        district: address.district,
+        detail: address.detail,
+        zipCode: address.zipCode,
       },
       name: branchName,
       phone,
@@ -47,7 +48,7 @@ function BranchReg() {
       closeTime: closingTime.format(format),
       openDay: openingDate.format('YYYY-MM-DD'),
     };
-  
+  //form data > branchData, branchImg
     const formData = new FormData();
     const json = JSON.stringify(branchData);
     const blob = new Blob([json], { type: "application/json" });
@@ -79,6 +80,7 @@ function BranchReg() {
     setPhotos(fileList);
   };
 
+  //모달
   const handleSubmit = () => {
     onFileUpload();
   };
@@ -94,6 +96,15 @@ function BranchReg() {
 
   const handleCancel = () => {
     setIsModalOpen(false);
+  };
+  //주소검색
+  const handleAddressChange = (data) => {
+    setAddress({
+      zipCode: data.zonecode,
+      city: data.city,
+      district: data.district,
+      detail: data.detailAddress,
+    });
   };
 
   return (
@@ -138,10 +149,11 @@ function BranchReg() {
         </Form.Item>
 
         <Form.Item name="address" label="주소">
-          <Input placeholder="우편번호" name="zipCode" value={zipCode} onChange={(e) => setZipCode(e.target.value)} />
-          <Input placeholder="시" name="city" value={city} onChange={(e) => setCity(e.target.value)} />
-          <Input placeholder="구" name="district" value={district} onChange={(e) => setDistrict(e.target.value)} />
-          <Input placeholder="상세주소" name="detail" value={detail} onChange={(e) => setDetail(e.target.value)} />
+          <Postcode onChange={handleAddressChange} />
+          <Input placeholder="우편번호" name="zipCode" value={address.zipCode} disabled />
+          <Input placeholder="시" name="city" value={address.city} disabled />
+          <Input placeholder="구" name="district" value={address.district} disabled />
+          <Input placeholder="상세주소" name="detail" value={address.detail} onChange={(e) => setAddress({ ...address, detail: e.target.value })} />
         </Form.Item>
 
         <Form.Item label="개장시간" name="openingTime" required>
