@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from '../../../node_modules/react-router-dom/dist/index';
+import { useNavigate } from '../../../../node_modules/react-router-dom/dist/index';
 import { Table, Button, Rate } from "antd";
 import axios from 'axios';
 import Paging from 'components/pagination/paging';
 import { axiosWithBaseUrl } from 'App';
-import ReviewContent from './ReviewContent';
-import styles from '../../assets/css/pages/mgt/review.module.css';
+import styles from '../../../assets/css/pages/mgt/review.module.css';
 
 function MgtReview() {
   const navigate = useNavigate();

@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Paging from "components/pagination/paging";
 import { axiosWithBaseUrl } from "App";
-import Enter from "pages/resv/tdlist/enterbtn";
-import Noshow from "pages/resv/tdlist/noshowbtn";
+import Enter from "pages/resv/todayList/enterbtn";
+import Noshow from "pages/resv/todayList/noshowbtn";
 
 const ResvTdTable = () => {
   const [resvList, setResvList] = useState([]);           // 현재 페이지의 예약 목록을 저장 
