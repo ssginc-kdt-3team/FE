@@ -24,7 +24,7 @@ const branch = {
             id: 'branchreg',
             title: '지점등록',
             type: 'item',
-            url: '/branch/register',
+            url: '/branch/add',
             icon: icons.ShopOutlined
         }
     ]

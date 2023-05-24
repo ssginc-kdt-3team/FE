@@ -25,7 +25,7 @@ import ShopMenu from '../pages/shop/menu';
 import ShopReg from '../pages/shop/reg';
 import BranchList from '../pages/branch/list';
 import BranchDetail from 'pages/branch/detail';
-import BranchReg from '../pages/branch/register'
+import BranchAdd from '../pages/branch/add'
 import BranchUpdate from '../pages/branch/update'
 import NotitextList from '../pages/notitext/list';
 import NotitextReg from '../pages/notitext/reg';
@@ -161,8 +161,8 @@ const MainRoutes = {
                 element: <BranchUpdate />
             },
             {
-                path: '/branch/register',
-                element: <BranchReg />
+                path: '/branch/add',
+                element: <BranchAdd />
             }
             ]
         },
