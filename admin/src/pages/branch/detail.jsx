@@ -21,7 +21,7 @@ function  BranchDetail() {
   }, [id]);
 
   const handleEdit = () => {
-    const branchId = '지점의 ID'; // 지점의 ID를 어떻게 가져올지에 따라서 수정해주세요.
+    const id = '지점의 ID'; // 지점의 ID를 어떻게 가져올지에 따라서 수정해주세요.
     navigate(`/branch/update/${id}`);
   };
 
