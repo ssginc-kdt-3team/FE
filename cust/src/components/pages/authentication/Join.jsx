@@ -1,9 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useReducer, useRef, useState } from 'react';
 import PageTitle from '../../ui/PageTitle';
-import styles from '../../../assets/css/pages/auth/Join.module.css';
+import styles from '../../../assets/css/pages/authentication/Join.module.css';
 import { useNavigate } from 'react-router-dom';
-import { isEmailValid } from '../../../utils/auth/isEmailValid';
+import { isEmailValid } from '../../../utils/authentication/emailValidation';
+import { isInputEmpty, isPasswordValid, checkEmailDup } from '../../../utils/authentication/joinValidation';
 
 // action에 따라 안에 데이터를 어떻게 변화시킬지 설정
 const reducer = (state, action) => {
@@ -27,79 +28,27 @@ const initialUserInfo = { // 초기값을 가지는 객체
 };
 
 function Join() {
+  const navigate = useNavigate(); // 페이지 이동을 위한 Hook
+
   const [userInfo, dispatch] = useReducer(reducer, initialUserInfo);
 
   const handleInput = (e) => {
     // console.log(e.target);
+    if(e.target.name === "email") // 이메일이 바뀐 경우
+      setEnteredEmail(e.target.value); // 이메일 변경값 설정
+    
     dispatch(e.target); // 데이터를 변화시키기 위한 동작을 할 dispatch, action 값을 보냄
   };
 
-  const [isEmailDuplicated, setIsEmailDuplicated] = useState(true);
+  const [canUseEamil, setCanUseEmail] = useState(false);
+  const [enteredEmail, setEnteredEmail] = useState("");
   const password = userInfo.password; // 사용자가 입력한 password
   const [confirmPassword, setConfirmPassword] = useState(""); // 사용자가 입력한 확인용 password
-
-  const navigate = useNavigate(); // 페이지 이동을 위한 Hook
-
-  // 빈 칸 처리
-  const isInputEmpty = (userInfo) => {
-    for (let key in userInfo) {
-      if(userInfo[key] === "" || userInfo[key] === null) {
-        alert('내용을 입력하세요.');
-        return true;
-      }
-    }
-    return false;
-  }
-
-  // 이메일 중복 확인
-  const checkEmailDup = () => {
-    console.log('중복 확인용 이메일: ' + userInfo.email);
-
-    if(isEmailValid(userInfo.email)) { // 이메일 형식이 맞으면
-      axios.post('/customer/emailCheck', { // 이메일 중복 확인 수행
-        email: userInfo.email
-      })
-      .then(res => { // 받아오는 정보가 있다
-        console.log(res.data);
-        if(res.data === true) {
-          alert("사용가능한 이메일 입니다.");
-          setIsEmailDuplicated(false);
-        }
-        else {
-          alert('이미 사용중인 이메일 입니다.');
-          userInfo.email = ""; // 이메일 정보 초기화
-          setIsEmailDuplicated(true);
-        }
-      })
-      .catch(err => { // 오류 처리
-        alert("오류가 발생하였습니다.");
-        console.log(err);
-      });
-    }
-    return false;  
-  }
 
   // 비밀번호 확인
   const passwordConfirm = useRef(); // 참고  
   const [isPasswordConfirmed, setIsPasswordConfirmed] = useState(false);
   
-  // 비밀번호 조건 확인
-  const isPasswordValid = (password, target, stateSetter) => {
-    // console.log(password.length);
-    if(password.length >= 8 && password.length <= 16)
-      return true;
-    else {
-      if(password.length === 0)
-        passwordConfirm.current.innerText = ""; // 초기 상태에서는 안내 문구 안보이게
-      else
-        passwordConfirm.current.innerText = "비밀번호는 8자리 이상 16자리 이하로 설정해주세요.";
-      target.current.style.color = 'red';
-
-      stateSetter(false);
-      return false;
-    }
-  }
-
   useEffect(() => {
     // console.log(isPasswordValid(password))
     if(isPasswordValid(password, passwordConfirm, setIsPasswordConfirmed)) {
@@ -124,7 +73,7 @@ function Join() {
   const handleJoin = () => {
     if(!isInputEmpty(userInfo)) { // 빈칸 확인
       // if(isEmailValid(userInfo.email)) { // 이메일 검증
-      if(isEmailDuplicated) { // 이메일이 이미 사용중이면
+      if(!canUseEamil) { // 이메일이 이미 사용중이면
         alert("이메일 중복확인을 해주세요.");
         return;
       }
@@ -174,11 +123,17 @@ function Join() {
           <div className='grid-2c flex-gap-40'>
             <div id={styles.emailWrap}>
               <label>EMAIL</label>
-              <input className={styles.joinInput} name="email" type='email' value={userInfo.email} placeholder='이메일' onChange={handleInput}/>
+              <input className={styles.joinInput} name="email" type='email' value={enteredEmail} placeholder='이메일' onChange={handleInput}/>
             </div>
 
             <div id={styles.confirmDupBtnWrap}>
-              <div id={styles.confirmDupBtn} className='button buttonReverse' onClick={() => checkEmailDup()}>이메일 중복확인</div>
+              <div 
+                id={styles.confirmDupBtn} 
+                className='button buttonReverse' 
+                onClick={() => checkEmailDup(userInfo.email, setCanUseEmail, setEnteredEmail)}
+              >
+                이메일 중복확인
+              </div>
             </div>
           </div>
 

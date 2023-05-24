@@ -19,7 +19,7 @@ function MobNavMenu({data, setIsNavOpen}) {
             <div id={styles.topWrap} className='space-between' onClick={()=> handleNavigate(data.link)}>
               <ion-icon name='cube'></ion-icon>
               <h1>{data.name}</h1>
-              <img src={next} alt=''/>
+              <img src={next} alt='move to page'/>
             </div>
             {
               data.subMenu ? (
