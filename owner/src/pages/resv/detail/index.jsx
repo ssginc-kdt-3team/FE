@@ -37,7 +37,7 @@ function ResvDetail() {
     <Card
       title="예약 상세 정보"
     //   예약 중일 때만 거절하기 버튼 보임
-      extra={resv && resv.status === "RESERVATION" ? <Reject id={id}/> : null}
+      extra={resv && resv.status === "RESERVATION" ? <Reject id={id} /> : null}
       style={{
         width: 800,
       }}

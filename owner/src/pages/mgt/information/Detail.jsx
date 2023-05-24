@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card } from 'antd';
-import { useNavigate } from '../../../node_modules/react-router-dom/dist/index';
+import { useNavigate } from '../../../../node_modules/react-router-dom/dist/index';
 // import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -22,6 +22,7 @@ function ShopDetail({data}) {
       {
         data && (
           <Card>
+            
             {/* title="Default size card" 
             extra={<Button type="primary" onClick={() => navigate(`/mgt/info/update/${'아이디'}`)}>수정</Button>}  */}
             
@@ -31,12 +32,13 @@ function ShopDetail({data}) {
               <div>
                 <h2 style={{ borderBottom: '1px solid #ccc' }}>{data.shopName}</h2>
                 <h3>{data.shopInfo}</h3>
-                <p><Span>OWNER</Span>{data.ownerName}</p>
-                <p><Span>BRANCH</Span>{data.branchName}</p>
-                <p><Span>LOCATION</Span>{data.location}</p>
-                <p><Span>TIME</Span>{data.openTime}~{data.closeTime} (마감 시간: {data.orderCloseTime})</p>
-                <p><Span>CEO</Span>{data.businessCeo}</p>
-                <p><Span>BUSINESS NUMBER</Span>{data.businessNumber}</p>
+                <p><Span>이름</Span>{data.ownerName}</p>
+                <p><Span>지점명</Span>{data.branchName}</p>
+                <p><Span>위치</Span>{data.location}</p>
+                <p><Span>운영시간</Span>{data.openTime}~{data.closeTime}</p>
+                <p><Span>주문 마감 시간</Span>{data.orderCloseTime}</p>
+                <p><Span>대표자명</Span>{data.businessCeo}</p>
+                <p><Span>사업자등록번호</Span>{data.businessNumber}</p>
               </div>
             </div>
           </Card>

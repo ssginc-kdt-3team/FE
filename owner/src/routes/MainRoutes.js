@@ -5,17 +5,17 @@ import Loadable from 'components/Loadable';
 import MainLayout from 'layout/MainLayout';
 import MyProfile from '../pages/profile/myprofile';
 import ProfileUpdate from '../pages/profile/update';
-import ShopReg from '../pages/shop/reg';
-import MgtInfo from '../pages/mgt/info';
-import MgtReview from '../pages/mgt/review';
-import MenuReg from '../pages/mgt/menu/menureg';
-import MgtInfoUpdate from '../pages/mgt/infoupdate';
+import ShopAdd from '../pages/shop/Add';
+import MgtInfo from '../pages/mgt/information/Index';
+import MgtReview from '../pages/mgt/review/Review';
+import MenuReg from '../pages/mgt/menu/Add';
+import MgtInfoUpdate from '../pages/mgt/information/Update';
 // import MenuList from '../pages/mgt/menu/mefnulist';
-import MenuDetail from '../pages/mgt/menu/menudetail';
-import MenuUpdate from '../pages/mgt/menu/menuupdate';
-import ResvAcList from '../pages/resv/aclist/index';
+import MenuDetail from '../pages/mgt/menu/Detail';
+import MenuUpdate from '../pages/mgt/menu/Update';
+import ResvAcList from '../pages/resv/activeList/index';
 import ResvList from '../pages/resv/list/index';
-import ResTdList from '../pages/resv/tdlist/index';
+import ResTdList from '../pages/resv/todayList/index';
 import ResvDeposit from '../pages/deposit/table';
 import ResvDetail from '../pages/resv/detail/index';
 
@@ -57,8 +57,8 @@ const MainRoutes = {
             ]
         },
         {
-            path: '/shop/reg',
-            element: <ShopReg />
+            path: '/shop/register',
+            element: <ShopAdd />
         },
         {
             path: '/resv',
