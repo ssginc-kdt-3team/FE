@@ -2,21 +2,26 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from '../../assets/css/layout/MobNav.module.css';
 import menuData from "../../data/menuData";
+import { useRecoilValue } from 'recoil';
+import { loginInfo } from '../../state/loginInfo';
+import MobNavMenu from '../ui/MobNavMenu';
 
 function MobNav({isNavOpen, setIsNavOpen}) {
+  const loginState = useRecoilValue(loginInfo);
+
   return (
     <div id={styles.mobNavWrap} className={isNavOpen ? styles.open : styles.close}>
-      {/* <div>
-        { isLoggedin ? <span>{user.name}</span> : <Link to='/login' onClick={() => setIsNavOpen(false)}>로그인</Link> }
-        { isLoggedin ? ' 님 환영합니다!' : '이 필요합니다.' }
-      </div> */}
+      <div>
+        { loginState.isLoggedin ? <span>{loginState.id}</span> : <Link to='/login' onClick={() => setIsNavOpen(false)}>로그인</Link> }
+        { loginState.isLoggedin ? ' 번 님 환영합니다!' : '이 필요합니다.' }
+      </div>
       
       <ul>
         {
           menuData && menuData.map( data => (
-            <Link to={data.link} key={data.id} onClick={() => setIsNavOpen(false)}>
-              <div>{data.name}</div>
-            </Link>
+            // <Link to={data.link} key={data.id} onClick={() => setIsNavOpen(false)}>
+              <MobNavMenu key={data.id} data={data} setIsNavOpen={setIsNavOpen}/>
+            // </Link>
           ))
         }
       </ul>
