@@ -3,13 +3,35 @@ import styles from '../../../assets/css/widget/shop/ReviewCard.module.css';
 import { useRecoilValue } from 'recoil';
 import { loginInfo } from '../../../state/loginInfo';
 import { Rate } from 'antd';
-import toggle from '../../../assets/images/icons/next.png';
+import axios from 'axios';
 
 function ReviewCard({data}) {
+  console.log(data);
+
   const loginState = useRecoilValue(loginInfo);
   // console.log(loginState.id);
 
   const [isContentWrapOpen, setIsContentWrapOpen] = useState(false);
+
+  const handleReviewDelete = () => {
+    // console.log(data.reviewId);
+    
+    if(window.confirm('후기를 삭제하시겠습니까?')) {
+      axios.post(`/customer/review/delete/${data.reviewId}`)
+      .then(res => {
+        console.log(res);
+        if(res.data === true)
+          alert("후기가 삭제되었습니다.");
+        // navigate('/resv');
+      })
+      .catch(err => { // 오류 처리
+        alert("오류가 발생하였습니다.");
+        console.log(err);
+      });
+    }
+    else 
+      return;
+  }
 
   return (
     <div className='box' style={{ width: '100%' }}>
@@ -21,7 +43,7 @@ function ReviewCard({data}) {
 
         <div 
           onClick={() => setIsContentWrapOpen(!isContentWrapOpen)} 
-          style={{ transform: isContentWrapOpen ? 'rotate(270deg)' : 'rotate(90deg)' }}
+          style={{ transform: isContentWrapOpen ? 'rotate(180deg)' : 'rotate(0)' }}
         >
         </div>
       </div>
@@ -35,7 +57,13 @@ function ReviewCard({data}) {
         {/* 이름, 삭제버튼 */}
         <div className='space-between'>
           <div id={styles.name}>{data.userName.slice(0, 1)}{'O'.repeat(data.userName.length - 2)}{data.userName.slice(-1, )}</div>
-          <div id={styles.deleteBtn} style={data.userId === loginState.id ? { display: 'block' } : { display: 'none' }}>삭제</div>
+          <div 
+            id={styles.deleteBtn} 
+            onClick={handleReviewDelete}
+            style={data.userId === loginState.id ? { display: 'block' } : { display: 'none' }}
+          >
+            삭제
+          </div>
         </div>
         
         {/* 내용 */}

@@ -13,7 +13,7 @@
 #titleWrap > div:last-child {
   width: 20px;
   height: 20px;
-  background-image: url('../../../images/icons/next.png');
+  background-image: url('../../../images/icons/down.png');
   background-position: center;
   background-size: cover; 
   cursor: pointer;

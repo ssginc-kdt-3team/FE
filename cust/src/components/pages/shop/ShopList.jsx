@@ -13,7 +13,7 @@ function ShopList() {
   // const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`/shop/list/?id=${branchId}`)
+    axios.get(`/shop/list/${branchId}`)
     .then(res => {
       console.log(res.data);
       setShopList(res.data);
