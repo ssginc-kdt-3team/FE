@@ -21,15 +21,13 @@ const Postcode = ({ onChange }) => {
       fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
     }
     onChange({ 
-      zonecode: data.zonecode, 
-      city: data.city, 
-      district: data.district, 
-      detailAddress: data.jibunAddress 
+      zonecode: 
+      data.zonecode, 
+      city: data.address, 
+      district: data.jibunAddress,  
     });
     console.log(fullAddress); // 예: '서울 성동구 왕십리로2길 20 (성수동1가)'
-    console.log(data.address.slice(0, 2));
-    console.log(data.bname);
-    console.log(data.buildingName);
+    console.log(data.address);
     console.log(extraAddress);
   };
 
