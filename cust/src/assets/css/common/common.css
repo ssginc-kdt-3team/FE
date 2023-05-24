@@ -65,15 +65,35 @@ a {
 /* input {
   box-sizing: border-box;
 } */
+input {
+
+  /* ios 대응 */
+  /* appearance: none;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0; */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
 
 select {
   width: 200px;
   padding: 5px 0;
+  background-color: white;
+  /*화살표 배경 넣기*/
+  background: url('../../images/icons/down.png') no-repeat 98% 50% #fff; /* 화살표 select박스 오른쪽 중앙 배치, 배경 흰색 */
+  background-size: 20px;
+  
   border: 0;
   border-bottom: 1px solid var(--input-border);
   /* border-radius: 10px; */
   font-size: var(--input-fontSize);
   outline: none;
+  
+  /* ios 대응 */
+  -webkit-appearance: none;
+  -moz-appearance: none; 
+  appearance: none;
 }
 .select:focus {
   border-bottom: 1px solid var(--main);
