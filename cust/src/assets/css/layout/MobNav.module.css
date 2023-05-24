@@ -19,7 +19,23 @@
   transform: translateY(-100vh);
 }
 
-#mobNavWrap ul {
+/* 사용자명/로그인 */
+#mobNavWrap > div {
+  padding-bottom: 24px;
+}
+/* 사용자명 */
+#mobNavWrap > div > span {
+  padding-left: 2px;
+  font-size: 1.6rem;
+}
+/* 로그인 */
+#mobNavWrap > div > a {
+  padding-left: 2px;
+  color: var(--main);
+}
+
+/* 메뉴 */
+#mobNavWrap > ul:last-child {
   display: flex;
   gap: 24px;
   flex-direction: column;

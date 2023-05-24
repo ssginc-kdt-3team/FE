@@ -1,0 +1,40 @@
+#mobNavMenuWrap {
+  padding: 16px 32px;
+  border: 0.5px solid var(--border);
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  box-shadow: 0px 8px 24px rgb(0 0 0 / 5%);
+  -webkit-box-shadow: 0px 8px 24px rgb(0 0 0 / 5%);
+}
+
+/* 상단 */
+/* #topWrap {
+  border-bottom : 0.5px solid var(--input-border);
+  padding-bottom: 10px;
+} */
+#topWrap > ion-icon {
+  color: var(--main);
+}
+#topWrap > h1 {
+  width: calc(100% - 52px);
+  padding-left: 8px;
+  font-size: 16px;
+  font-weight: 400;
+  margin: 0;
+}
+#topWrap > img {
+  width: 20px;
+}
+
+/* 하단 */
+#bottomWrap {
+  border-top : 0.5px solid var(--border);
+  margin-top: 16px;
+  padding-top: 16px;
+  gap: 10px;
+}

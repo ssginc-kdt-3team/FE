@@ -66,14 +66,10 @@ a {
   box-sizing: border-box;
 } */
 input {
-
-  /* ios 대응 */
   /* appearance: none;
   -webkit-appearance: none;
-  -webkit-border-radius: 0; */
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+  -moz-appearance: none; */
+  background-color: #fff;
 }
 
 select {
