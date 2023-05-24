@@ -8,7 +8,7 @@ function OwnerList() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/admin/owner/findAll/{page}")
+      .get("http://localhost:8080/admin/owner/findAll/${id}/{page}")
       .then((response) => {
         setOwnerList(response.data.content);
       })

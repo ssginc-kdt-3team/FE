@@ -16,15 +16,15 @@ const normFile = (e) => {
   return e.fileList;
 };
 
-function BranchReg() {
+function BranchAdd() {
   // form data 상태변수
-  const [branchName, setBranchName] = useState('');
-  const [phone, setPhone] = useState('');
+  const [branchName, setBranchName] = useState(null);
+  const [phone, setPhone] = useState(null);
   const [address, setAddress] = useState({
-    zipCode: '',
-    city: '',
-    district: '',
-    detail: '',
+    zipCode: null,
+    city: null,
+    district: null,
+    detail: null,
   });
   const [openingTime, setOpeningTime] = useState(dayjs('12:00', format));
   const [closingTime, setClosingTime] = useState(dayjs('12:00', format));
@@ -202,4 +202,4 @@ function BranchReg() {
   );
 }
 
-export default BranchReg;
+export default BranchAdd;
