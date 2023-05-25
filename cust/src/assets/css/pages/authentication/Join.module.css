@@ -68,19 +68,26 @@ input[type=radio] {
   accent-color: var(--main);
 }
 
-/* 주소 input */
-#addressWrap input {
-  /* width: 30%; */
-  width: calc((90% - 80px) / 3);
-  margin-right: 40px;
+/* 우편 번호 */
+#zipCodeWrap {
+  width: calc(50% - 20px);
 }
-#addressWrap > div > input:last-child {
-  margin: 0;
+#zipCodeWrap > input {
+  width: calc(100% - 40px - var(--button-width-sm));
+}
+
+/* 입력된 주소, 상세 주소 */
+#detailAddressWrap > input {
+  width: calc(50% - 20px);
+}
+/* 상세 주소 */
+#detailAddressWrap > input:last-child {
+  margin-left: 40px;
 }
 
 /* 취소/확인 버튼 */
 #buttonWrap {
-  margin-top: 40px;
+  margin-top: 60px;
 }
 #buttonWrap > div {
   width: var(--button-width);
@@ -122,14 +129,27 @@ input[type=radio] {
     width: 100%;
   }
 
-  /* 주소 input */
-  #addressWrap input {
-    width: calc((100% - 40px) / 3);
-    margin-right: 20px;
+  /* 우편 번호 */
+  #zipCodeWrap {
+    width: 100%;
+    gap: 20px;
+  }
+  #zipCodeWrap > input {
+    width: calc(100% - 20px - var(--button-width-sm));
+  }
+
+  /* 입력된 주소, 상세 주소 */
+  #detailAddressWrap > input {
+    width: 100%;
+  }
+  /* 상세 주소 */
+  #detailAddressWrap > input:last-child {
+    margin: 0;
   }
 
   /* 취소/확인 버튼 */
   #buttonWrap {
+    margin-top: 40px;
     flex-direction: column;
     gap: 10px;
   }

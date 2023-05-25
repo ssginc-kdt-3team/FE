@@ -8,10 +8,10 @@ import { Link } from 'react-router-dom';
 import MobNav from './MobNav';
 import SubMenu from './SubMenu';
 import { useRecoilValue } from 'recoil';
-import { loginInfo } from '../../state/loginInfo';
+import { loginState } from '../../state/loginState';
 
 function Heaader() {
-  const loginState = useRecoilValue(loginInfo);
+  const loginInfo = useRecoilValue(loginState);
 
   // 모바일 Nav 상태
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -35,9 +35,9 @@ function Heaader() {
         <div id={styles.headerWrap}>
           {/* 로그인/회원가입/프로필 */}
           <div id={styles.topWrap} className='flex-end'>
-            <Link to="/login" style={loginState.isLoggedin ? { display: 'none' } : { display: 'block' }}><span>로그인</span></Link>
-            <Link to="/join" style={loginState.isLoggedin ? { display: 'none' } : { display: 'block' }}><span>회원가입</span></Link>
-            <Link to="" style={loginState.isLoggedin ? { display: 'block' } : { display: 'none' }}><span>{loginState.id}번 님</span></Link>
+            <Link to="/login" style={loginInfo.isLoggedin ? { display: 'none' } : { display: 'block' }}><span>로그인</span></Link>
+            <Link to="/join" style={loginInfo.isLoggedin ? { display: 'none' } : { display: 'block' }}><span>회원가입</span></Link>
+            <Link to="" style={loginInfo.isLoggedin ? { display: 'block' } : { display: 'none' }}><span>{loginInfo.id}번 님</span></Link>
           </div>
 
           {/* 로고 */}

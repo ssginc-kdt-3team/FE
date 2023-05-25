@@ -3,8 +3,6 @@ import PageTitle from '../../ui/PageTitle';
 import ReviewCard from '../../widget/shop/ReviewCard';
 import Paging from '../../ui/Paging';
 import axios from 'axios';
-import { useRecoilValue } from 'recoil';
-import { loginInfo } from '../../../state/loginInfo';
 
 const reviewCardWrapStyle = {
   maxWidth: '800px',
@@ -12,7 +10,6 @@ const reviewCardWrapStyle = {
 }
 
 function Review() {
-  const loginState = useRecoilValue(loginInfo);
 
   const [reviewList, setReviewList] = useState();
   

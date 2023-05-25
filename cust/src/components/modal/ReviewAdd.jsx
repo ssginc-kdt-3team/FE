@@ -2,7 +2,7 @@ import { Modal, Rate } from 'antd';
 import React, { useReducer } from 'react';
 import styles from '../../assets/css/modal/ReviewAdd.module.css';
 import { useRecoilValue } from 'recoil';
-import { loginInfo } from '../../state/loginInfo';
+import { loginState } from '../../state/loginState';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { isEmpty, isPointSelected } from '../../utils/review/reviewValidation';
@@ -24,8 +24,8 @@ const initialReviewInfo = { // 초기값을 가지는 객체
 };
 
 function ReviewAdd({isModalOpen, setIsModalOpen, isReviewed, setIsReviewed}) {
-  const loginState = useRecoilValue(loginInfo); // 로그인 정보 가져와서
-  initialReviewInfo.userId = loginState.id; // 초기값의 userId 설정
+  const loginInfo = useRecoilValue(loginState); // 로그인 정보 가져와서
+  initialReviewInfo.userId = loginInfo.id; // 초기값의 userId 설정
 
   const { resvId } = useParams(); // 예약 id 가져와서
   initialReviewInfo.reservationId = resvId; // 초기값의 reservationId로 설정

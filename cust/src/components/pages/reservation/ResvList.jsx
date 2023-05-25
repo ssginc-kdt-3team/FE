@@ -6,11 +6,11 @@ import ResvCard from '../../widget/reservation/ResvCard';
 import Paging from '../../ui/Paging';
 import { axiosWithToken } from '../../../index';
 import { useRecoilValue } from 'recoil';
-import { loginInfo } from '../../../state/loginInfo';
+import { loginState } from '../../../state/loginState';
 
 function ResvList({isActiveList}) {
-  const loginState = useRecoilValue(loginInfo);
-  const userId = loginState.id;
+  const loginInfo = useRecoilValue(loginState);
+  const userId = loginInfo.id;
 
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   const [totalItems, setTotalItems] = useState(0); // 총 아이템 수

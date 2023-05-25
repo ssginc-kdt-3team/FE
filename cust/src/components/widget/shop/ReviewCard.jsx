@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import styles from '../../../assets/css/widget/shop/ReviewCard.module.css';
 import { useRecoilValue } from 'recoil';
-import { loginInfo } from '../../../state/loginInfo';
+import { loginState } from '../../../state/loginState';
 import { Rate } from 'antd';
 import axios from 'axios';
 
 function ReviewCard({data}) {
   console.log(data);
 
-  const loginState = useRecoilValue(loginInfo);
-  // console.log(loginState.id);
+  const loginInfo = useRecoilValue(loginState);
+  // console.log(loginInfo.id);
 
   const [isContentWrapOpen, setIsContentWrapOpen] = useState(false);
 
@@ -60,7 +60,7 @@ function ReviewCard({data}) {
           <div 
             id={styles.deleteBtn} 
             onClick={handleReviewDelete}
-            style={data.userId === loginState.id ? { display: 'block' } : { display: 'none' }}
+            style={data.userId === loginInfo.id ? { display: 'block' } : { display: 'none' }}
           >
             삭제
           </div>

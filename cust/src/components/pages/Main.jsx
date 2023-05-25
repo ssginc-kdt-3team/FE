@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
-import { loginInfo } from '../../state/loginInfo';
+import { loginState } from '../../state/loginState';
 
 function Main() {
-  const setLoginInfo = useSetRecoilState(loginInfo);
+  const setLoginState = useSetRecoilState(loginState);
 
   const handleLogout = () => {
-    setLoginInfo({
+    setLoginState({
       id: -1,
       isLoggedin: false
     });
