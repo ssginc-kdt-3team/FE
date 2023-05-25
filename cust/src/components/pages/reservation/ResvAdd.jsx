@@ -12,7 +12,7 @@ import { blockCalendar } from '../../../utils/reservation/blockCalendar';
 import PageTitle from '../../ui/PageTitle';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import { loginInfo } from '../../../state/loginInfo';
+import { loginState } from '../../../state/loginState';
 
 const initialResvInfo = { // 초기값을 가지는 객체
   reservationDate: "",
@@ -25,10 +25,11 @@ const initialResvInfo = { // 초기값을 가지는 객체
 
 function ResvAdd() {
   let { state } = useLocation();
-  console.log('넘어온 state: ' + state.branchId);
+  if(state)
+    console.log('넘어온 state: ' + state.branchId);
 
-  const loginState = useRecoilValue(loginInfo);
-  initialResvInfo.userId = loginState.id; // 초기값의 userId 설정
+  const loginInfo = useRecoilValue(loginState);
+  initialResvInfo.userId = loginInfo.id; // 초기값의 userId 설정
 
   const navigate = useNavigate();
   const [resvInfo, setResvInfo] = useState(initialResvInfo);

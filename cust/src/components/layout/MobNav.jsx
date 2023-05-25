@@ -3,18 +3,18 @@ import { Link } from 'react-router-dom';
 import styles from '../../assets/css/layout/MobNav.module.css';
 import menuData from "../../data/menuData";
 import { useRecoilValue } from 'recoil';
-import { loginInfo } from '../../state/loginInfo';
+import { loginState } from '../../state/loginState';
 import MobNavMenu from '../ui/MobNavMenu';
 
 function MobNav({isNavOpen, setIsNavOpen}) {
-  const loginState = useRecoilValue(loginInfo);
+  const loginInfo = useRecoilValue(loginState);
 
   return (
     <>
       <div id={styles.mobNavWrap} className={isNavOpen ? styles.open : styles.close}>
         <div>
-          { loginState.isLoggedin ? <span>{loginState.id}</span> : <Link to='/login' onClick={() => setIsNavOpen(false)}>로그인</Link> }
-          { loginState.isLoggedin ? ' 번 님 환영합니다!' : '이 필요합니다.' }
+          { loginInfo.isLoggedin ? <span>{loginInfo.id}</span> : <Link to='/login' onClick={() => setIsNavOpen(false)}>로그인</Link> }
+          { loginInfo.isLoggedin ? ' 번 님 환영합니다!' : '이 필요합니다.' }
         </div>
         
         <ul>

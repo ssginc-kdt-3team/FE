@@ -3,8 +3,8 @@ import { recoilPersist } from 'recoil-persist'
 
 const { persistAtom } = recoilPersist();
 
-export const loginInfo = atom({
-  key: 'loginInfo',
+export const loginState = atom({
+  key: 'loginState',
   default: {
     id: -1,
     isLoggedin: false

@@ -3,8 +3,7 @@ import React, { useState } from 'react';
 import PageTitle from '../../ui/PageTitle';
 import styles from '../../../assets/css/pages/authentication/Login.module.css';
 import { useSetRecoilState } from 'recoil';
-import { loginInfo } from '../../../state/loginInfo';
-import { userInfo } from '../../../state/userInfo';
+import { loginState } from '../../../state/loginState';
 import { useNavigate } from 'react-router-dom';
 import next from '../../../assets/images/icons/next.png';
 import { isEmailValid } from '../../../utils/authentication/emailValidation';
@@ -12,8 +11,7 @@ import { axiosWithToken } from '../../../index';
 import { isInputEmpty } from '../../../utils/authentication/loginValidation';
 
 function Login() {
-  const setLoginInfo = useSetRecoilState(loginInfo);
-  const setUserInfo = useSetRecoilState(userInfo);
+  const setLoginState = useSetRecoilState(loginState);
 
   const [email, setEmail] = useState(''); // 사용자가 입력한 email
   const [password, setPassword] = useState(''); // 사용자가 입력한 password                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
@@ -30,7 +28,7 @@ function Login() {
           password: password, // password
         })
         .then(res => { // 받아오는 정보가 있다
-          console.log(res.data.id);
+          console.log(res.data);
           // console.log('res.data.token: ' + res.data.token);
           
           // const accessToken = res.data.token;
@@ -42,7 +40,7 @@ function Login() {
           if(res.data === "")
             alert('로그인에 실패하였습니다.\n아이디와 비밀번호를 확인하세요.');
           else {
-            setLoginInfo({ // 로그인된 상태로 변경
+            setLoginState({ // 로그인된 상태로 변경
               id: res.data.id,
               isLoggedin: true
             });

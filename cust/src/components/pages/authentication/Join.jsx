@@ -5,6 +5,7 @@ import styles from '../../../assets/css/pages/authentication/Join.module.css';
 import { useNavigate } from 'react-router-dom';
 import { isEmailValid } from '../../../utils/authentication/emailValidation';
 import { isInputEmpty, isPasswordValid, checkEmailDup } from '../../../utils/authentication/joinValidation';
+import Postcode from '../../popUp/PostCode';
 
 // action에 따라 안에 데이터를 어떻게 변화시킬지 설정
 const reducer = (state, action) => {
@@ -68,20 +69,30 @@ function Join() {
     }
   }, [password, confirmPassword])
 
+  
+  // 주소 검색
+  const handleAddressChange = (data) => {
+    console.log(data);
+    
+    dispatch({ name: 'city', value: data.city });
+    dispatch({ name: 'district', value: data.district });
+    dispatch({ name: 'zipCode', value: data.zipCode });
+  };
+
 
   // 회원가입 처리  
   const handleJoin = () => {
-    if(!isInputEmpty(userInfo)) { // 빈칸 확인
-      // if(isEmailValid(userInfo.email)) { // 이메일 검증
-      if(!canUseEamil) { // 이메일이 이미 사용중이면
-        alert("이메일 중복확인을 해주세요.");
-        return;
-      }
+    // if(!isInputEmpty(userInfo)) { // 빈칸 확인
+      // // if(isEmailValid(userInfo.email)) { // 이메일 검증
+      // if(!canUseEamil) { // 이메일이 이미 사용중이면
+      //   alert("이메일 중복확인을 해주세요.");
+      //   return;
+      // }
       
-      if(!isPasswordConfirmed) { // 비밀번호 확인
-        alert("비밀번호를 확인해주세요.");
-        return;
-      }
+      // if(!isPasswordConfirmed) { // 비밀번호 확인
+      //   alert("비밀번호를 확인해주세요.");
+      //   return;
+      // }
       
       console.log(userInfo);
 
@@ -99,7 +110,7 @@ function Join() {
       //   alert("오류가 발생하였습니다.");
       //   console.log(err);
       // });
-    }
+    // }
   }
 
   return (
@@ -166,12 +177,31 @@ function Join() {
           </div>
 
           {/* 주소 */}
-          <div id={styles.addressWrap}>
+          <div id={styles.addressWrap} className='flex flex-col'>
             <label>ADDRESS</label>
-            <input className={styles.joinInput} name="zipCode" type='text' placeholder='우편번호' onChange={handleInput}/>
-            <div>
-              <input className={styles.joinInput} name="city" type='text' placeholder='시' onChange={handleInput}/>
-              <input className={styles.joinInput} name="district" type='text' placeholder='구' onChange={handleInput}/>
+            <div id={styles.zipCodeWrap} className='space-between flex-gap-40'>
+              <input 
+                className={styles.joinInput} 
+                name="zipCode" 
+                type='text' 
+                value={userInfo.zipCode} 
+                placeholder='우편번호' 
+                onChange={handleAddressChange}
+                readOnly
+              />
+              <Postcode onChange={handleAddressChange}/>
+            </div>
+
+            <div id={styles.detailAddressWrap}>
+              <input 
+                className={styles.joinInput} 
+                name="city_district" 
+                type='text' 
+                value={userInfo.city + " " + userInfo.district} 
+                placeholder='' 
+                onChange={handleAddressChange}
+                readOnly
+              />
               <input className={styles.joinInput} name="detail" type='text' placeholder='상세주소' onChange={handleInput}/>
             </div>
           </div>
