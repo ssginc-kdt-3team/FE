@@ -23,7 +23,7 @@
   width: 1px;
   height: 10px;
   content: "";
-  background: var(--devider);
+  background: var(--header-border);
   margin: 0 15px;
   display: inline-block;
 }

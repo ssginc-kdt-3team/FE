@@ -33,7 +33,7 @@
 
 /* 이전 */
 .pagination > li:nth-child(n+2):nth-child(-n+2) {
-  background-image: url('../../images/icons/next.png');
+  background-image: url('../../images/icons/next_999.png');
   transform: scaleX(-1);
   cursor: pointer;
 }
@@ -44,7 +44,7 @@
 
 /* 다음 */
 .pagination > li:nth-last-child(2) {
-  background-image: url('../../images/icons/next.png');
+  background-image: url('../../images/icons/next_999.png');
   cursor: pointer;
 }
 .pagination > li:nth-last-child(2):active {
@@ -53,7 +53,7 @@
 
 .pagination > li a {
   text-decoration: none;
-  color: var(--font);
+  color: var(--description);
 }
 
 .pagination > li.active a { /* 눌려져 있을 때 */

@@ -10,22 +10,26 @@ function MobNav({isNavOpen, setIsNavOpen}) {
   const loginState = useRecoilValue(loginInfo);
 
   return (
-    <div id={styles.mobNavWrap} className={isNavOpen ? styles.open : styles.close}>
-      <div>
-        { loginState.isLoggedin ? <span>{loginState.id}</span> : <Link to='/login' onClick={() => setIsNavOpen(false)}>로그인</Link> }
-        { loginState.isLoggedin ? ' 번 님 환영합니다!' : '이 필요합니다.' }
+    <>
+      <div id={styles.mobNavWrap} className={isNavOpen ? styles.open : styles.close}>
+        <div>
+          { loginState.isLoggedin ? <span>{loginState.id}</span> : <Link to='/login' onClick={() => setIsNavOpen(false)}>로그인</Link> }
+          { loginState.isLoggedin ? ' 번 님 환영합니다!' : '이 필요합니다.' }
+        </div>
+        
+        <ul>
+          {
+            menuData && menuData.map( data => (
+              // <Link to={data.link} key={data.id} onClick={() => setIsNavOpen(false)}>
+                <MobNavMenu key={data.id} data={data} setIsNavOpen={setIsNavOpen}/>
+              // </Link>
+            ))
+          }
+        </ul>
       </div>
-      
-      <ul>
-        {
-          menuData && menuData.map( data => (
-            // <Link to={data.link} key={data.id} onClick={() => setIsNavOpen(false)}>
-              <MobNavMenu key={data.id} data={data} setIsNavOpen={setIsNavOpen}/>
-            // </Link>
-          ))
-        }
-      </ul>
-    </div>
+
+      {/* <div id={styles.background} style={isNavOpen ? { opacity: '0.7', height: '100%' } : { opacity: '0', height: '0' }}></div> */}
+    </>
   );
 };
 

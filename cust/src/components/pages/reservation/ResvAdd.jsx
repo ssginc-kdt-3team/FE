@@ -25,7 +25,7 @@ const initialResvInfo = { // 초기값을 가지는 객체
 
 function ResvAdd() {
   let { state } = useLocation();
-  console.log(state);
+  console.log('넘어온 state: ' + state.branchId);
 
   const loginState = useRecoilValue(loginInfo);
   initialResvInfo.userId = loginState.id; // 초기값의 userId 설정
