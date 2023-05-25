@@ -47,7 +47,7 @@ const MainRoutes = {
             children: [
                 
                 {
-           		 path: '/myprofile',
+           		 path: '/profile',
           		 element: <MyProfile />
         	       },
                 {

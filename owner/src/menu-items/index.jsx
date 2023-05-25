@@ -1,11 +1,11 @@
 // project import
 import pages from './pages';
-// import utilities from './utilities';
-// import shop from './shop';
+import profile from './profile';
 import resv from './resv';
 import mgt from './mgt';
-import profile from './profile';
 
+// import utilities from './utilities';
+// import shop from './shop';
 
 // ==============================|| MENU ITEMS ||============================== //
 

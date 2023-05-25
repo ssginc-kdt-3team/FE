@@ -17,7 +17,7 @@ const profile = {
             id: 'profile',
             title:'profile',
             type: 'item',
-            url: '/myprofile',
+            url: '/profile',
             icon: icons.UserOutlined
         }
         
