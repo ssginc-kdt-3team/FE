@@ -13,7 +13,7 @@ function MgtInfo() {
 
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/owner/shop/detail/${40}`)
+    axios.get(`http://localhost:8080/owner/shop/detail/${41}`)
     .then(res => {
       console.log(res.data);
       setShopInfo(res.data);

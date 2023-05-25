@@ -3,6 +3,7 @@ import { configureStore } from '@reduxjs/toolkit';
 
 // project import
 import reducers from './reducers';
+import ownerReducer from './reducers';
 
 // ==============================|| REDUX TOOLKIT - MAIN STORE ||============================== //
 
