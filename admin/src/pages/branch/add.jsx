@@ -99,12 +99,12 @@ function BranchAdd() {
   };
   
   //주소검색
-  const handleAddressChange = (data) => {
+  const handleAddressChange = (value) => {
     setAddress({
-      zipCode: data.zonecode,
-      city: data.city,
-      district: data.district,
-      detail: data.detail,
+      zipCode: value.zonecode,
+      city: value.city,
+      district: value.district,
+      detail: value.detail,
     });
   };
 

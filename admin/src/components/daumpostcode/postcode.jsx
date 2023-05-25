@@ -21,8 +21,7 @@ const Postcode = ({ onChange }) => {
       fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
     }
     onChange({ 
-      zonecode: 
-      data.zonecode, 
+      zonecode: data.zonecode, 
       city: data.address, 
       district: data.buildingName,  
       
