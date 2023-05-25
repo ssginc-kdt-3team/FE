@@ -77,7 +77,7 @@ select {
   padding: 5px 0;
   background-color: white;
   /*화살표 배경 넣기*/
-  background: url('../../images/icons/down.png') no-repeat 98% 50% #fff; /* 화살표 select박스 오른쪽 중앙 배치, 배경 흰색 */
+  background: url('../../images/icons/down.png') no-repeat 100% 50% #fff; /* 화살표 select박스 오른쪽 중앙 배치, 배경 흰색 */
   background-size: 20px;
   
   border: 0;

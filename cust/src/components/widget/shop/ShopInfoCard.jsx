@@ -11,7 +11,8 @@ function ShopInfoCard({data}) {
           <div id={styles.topWrap} className='flex flex-row flex-gap-40'>
             <img src={noImage} alt=''/>
             <div>
-              <p><span>TIME</span>{data.shopOpenTime}~{data.shopCloseTime} (주문 마감: {data.shopOrderCloseTime})</p>
+              운영시간 넣어야
+              {/* <p><span>TIME</span>{data.shopOpenTime.slice(0, 5)}~{data.shopCloseTime.slice(0, 5)} (주문 마감: {data.shopOrderCloseTime.slice(0, 5)})</p> */}
               <p><span>LOCATION</span>{data.shopLocation}</p>
               <p><span>CALL</span>{data.shopCall}</p>
               <p>{data.shopInfo}</p>

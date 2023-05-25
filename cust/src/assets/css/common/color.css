@@ -8,7 +8,9 @@
 
   /* border */
   --input-border: #ccc;
-  --devider: #aeaeae;
+  --header-border: #aeaeae;
+  /* --devide-border: #e5e7ea; */
+  --border: #ebebeb;
 
   /* font */
   --font: #333;
@@ -29,7 +31,6 @@
   --gray-150: #f3f5f7;
   --red: #ca3232;
 
-  --border: #ebebeb;
   --price: #f95a00;
 
 
