@@ -1,8 +1,8 @@
 // project import
-import pages from './pages';
-import profile from './profile';
-import resv from './resv';
-import mgt from './mgt';
+import pages from './Pages';
+import profile from './Profile';
+import resv from './Resv';
+import mgt from './Mgt';
 
 // import utilities from './utilities';
 // import shop from './shop';
