@@ -5,7 +5,7 @@ import { PlusOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import dayjs from 'dayjs';
 
-//시간 형식
+// 시간 형식
 const format = 'HH:mm';
 
 const normFile = (e) => {
@@ -19,51 +19,53 @@ function ShopAdd() {
   // form data 상태변수
   const [shopName, setShopName] = useState('');
   const [ownerName, setOwnerName] = useState('');
+  const [ownerId, setownerId] = useState('40');
+  const [branchId, setBranchId] = useState('1');
   const [shopInfo, setShopInfo] = useState('');
   const [location, setLocation] = useState('');
   const [businessCeo, setBusinessCeo] = useState('');
   const [businessNumber, setBusinessNumber] = useState('');
   const [orderCloseTime, setOrderCloseTime] = useState('');
   const [seat, setSeat] = useState('');
-  // const [phone, setPhone] = useState('');
   const [openTime, setOpenTime] = useState(dayjs('12:00', format));
   const [closeTime, setCloseTime] = useState(dayjs('12:00', format));
   const [openDay, setOpenDay] = useState(dayjs());
-  const [photos, setPhotos] = useState([]);
-  const [businessPhotos, setBusinessPhotos] = useState([]);
+  const [photos, setPhotos] = useState([]);                            //shopImg
+  const [businessPhotos, setBusinessPhotos] = useState([]);             //businessImg
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
   const formRef = useRef(null);
 
   const onFileUpload = async () => {
     const shopData = {
-      name: shopName,
-      // phone,
+      shopName: shopName,
       openTime: openTime.format(format),
       closeTime: closeTime.format(format),
       openDay: openDay.format('YYYY-MM-DD'),
-      shopInfo,
-      location,
-      seat,
-      ownerName,
+      shopInfo: shopInfo ,
+      location: location ,
+      seat: seat ,
+      ownerName ,
       businessCeo,
       businessNumber,
       orderCloseTime: orderCloseTime.format(format),
+      ownerId: '', // ownerId 값 추가
+      branchId: '', // branchId 값 추가
     };
-  
+
     // form data > shophData, shopImg, businessImg
     const formData = new FormData();
     const json = JSON.stringify(shopData);
     const blob = new Blob([json], { type: 'application/json' });
     formData.append('shopData', blob);
-  
+
     photos.forEach((file) => {
       formData.append('shopImg', file.originFileObj);
     });
-    photos.forEach((file) => {
+    businessPhotos.forEach((file) => { // 수정: businessPhotos 사용
       formData.append('businessImg', file.originFileObj);
     });
-  
+
     try {
       const response = await axios.post('http://localhost:8080/owner/shop/add', formData, {
         headers: {
@@ -72,6 +74,8 @@ function ShopAdd() {
       });
       console.log(response);
       console.log(formData);
+      console.log(formData.shopImg);
+      console.log(formData.businessImg);
       navigate('/mgt/info');
     } catch (error) {
       console.error('Error adding shop:', error);
@@ -84,14 +88,14 @@ function ShopAdd() {
 
   const handleFileChange = (info) => {
     const fileList = normFile(info);
-    if (info.target.name === 'photos') {
+    if (info.target.name === 'shopImg') {
       setPhotos(fileList);
     } else if (info.target.name === 'businessImg') {
       setBusinessPhotos(fileList);
     }
   };
 
-  //모달
+  // 모달
   const handleSubmit = () => {
     onFileUpload();
   };
@@ -109,8 +113,7 @@ function ShopAdd() {
     setIsModalOpen(false);
   };
 
-
-//정보 입력 폼
+  // 정보 입력 폼
   return (
     <Card
       title="매장 등록"
@@ -138,24 +141,30 @@ function ShopAdd() {
         onFinish={onFinish}
       >
 
+        <Form.Item label="지점id" name="branchId" required>
+          <Input value={branchId} onChange={(e) => setBranchId(e.target.value)} />
+        </Form.Item>
+        <Form.Item label="점주id" name="ownerId" required>
+          <Input value={ownerId} onChange={(e) => setownerId(e.target.value)} />
+        </Form.Item>
         <Form.Item label="매장명" name="shopName" required>
           <Input value={shopName} onChange={(e) => setShopName(e.target.value)} />
-        </Form.Item> 
+        </Form.Item>
         <Form.Item label="매장 설명" name="shopInfo" required>
           <Input value={shopInfo} onChange={(e) => setShopInfo(e.target.value)} />
-        </Form.Item> 
+        </Form.Item>
         <Form.Item label="지점 내 위치" name="location" required>
           <Input value={location} onChange={(e) => setLocation(e.target.value)} />
-        </Form.Item> 
+        </Form.Item>
         <Form.Item label="좌석 수" name="seat" required>
           <Input value={seat} onChange={(e) => setSeat(e.target.value)} />
-        </Form.Item> 
+        </Form.Item>
         {/* 점주 id에서 name 가져오기  */}
         <Form.Item label="점주 이름" name="ownername" required>
           <Input value={ownerName} onChange={(e) => setOwnerName(e.target.value)} />
-        </Form.Item> 
+        </Form.Item>
 
-        {/*나중에 추가하기
+        {/* 나중에 추가하기
          <Form.Item
           label="매장 전화번호"
           name="phone"
@@ -190,7 +199,7 @@ function ShopAdd() {
           getValueFromEvent={normFile}
         >
           <Upload
-            name="photos"
+            name="shopImg"
             action="/upload.do"
             listType="picture-card"
             beforeUpload={() => false} // Disable automatic upload
@@ -205,10 +214,10 @@ function ShopAdd() {
         </Form.Item>
         <Form.Item label="사업주 이름" name="businessCeo" required>
           <Input value={businessCeo} onChange={(e) => setBusinessCeo(e.target.value)} />
-        </Form.Item> 
+        </Form.Item>
         <Form.Item label="사업자 등록번호" name="businessNumber" required>
           <Input value={businessNumber} onChange={(e) => setBusinessNumber(e.target.value)} />
-        </Form.Item> 
+        </Form.Item>
         <Form.Item
           label="사업자 등록증 사진"
           name="businessImg"
@@ -227,18 +236,18 @@ function ShopAdd() {
             onChange={handleFileChange}
             fileList={businessPhotos}
           >
-             <div>
+            <div>
               <PlusOutlined />
               <div style={{ marginTop: 8 }}></div>
             </div>
-         </Upload>
-         </Form.Item> 
+          </Upload>
+        </Form.Item>
 
         <Form.Item>
           <Button type="primary" onClick={showModal}>
             등록하기
           </Button>
-          <Modal title="등록" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+          <Modal title="등록" visible={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
             <p>매장을 등록하시겠습니까?</p>
           </Modal>
         </Form.Item>

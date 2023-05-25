@@ -6,6 +6,8 @@ import menu from './menu';
 
 // ==============================|| COMBINE REDUCERS ||============================== //
 
-const reducers = combineReducers({ menu });
+const reducers = combineReducers({
+     menu,
+});
 
 export default reducers;
