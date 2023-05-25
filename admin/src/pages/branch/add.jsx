@@ -97,13 +97,14 @@ function BranchAdd() {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+  
   //주소검색
   const handleAddressChange = (data) => {
     setAddress({
       zipCode: data.zonecode,
       city: data.city,
       district: data.district,
-      detail: data.detailAddress,
+      detail: data.detail,
     });
   };
 
