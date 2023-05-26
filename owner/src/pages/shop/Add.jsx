@@ -55,16 +55,22 @@ function ShopAdd() {
 
     // form data > shophData, shopImg, businessImg
     const formData = new FormData();
+
     const json = JSON.stringify(shopData);
     const blob = new Blob([json], { type: 'application/json' });
     formData.append('shopData', blob);
 
+    console.log(FormData);
+    console.log(shopData);
+
     photos.forEach((file) => {
       formData.append('shopImg', file);
+      console.log(file);
     });
     
     businessPhotos.forEach((file) => { // 수정: businessPhotos 사용
       formData.append('businessImg', file);
+      console.log(file);
     });
 
     try {
@@ -74,10 +80,10 @@ function ShopAdd() {
         },
       });
       console.log(response);
-      console.log(formData);
-      console.log(formData.get('shopImg')); // 수정: formData.get() 메서드로 값을 가져옴
-      console.log(formData.get('businessImg')); // 수정: formData.get() 메서드로 값을 가져옴
-
+      console.log(formData.shopData);
+      console.log(formData.shopImg);
+      console.log(formData.businessImg);
+     
       if (response.status === 200) {
         setIsModalOpen(true);
       }
@@ -90,16 +96,46 @@ function ShopAdd() {
     // Handle form submission if needed
   };
 
-  const handleFileChange = (info, fieldName) => {
-    if (info.file.status === 'done' || info.file.status === 'removed') {
-      // 수정: fileList 대신 file을 사용하여 배열에 추가
-      if (fieldName === 'shopImg') {
-        setPhotos(info.fileList.map((file) => file.originFileObj));
-      } else if (fieldName === 'businessImg') {
-        setBusinessPhotos(info.fileList);
-      }
+  const handleAddImages = (event, fieldName) => {
+    const imageLists = event.target.files;
+    let imageUrlLists = [];
+  
+    for (let i = 0; i < imageLists.length; i++) {
+      const currentImageUrl = URL.createObjectURL(imageLists[i]);
+      imageUrlLists.push(currentImageUrl);
+    }
+  
+    if (imageUrlLists.length > 10) {
+      imageUrlLists = imageUrlLists.slice(0, 10);
+    }
+  
+    if (fieldName === 'shopImg') {
+      setPhotos(imageUrlLists);
+    } else if (fieldName === 'businessImg') {
+      setBusinessPhotos(imageUrlLists);
     }
   };
+
+  // const handleFileChange = (info, fieldName) => {
+  //   if (info.file.status === 'done' || info.file.status === 'removed') {
+  //     // Create a new array for each field
+  //     if (fieldName === 'shopImg') {
+  //       setPhotos([info.file.originFileObj]);
+  //     } else if (fieldName === 'businessImg') {
+  //       setBusinessPhotos([info.file]);
+  //     }
+  //   }
+  // };
+  // const handleFileChange = (info, fieldName) => {
+  //   if (info.file.status === 'done' || info.file.status === 'removed') {
+  //     // 수정: fileList 대신 file을 사용하여 배열에 추가
+  //     if (fieldName === 'shopImg') {
+  //       setPhotos(info.fileList.map((file) => file.originFileObj));
+  //     } else if (fieldName === 'businessImg') {
+  //       setBusinessPhotos(info.fileList);
+  //     }
+  //   }
+  // };
 
   // 모달
   const handleSubmit = () => {
@@ -205,13 +241,13 @@ function ShopAdd() {
           getValueFromEvent={normFile}
         >
           <Upload
-            name="shopImg"
-            action="/upload.do"
-            listType="picture-card"
-            beforeUpload={() => false} // Disable automatic upload
-            onChange={(e) => handleFileChange(e, 'shopImg')}
-            fileList={photos}
-          >
+          name="shopImg"
+          action="/upload.do"
+          listType="picture-card"
+          beforeUpload={() => false} // Disable automatic upload
+          onChange={(e) => handleAddImages(e, 'shopImg')}
+          fileList={photos}
+>
             <div>
               <PlusOutlined />
               <div style={{ marginTop: 8 }}></div>
@@ -234,13 +270,13 @@ function ShopAdd() {
           valuePropName="fileList"
           getValueFromEvent={normFile}
         >
-          <Upload
-            name="businessImg"
-            action="/upload.do"
-            listType="picture-card"
-            beforeUpload={() => false} // Disable automatic upload
-            onChange={(e) => handleFileChange(e, 'businessImg')}
-            fileList={businessPhotos}
+         <Upload
+          name="businessImg"
+          action="/upload.do"
+          listType="picture-card"
+          beforeUpload={() => false} // Disable automatic upload
+          onChange={(e) => handleAddImages(e, 'businessImg')}
+          fileList={businessPhotos}
           >
             <div>
               <PlusOutlined />

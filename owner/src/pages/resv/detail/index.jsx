@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import { axiosWithBaseUrl } from 'App';
 import { Card } from 'antd';
 import Reject from "pages/resv/detail/rejectbtn";
 
 function ResvDetail() {
   const { id } = useParams();
   const [resv, setResv] = useState(null);
-
+  
   useEffect(() => {
-    axios
-      .get(`http://localhost:8080/owner/reservation/${id}`)
+    axiosWithBaseUrl
+      .get(`/owner/reservation/${id}`)
       .then((res) => {
         setResv(res.data);
         console.log(res.data);

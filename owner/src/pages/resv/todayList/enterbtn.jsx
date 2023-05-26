@@ -2,7 +2,7 @@ import { Button, Modal } from 'antd';
 import { useState } from 'react';
 import { axiosWithBaseUrl } from "App";
 
-const Enter = ({id}) => {
+const Enter = ({id, fetchResTdvList }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
     setIsModalOpen(true);
@@ -22,6 +22,7 @@ const Enter = ({id}) => {
       .then((res) => {
         console.log(res.data);
         console.log("입장완료");
+        fetchResTdvList(); 
       })
       .catch((error) => {
         console.log(error);
@@ -33,7 +34,10 @@ const Enter = ({id}) => {
       <Button type="primary" onClick={showModal}>
        입장
       </Button>
-      <Modal title="입장" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+      <Modal title="입장" 
+      open={isModalOpen} 
+      onOk={handleOk} 
+      onCancel={handleCancel}>
         <p>입장 처리하시겠습니까?</p>
       </Modal>
     </>
