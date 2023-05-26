@@ -6,13 +6,13 @@ import dayjs from 'dayjs';
 import styles from '../../../assets/css/pages/reservation/ResvAdd.module.css';
 import '../../../assets/css/widget/Calendar.css'; // css import
 import Counter from '../../widget/reservation/Counter';
-// import { axiosWithBaseUrl } from '../../../App'
 import TimePicker from '../../widget/reservation/TimePicker';
 import { blockCalendar } from '../../../utils/reservation/blockCalendar';
 import PageTitle from '../../ui/PageTitle';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { loginState } from '../../../state/loginState';
+import Filter from '../../widget/reservation/Filter';
 
 const initialResvInfo = { // 초기값을 가지는 객체
   reservationDate: "",
@@ -24,9 +24,11 @@ const initialResvInfo = { // 초기값을 가지는 객체
 };
 
 function ResvAdd() {
-  let { state } = useLocation();
+  const { state } = useLocation();
   if(state)
-    console.log('넘어온 state: ' + state.branchId);
+    console.log('[넘어온 state] 지점id :' + state.branchId + ' / 매장id : ' + state.shopId);
+  
+  const [locationState, setLocationState] = useState(state === null ? null : state); // 받아온 state 값을 useState로 관리
 
   const loginInfo = useRecoilValue(loginState);
   initialResvInfo.userId = loginInfo.id; // 초기값의 userId 설정
@@ -34,29 +36,11 @@ function ResvAdd() {
   const navigate = useNavigate();
   const [resvInfo, setResvInfo] = useState(initialResvInfo);
 
-  // 지점 선택 처리
-  const handleBranchSelect = (value) => {
-    setBranchId(value); // 지점 id 변경
-    // setShopId(shopList.length !== 0 ? shopList[0].id : null); // 매장 id 초기화
-    state = null; // 초기값을 null로
-  }
-
-  // 매장 선택 처리
-  const handleShopSelect = (e) => { // 매장 정보가 변경될 때 마다
-    console.log(e.target.value);
-    setResvInfo({ // 예약 정보 업데이트
-      ...resvInfo,
-      shopId: e.target.value
-    })
-
-    setShopId(e.target.value); // 매장 id 변경
-    state = null; // 초기값을 null로
-  }
 
   // 메모 처리
   const handleTextArea = (e) => {
     let { name, value } = e.target;
-    console.log('name: ' + name + ' value: ' + value);
+    console.log('name: ' + name + ' / value: ' + value);
 
     setResvInfo({
       ...resvInfo,
@@ -64,65 +48,17 @@ function ResvAdd() {
     })
   };
 
-  const [branchList, setBranchList] = useState(null);
-  const [shopList, setShopList] = useState(null);
-
   const [branchId, setBranchId] = useState(state ? state.branchId : 1); // 선택된 지점 id, state가 있으면 초기값을 state의 branchId로 설정
   const [shopId, setShopId] = useState(state ? state.shopId : 0); // 선택된 매장 id, state가 있으면 초기값을 state의 shopId로 설정
   initialResvInfo.shopId = shopId; // 초기값의 shopId 설정
 
   const [selectedDate, setSelectedDate] = useState(moment(new Date()).format("YYYY-MM-DD")); // 선택된 날짜
 
-  const [possibleTimeList, setPossibleTimeList] = useState(null);
+  // const [possibleTimeList, setPossibleTimeList] = useState(null);
   const [selectedTime, setSelectedTime] = useState("00:00:00"); // 선택된 시간
 
   const [peopleCount, setPeopleCount] = useState(1); // 예약 인원 카운트
   const [childCount, setChildCount] = useState(0); // 유아 수 카운트
-
-  console.log('지점id: ' + branchId + ' 매장id: ' + shopId)
-  // console.log(shopList ? shopList[0] : '')
-  // 지점 정보, 지점별 매장 정보 가져오기
-  useEffect(() => {
-    const fetchData = async () => { // async는 함수 앞에 붙여서 해당 함수가 Promise를 반환하는 비동기 함수임을 나타냄
-      try {
-        const [res1, res2] = await Promise.all([ // await는 Promise가 실행 될 때까지 대기
-          axios.get('/branch/all'),
-          axios.get(`/branch/shops/${branchId}`),
-        ]);
-        console.log(res1.data);
-        console.log(res2.data);
-        setBranchList(res1.data);
-        setShopList(res2.data);
-        if(state === null) {
-          console.log('state 있음')
-          setShopId(res2.data[0].id);
-        }
-        // setPossibleTimeList(res3.data);
-        // console.log(res3.data)
-      }
-      catch (err) {
-        console.log(err);
-      }
-    };
-  
-    fetchData(); // 처음 렌더링 시에도 실행되도록 함
-  }, [branchId, state]); // 지점, 매장, 날짜가 변할 때 마다 리렌더링
-
-
-  // 매장별 예약 가능 시간 정보 가져오기
-  useEffect(() => {
-    axios.post('/customer/reservation/possible', {
-      shopId: shopId,
-      date: moment(selectedDate).format("YYYY-MM-DD")
-    })
-    .then(res => {
-      console.log(res.data);
-      setPossibleTimeList(res.data);
-    })
-    .catch(err => {
-      console.log(err);
-    })
-  }, [shopId, selectedDate]);
 
   // 매장이 바뀌면 지점, 날짜는 그대로
   // 날짜가 바뀌면 지점, 매장은 그대로
@@ -137,7 +73,6 @@ function ResvAdd() {
       shopId: shopId
     }))
   }, [selectedDate, selectedTime, peopleCount, childCount, shopId])
-
 
   // 예약하기 처리
   const handleReserve = () => {
@@ -166,23 +101,16 @@ function ResvAdd() {
         {/* 지점이랑 매장의 id, 이름 가져와서 option 안에 넣는다 */}
         <form id={styles.resvForm} className='flex flex-col flex-gap-40'>
           <div id={styles.topWrap} className='flex flex-gap-40'>
-            {/* 지점 선택 */}
-            <select onChange={(e) => handleBranchSelect(e.target.value)} value={branchId}>
-              {
-                branchList && branchList.map( branch => (
-                  <option key={branch.id} value={branch.id}>{branch.name}</option>
-                ))
-              }
-            </select>
-
-            {/* 매장 선택 */}
-            <select onChange={handleShopSelect} value={shopId}>
-              {
-                 shopList && shopList.map( (shop, index) => (
-                  <option key={shop.id} value={shop.id}>{shop.name}</option>
-                ))
-              }
-            </select>
+            <Filter 
+              state={locationState} 
+              setState={setLocationState}
+              branchId={branchId} 
+              setBranchId={setBranchId} 
+              shopId={shopId} 
+              setShopId={setShopId} 
+              resvInfo={resvInfo} 
+              setResvInfo={setResvInfo}
+            />
           </div>
         
           <div id={styles.middleWrap} className='grid-2c flex-gap-80'>
@@ -228,7 +156,7 @@ function ResvAdd() {
               <div>
                 <label>시간 선택</label>
                 <TimePicker 
-                  possibleTimeList={possibleTimeList} 
+                  shopId={shopId}
                   defaultValue="00:00" 
                   setSelectedTime={setSelectedTime} 
                   selectedDate={moment(selectedDate).format("YYYY-MM-DD")}

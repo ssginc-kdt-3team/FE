@@ -32,7 +32,7 @@ function ResvUpdate() {
 
   const [selectedDate, setSelectedDate] = useState(null); // 선택된 날짜
 
-  const [possibleTimeList, setPossibleTimeList] = useState(null);
+  // const [possibleTimeList, setPossibleTimeList] = useState(null);
   const [selectedTime, setSelectedTime] = useState("00:00:00"); // 선택된 시간
 
   const [peopleCount, setPeopleCount] = useState(1); // 예약 인원 카운트
@@ -61,20 +61,9 @@ function ResvUpdate() {
     });
   }, [resvId])
 
-  // 시간 정보 가져오기
-  useEffect(() => {
-    if(shopId !== null && selectedDate !== null) {
-      axios.post('/customer/reservation/possible', {
-        shopId: shopId ,
-        date: moment(selectedDate).format("YYYY-MM-DD")
-      })
-      .then(res => {
-        console.log(res.data);
-        setPossibleTimeList(res.data);
-      })
-      .catch(err => console.log(err));
-    }
-  }, [shopId, selectedDate]);
+  // useEffect(() => {
+  //   console.log('selectedTime : ' + selectedTime);
+  // }, [selectedTime])
 
   // 시간, 날짜, 예약인원, 유아 수가 바뀔 때마다 resvInfo 업데이트
   useEffect(() => {
@@ -91,15 +80,14 @@ function ResvUpdate() {
   const handleReserve = () => {
     console.log(resvInfo);
 
-    axios.post(`/customer/reservation/update/${resvId}`, resvInfo)
-      .then(res => {
-        console.log(res);
-        console.log(resvInfo);
-        alert('수정이 완료되었습니다.');
-        navigate(`/resv/${resvId}`, { replace: true }); // 예약상세 화면으로 이동
-
-      })
-      .catch(err => console.log(err))
+    // axios.post(`/customer/reservation/update/${resvId}`, resvInfo)
+    // .then(res => {
+    //   console.log(res);
+    //   console.log(resvInfo);
+    //   alert('수정이 완료되었습니다.');
+    //   navigate(`/resv/${resvId}`, { replace: true }); // 예약상세 화면으로 이동
+    // })
+    // .catch(err => console.log(err))
   }
 
   return (
@@ -114,14 +102,14 @@ function ResvUpdate() {
             {/* 지점 선택 */}
             <select disabled>
               {
-                previousResvInfo && (<option value={previousResvInfo.branchName} selected>{previousResvInfo.branchName}</option>)
+                previousResvInfo && (<option value={previousResvInfo.branchName}>{previousResvInfo.branchName}</option>)
               }          
             </select>
 
             {/* 매장 선택 */}   
             <select disabled>
               {
-                previousResvInfo && (<option value={previousResvInfo.shopName} selected>{previousResvInfo.shopName}</option>)
+                previousResvInfo && (<option value={previousResvInfo.shopName}>{previousResvInfo.shopName}</option>)
               }
             </select>
           </div>
@@ -169,7 +157,8 @@ function ResvUpdate() {
               <div>
                 <label>시간 선택</label>
                 <TimePicker 
-                  possibleTimeList={possibleTimeList} 
+                  // possibleTimeList={possibleTimeList}
+                  shopId={shopId} 
                   defaultValue={selectedTime}
                   setSelectedTime={setSelectedTime} 
                   selectedDate={moment(selectedDate).format("YYYY-MM-DD")}
@@ -180,10 +169,8 @@ function ResvUpdate() {
               <div>
                 <label>요구사항 <span>* 100자 이하로 작성해주세요.</span></label>
                 <textarea name='memo' type='text' cols={50} rows={3} maxLength="100" ref={memoTextarea} onChange={(e) => setMemo(e.target.value)}></textarea> 
-              </div>       
-
-              {/* 시간 선택 */}
-              {/* <TimePicker possibleTimeList={possibleTimeList} defaultValue={selectedTime} setSelectedTime={setSelectedTime}/> */}
+              </div>
+              
             </div>
           </div>
 
