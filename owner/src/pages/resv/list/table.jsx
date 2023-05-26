@@ -13,7 +13,7 @@ const ResvTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(10);
-  const [selectedDate, setSelectedDate] = useState({start:"1800-01-01", end:"2300-01-01"});
+  const [selectedDate, setSelectedDate] = useState({start:"1990-01-01", end:"2300-01-01"});
   const [selectedType, setSelectedType] = useState("all");
 
   useEffect(() => {
@@ -24,8 +24,8 @@ const ResvTable = () => {
     setLoading(true);
     const currentPageInt = parseInt(currentPage, 10); // Convert currentPage to an integer
     const requestBody = {
-      start: selectedDate.start,                       // selectedDate 객체에서 시작 날짜에 접근합니다.
-      end: selectedDate.end,                           // selectedDate 객체에서 종료 날짜에 접근합니다.
+      start: selectedDate.start,                       // selectedDate 객체에서 시작 날짜
+      end: selectedDate.end,                           // selectedDate 객체에서 종료 날짜
     };
     // let type = selectedType;
     // if (selectedType === "all") {
@@ -33,7 +33,7 @@ const ResvTable = () => {
     // }
 
     axiosWithBaseUrl
-       .post(`/owner/reservation/list/${3}/${selectedType}/${currentPageInt}`, requestBody)
+       .post(`/owner/reservation/list/${14}/${selectedType}/${currentPageInt}`, requestBody)
       // .get(`/owner/reservation/list/${3}/noshoww/${currentPageInt}`, { params, data: requestBody })
       .then((response) => {
         setResvList(response.data.content);

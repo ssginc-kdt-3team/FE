@@ -19,7 +19,7 @@ function ShopAdd() {
   // form data 상태변수
   const [shopName, setShopName] = useState('');
   const [ownerName, setOwnerName] = useState('');
-  const [ownerId, setownerId] = useState('40');
+  const [ownerId, setownerId] = useState('14');
   const [branchId, setBranchId] = useState('1');
   const [shopInfo, setShopInfo] = useState('');
   const [location, setLocation] = useState('');
@@ -60,10 +60,11 @@ function ShopAdd() {
     formData.append('shopData', blob);
 
     photos.forEach((file) => {
-      formData.append('shopImg', file.originFileObj);
+      formData.append('shopImg', file);
     });
+    
     businessPhotos.forEach((file) => { // 수정: businessPhotos 사용
-      formData.append('businessImg', file.originFileObj);
+      formData.append('businessImg', file);
     });
 
     try {
@@ -74,11 +75,14 @@ function ShopAdd() {
       });
       console.log(response);
       console.log(formData);
-      console.log(formData.shopImg);
-      console.log(formData.businessImg);
-      navigate('/mgt/info');
+      console.log(formData.get('shopImg')); // 수정: formData.get() 메서드로 값을 가져옴
+      console.log(formData.get('businessImg')); // 수정: formData.get() 메서드로 값을 가져옴
+
+      if (response.status === 200) {
+        setIsModalOpen(true);
+      }
     } catch (error) {
-      console.error('Error adding shop:', error);
+      console.error(error);
     }
   };
 
@@ -86,12 +90,14 @@ function ShopAdd() {
     // Handle form submission if needed
   };
 
-  const handleFileChange = (info) => {
-    const fileList = normFile(info);
-    if (info.target.name === 'shopImg') {
-      setPhotos(fileList);
-    } else if (info.target.name === 'businessImg') {
-      setBusinessPhotos(fileList);
+  const handleFileChange = (info, fieldName) => {
+    if (info.file.status === 'done' || info.file.status === 'removed') {
+      // 수정: fileList 대신 file을 사용하여 배열에 추가
+      if (fieldName === 'shopImg') {
+        setPhotos(info.fileList.map((file) => file.originFileObj));
+      } else if (fieldName === 'businessImg') {
+        setBusinessPhotos(info.fileList);
+      }
     }
   };
 
@@ -203,7 +209,7 @@ function ShopAdd() {
             action="/upload.do"
             listType="picture-card"
             beforeUpload={() => false} // Disable automatic upload
-            onChange={handleFileChange}
+            onChange={(e) => handleFileChange(e, 'shopImg')}
             fileList={photos}
           >
             <div>
@@ -233,7 +239,7 @@ function ShopAdd() {
             action="/upload.do"
             listType="picture-card"
             beforeUpload={() => false} // Disable automatic upload
-            onChange={handleFileChange}
+            onChange={(e) => handleFileChange(e, 'businessImg')}
             fileList={businessPhotos}
           >
             <div>
@@ -244,14 +250,23 @@ function ShopAdd() {
         </Form.Item>
 
         <Form.Item>
-          <Button type="primary" onClick={showModal}>
-            등록하기
+          <Button type="primary" htmlType="submit" onClick={onFileUpload}>
+            Submit
           </Button>
-          <Modal title="등록" visible={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-            <p>매장을 등록하시겠습니까?</p>
-          </Modal>
         </Form.Item>
       </Form>
+      {/* 성공 모달 */}
+      <Modal
+        title="매장 등록 성공"
+        visible={isModalOpen}
+        onOk={() => {
+          setIsModalOpen(false);
+          navigate('/mgt/info');
+        }}
+      >
+        <p>매장 등록이 성공적으로 완료되었습니다.</p>
+      </Modal>
+
     </Card>
   );
 }
