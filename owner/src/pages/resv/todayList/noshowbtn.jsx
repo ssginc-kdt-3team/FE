@@ -3,8 +3,9 @@ import { useState } from 'react';
 import { axiosWithBaseUrl } from "App";
 
 
-const Noshow = ({id}) => {
+const Noshow = ({ id, fetchResTdvList }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -23,6 +24,7 @@ const Noshow = ({id}) => {
         console.log(res.data);
         // setResv({ ...resv, status: "NOSHOW" }); // 예약 상태를"CANCEL"로 업데이트
         console.log("Reservation noshow");
+        fetchResTdvList(); 
       })
       .catch((error) => {
         console.log(error);

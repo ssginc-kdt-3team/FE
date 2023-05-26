@@ -23,7 +23,7 @@ const ResvTdTable = () => {
   const fetchResTdvList = () => {
     setLoading(true);
     axiosWithBaseUrl
-      .get(`/owner/reservation/activetime/${14}/${selectedType}/${currentPage}`) // Use the selectedType value in the URL
+      .get(`/owner/reservation/activetime/${3}/${selectedType}/${currentPage}`) // 점주 id
       .then((response) => {
         setResvList(response.data.content);
         console.log(response.data.content);
@@ -36,32 +36,6 @@ const ResvTdTable = () => {
         setLoading(false);
       });
   };
-
-  // const handleEnter = (id) => {
-  //   axiosWithBaseUrl
-  //     .post(`/owner/reservation/enter/${id}`)
-  //     .then((res) => {
-  //       console.log(res.data);
-  //       // setResv({ ...resv, status: "DONE" }); // 예약 상태를"CANCEL"로 업데이트
-  //       console.log("Reservation done");
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
-
-  // const handleNoshow = (id) => {
-  //   axiosWithBaseUrl
-  //     .post(`/owner/reservation/noshow/${id}`)
-  //     .then((res) => {
-  //       console.log(res.data);
-  //       // setResv({ ...resv, status: "NOSHOW" }); // 예약 상태를"CANCEL"로 업데이트
-  //       console.log("Reservation noshow");
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
 
   const handleTypeChange = (type) => {
     setSelectedType(type);
@@ -138,8 +112,8 @@ const ResvTdTable = () => {
         if (text === "RESERVATION") {
           return (
             <>
-              <Enter id={record.id} />
-              <Noshow id={record.id} />
+              <Enter id={record.id} fetchResTdvList={fetchResTdvList} />
+              <Noshow id={record.id} fetchResTdvList={fetchResTdvList} />
               {/* <Button type="primary" onClick={() => handleEnter(record.id)}>입장</Button> */}
               {/* <Button danger onClick={() => handleNoshow(record.id)}>노쇼</Button> */}
             </>

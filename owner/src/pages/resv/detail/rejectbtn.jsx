@@ -1,10 +1,11 @@
 import { Button, Modal } from 'antd';
 import { useState } from 'react';
-import axios from "axios";
+import { axiosWithBaseUrl } from 'App';
 
 
 const Reject = ({id}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -17,13 +18,13 @@ const Reject = ({id}) => {
   };
 
 
-  const handleReject = () => {
-    axios
-      .post(`http://localhost:8080/owner/reservation/reject/${id}`)
+  const handleReject = (id) => {
+    axiosWithBaseUrl
+      .post(`/owner/reservation/reject/${id}`)
       .then((res) => {
         console.log(res.data);
-        // setResv({ ...resv, status: "CANCEL" }); // 예약 상태를"CANCEL"로 업데이트
         console.log("Reservation rejected");
+        // Perform any necessary actions after rejecting the reservation
       })
       .catch((error) => {
         console.log(error);
