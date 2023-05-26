@@ -3,27 +3,33 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import Paging from "components/pagination/paging";
 import { Table } from 'antd';
 
-function DepositList() {
-  const { id } = useParams();
-  const [depositList, setDepositList] = useState([]);
-  const [page, setPage] = useState(1);
-  const itemsPerPage = 10;
+function DepositList({type, branchId, shopId}) {
+  // const { id } = useParams();
+  const [depositList, setDepositList] = useState(null);
+  
+  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
+  const [totalItems, setTotalItems] = useState(0); // 총 아이템 수
+  const [itemsPerPage, setItemsPerPage] = useState(8) // 페이지당 아이템 수
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:8080/admin/deposit/branch/${id}/${page}`)
-      .then((response) => {
-        setDepositList(response.data.content);
-        console.log(response.data.content);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [id, page]);
+    axios.get(`http://localhost:8080/admin/deposit/${type}/${type === "branch" ? branchId : shopId}/${currentPage}`)
+    .then(res => {
+      console.log(res);
+      console.log('넘어온 데이터 ▼');console.log(res.data.content);
+      setDepositList(res.data.content);
+      setTotalItems(res.data.totalElements); // 총 아이템 수 설정
+      console.log(`http://localhost:8080/admin/deposit/${type}/${type === "branch" ? branchId : shopId}/${currentPage}`);
+      console.log('type: ' + type + ' / branchId: ' + branchId + ' / shopId: ' + shopId + ' / 총 아이템 수: ' + res.data.totalElements);
+      setItemsPerPage(res.data.pageable.pageSize); // 페이지당 아이템 수 설정
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  }, [type, branchId, shopId, currentPage]);
 
 
   const columns = [
@@ -86,43 +92,35 @@ function DepositList() {
       key: "status",
     },
   ];
+  
 
-  const handleBranchClick = (branchId) => {
-    setPage(1); // 페이지를 초기화합니다.
-    axios
-      .get(`http://localhost:8080/admin/deposit/branch/${branchId}/${page}`)
-      .then((response) => {
-        setDepositList(response.data.content);
-        console.log(response.data.content);
-
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
 
   return (
     <div>
-      {depositList.length > 0 ? (
-        <>
-          <h1>지점별 예약금 리스트</h1>
-          <Table
-            dataSource={depositList}
-            columns={columns}
-            bordered
-            pagination={false}
-          />
-          <Paging
-            page={page}
-            itemsPerPage={itemsPerPage}
-            totalItems={depositList.length}
-            setPage={setPage}
-          />
-        </>
-      ) : (
-        <p>Loading deposit...</p>
-      )}
+      {
+        depositList ? (
+          <>
+            <h1>지점별 예약금 리스트</h1>
+            <Table
+              dataSource={depositList}
+              columns={columns}
+              bordered
+              pagination={false}
+            />
+            <Paging
+              page={currentPage}
+              itemsPerPage={itemsPerPage}
+              totalItems={totalItems}
+              setPage={setCurrentPage}
+            />
+          </>
+        ) : (
+          <p>Loading deposit...</p>
+        )
+      }
     </div>
+
+    
   );
 }
 
