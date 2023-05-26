@@ -23,7 +23,7 @@ const ResvTdTable = () => {
   const fetchResTdvList = () => {
     setLoading(true);
     axiosWithBaseUrl
-      .get(`/owner/reservation/activetime/${3}/${selectedType}/${currentPage}`) // Use the selectedType value in the URL
+      .get(`/owner/reservation/activetime/${14}/${selectedType}/${currentPage}`) // Use the selectedType value in the URL
       .then((response) => {
         setResvList(response.data.content);
         console.log(response.data.content);
