@@ -22,10 +22,12 @@ const initialUserInfo = { // 초기값을 가지는 객체
   password: "",
   birthday: "",
   gender: null,
-  zipCode: "",
-  city: "",
-  district: "",
-  detail: ""
+  address : {
+    zipCode: "",
+    address: "",
+    extraAddress: "",
+    detail: ""
+  }
 };
 
 function Join() {
@@ -35,9 +37,15 @@ function Join() {
 
   const handleInput = (e) => {
     // console.log(e.target);
+
+    if(e.target.name === "detail") {// 주소에서 상세가 바뀐경우
+      dispatch({ name: 'address', value: { ...userInfo.address, detail: e.target.value } });
+      return;
+    }
+
     if(e.target.name === "email") // 이메일이 바뀐 경우
       setEnteredEmail(e.target.value); // 이메일 변경값 설정
-    
+
     dispatch(e.target); // 데이터를 변화시키기 위한 동작을 할 dispatch, action 값을 보냄
   };
 
@@ -74,43 +82,56 @@ function Join() {
   const handleAddressChange = (data) => {
     console.log(data);
     
-    dispatch({ name: 'city', value: data.city });
-    dispatch({ name: 'district', value: data.district });
-    dispatch({ name: 'zipCode', value: data.zipCode });
+    dispatch({ 
+      name: 'address', 
+      value: {
+        ...userInfo.address,
+        zipCode: data.zipCode,
+        address: data.city,
+        extraAddress: data.district,
+      } 
+    });
   };
 
 
+  useEffect(() => {
+    console.log(userInfo.zipCode);
+    console.log(userInfo.address);
+    console.log(userInfo.extraAddress);
+    console.log(userInfo.detail);
+  }, [userInfo])
+
   // 회원가입 처리  
   const handleJoin = () => {
-    // if(!isInputEmpty(userInfo)) { // 빈칸 확인
-      // // if(isEmailValid(userInfo.email)) { // 이메일 검증
-      // if(!canUseEamil) { // 이메일이 이미 사용중이면
-      //   alert("이메일 중복확인을 해주세요.");
-      //   return;
-      // }
+    if(!isInputEmpty(userInfo)) { // 빈칸 확인
+      // if(isEmailValid(userInfo.email)) { // 이메일 검증
+      if(!canUseEamil) { // 이메일이 이미 사용중이면
+        alert("이메일 중복확인을 해주세요.");
+        return;
+      }
       
-      // if(!isPasswordConfirmed) { // 비밀번호 확인
-      //   alert("비밀번호를 확인해주세요.");
-      //   return;
-      // }
+      if(!isPasswordConfirmed) { // 비밀번호 확인
+        alert("비밀번호를 확인해주세요.");
+        return;
+      }
       
       console.log(userInfo);
 
-      // axios.post('/customer/join', userInfo)
-      // .then(res => { // 받아오는 정보가 있다
-      //   console.log(res.data);
-      //   if(res.data === "")
-      //     alert("회원가입에 실패하였습니다.");
-      //   else {
-      //     alert('회원가입에 성공하였습니다.');
-      //     navigate('/login', { replace: true });
-      //   }
-      // })
-      // .catch(err => { // 오류 처리
-      //   alert("오류가 발생하였습니다.");
-      //   console.log(err);
-      // });
-    // }
+      axios.post('/customer/join', userInfo)
+      .then(res => { // 받아오는 정보가 있다
+        console.log(res.data);
+        if(res.data === "")
+          alert("회원가입에 실패하였습니다.");
+        else {
+          alert('회원가입에 성공하였습니다.');
+          navigate('/login', { replace: true });
+        }
+      })
+      .catch(err => { // 오류 처리
+        alert("오류가 발생하였습니다.");
+        console.log(err);
+      });
+    }
   }
 
   return (
@@ -184,7 +205,7 @@ function Join() {
                 className={styles.joinInput} 
                 name="zipCode" 
                 type='text' 
-                value={userInfo.zipCode} 
+                value={userInfo.address.zipCode} 
                 placeholder='우편번호' 
                 onChange={handleAddressChange}
                 readOnly
@@ -195,9 +216,9 @@ function Join() {
             <div id={styles.detailAddressWrap}>
               <input 
                 className={styles.joinInput} 
-                name="city_district" 
+                name="address" 
                 type='text' 
-                value={userInfo.city + " " + userInfo.district} 
+                value={userInfo.address.address + ' ' + userInfo.address.extraAddress} 
                 placeholder='' 
                 onChange={handleAddressChange}
                 readOnly
