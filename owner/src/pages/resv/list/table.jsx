@@ -33,7 +33,7 @@ const ResvTable = () => {
     // }
 
     axiosWithBaseUrl
-       .post(`/owner/reservation/list/${14}/${selectedType}/${currentPageInt}`, requestBody)
+       .post(`/owner/reservation/list/${3}/${selectedType}/${currentPageInt}`, requestBody)
       // .get(`/owner/reservation/list/${3}/noshoww/${currentPageInt}`, { params, data: requestBody })
       .then((response) => {
         setResvList(response.data.content);

@@ -66,31 +66,54 @@ const DepositTable = () => {
       key: "reservationDate",
     },
     {
-      title: "예약상태",
-      dataIndex: "reservationStatus",
-      key: "reservationStatus",
+      title: "예약금상태",
+      dataIndex: "depositStatus",
+      key: "depositStatus",
       render: (text) => {
         let color, content;
 
-        if (text === "NOSHOW") {
+        if (text === "ALL_PENALTY") {
           color = "volcano";
-          content = "노쇼";
-        } else if (text === "DONE") {
+          content = "전액";
+        } else if (text === "RETURN") {
           color = "green";
-          content = "완료";
-        } else if (text === "CANCEL") {
-          color = "gold";
-          content = "취소";
-        } else if (text === "IMMINENT") {
+          content = "환불";
+        } else if (text === "HALF_PENALTY") {
           color = "magenta";
-          content = "취소";
+          content = "반액";
         } else {
           color = "blue";
-          content = "예약 중";
+          content = "완료";
         }
         return <Tag color={color}>{content}</Tag>;
       }
       },
+    // {
+    //   title: "예약상태",
+    //   dataIndex: "reservationStatus",
+    //   key: "reservationStatus",
+    //   render: (text) => {
+    //     let color, content;
+
+    //     if (text === "NOSHOW") {
+    //       color = "volcano";
+    //       content = "노쇼";
+    //     } else if (text === "DONE") {
+    //       color = "green";
+    //       content = "완료";
+    //     } else if (text === "CANCEL") {
+    //       color = "gold";
+    //       content = "취소";
+    //     } else if (text === "IMMINENT") {
+    //       color = "magenta";
+    //       content = "취소";
+    //     } else {
+    //       color = "blue";
+    //       content = "예약 중";
+    //     }
+    //     return <Tag color={color}>{content}</Tag>;
+    //   }
+    //   },
       {
         title: "예약자명",
         dataIndex: "customerName",
@@ -100,39 +123,17 @@ const DepositTable = () => {
         ),                                                                        
         
       },
-      {
-        title: "예약자 번호",
-        dataIndex: "phoneNumber",
-        key: "phoneNumber",
-      },
+      // {
+      //   title: "예약자 번호",
+      //   dataIndex: "phoneNumber",
+      //   key: "phoneNumber",
+      // },
       {
         title: "예약인원",
         dataIndex: "people",
         key: "people",
       },
-      {
-        title: "예약금상태",
-        dataIndex: "depositStatus",
-        key: "depositStatus",
-        render: (text) => {
-          let color, content;
-  
-          if (text === "ALL_PENALTY") {
-            color = "volcano";
-            content = "전액";
-          } else if (text === "RETURN") {
-            color = "green";
-            content = "환불";
-          } else if (text === "HALF_PENALTY") {
-            color = "magenta";
-            content = "반액";
-          } else {
-            color = "blue";
-            content = "완료";
-          }
-          return <Tag color={color}>{content}</Tag>;
-        }
-        },
+
       {
         title: "예약금",
         dataIndex: "originDeposit",

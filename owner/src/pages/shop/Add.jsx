@@ -5,7 +5,7 @@ import { PlusOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import dayjs from 'dayjs';
 
-// 시간 형식
+//시간 형식
 const format = 'HH:mm';
 
 const normFile = (e) => {
@@ -36,59 +36,59 @@ function ShopAdd() {
   const navigate = useNavigate();
   const formRef = useRef(null);
 
-  const onFileUpload = async () => {
+  //등록하기
+  const handleSubmit = async () => {
+    // formData > shopData, shopImg, businessImg
+  
     const shopData = {
       shopName: shopName,
       openTime: openTime.format(format),
       closeTime: closeTime.format(format),
       openDay: openDay.format('YYYY-MM-DD'),
-      shopInfo: shopInfo ,
-      location: location ,
-      seat: seat ,
-      ownerName ,
-      businessCeo,
-      businessNumber,
+      shopInfo: shopInfo,
+      location: location,
+      seat: seat,
+      ownerName: ownerName,
+      businessCeo: businessCeo,
+      businessNumber: businessNumber,
       orderCloseTime: orderCloseTime.format(format),
-      ownerId: '', // ownerId 값 추가
-      branchId: '', // branchId 값 추가
+      ownerId: ownerId, // ownerId 값 추가
+      branchId: branchId, // branchId 값 추가
     };
 
-    // form data > shophData, shopImg, businessImg
     const formData = new FormData();
-
     const json = JSON.stringify(shopData);
-    const blob = new Blob([json], { type: 'application/json' });
-    formData.append('shopData', blob);
+    const blob = new Blob([json], { type: "application/json" });
+    formData.append("shopData", blob);
 
-    console.log(FormData);
-    console.log(shopData);
-
+    // shopImg 파일 추가
     photos.forEach((file) => {
-      formData.append('shopImg', file);
-      console.log(file);
+      formData.append('shopImg', file.originFileObj);
     });
-    
-    businessPhotos.forEach((file) => { // 수정: businessPhotos 사용
-      formData.append('businessImg', file);
-      console.log(file);
+
+    // businessImg 파일 추가
+    businessPhotos.forEach((file) => {
+      formData.append('businessImg', file.originFileObj);
     });
 
     try {
       const response = await axios.post('http://localhost:8080/owner/shop/add', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
+       headers: {
+        'Content-Type': 'multipart/form-data',
         },
-      });
+        });
       console.log(response);
+      console.log(formData);
       console.log(formData.shopData);
       console.log(formData.shopImg);
       console.log(formData.businessImg);
-     
-      if (response.status === 200) {
-        setIsModalOpen(true);
-      }
+      
+      navigate('/mgt/info');
     } catch (error) {
-      console.error(error);
+      console.error('Error adding shop:', error);
+      console.log(formData.shopData);
+      console.log(formData.shopImg);
+      console.log(formData.businessImg);
     }
   };
 
@@ -96,51 +96,17 @@ function ShopAdd() {
     // Handle form submission if needed
   };
 
-  const handleAddImages = (event, fieldName) => {
-    const imageLists = event.target.files;
-    let imageUrlLists = [];
-  
-    for (let i = 0; i < imageLists.length; i++) {
-      const currentImageUrl = URL.createObjectURL(imageLists[i]);
-      imageUrlLists.push(currentImageUrl);
-    }
-  
-    if (imageUrlLists.length > 10) {
-      imageUrlLists = imageUrlLists.slice(0, 10);
-    }
-  
-    if (fieldName === 'shopImg') {
-      setPhotos(imageUrlLists);
-    } else if (fieldName === 'businessImg') {
-      setBusinessPhotos(imageUrlLists);
-    }
+  const handleFileChange = (info) => {
+    const fileList = normFile(info);
+    setPhotos(fileList);
+    setBusinessPhotos(fileList);
   };
 
-  // const handleFileChange = (info, fieldName) => {
-  //   if (info.file.status === 'done' || info.file.status === 'removed') {
-  //     // Create a new array for each field
-  //     if (fieldName === 'shopImg') {
-  //       setPhotos([info.file.originFileObj]);
-  //     } else if (fieldName === 'businessImg') {
-  //       setBusinessPhotos([info.file]);
-  //     }
-  //   }
-  // };
-  // const handleFileChange = (info, fieldName) => {
-  //   if (info.file.status === 'done' || info.file.status === 'removed') {
-  //     // 수정: fileList 대신 file을 사용하여 배열에 추가
-  //     if (fieldName === 'shopImg') {
-  //       setPhotos(info.fileList.map((file) => file.originFileObj));
-  //     } else if (fieldName === 'businessImg') {
-  //       setBusinessPhotos(info.fileList);
-  //     }
-  //   }
-  // };
 
   // 모달
-  const handleSubmit = () => {
-    onFileUpload();
-  };
+  // const handleSubmit = () => {
+  //   onFileUpload();
+  // };
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -230,9 +196,10 @@ function ShopAdd() {
         <Form.Item label="주문마감시간" name="orderCloseTime" required>
           <TimePicker format={format} value={orderCloseTime} onChange={setOrderCloseTime} />
         </Form.Item>
-        <Form.Item
+      {/* 사진 업로드 */}
+      <Form.Item
           label="매장 사진"
-          name="photos"
+          name="shopImg"
           required
           rules={[
             { required: true, message: '매장 사진을 업로드해주세요.' },
@@ -241,13 +208,13 @@ function ShopAdd() {
           getValueFromEvent={normFile}
         >
           <Upload
-          name="shopImg"
-          action="/upload.do"
-          listType="picture-card"
-          beforeUpload={() => false} // Disable automatic upload
-          onChange={(e) => handleAddImages(e, 'shopImg')}
-          fileList={photos}
->
+            name="photos"
+            action="/upload.do"
+            listType="picture-card"
+            beforeUpload={() => false} // Disable automatic upload
+            onChange={handleFileChange}
+            fileList={photos}
+          >
             <div>
               <PlusOutlined />
               <div style={{ marginTop: 8 }}></div>
@@ -265,44 +232,34 @@ function ShopAdd() {
           name="businessImg"
           required
           rules={[
-            { required: true, message: '사업자 등록증 사진을 업로드해주세요.' },
+            { required: true, message: '사업자등록증 사진을 업로드해주세요.' },
           ]}
           valuePropName="fileList"
           getValueFromEvent={normFile}
         >
-         <Upload
-          name="businessImg"
-          action="/upload.do"
-          listType="picture-card"
-          beforeUpload={() => false} // Disable automatic upload
-          onChange={(e) => handleAddImages(e, 'businessImg')}
-          fileList={businessPhotos}
+          <Upload
+            name="businessPhotos"
+            action="/upload.do"
+            listType="picture-card"
+            beforeUpload={() => false} // Disable automatic upload
+            onChange={handleFileChange}
+            fileList={businessPhotos}
           >
             <div>
               <PlusOutlined />
               <div style={{ marginTop: 8 }}></div>
             </div>
           </Upload>
-        </Form.Item>
-
+          </Form.Item>
         <Form.Item>
-          <Button type="primary" htmlType="submit" onClick={onFileUpload}>
-            Submit
+          <Button type="primary" onClick={handleSubmit}>
+            등록하기
           </Button>
+          {/* <Modal title="등록" visible={isModalOpen} onOk={handleSubmit} onCancel={handleCancel}>
+            <p>매장을 등록하시겠습니까?</p>
+          </Modal> */}
         </Form.Item>
       </Form>
-      {/* 성공 모달 */}
-      <Modal
-        title="매장 등록 성공"
-        visible={isModalOpen}
-        onOk={() => {
-          setIsModalOpen(false);
-          navigate('/mgt/info');
-        }}
-      >
-        <p>매장 등록이 성공적으로 완료되었습니다.</p>
-      </Modal>
-
     </Card>
   );
 }
