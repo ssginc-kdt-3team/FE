@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import noImage from '../../../assets/images/no_image.jpg';
 import { useNavigate } from 'react-router-dom';
 import styles from '../../../assets/css/pages/shop/Shop.module.css';
+import { Button } from 'antd';
 
 const ContentWrap = styled.div`
   position: absolute;
@@ -26,7 +27,7 @@ const Title = styled.div`
 const Img = styled.img`
   width: 100%;
   height: 100%;
-  border-radius: 10px;
+  border-radius: var(--border-radius);
   /*object-fit: contain; /* 여백 O */
   object-fit: cover; /* 여백 X */
   transition: all 0.5s;
@@ -34,9 +35,9 @@ const Img = styled.img`
 `;
 
 const Btn = styled.button`
-  width: var(--button-width-sm);
-  height: var(--button-height-sm);
-  line-height: calc(var(--button-height-sm) - 2px);
+  width: var(--button-width-s);
+  height: var(--button-height-s);
+  line-height: calc(var(--button-height-s) - 2px);
   /* background-color: var(--gray); */
   /* position: absolute;
   left: 50%;
@@ -49,7 +50,7 @@ const Btn = styled.button`
 const Li = styled.li`
   /* width: 250px;
   height: 250px; */
-  border-radius: 10px;
+  border-radius: var(--border-radius);
   font-size: 20px;
   
   position: relative;
@@ -80,22 +81,30 @@ const Li = styled.li`
   }
 `;
 
+const btnStyle = {
+  width: 'var(--button-width-s)',
+  height: 'var(--button-height-s)',
+  fontSize: 'var(--button-fontSize-s)'
+}
+
 function BranchShopCard({data, isShopCard=false, branchId=1}) {
   const navigate = useNavigate();
 
   return (
     <Li id={styles.tile}>
-      <Img src={noImage} alt='' onClick={() => navigate(isShopCard ? `/shop/${branchId}/${data.id}` : `/shop/${data.id}`)}/>
+      <Img src={isShopCard ? data.shopImgUrl ? data.shopImgUrl : noImage : data.branchImgUrl ? data.branchImgUrl : noImage} alt='' onClick={() => navigate(isShopCard ? `/shop/${branchId}/${data.id}` : `/shop/${data.id}`)}/>
         <ContentWrap className='center flex-col flex-gap-20'>
           <Title onClick={() => navigate(isShopCard ? `/shop/${branchId}/${data.id}` : `/shop/${data.id}`)}>{data.name}</Title>
           {
             isShopCard ? (
-              <Btn 
+              <Button 
                 className='button buttonReverse buttonTransparent'
                 onClick={() => navigate("/resv/add", { state : { branchId: `${branchId}`, shopId: `${data.id}` }})}
                 disabled={data.shopStatus === 'OPEN' ? false : true}
-                style={data.shopStatus === 'OPEN' ? {} : { opacity: '0.25' }}
-              >예약하기</Btn>
+                style={{...btnStyle, ...data.shopStatus === 'OPEN' ? {} : { opacity: '0.25' }}}
+              >
+                예약하기
+              </Button>
             )
             : ''
           }

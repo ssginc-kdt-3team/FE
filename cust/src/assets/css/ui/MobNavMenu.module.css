@@ -1,7 +1,7 @@
 #mobNavMenuWrap {
   padding: 16px 24px;
   border: 0.5px solid var(--border);
-  border-radius: 10px;
+  border-radius: var(--border-radius);
   display: -webkit-box;
   display: -ms-flexbox;
   -webkit-box-pack: justify;

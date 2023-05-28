@@ -11,9 +11,16 @@
   /* size */
   --input-fontSize: 18px;
   --input-height: 50px;
+
+  --button-fontSize: 18px;
+  --button-fontSize-s: 16px;
   --button-width: 180px;
-  --button-width-sm: 100px;
-  --button-height-sm: 40px;
+  --button-width-s: 100px;
+  --button-height-s: 40px;
+
+  --border-radius : 10px;
+  --border-radius-m: 8px;
+  --border-radius-s: 6px;
 
 
   /* resvForm */

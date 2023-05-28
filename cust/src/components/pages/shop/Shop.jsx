@@ -34,11 +34,11 @@ function Shop() {
         shopInfo: res.data.shopInfo,
         shopImg: res.data.shopImg,
         shopLocation: res.data.shopLocation,
-        shopCall: res.data.shopCall,
+        phone: res.data.phone,
         shopStatus: res.data.shopStatus,
         shopOpenTime: res.data.shopOpenTime,
         shopCloseTime: res.data.shopCloseTime,
-        shopOrderCloseTime: res.data.shopOrderCloseTime
+        orderCloseTime: res.data.orderCloseTime
       });
 
       setMenuList(res.data.menus);

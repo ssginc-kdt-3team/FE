@@ -2,19 +2,48 @@ import React, { useState } from 'react';
 import PageTitle from '../../ui/PageTitle';
 import styles from '../../../assets/css/pages/authentication/Login.module.css';
 import { useNavigate } from 'react-router-dom';
+import { Button } from 'antd';
+import { isInputEmpty } from '../../../utils/authentication/joinValidation';
+import axios from 'axios';
 
 function FindPwd() {
-  const [name, setName] = useState("");
-  const [email, setEamil] = useState("");
-  const [phone, setPhone] = useState("");
+  const navigate = useNavigate();
 
-  // const [result, setResult] = useState(null);
-  const result = {
-    name: 'name',
-    pw: 'pw'
+  const [inputInfo, setInputInfo] = useState({
+    name: '',
+    email: '',
+    phone: ''
+  })
+
+  // input 처리
+  const handleInput = (e) => {
+    // console.log(e);
+    let { name, value } = e.target;
+    // console.log('name: ' + name + ' / value: ' + value);
+
+    setInputInfo({
+      ...inputInfo,
+      [name]: value // 메모 변경
+    })
   };
 
-  const navigate = useNavigate();
+  // 비밀번호 찾기 수행
+  const handleFindPwd = () => {
+    if(!isInputEmpty(inputInfo)) {
+      axios.post(`/customer/findPwd`, inputInfo)
+      .then(res => { // 받아오는 정보가 있다
+        console.log(res);
+        if(res.data !== null) {
+          alert('비밀번호 찾기에 성공하였습니다.');
+          navigate(`/find-pwd/result`, { replace: true, state: { name: inputInfo.name, password: res.data } });
+        }
+      })
+      .catch(err => { // 오류 처리
+        console.log(err);
+        alert(err.response.data);
+      });
+    }
+  }
 
   return (
     <div className='container'>
@@ -23,20 +52,20 @@ function FindPwd() {
         <form className={styles.loginForm}>
           <div>
             <label>NAME</label>
-            <input className={styles.loginInput} type='name' value={name} placeholder='이름' onChange={(e) => setName(e.currentTarget.value)}/>
+            <input className={styles.loginInput} type='text' name='name' value={inputInfo.name} placeholder='이름' onChange={handleInput}/>
           </div>
 
           <div>
             <label>EMAIL</label>
-            <input className={styles.loginInput} type='email' value={email} placeholder='이메일' onChange={(e) => setPhone(e.currentTarget.value)}/>
+            <input className={styles.loginInput} type='email' name='email' value={inputInfo.email} placeholder='이메일' onChange={handleInput}/>
           </div>
 
           <div>
             <label>PHONE</label>
-            <input className={styles.loginInput} type='phone' value={phone} placeholder='휴대폰 번호' onChange={(e) => setPhone(e.currentTarget.value)}/>
+            <input className={styles.loginInput} type='text' name='phone' value={inputInfo.phone} placeholder='휴대폰 번호' onChange={handleInput}/>
           </div>
 
-          <div className='button mt-45' onClick={() => navigate(`/find-pw/result`, { state : result })}>비밀번호 찾기</div>
+          <Button type='primary' className='button mt-45' onClick={handleFindPwd}>비밀번호 찾기</Button>
         </form>
       </div>
     </div>

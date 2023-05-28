@@ -13,9 +13,9 @@
   margin: 0;
   background-color: white;
   border: 1px solid var(--input-border);
-  border-radius: 8px;
+  border-radius: var(--border-radius-m);
   color: var(--font);
-  font-size: 16px;
+  font-size: var(--button-fontSize-s);
   /* font-weight: bold; */
   cursor: pointer;
 }

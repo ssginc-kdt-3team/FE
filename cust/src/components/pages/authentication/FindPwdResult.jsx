@@ -3,8 +3,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import PageTitle from '../../ui/PageTitle';
 import styled from 'styled-components';
 import styles from '../../../assets/css/pages/authentication/Login.module.css';
+import { Button } from 'antd';
 
-const ResultP = styled.p`
+const P = styled.p`
   font-size: 24px;
   color: var(--main);
   font-weight: 500;
@@ -26,9 +27,9 @@ function FindPwdResult() {
         <PageTitle title="비밀번호 찾기"/>
         <div className={styles.loginForm} style={{gap: '10px'}}>
           <p style={{textAlign: 'center', marginTop: 0}}>{state.name}님의 정보와 일치하는 비밀번호 입니다.</p>
-          <ResultP>{state.pw}</ResultP>
+          <P>{state.password}</P>
 
-          <div className='button mt-75' onClick={() => navigate("/login", { replace: true })}>로그인 하기</div>
+          <Button type='primary' className='button mt-75' onClick={() => navigate("/login", { replace: true })}>로그인 하기</Button>
         </div>
       </div>
     </div>

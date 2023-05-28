@@ -6,6 +6,7 @@ import { loginState } from '../../state/loginState';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { isEmpty, isPointSelected } from '../../utils/review/reviewValidation';
+import { Button } from 'antd';
 
 // action에 따라 안에 데이터를 어떻게 변화시킬지 설정
 const reducer = (state, action) => {
@@ -58,19 +59,19 @@ function ReviewAdd({isModalOpen, setIsModalOpen, isReviewed, setIsReviewed}) {
       if(isPointSelected(reviewInfo.point)) { // 별점이 선택되어 있으면
         console.log(reviewInfo);
     
-        // axios.post('customer/review/add', reviewInfo)
-        // .then(res => {
-        //   console.log(res);
-        //   if(res.data) {
-        //     alert('후기가 등록되었습니다.');
-        //     handleClose();
-        //     setIsReviewed(true);
-        //   }
-        // })
-        // .catch(err => {
-        //   console.log(err);
-        //   alert('오류가 발생하였습니다.');
-        // })
+        axios.post('customer/review/add', reviewInfo)
+        .then(res => {
+          console.log(res);
+          if(res.data) {
+            alert('후기가 등록되었습니다.');
+            handleClose();
+            setIsReviewed(true);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+          alert('오류가 발생하였습니다.');
+        })
       }
     }
 
@@ -90,6 +91,7 @@ function ReviewAdd({isModalOpen, setIsModalOpen, isReviewed, setIsReviewed}) {
           id={styles.reviewTitle} 
           name='title' onChange={handleOnChange} 
           value={reviewInfo.title}
+          maxLength="40" 
           placeholder='제목'
         >
         </input>
@@ -109,8 +111,8 @@ function ReviewAdd({isModalOpen, setIsModalOpen, isReviewed, setIsReviewed}) {
       </form>
 
       <div id={styles.bottomWrap}>
-        <button className='button buttonReverse' onClick={handleClose}>취소</button>
-        <button className='button' onClick={handleReviewSubmit}>완료</button>
+        <Button className='button buttonReverse' onClick={handleClose}>취소</Button>
+        <Button type="primary" className='button' onClick={handleReviewSubmit}>완료</Button>
       </div>
     </Modal>
   );

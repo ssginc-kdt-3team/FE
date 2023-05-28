@@ -3,13 +3,23 @@ import PageTitle from '../../ui/PageTitle';
 import ReviewCard from '../../widget/shop/ReviewCard';
 import Paging from '../../ui/Paging';
 import axios from 'axios';
+import { useRecoilValue } from 'recoil';
+import { loginState } from '../../../state/loginState';
+import styled from 'styled-components';
 
-const reviewCardWrapStyle = {
-  maxWidth: '800px',
-  width: '75%'
-}
+const Ul = styled.ul`
+  max-width: 800px;
+  width: 75%;
+  
+  @media screen and (max-width: 768px) {
+    max-width: 100%;
+    width: 100%;
+    gap: 20px;
+  }
+`;
 
 function Review() {
+  const loginInfo = useRecoilValue(loginState);
 
   const [reviewList, setReviewList] = useState();
   
@@ -19,7 +29,7 @@ function Review() {
 
   useEffect(() => {
     // axios.get(`/shop/detail/review/${loginState.id}/${currentPage}`)
-    axios.get(`/shop/detail/review/${1}/${currentPage}`)
+    axios.get(`/customer/review/all/${loginInfo.id}/${currentPage}`)
     .then(res => {
       console.log(res.data);
       setReviewList(res.data.content);
@@ -30,20 +40,20 @@ function Review() {
       alert("오류가 발생하였습니다.");
       console.log(err);
     })
-  }, [currentPage])
+  }, [loginInfo.id, currentPage])
 
   return (
     <div className='container background'>
       <div className='center flex-col'>
         <PageTitle title="후기"/>
 
-        <ul className='flex flex-col flex-gap-40' style={reviewCardWrapStyle}>
+        <Ul className='flex flex-col flex-gap-40'>
           {
             reviewList && reviewList.map( (review, index) => (
               <ReviewCard key={index} data={review}/>
             ))
           }
-        </ul>
+        </Ul>
         
         {/* 페이지 */}
         <Paging currentPage={currentPage} totalItems={totalItems} itemsPerPage={itemsPerPage} setCurrentPage={setCurrentPage}/>

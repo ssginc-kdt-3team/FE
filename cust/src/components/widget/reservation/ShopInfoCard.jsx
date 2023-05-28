@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../../../assets/css/widget/reservation/ShopInfoCardR.module.css';
+import styles from '../../../assets/css/widget/reservation/ShopInfoCard.module.css';
 import noImage from '../../../assets/images/no_image.jpg';
 
 function ShopInfoCardR({data}) {
