@@ -37,6 +37,7 @@
   grid-column-end: 3;
 } */
 
+
 /* 이메일 중복확인 버튼 */
 /* 버튼 밑바닥으로 */
 #confirmDupBtnWrap {
@@ -73,12 +74,19 @@ input[type=radio] {
   width: calc(50% - 20px);
 }
 #zipCodeWrap > input {
-  width: calc(100% - 40px - var(--button-width-sm));
+  width: calc(100% - 40px - var(--button-width-s));
+}
+#zipCodeWrap > input {
+  border-bottom: 1px solid var(--input-border);
 }
 
 /* 입력된 주소, 상세 주소 */
 #detailAddressWrap > input {
   width: calc(50% - 20px);
+}
+/* 입력된 주소 */
+#detailAddressWrap > input:first-child {
+  border-bottom: 1px solid var(--input-border);
 }
 /* 상세 주소 */
 #detailAddressWrap > input:last-child {
@@ -89,7 +97,7 @@ input[type=radio] {
 #buttonWrap {
   margin-top: 60px;
 }
-#buttonWrap > div {
+#buttonWrap > button {
   width: var(--button-width);
 }
 
@@ -106,9 +114,13 @@ input[type=radio] {
   } */
   /* 한 줄에 2개인 거 1개로 바꾸고 간격 처리 */
   .joinForm > div:nth-child(3) {
+    display: flex;
+    flex-direction: column;
     gap: 10px;
   }
   .joinForm > div:nth-child(4) {
+    display: flex;
+    flex-direction: column;
     gap: 40px;
   }
 
@@ -135,7 +147,7 @@ input[type=radio] {
     gap: 20px;
   }
   #zipCodeWrap > input {
-    width: calc(100% - 20px - var(--button-width-sm));
+    width: calc(100% - 20px - var(--button-width-s));
   }
 
   /* 입력된 주소, 상세 주소 */
@@ -153,7 +165,7 @@ input[type=radio] {
     flex-direction: column;
     gap: 10px;
   }
-  #buttonWrap > div {
+  #buttonWrap > button {
     width: 100%;
   }
 }

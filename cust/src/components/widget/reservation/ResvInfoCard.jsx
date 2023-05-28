@@ -4,6 +4,7 @@ import styles from '../../../assets/css/widget/reservation/ResvInfoCard.module.c
 import ResvStatusTag from '../../ui/reservation/ResvStatusTag';
 import { Link, useNavigate } from 'react-router-dom';
 import ReviewAdd from '../../modal/ReviewAdd';
+import { Button } from 'antd';
 
 function ResvInfoCard({data, resvId}) {
   // console.log('resvId :' + resvId);
@@ -61,31 +62,33 @@ function ResvInfoCard({data, resvId}) {
             </div>
 
             <div id={styles.bottomWrap} className='center'>
-              <button 
+              <Button 
                 className='button buttonReverse' 
                 disabled={isDisabled(data.reservationStatus)} 
                 onClick={() => navigate(`/resv/update/${resvId}`)}
                 style={isDisabled(data.reservationStatus) ? { opacity: '0.25' } : {}}
               >
                 예약 변경
-              </button>
+              </Button>
 
-              <button 
+              <Button 
                 className='button' 
+                type="primary" 
                 disabled={isDisabled(data.reservationStatus)} 
                 onClick={confirmDelete}
                 style={isDisabled(data.reservationStatus) ? { opacity: '0.25' } : {}}
               >
                 예약 취소
-              </button>
+              </Button>
 
-              <button 
+              <Button 
                 className='button' 
+                type="primary" 
                 onClick={() => setIsModalOpen(true)}
                 style={!isReviewed && (data.reservationStatus === 'DONE' && data.canReview) ? { display: 'block' } : { display: 'none' }}
               >
                 후기 등록
-              </button>
+              </Button>
             </div>
           </div>
         )

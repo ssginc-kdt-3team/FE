@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { isEmailValid } from '../../../utils/authentication/emailValidation';
 import { isInputEmpty, isPasswordValid, checkEmailDup } from '../../../utils/authentication/joinValidation';
 import Postcode from '../../popUp/PostCode';
+import { Button } from 'antd';
 
 // action에 따라 안에 데이터를 어떻게 변화시킬지 설정
 const reducer = (state, action) => {
@@ -94,12 +95,12 @@ function Join() {
   };
 
 
-  useEffect(() => {
-    console.log(userInfo.zipCode);
-    console.log(userInfo.address);
-    console.log(userInfo.extraAddress);
-    console.log(userInfo.detail);
-  }, [userInfo])
+  // useEffect(() => {
+  //   console.log(userInfo.zipCode);
+  //   console.log(userInfo.address);
+  //   console.log(userInfo.extraAddress);
+  //   console.log(userInfo.detail);
+  // }, [userInfo])
 
   // 회원가입 처리  
   const handleJoin = () => {
@@ -159,13 +160,13 @@ function Join() {
             </div>
 
             <div id={styles.confirmDupBtnWrap}>
-              <div 
+              <Button 
                 id={styles.confirmDupBtn} 
                 className='button buttonReverse' 
                 onClick={() => checkEmailDup(userInfo.email, setCanUseEmail, setEnteredEmail)}
               >
                 이메일 중복확인
-              </div>
+              </Button>
             </div>
           </div>
 
@@ -229,8 +230,8 @@ function Join() {
 
           {/* 버튼 */}
           <div id={styles.buttonWrap} className='center width-100 flex-gap-20'>
-            <div className='button buttonReverse' onClick={() => navigate(-1)}>취소</div>
-            <div className='button' onClick={handleJoin}>완료</div>
+            <Button className='button buttonReverse' onClick={() => navigate(-1)}>취소</Button>
+            <Button type='primary' className='button' onClick={handleJoin}>완료</Button>
           </div>
         </form>
 

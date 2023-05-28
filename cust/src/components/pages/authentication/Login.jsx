@@ -9,6 +9,7 @@ import next from '../../../assets/images/icons/next.png';
 import { isEmailValid } from '../../../utils/authentication/emailValidation';
 import { axiosWithToken } from '../../../index';
 import { isInputEmpty } from '../../../utils/authentication/loginValidation';
+import { Button } from 'antd';
 
 function Login() {
   const setLoginState = useSetRecoilState(loginState);
@@ -73,14 +74,14 @@ function Login() {
 
           <input className={styles.loginInput} type='password' value={password} placeholder='비밀번호' onChange={(e) => setPassword(e.currentTarget.value)}/>
 
-          <div className='button mt-45' onClick={handleLogin}>로그인</div>
+          <Button type='primary' className='button mt-45' onClick={handleLogin}>로그인</Button>
 
           <div id={styles.findIdPasswordWrap}>
             <div onClick={() => navigate("/find-id")}>
               아이디 찾기
               <img src={next} alt="find id" />
             </div>
-            <div onClick={() => navigate('/find-pw')}>
+            <div onClick={() => navigate('/find-pwd')}>
               비밀번호 찾기
               <img src={next} alt="find password" />
             </div>

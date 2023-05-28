@@ -17,7 +17,7 @@
   width: 100%;
   padding: 15px;
   border: 1px solid var(--input-border);
-  border-radius: 10px;
+  border-radius: var(--border-radius-m);
   /* margin-bottom: 10px; */
   resize: none;
 }
@@ -30,7 +30,7 @@
 #buttonWrap {
   margin-top: 40px;
 }
-#buttonWrap > div {
+#buttonWrap > button {
   width: var(--button-width);
 }
 
@@ -48,6 +48,8 @@
 
   /* 메인 */
   #middleWrap {
+    display: flex;
+    flex-direction: column;
     gap: 40px;
   }
   /* #detailWrap {
@@ -59,7 +61,7 @@
     flex-direction: column; 
     gap: 10px;
   }
-  #buttonWrap > div {
+  #buttonWrap > button {
     width: 100%;
   }
 }

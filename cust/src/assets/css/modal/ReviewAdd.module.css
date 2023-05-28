@@ -5,7 +5,7 @@
 /* 모달 */
 .modalWrap > div:nth-child(2) {
   width: 100%;
-  border-radius: 10px;
+  border-radius: var(--border-radius);
   padding: 30px;
   display: flex;
   flex-direction: column;
@@ -86,9 +86,9 @@
 }
 
 #bottomWrap > button {
-  width: var(--button-width-sm);
-  height: var(--button-height-sm);
-  font-size: 16px;
+  width: var(--button-width-s);
+  height: var(--button-height-s);
+  font-size: var(--button-fontSize-s);
   line-height: 38px; /* 경계값 만큼 빼주어야 << 버튼이 border-box이다 */
 }
 

@@ -11,6 +11,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import TimePicker from '../../widget/reservation/TimePicker';
 import { blockCalendar } from '../../../utils/reservation/blockCalendar';
 import PageTitle from '../../ui/PageTitle';
+import { Button } from 'antd';
 
 function ResvUpdate() {
   const { resvId } = useParams();
@@ -176,8 +177,8 @@ function ResvUpdate() {
 
           {/* 버튼 */}
           <div id={styles.buttonWrap} className='center width-100 flex-gap-20'>
-            <div className='button buttonReverse' onClick={() => navigate(-1)}>취소</div>
-            <div className='button' onClick={handleReserve}>완료</div>
+            <Button className='button buttonReverse' onClick={() => navigate(-1)}>취소</Button>
+            <Button type='primary' className='button' onClick={handleReserve}>완료</Button>
           </div>
           
         </form>

@@ -13,6 +13,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { loginState } from '../../../state/loginState';
 import Filter from '../../widget/reservation/Filter';
+import { Button } from 'antd';
 
 const initialResvInfo = { // 초기값을 가지는 객체
   reservationDate: "",
@@ -174,8 +175,8 @@ function ResvAdd() {
 
           {/* 버튼 */}
           <div id={styles.buttonWrap} className='center width-100 flex-gap-20'>
-            <div className='button buttonReverse' onClick={() => navigate(-1)}>취소</div>
-            <div className='button' onClick={handleReserve}>완료</div>
+            <Button className='button buttonReverse' onClick={() => navigate(-1)}>취소</Button>
+            <Button type='primary' className='button' onClick={handleReserve}>완료</Button>
           </div>
         </form>
       </div>

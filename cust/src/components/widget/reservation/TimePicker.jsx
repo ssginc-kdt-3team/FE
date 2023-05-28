@@ -13,8 +13,8 @@ function TimePicker({shopId, defaultValue, setSelectedTime, selectedDate}) {
     setSelectedOption(defaultValue); // defaultValue를 최신값으로 설정
   }, [defaultValue])
 
-  console.log('넘어온 defaultValue : ' + defaultValue);
-  console.log('selectedOption : ' + selectedOption);
+  // console.log('넘어온 defaultValue : ' + defaultValue);
+  // console.log('selectedOption : ' + selectedOption);
 
   const onChange = (value) => {
     console.log(`선택된 시간값: ${value}`);

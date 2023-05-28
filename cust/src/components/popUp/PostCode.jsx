@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
+import { Button } from 'antd';
 
 const Postcode = ({ onChange }) => {
   // 다음 우편번호 서비스 스크립트 url
@@ -36,9 +37,9 @@ const Postcode = ({ onChange }) => {
   };
 
   return (
-    <button type='button' className='button buttonReverse' onClick={handleClick} style={{ width: 'var(--button-width-sm)' }}>
+    <Button className='button buttonReverse' onClick={handleClick} style={{ width: 'var(--button-width-s)' }}>
       주소 검색
-    </button>
+    </Button>
   );
 };
 

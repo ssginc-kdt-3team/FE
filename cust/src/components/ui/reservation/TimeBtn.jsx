@@ -7,8 +7,8 @@ function TimeBtn({time, selectedOption, handleOptionChange, selectedDate}) {
   const dateTime = moment(new Date()).format("YYYY-MM-DD HH:mm:SS"); // 현재 시간
   
   // console.log('selectedDate : ' + selectedDate);
-  console.log('selectedOption : ' + selectedOption);
-  console.log(time.time)
+  // console.log('selectedOption : ' + selectedOption);
+  // console.log(time.time)
   // console.log(dateTime)
   // console.log((selectedDate + " " + time.time) <= dateTime)
   return (

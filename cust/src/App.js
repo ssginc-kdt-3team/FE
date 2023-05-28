@@ -32,8 +32,8 @@ function App() {
           <Route path="/login" element={<Login/>}/>
           <Route path="/find-id" element={<FindId/>}/>
           <Route path="/find-id/result" element={<FindIdResult/>}/>
-          <Route path="/find-pw" element={<FindPw/>}/>
-          <Route path="/find-pw/result" element={<FindPwResult/>}/>
+          <Route path="/find-pwd" element={<FindPw/>}/>
+          <Route path="/find-pwd/result" element={<FindPwResult/>}/>
           <Route path="/join" element={<Join/>}/>
 
           {/* resvation */}
