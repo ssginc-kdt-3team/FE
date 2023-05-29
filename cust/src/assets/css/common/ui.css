@@ -50,7 +50,7 @@
 .buttonReverse:disabled:hover {
   background-color: #fff !important;
   /* color: var(--main); */
-  border-color: var(--button-border) !important;
+  border-color: var(--input-border) !important;
 }
 
 .buttonTransparent {

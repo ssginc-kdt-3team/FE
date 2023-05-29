@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import styles from '../../../assets/css/widget/reservation/ResvInfoCard.module.css';
+import styles from '../../../assets/css/ui/reservation/ResvInfoCard.module.css';
 import ResvStatusTag from '../../ui/reservation/ResvStatusTag';
 import { Link, useNavigate } from 'react-router-dom';
 import ReviewAdd from '../../modal/ReviewAdd';

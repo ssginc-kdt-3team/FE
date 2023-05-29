@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import PageTitle from '../../ui/PageTitle';
-import ShopInfoCard from '../../widget/shop/ShopInfoCard';
-import MenuCard from '../../widget/shop/MenuCard';
-import ReviewCard from '../../widget/shop/ReviewCard';
+import ShopInfoCard from '../../ui/shop/ShopInfoCard';
+import MenuCard from '../../ui/shop/MenuCard';
+import ReviewCard from '../../ui/shop/ReviewCard';
 import { axiosForJson } from '../../../index';
 import styles from '../../../assets/css/pages/shop/Shop.module.css';
 import styled from 'styled-components';

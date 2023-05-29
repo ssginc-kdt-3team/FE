@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styles from '../../../assets/css/widget/reservation/ResvCard.module.css'
+import styles from '../../../assets/css/ui/reservation/ResvCard.module.css'
 import ResvStatusTag from '../../ui/reservation/ResvStatusTag';
 
 function ResvCard({data}) {

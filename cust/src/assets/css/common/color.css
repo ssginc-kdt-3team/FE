@@ -7,11 +7,12 @@
   --input-bg: #f9f9f9;
 
   /* border */
-  --input-border: #ccc;
+  /* --input-border: #ccc; */
+  --input-border: #d9d9d9;
   --header-border: #aeaeae;
   /* --devide-border: #e5e7ea; */
   --border: #ebebeb;
-  --button-border: #d9d9d9;
+  /* --button-border: #d9d9d9; */
 
   /* font */
   --font: #333;

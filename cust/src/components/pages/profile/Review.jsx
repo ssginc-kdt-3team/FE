@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PageTitle from '../../ui/PageTitle';
-import ReviewCard from '../../widget/shop/ReviewCard';
+import ReviewCard from '../../ui/shop/ReviewCard';
 import Paging from '../../ui/Paging';
 import axios from 'axios';
 import { useRecoilValue } from 'recoil';

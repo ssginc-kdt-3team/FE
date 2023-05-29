@@ -81,7 +81,7 @@ const Li = styled.li`
   }
 `;
 
-const btnStyle = {
+const buttonStyle = {
   width: 'var(--button-width-s)',
   height: 'var(--button-height-s)',
   fontSize: 'var(--button-fontSize-s)'
@@ -101,7 +101,7 @@ function BranchShopCard({data, isShopCard=false, branchId=1}) {
                 className='button buttonReverse buttonTransparent'
                 onClick={() => navigate("/resv/add", { state : { branchId: `${branchId}`, shopId: `${data.id}` }})}
                 disabled={data.shopStatus === 'OPEN' ? false : true}
-                style={{...btnStyle, ...data.shopStatus === 'OPEN' ? {} : { opacity: '0.25' }}}
+                style={{...buttonStyle, ...data.shopStatus === 'OPEN' ? {} : { opacity: '0.25' }}}
               >
                 예약하기
               </Button>

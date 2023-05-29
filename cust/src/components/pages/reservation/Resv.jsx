@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from '../../../assets/css/pages/reservation/Resv.module.css'
 import PageTitle from '../../ui/PageTitle';
-import ShopInfoCardR from '../../widget/reservation/ShopInfoCard';
-import CustInfoCard from '../../widget/reservation/CustInfoCard';
-import ResvInfoCard from '../../widget/reservation/ResvInfoCard';
+import ShopInfoCardR from '../../ui/reservation/ShopInfoCard';
+import CustInfoCard from '../../ui/reservation/CustInfoCard';
+import ResvInfoCard from '../../ui/reservation/ResvInfoCard';
 // import { axiosWithBaseUrl } from '../../../App'
 
 function Resv() {

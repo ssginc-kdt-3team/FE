@@ -2,6 +2,9 @@
 * {
   font-family: 'Noto Sans KR', sans-serif;
   box-sizing: border-box;
+
+  /* 터치 시 파란 배경 제거 */
+  -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); 
 }
 
 html {
@@ -86,7 +89,7 @@ input {
   font-size: var(--input-fontSize);
   outline: none;
   
-  /* ios 대응 */
+  /* 기본 효과 제거 */
   -webkit-appearance: none;
   -moz-appearance: none; 
   appearance: none;

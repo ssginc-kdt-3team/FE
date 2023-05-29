@@ -1,0 +1,7 @@
+#radioWrap > label {
+  color: var(--font);
+}
+
+#radioWrap > label::before {
+  background-color: var(--input-border);
+}

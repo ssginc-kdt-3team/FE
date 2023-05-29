@@ -37,7 +37,7 @@ function Heaader() {
           <div id={styles.topWrap} className='flex-end'>
             <Link to="/login" style={loginInfo.isLoggedin ? { display: 'none' } : { display: 'block' }}><span>로그인</span></Link>
             <Link to="/join" style={loginInfo.isLoggedin ? { display: 'none' } : { display: 'block' }}><span>회원가입</span></Link>
-            <Link to="" style={loginInfo.isLoggedin ? { display: 'block' } : { display: 'none' }}><span>{loginInfo.id}번 님</span></Link>
+            <Link to={`/profile/${loginInfo.id}`} style={loginInfo.isLoggedin ? { display: 'block' } : { display: 'none' }}><span>{loginInfo.id}번 님</span></Link>
           </div>
 
           {/* 로고 */}
