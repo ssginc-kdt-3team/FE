@@ -10,12 +10,12 @@ const icons = {
 
 const profile = {
     id: 'owner-profile',
-    title: 'owner-profile',
+    title: '프로필',
     type: 'group',
     children: [
         {
             id: 'profile',
-            title:'profile',
+            title:'마이프로필',
             type: 'item',
             url: '/profile',
             icon: icons.UserOutlined

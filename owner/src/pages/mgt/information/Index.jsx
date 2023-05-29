@@ -1,27 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { useNavigate } from '../../../../node_modules/react-router-dom/dist/index';
+import { useNavigate } from 'react-router-dom';
 import { Button } from 'antd';
-import axios from "axios";
+import axios from 'axios';
 import MenuList from '../menu/List';
 import ShopDetail from './Detail';
 
 function MgtInfo() {
   const navigate = useNavigate();
-  const { id } = useParams();       //owner id
+  // const { id } = useParams(); // owner id
   const [shopInfo, setShopInfo] = useState(null);
-
+  const [menulist, setMenuList] = useState(null);
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/owner/shop/detail/${14}`)
-    .then(res => {
-      console.log(res.data);
-      setShopInfo(res.data);
-    })
-    .catch(err => {
-      console.log(err);
-    })
-  }, [id])
+    axios
+      .get(`http://localhost:8080/owner/shop/detail/${14}`)
+      .then((res) => {
+        console.log(res.data);
+        setShopInfo(res.data);
+        setMenuList(res.data.menus);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <div>
@@ -30,23 +32,20 @@ function MgtInfo() {
         <div>
           <div className='space-between'>
             {shopInfo ? (
-              <Button type='primary' onClick={() => navigate(`/mgt/info/update/${id}`)}>
-                수정
-              </Button>
+              <ShopDetail data={shopInfo} />
             ) : (
               <Button type='primary' onClick={() => navigate(`/shop/register`)}>
                 매장 등록하기
               </Button>
             )}
           </div>
-          {shopInfo ? <ShopDetail data={shopInfo} /> : null}
         </div>
 
         {/* 메뉴 정보 */}
         {shopInfo && (
           <div>
             <h2>메뉴</h2>
-            <MenuList />
+            <MenuList menuList={menulist} />
           </div>
         )}
       </div>

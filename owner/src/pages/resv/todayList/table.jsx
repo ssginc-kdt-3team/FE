@@ -23,7 +23,7 @@ const ResvTdTable = () => {
   const fetchResTdvList = () => {
     setLoading(true);
     axiosWithBaseUrl
-      .get(`/owner/reservation/activetime/${3}/${selectedType}/${currentPage}`) // 점주 id
+      .get(`/owner/reservation/activetime/${14}/${selectedType}/${currentPage}`) // 점주 id
       .then((response) => {
         setResvList(response.data.content);
         console.log(response.data.content);

@@ -93,7 +93,7 @@ const MainRoutes = {
                     element: <MgtInfo />
                 },
                 {
-                    path: '/mgt/info/update',
+                    path: '/mgt/info/update/:id',
                     element: <MgtInfoUpdate />
                 },
                 {

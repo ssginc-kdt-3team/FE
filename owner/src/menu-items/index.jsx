@@ -1,5 +1,5 @@
 // project import
-import pages from './Pages';
+import pages from './Authentication';
 import profile from './Profile';
 import resv from './Resv';
 import mgt from './Mgt';
@@ -9,10 +9,12 @@ import mgt from './Mgt';
 
 // ==============================|| MENU ITEMS ||============================== //
 
+// 로그인 상태에 따라 페이지 업데이트
 const menuItems = {
-    items: [pages, profile, resv, mgt]
-};
 
+    items: [pages, profile, resv, mgt]
+
+};
 export default menuItems;
 
 

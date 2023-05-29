@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card } from 'antd';
+import { Card, Button } from 'antd';
 import { useNavigate } from '../../../../node_modules/react-router-dom/dist/index';
 // import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -16,6 +16,7 @@ const Span = styled.span`
 
 function ShopDetail({data}) {
   const navigate = useNavigate();
+  const { id } = data;
 
   return (
     <>
@@ -35,10 +36,14 @@ function ShopDetail({data}) {
                 <p><Span>이름</Span>{data.ownerName}</p>
                 <p><Span>지점명</Span>{data.branchName}</p>
                 <p><Span>위치</Span>{data.location}</p>
-                <p><Span>운영시간</Span>{data.openTime}~{data.closeTime}</p>
+                <p><Span>오픈시간</Span>{data.openTime}</p>
+                <p><Span>닫는시간</Span>{data.closeTime}</p>
                 <p><Span>주문 마감 시간</Span>{data.orderCloseTime}</p>
                 <p><Span>대표자명</Span>{data.businessCeo}</p>
                 <p><Span>사업자등록번호</Span>{data.businessNumber}</p>
+                <Button type='primary' onClick={() => navigate(`/mgt/info/update/${14}`)}>
+                수정
+              </Button>
               </div>
             </div>
           </Card>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import { Table, Button } from "antd";
 import { Link } from 'react-router-dom';
 import { axiosWithBaseUrl } from 'App';
@@ -11,11 +11,10 @@ const Img = styled.img`
   height: 100px;
 `;
 
-function MenuList() {
+function MenuList({ menuList }) {
   const navigate = useNavigate();
-
-  const [menuList, setMenuList] = useState(null);
   const [loading, setLoading] = useState(false);
+
 
   const columns = [
     {
@@ -28,18 +27,9 @@ function MenuList() {
     },
     {
       title: "메뉴명",
-      dataIndex: "menuName",
-      key: "menuName"
+      dataIndex: "name",
+      key: "name"
     },
-    // {
-    //   title: "예약자명",
-    //   dataIndex: "name",
-    //   key: "name",
-    //   render: (text, row) => (
-    //     <Link to={`/resv/detail/${row.id}`}>{text}</Link>
-    //   ),                                                                        
-      
-    // },
     {
       title: "가격",
       dataIndex: "price",
@@ -51,23 +41,23 @@ function MenuList() {
     {
       title: "수정",
       dataIndex: "",
-      key: "",
-      render: row => (
-        <Button type="primary" onClick={() => navigate(`/mgt/menu/update/${row.id}`, { state: row })}>수정</Button>
+      key: "menuId",
+      render: (record) => (
+        <Button id={record.id} type="primary" onClick={() => navigate(`/mgt/menu/update/${record.id}`, { state: record })}>수정</Button>
       )
     }
   ];
 
-  useEffect(() => {
-    axios.get(`http://localhost:3001/products`)
-    .then(res => {
-      console.log(res.data);
-      setMenuList(res.data);
-    })
-    .catch(err => {
-      console.log(err);
-    })
-  }, [])
+  // useEffect(() => {
+  //   axios.get(`http://localhost:3001/products`)
+  //   .then(res => {
+  //     console.log(res.data);
+  //     setMenuList(res.data);
+  //   })
+  //   .catch(err => {
+  //     console.log(err);
+  //   })
+  // }, [])
 
   return (
     <Table
