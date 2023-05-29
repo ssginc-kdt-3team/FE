@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { axiosWithBaseUrl } from "App";
 import { useDispatch } from 'react-redux';
 import { LOGIN } from "store/reducers/actions";
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Modal  } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { isEmailValid } from '../../../utils/auth';
 
@@ -12,13 +12,14 @@ const LoginForm = () => {
   
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-  
+
+
     const onFinish = (values) => {
-      const { username, password } = values;
-      if (isEmailValid(username)) {
+      const { email, password } = values;
+      if (isEmailValid(email)) {
         dispatch(
           LOGIN({
-            email: username,
+            email: email,
             password: password,
           })
         )
@@ -26,8 +27,12 @@ const LoginForm = () => {
             if (res === '') {
               alert('로그인에 실패하였습니다.\n아이디와 비밀번호를 확인하세요.');
             } else {
+              setLoginInfo({
+                id: res.data.id,
+                isLoggedIn: true,
+              });
               alert('로그인에 성공하였습니다.');
-              navigate('/', { replace: true });
+              navigate('/', { replace: true }); // 메인화면으로 이동
             }
           })
           .catch((err) => {
@@ -56,20 +61,25 @@ const LoginForm = () => {
         if (isEmailValid(email)) {
           axiosWithBaseUrl
             .post('/owner/login', {
-              email: email, // email
-              password: password, // password
+              email: email,                         // email
+              password: password,                   // password
             })
-            .then(res => { // 받아오는 정보가 있다
+            .then(res => {                          // 받아오는 정보가 있다
               console.log(res.data.id);
               if (res.data === "")
                 alert('로그인에 실패하였습니다.\n아이디와 비밀번호를 확인하세요.');
               else {
-                setLoginInfo({ // 로그인된 상태로 변경
+                setLoginInfo({                       // 로그인된 상태로 변경
                   id: res.data.id,
                   isLoggedin: true
                 });
-                alert('로그인에 성공하였습니다.');
-                navigate('/', { replace: true }); // 메인화면으로 이동
+                Modal.success({
+                  title: '로그인 성공',
+                  content: '로그인에 성공하였습니다.',
+                  onOk: () => {
+                    navigate('/', { replace: true });
+                  },
+                });
               }
             })
             .catch(err => { // 오류 처리
@@ -104,7 +114,8 @@ const LoginForm = () => {
   
             <Form.Item
               label="비밀번호"
-              name="password"
+              autocomplete="current-password"
+              // style={{ marginLeft:'5px' }}
               rules={[
                 {
                   required: true,
@@ -120,22 +131,12 @@ const LoginForm = () => {
             </Form.Item>
   
             <Form.Item
-              name="remember"
-              valuePropName="checked"
               wrapperCol={{
                 offset: 8,
                 span: 16,
               }}
             >
-            </Form.Item>
-  
-            <Form.Item
-              wrapperCol={{
-                offset: 8,
-                span: 16,
-              }}
-            >
-              <Button onClick={handleLogin} className="button mt-45" type="primary" htmlType="submit" style={{ marginLeft:'30px' }}>
+              <Button onClick={handleLogin} className="button mt-45" type="primary" htmlType="submit" style={{ marginLeft:'20px' }}>
                 로그인
               </Button>
             </Form.Item>

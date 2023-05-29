@@ -16,7 +16,7 @@ function MenuAdd() {
   // form data 상태변수
   const [menuName, setMenuName] = useState(null);
   const [menuPrice, setMenuPrice] = useState(null);
-  const [ownerId, setOwenrId] = useState(1);
+  const [ownerId, setOwenrId] = useState(14);
   const [photos, setPhotos] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();

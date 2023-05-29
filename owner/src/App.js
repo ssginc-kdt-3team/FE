@@ -13,7 +13,7 @@ export const axiosWithBaseUrl = axios.create({
   });
 
 const App = () => (
-    <ThemeCustomization>
+    <ThemeCustomization> 
         <ScrollTop>
             <Routes />
         </ScrollTop>
