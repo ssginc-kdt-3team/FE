@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../../../assets/css/widget/reservation/CustInfoCard.module.css';
+import styles from '../../../assets/css/ui/reservation/CustInfoCard.module.css';
 
 function CustInfoCard({data}) {
   return (

@@ -57,7 +57,7 @@ function Filter({state, setState, branchId, setBranchId, shopId, setShopId, resv
 
   return (
     <>
-      <Select className='select' bordered={false} size='large' onChange={(e) => handleBranchSelect(e)} value={branchId}>
+      <Select className='select' bordered={false} size='large' value={branchId} onChange={(e) => handleBranchSelect(e)}>
         {
           branchList && branchList.map( branch => (
             <Option key={branch.id} value={branch.id}>{branch.name}</Option>
@@ -66,7 +66,7 @@ function Filter({state, setState, branchId, setBranchId, shopId, setShopId, resv
       </Select>
 
       {/* 매장 선택 */}
-      <Select className='select' bordered={false} size='large' onChange={handleShopSelect} value={shopId}>
+      <Select className='select' bordered={false} size='large' value={shopId} onChange={handleShopSelect}>
         {
           shopList && shopList.map( (shop, index) => (
             <Option key={shop.id} value={shop.id}>{shop.name}</Option>

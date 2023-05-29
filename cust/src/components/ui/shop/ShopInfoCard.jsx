@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../../../assets/css/widget/shop/ShopInfoCard.module.css'
+import styles from '../../../assets/css/ui/shop/ShopInfoCard.module.css'
 import noImage from '../../../assets/images/no_image.jpg';
 import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';

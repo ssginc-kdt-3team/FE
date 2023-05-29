@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import styles from '../../../assets/css/widget/reservation/TimePicker.module.css';
+import styles from '../../../assets/css/ui/reservation/TimePicker.module.css';
 
 function TimeBtn({time, selectedOption, handleOptionChange, selectedDate}) {
   // const date = moment(new Date()).format("YYYY-MM-DD"); // 오늘 날짜

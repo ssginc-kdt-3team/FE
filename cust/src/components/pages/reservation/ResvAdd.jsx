@@ -4,15 +4,15 @@ import Calendar from 'react-calendar';
 import moment from 'moment';
 import dayjs from 'dayjs';
 import styles from '../../../assets/css/pages/reservation/ResvAdd.module.css';
-import '../../../assets/css/widget/Calendar.css'; // css import
-import Counter from '../../widget/reservation/Counter';
-import TimePicker from '../../widget/reservation/TimePicker';
+import '../../../assets/css/ui/reservation/Calendar.css'; // css import
+import Counter from '../../ui/reservation/Counter';
+import TimePicker from '../../ui/reservation/TimePicker';
 import { blockCalendar } from '../../../utils/reservation/blockCalendar';
 import PageTitle from '../../ui/PageTitle';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { loginState } from '../../../state/loginState';
-import Filter from '../../widget/reservation/Filter';
+import Filter from '../../ui/reservation/Filter';
 import { Button } from 'antd';
 
 const initialResvInfo = { // 초기값을 가지는 객체

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styles from '../../../assets/css/widget/reservation/TimePicker.module.css';
+import styles from '../../../assets/css/ui/reservation/TimePicker.module.css';
 import TimeBtn from '../../ui/reservation/TimeBtn';
 import axios from 'axios';
 import moment from 'moment';

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from '../../../assets/css/widget/shop/ReviewCard.module.css';
+import styles from '../../../assets/css/ui/shop/ReviewCard.module.css';
 import { useRecoilValue } from 'recoil';
 import { loginState } from '../../../state/loginState';
 import { Rate } from 'antd';
