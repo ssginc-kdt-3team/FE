@@ -7,6 +7,8 @@ import 'simplebar/src/simplebar.css';
 
 // third-party
 import { Provider as ReduxProvider } from 'react-redux';
+import { PersistGate } from 'redux-persist/lib/integration/react';
+import { persistStore } from 'redux-persist'
 
 // apex-chart
 import 'assets/third-party/apex-chart.css';
@@ -18,17 +20,24 @@ import reportWebVitals from './reportWebVitals';
 
 // ==============================|| MAIN - REACT DOM RENDER  ||============================== //
 
+
+
 const container = document.getElementById('root');
 const root = createRoot(container); // createRoot(container!) if you use TypeScript
+const persistor = persistStore(store);
+
 root.render(
     <StrictMode>
         <ReduxProvider store={store}>
             <BrowserRouter basename="/">
-                <App />
+                {/* <PersistGate loading={null} persistor={persistor}> */}
+                    <App />
+                {/* </PersistGate> */}
             </BrowserRouter>
         </ReduxProvider>
     </StrictMode>
 );
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

@@ -3,7 +3,7 @@ import { configureStore } from '@reduxjs/toolkit';
 
 // project import
 import reducers from './reducers';
-import ownerReducer from './reducers';
+import { persistStore } from 'redux-persist';
 
 // ==============================|| REDUX TOOLKIT - MAIN STORE ||============================== //
 
@@ -13,4 +13,6 @@ const store = configureStore({
 
 const { dispatch } = store;
 
-export { store, dispatch };
+const persistor = persistStore(store);
+
+export { store, dispatch, persistor  };

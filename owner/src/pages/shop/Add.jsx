@@ -104,9 +104,9 @@ function ShopAdd() {
 
 
   //모달
-//  const handleSubmit = () => {
-//     onFileUpload();
-//   };
+  // const handleSubmit = () => {
+  //    onFileUpload();
+  //      };
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -255,9 +255,9 @@ function ShopAdd() {
           <Button type="primary" onClick={handleSubmit}>
             등록하기
           </Button>
-          {/* <Modal title="등록" visible={isModalOpen} onOk={handleSubmit} onCancel={handleCancel}>
+          <Modal title="등록" visible={isModalOpen} onOk={handleSubmit} onCancel={handleCancel}>
             <p>매장을 등록하시겠습니까?</p>
-          </Modal> */}
+          </Modal>
         </Form.Item>
       </Form>
     </Card>

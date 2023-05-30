@@ -23,7 +23,7 @@ const menu = createSlice({
             state.openComponent = action.payload.openComponent;
         },
 
-        openDrawer(state, action) {
+        openDrawer(state, action) { 
             state.drawerOpen = action.payload.drawerOpen;
         },
 
