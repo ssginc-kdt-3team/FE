@@ -21,29 +21,29 @@ const Deposit = {
             icon: icons.HistoryOutlined,
             breadcrumbs: false
         },
-        {
-            id: 'depositfilter',
-            title: '예약금필터-지울거',
-            type: 'item',
-            url: '/deposit/filter',
-            icon: icons.HistoryOutlined,
-            breadcrumbs: false
-        },
-        {
-            id: 'depositlist',
-            title: '예약금리스트-지울거',
-            type: 'item',
-            url: '/deposit/list',
-            icon: icons.HistoryOutlined,
-            breadcrumbs: false
-        }, {
-            id: 'depositshop',
-            title: '매장별예약금리스트-지울거',
-            type: 'item',
-            url: '/deposit/list/shop',
-            icon: icons.HistoryOutlined,
-            breadcrumbs: false
-        }
+        // {
+        //     id: 'depositfilter',
+        //     title: '예약금필터-지울거',
+        //     type: 'item',
+        //     url: '/deposit/filter',
+        //     icon: icons.HistoryOutlined,
+        //     breadcrumbs: false
+        // },
+        // {
+        //     id: 'depositlist',
+        //     title: '예약금리스트-지울거',
+        //     type: 'item',
+        //     url: '/deposit/list',
+        //     icon: icons.HistoryOutlined,
+        //     breadcrumbs: false
+        // }, {
+        //     id: 'depositshop',
+        //     title: '매장별예약금리스트-지울거',
+        //     type: 'item',
+        //     url: '/deposit/list/shop',
+        //     icon: icons.HistoryOutlined,
+        //     breadcrumbs: false
+        // }
         // {
         //     id: 'depositdetail',
         //     title: '지점별 예약금 리스트-확인용',

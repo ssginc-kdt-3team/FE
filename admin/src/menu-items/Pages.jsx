@@ -11,12 +11,12 @@ const icons = {
 
 const pages = {
     id: 'authentication',
-    title: 'Authentication',
+    title: '인증',
     type: 'group',
     children: [
         {
             id: 'login1',
-            title: 'Login',
+            title: '로그인',
             type: 'item',
             url: '/login',
             icon: icons.LoginOutlined,
