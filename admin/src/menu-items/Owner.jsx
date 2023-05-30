@@ -21,13 +21,13 @@ const dashboard = {
             url: '/owner/list',
             icon: icons.SolutionOutlined,
         },
-        {
-            id: 'ownerreg',
-            title: '점주 등록',
-            type: 'item',
-            url: '/owner/reg',
-            icon: icons.UserAddOutlined,
-        }
+        // {
+        //     id: 'ownerreg',
+        //     title: '점주 등록',
+        //     type: 'item',
+        //     url: '/owner/reg',
+        //     icon: icons.UserAddOutlined,
+        // }
     ]
 };
 

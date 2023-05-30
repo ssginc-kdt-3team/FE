@@ -53,7 +53,7 @@ function LoginForm() {
     <div className='container'>
       <div className='center flex-col'>
         <form onSubmit={handleLogin}>
-          <input  type='id' value={id} placeholder='이메일' onChange={(e) => setid(e.currentTarget.value)}/>
+          <input  type='id' value={id} placeholder='아이디' onChange={(e) => setid(e.currentTarget.value)}/>
 
           <input type='password' value={password} placeholder='비밀번호' onChange={(e) => setPassword(e.currentTarget.value)}/>
 

@@ -32,22 +32,22 @@ const shop = {
             icon: icons.MessageOutlined
             // breadcrumbs: false
         },
-        {
-            id: 'shopmenu',
-            title: '메뉴 관리',
-            type: 'item',
-            url: '/shop/menu',
-            icon: icons.ProfileOutlined
-            // breadcrumbs: false
-        },
-        {
-            id: 'shopreg',
-            title: '매장 등록',
-            type: 'item',
-            url: '/shop/reg',
-            icon: icons.FileAddOutlined
-            // breadcrumbs: false
-        }
+        // {
+        //     id: 'shopmenu',
+        //     title: '메뉴 관리',
+        //     type: 'item',
+        //     url: '/shop/menu',
+        //     icon: icons.ProfileOutlined
+        //     // breadcrumbs: false
+        // },
+        // {
+        //     id: 'shopreg',
+        //     title: '매장 등록',
+        //     type: 'item',
+        //     url: '/shop/reg',
+        //     icon: icons.FileAddOutlined
+        //     // breadcrumbs: false
+        // }
     ]
 };
 
