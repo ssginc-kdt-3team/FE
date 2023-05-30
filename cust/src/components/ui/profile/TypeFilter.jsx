@@ -2,10 +2,11 @@ import { Radio } from 'antd';
 import React from 'react';
 import styles from '../../../assets/css/ui/profile/TypeFilter.module.css'
 
-function TypeFilter({type, setType}) {
+function TypeFilter({type, setType, setCurrentPage}) {
   const handleTypeRadio = (e) => {
     console.log(e.target.value);
     setType(e.target.value);
+    setCurrentPage(1); // 페이지 1번으로
     // console.log('type: ' + e.target.value);
   };
 

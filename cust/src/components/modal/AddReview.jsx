@@ -1,6 +1,6 @@
 import { Modal, Rate } from 'antd';
 import React, { useReducer } from 'react';
-import styles from '../../assets/css/modal/ReviewAdd.module.css';
+import styles from '../../assets/css/modal/Modal.module.css';
 import { useRecoilValue } from 'recoil';
 import { loginState } from '../../state/loginState';
 import { useParams } from 'react-router-dom';
@@ -24,7 +24,7 @@ const initialReviewInfo = { // 초기값을 가지는 객체
   point: 0
 };
 
-function ReviewAdd({isModalOpen, setIsModalOpen, isReviewed, setIsReviewed}) {
+function AddReview({isModalOpen, setIsModalOpen, isReviewed, setIsReviewed}) {
   const loginInfo = useRecoilValue(loginState); // 로그인 정보 가져와서
   initialReviewInfo.userId = loginInfo.id; // 초기값의 userId 설정
 
@@ -85,7 +85,7 @@ function ReviewAdd({isModalOpen, setIsModalOpen, isReviewed, setIsReviewed}) {
       centered
       open={isModalOpen}
     >
-      <form>
+      <form id={styles.addReviewForm}>
         <Rate onChange={handlePoint} value={reviewInfo.point} style={{ fontSize: '30px' }}></Rate>
         <input 
           id={styles.reviewTitle} 
@@ -118,4 +118,4 @@ function ReviewAdd({isModalOpen, setIsModalOpen, isReviewed, setIsReviewed}) {
   );
 }
 
-export default ReviewAdd;
+export default AddReview;

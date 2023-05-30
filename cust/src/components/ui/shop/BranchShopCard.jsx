@@ -10,7 +10,8 @@ const ContentWrap = styled.div`
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  opacity: 0;
+  /* opacity: 0; */
+  opacity: 1;
 
   @media screen and (max-width: 768px) {
     opacity: 1;
@@ -30,6 +31,7 @@ const Img = styled.img`
   border-radius: var(--border-radius);
   /*object-fit: contain; /* 여백 O */
   object-fit: cover; /* 여백 X */
+  filter: brightness(50%); /* 이미지 어둡게 처리 */
   transition: all 0.5s;
   /* z-index: 95; */
 `;

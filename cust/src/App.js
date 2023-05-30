@@ -4,11 +4,11 @@ import Login from "./components/pages/authentication/Login";
 import './App.css';
 import Join from "./components/pages/authentication/Join";
 import { RecoilRoot } from "recoil";
-import Heaader from "./components/layout/Header";
-import ResvAdd from "./components/pages/reservation/ResvAdd";
+import Header from "./components/layout/Header";
+import AddResv from "./components/pages/reservation/AddResv";
 import ResvList from "./components/pages/reservation/ResvList";
 import Resv from "./components/pages/reservation/Resv";
-import ResvUpdate from "./components/pages/reservation/ResvUpdate";
+import UpdateResv from "./components/pages/reservation/UpdateResv";
 // import axios from "axios";
 import FindId from "./components/pages/authentication/FindId";
 import FindIdResult from "./components/pages/authentication/FindIdResult";
@@ -20,12 +20,13 @@ import Shop from "./components/pages/shop/Shop";
 import Review from "./components/pages/profile/Review";
 import Profile from "./components/pages/profile/Profile";
 import Cash from "./components/pages/profile/Cash";
+import ChargeResult from "./components/pages/profile/ChargeResult";
 
 function App() {
   return ( // 이 안에 JSX 문법 적용
     <RecoilRoot>
       <BrowserRouter>
-        <Heaader/>
+        <Header/>
         <Routes>
           {/* 메인 */}
           <Route path="/" element={<Main/>}/>
@@ -39,11 +40,11 @@ function App() {
           <Route path="/join" element={<Join/>}/>
 
           {/* resvation */}
-          <Route path="/resv/add" element={<ResvAdd/>}/>
+          <Route path="/resv/add" element={<AddResv/>}/>
           <Route path="/resv" element={<ResvList isActiveList={false}/>}/>
           <Route path="/resv/active" element={<ResvList isActiveList={true}/>}/>
           <Route path="/resv/:resvId" element={<Resv/>}/>
-          <Route path="/resv/update/:resvId" element={<ResvUpdate/>}/>
+          <Route path="/resv/update/:resvId" element={<UpdateResv/>}/>
 
           {/* shop */}
           <Route path="/branch" element={<BranchList/>}/>
@@ -54,6 +55,9 @@ function App() {
           <Route path="/profile/:userId/" element={<Profile/>}/>
           <Route path="/profile/:userId/review" element={<Review/>}/>
           <Route path="/cash" element={<Cash/>}/>
+
+          {/* Charge */}
+          <Route path="/chargeResult" element={<ChargeResult/>}/>
         </Routes>
       </BrowserRouter>
     </RecoilRoot>

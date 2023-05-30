@@ -6,9 +6,10 @@ import { loginState } from '../../../state/loginState';
 import axios from 'axios';
 import Paging from '../../ui/Paging';
 import CashInfoCard from '../../ui/profile/CashInfoCard';
-import { Button, Radio } from 'antd';
+import { Button } from 'antd';
 import TypeFilter from '../../ui/profile/TypeFilter';
 import DateFilter from '../../ui/profile/DateFilter';
+import SelectChargeOption from '../../modal/SelectChargeOption';
 
 const Ul = styled.ul`
   max-width: 800px;
@@ -32,12 +33,10 @@ const Div = styled.div`
 `;
 
 const buttonStyle = {
-  width: 'var(--button-width-s)',
-  height: 'var(--button-height-s)',
   marginBottom: '65px',
-  fontSize: 'var(--button-fontSize-s)',
   float: 'right'
 };
+
 
 function Cash() {
   const loginInfo = useRecoilValue(loginState);
@@ -51,7 +50,9 @@ function Cash() {
   const [totalItems, setTotalItems] = useState(0); // 총 아이템 수
   const [itemsPerPage, setItemsPerPage] = useState(8) // 페이지당 아이템 수
 
-  const [remainedCash, setRemainedCash] = useState(0); // 충전금 현황
+  const [remainedCash, setRemainedCash] = useState('0'); // 충전금 현황
+  
+  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태
 
   // 충전금 내역 가져오기
   useEffect(() => {
@@ -85,27 +86,35 @@ function Cash() {
   }, [loginInfo.id])
 
   return (
-    <div className='container'>
-      <div className='center flex-col'>
-        <PageTitle title={remainedCash} type="cash"/>
-        <Button className='button buttonReverse' style={buttonStyle}>충전하기</Button>
-        
-        <Div className='space-between'>
-          <TypeFilter type={type} setType={setType}/>
-          <DateFilter dateRange={dateRange} setDateRange={setDateRange}/>
-        </Div>
-        <Ul className='flex flex-col' style={{ borderTop: '1px solid var(--input-border)' }}>
-          {
-            cashList && cashList.map( cash => (
-              <CashInfoCard key={cash.id} data={cash}/>
-            ))
-          }
-        </Ul>
-    
-        {/* 페이지 */}
-        <Paging currentPage={currentPage} totalItems={totalItems} itemsPerPage={itemsPerPage} setCurrentPage={setCurrentPage}/>
+    <>
+      <div className='container'>
+        <div className='center flex-col'>
+          <PageTitle title={remainedCash.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} type="cash"/>
+          <div className='flex flex-gap-10'>
+            <Button className='button buttonReverse button-s' onClick={() => setIsModalOpen(true)} style={buttonStyle}>충전하기</Button>
+            <Button type='primary' className='button button-s' style={buttonStyle}>환불</Button>
+          </div>
+          
+          <Div className='space-between'>
+            <TypeFilter type={type} setType={setType} setCurrentPage={setCurrentPage}/>
+            <DateFilter dateRange={dateRange} setDateRange={setDateRange} setCurrentPage={setCurrentPage}/>
+          </Div>
+          <Ul className='flex flex-col' style={{ borderTop: '1px solid var(--input-border)' }}>
+            {
+              cashList && cashList.map( cash => (
+                <CashInfoCard key={cash.id} data={cash}/>
+              ))
+            }
+          </Ul>
+      
+          {/* 페이지 */}
+          <Paging currentPage={currentPage} totalItems={totalItems} itemsPerPage={itemsPerPage} setCurrentPage={setCurrentPage}/>
+        </div>
       </div>
-    </div>
+
+      {/* 충전하기 모달 */}
+      <SelectChargeOption isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}/>
+    </>
   );
 }
 

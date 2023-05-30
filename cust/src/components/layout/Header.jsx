@@ -4,13 +4,13 @@ import menuData from "../../data/menuData";
 import logo from '../../assets/images/logo.png';
 import hamburger from '../../assets/images/icons/hamburger.png';
 import close from '../../assets/images/icons/close.png';
-import { Link } from 'react-router-dom';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 import MobNav from './MobNav';
 import SubMenu from './SubMenu';
 import { useRecoilValue } from 'recoil';
 import { loginState } from '../../state/loginState';
 
-function Heaader() {
+function Header() {
   const loginInfo = useRecoilValue(loginState);
 
   // 모바일 Nav 상태
@@ -28,6 +28,12 @@ function Heaader() {
   //   console.log(isSubMenuOpen)
   //   setIsSubMenuOpen(!isSubMenuOpen);
   // };
+  const location = useLocation();
+  const hideHeader = location.pathname.startsWith("/chargeResult");
+
+  if (hideHeader) {
+    return null; // Header를 숨김
+  }
 
   return (
     <div className='fixed-top' style={{zIndex: '99'}}>
@@ -77,4 +83,4 @@ function Heaader() {
   );
 }
 
-export default Heaader;
+export default Header;

@@ -72,3 +72,9 @@
   border-color: #fff !important;
   background-color: rgba(0, 0, 0, 0) !important;
 }
+
+.button-s {
+  width: var(--button-width-s);
+  height: var(--button-height-s);
+  font-size: var(--button-fontSize-s);
+}
