@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import Table from "./table";
+import Table from "./Table";
 
 const DepositList = () => {
   return (

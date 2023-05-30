@@ -21,7 +21,6 @@ const Register = () => (
                 </Stack>
             </Grid>
             <Grid item xs={12}>
-                {/* <FirebaseRegister /> */}
                 <JoinForm/>
             </Grid>
         </Grid>
