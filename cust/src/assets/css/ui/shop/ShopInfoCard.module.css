@@ -4,8 +4,8 @@
   height: 240px;
   border-radius: var(--border-radius);
 
-  object-fit: contain; /* 여백 O */
-  /* object-fit: cover; /* 여백 X */
+  /* object-fit: contain; /* 여백 O */
+  object-fit: cover; /* 여백 X */
 }
 
 #topWrap p > span {
@@ -17,6 +17,7 @@
 #topWrap button {
   width: var(--button-width-s);
   height: var(--button-height-s);
+  margin-top: 16px;
   font-size: var(--button-fontSize-s);
 }
 
@@ -44,5 +45,12 @@
   }
   #topWrap > div > p:last-child {
     margin-bottom: 0;
+  }
+
+  /* 버튼 */
+  #topWrap button {
+    width: 100%;
+    height: var(--input-height);
+    font-size: var(--button-fontSize);
   }
 }

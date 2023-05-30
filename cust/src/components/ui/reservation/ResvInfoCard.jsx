@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import styles from '../../../assets/css/ui/reservation/ResvInfoCard.module.css';
 import ResvStatusTag from '../../ui/reservation/ResvStatusTag';
 import { Link, useNavigate } from 'react-router-dom';
-import ReviewAdd from '../../modal/ReviewAdd';
+import AddReview from '../../modal/AddReview';
 import { Button } from 'antd';
 
 function ResvInfoCard({data, resvId}) {
@@ -95,7 +95,7 @@ function ResvInfoCard({data, resvId}) {
       }
 
       {/* 리뷰 등록 모달 */}
-      <ReviewAdd isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} isReviewed={isReviewed} setIsReviewed={setIsReviewed}/>
+      <AddReview isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} isReviewed={isReviewed} setIsReviewed={setIsReviewed}/>
     </>
   );
 }

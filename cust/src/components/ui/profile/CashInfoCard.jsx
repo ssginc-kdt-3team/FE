@@ -19,7 +19,7 @@ function CashInfoCard({data}) {
       <div>
         <div className='flex center-h'>
           <P>{data.dateTime}</P>
-          <CashStatusTag status='RESERVATION'/>
+          <CashStatusTag status={data.type}/>
         </div>
         <h3 style={{ paddingBottom: '16px' }}>{data.reason}</h3>
       </div>

@@ -3,9 +3,10 @@ import { Select } from 'antd';
 
 const { Option } = Select;
 
-function DateFilter({dateRange, setDateRange}) {
+function DateFilter({dateRange, setDateRange, setCurrentPage}) {
   const handleDateRangeSelect = (e) => {
     setDateRange(e);
+    setCurrentPage(1); // 페이지 1번으로
     // console.log('dateRange: ' + e);
   }
 
