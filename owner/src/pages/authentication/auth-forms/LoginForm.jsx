@@ -39,7 +39,7 @@ const LoginForm = () => {
               content: '로그인에 성공하였습니다.',
             });
 
-            navigate('/', { replace: true });
+            navigate('/main', { replace: true });
           }
         })
         .catch((err) => {
