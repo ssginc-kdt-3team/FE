@@ -13,6 +13,7 @@ const JoinForm = Loadable(lazy(() => import('pages/authentication/Register')));
 const LoginRoutes = {
     path: '/',
     element: <MinimalLayout />,
+    
     children: [
         {
             path: '/',

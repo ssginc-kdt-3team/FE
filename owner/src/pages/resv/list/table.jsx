@@ -2,12 +2,17 @@ import { useState, useEffect } from "react";
 import { axiosWithBaseUrl } from "App";
 import { Table, Tag, Button } from "antd";
 import { Link } from "react-router-dom";
-import Paging from "components/pagination/paging";
-import { DatePicker, Space } from 'antd';
+import Paging from "components/pagination/Paging";
+import { DatePicker } from 'antd';
+
+//userSlice의 id 값 가져오기
+import { useSelector } from 'react-redux';
+
 
 const { RangePicker } = DatePicker;
 
 const ResvTable = () => {
+  const id = useSelector((state) => state.user.id);  
   const [resvList, setResvList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -33,11 +38,12 @@ const ResvTable = () => {
     // }
 
     axiosWithBaseUrl
-       .post(`/owner/reservation/list/${3}/${selectedType}/${currentPageInt}`, requestBody)
+       .post(`/owner/reservation/list/${id}/${selectedType}/${currentPageInt}`, requestBody)
       // .get(`/owner/reservation/list/${3}/noshoww/${currentPageInt}`, { params, data: requestBody })
       .then((response) => {
         setResvList(response.data.content);
         console.log(response.data.content);
+        console.log(id);
         setTotalItems(response.data.totalElements);
         setItemsPerPage(response.data.numberOfElements);
         setLoading(false);

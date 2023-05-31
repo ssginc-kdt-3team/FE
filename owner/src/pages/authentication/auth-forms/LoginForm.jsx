@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { axiosWithBaseUrl } from "App";
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../../store/reducers/userSlice'; 
-import { setLoggedIn } from '../../../lib/storage';
+import { setLoggedIn } from '../../../store/lib/storage';
 import { Form, Input, Button, Modal  } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { isEmailValid } from '../../../utils/auth';
@@ -67,6 +67,7 @@ const LoginForm = () => {
               type="email"
               placeholder="이메일"
               value={email}
+              autoComplete="email"
               onChange={(e) => setEmail(e.target.value)}
             />
           </Form.Item>
@@ -82,6 +83,7 @@ const LoginForm = () => {
             ]}
           >
             <Input.Password
+              autoComplete="current-password"
               placeholder="비밀번호"
               value={password}
               onChange={(e) => setPassword(e.target.value)}

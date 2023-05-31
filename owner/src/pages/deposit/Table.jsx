@@ -2,12 +2,15 @@ import { useState, useEffect } from "react";
 import { axiosWithBaseUrl } from "App";
 import { Table, Tag, Button } from "antd";
 import { Link } from "react-router-dom";
-import Paging from "components/pagination/paging";
+import Paging from "components/pagination/Paging";
 import { DatePicker } from 'antd';
+//userSlice의 id 값 가져오기
+import { useSelector } from 'react-redux';
 
 // const monthFormat = 'YYYY/MM';
 
 const DepositTable = () => {
+   const id = useSelector((state) => state.user.id);  
   const [resvList, setResvList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -30,14 +33,14 @@ const DepositTable = () => {
     }
 
     axiosWithBaseUrl
-       .post(`/owner/deposit/${3}/${currentPageInt}`, requestBody)
+       .post(`/owner/deposit/${id}/${currentPageInt}`, requestBody)
       // .get(`/owner/reservation/list/${3}/noshoww/${currentPageInt}`, { params, data: requestBody })
       .then((response) => {
         setResvList(response.data.content);
         console.log(response.data.content);
+        console.log(id);
         setTotalItems(response.data.totalElements);
         setItemsPerPage(response.data.numberOfElements);
-        
         setLoading(false);
       })
       .catch((error) => {
@@ -88,32 +91,6 @@ const DepositTable = () => {
         return <Tag color={color}>{content}</Tag>;
       }
       },
-    // {
-    //   title: "예약상태",
-    //   dataIndex: "reservationStatus",
-    //   key: "reservationStatus",
-    //   render: (text) => {
-    //     let color, content;
-
-    //     if (text === "NOSHOW") {
-    //       color = "volcano";
-    //       content = "노쇼";
-    //     } else if (text === "DONE") {
-    //       color = "green";
-    //       content = "완료";
-    //     } else if (text === "CANCEL") {
-    //       color = "gold";
-    //       content = "취소";
-    //     } else if (text === "IMMINENT") {
-    //       color = "magenta";
-    //       content = "취소";
-    //     } else {
-    //       color = "blue";
-    //       content = "예약 중";
-    //     }
-    //     return <Tag color={color}>{content}</Tag>;
-    //   }
-    //   },
       {
         title: "예약자명",
         dataIndex: "customerName",

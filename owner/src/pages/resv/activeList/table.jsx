@@ -1,12 +1,15 @@
 import { Table, Tag } from "antd";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Paging from "components/pagination/paging";
+import Paging from "components/pagination/Paging";
 import { axiosWithBaseUrl } from "App";
 
+//userSlice의 id 값 가져오기
+import { useSelector } from 'react-redux';
 
 const ResvAcList = () => {
-  const [resvacList, setResvAcList] = useState([]);           //현재 페이지의 예약 목록을 저장 
+  const id = useSelector((state) => state.user.id);       //store에 저장된 user id 가져오기
+  const [resvacList, setResvAcList] = useState([]);       //현재 페이지의 예약 목록을 저장 
   const [loading, setLoading] = useState(false);          //데이터를 불러오는 동안의 로딩 상태를 저장
   const [currentPage, setCurrentPage] = useState(1);      // 현재 페이지 번호를 저장
   const [totalItems, setTotalItems] = useState(0);        // 전체 고객 수를 저장
@@ -19,7 +22,7 @@ const ResvAcList = () => {
   const fetchResvAcList = () => {
     setLoading(true);
     axiosWithBaseUrl
-      .get(`/owner/reservation/active/${3}/${currentPage}`)         //axios를 사용하여 API 엔드포인트로 GET 요청
+      .get(`/owner/reservation/active/${id}/${currentPage}`)         //axios를 사용하여 API 엔드포인트로 GET 요청
       .then((response) => {                               //응답받은 데이터를 사용하여 업데이트                                  
         console.log(response.data.content)                     //responese.data: 전체 data, respone.data.content : 특정 data
         setResvAcList(response.data.content);

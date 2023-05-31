@@ -1,3 +1,5 @@
+//로그인, 회원가입 배경
+
 import PropTypes from 'prop-types';
 
 // material-ui

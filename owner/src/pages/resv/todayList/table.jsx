@@ -1,12 +1,15 @@
 import { Table, Tag, Button  } from "antd";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Paging from "components/pagination/paging";
+import Paging from "components/pagination/Paging";
 import { axiosWithBaseUrl } from "App";
-import Enter from "pages/resv/todayList/enterbtn";
-import Noshow from "pages/resv/todayList/noshowbtn";
+import Enter from "pages/resv/todayList/Enterbtn";
+import Noshow from "pages/resv/todayList/Noshowbtn";
+//userSlice의 id 값 가져오기
+import { useSelector } from 'react-redux';
 
 const ResvTdTable = () => {
+ const id = useSelector((state) => state.user.id);  
   const [resvList, setResvList] = useState([]);           // 현재 페이지의 예약 목록을 저장 
   const [loading, setLoading] = useState(false);          // 데이터를 불러오는 동안의 로딩 상태를 저장
   const [currentPage, setCurrentPage] = useState(1);      // 현재 페이지 번호를 저장
@@ -23,10 +26,11 @@ const ResvTdTable = () => {
   const fetchResTdvList = () => {
     setLoading(true);
     axiosWithBaseUrl
-      .get(`/owner/reservation/activetime/${14}/${selectedType}/${currentPage}`) // 점주 id
+      .get(`/owner/reservation/activetime/${id}/${selectedType}/${currentPage}`) // 점주 id
       .then((response) => {
         setResvList(response.data.content);
         console.log(response.data.content);
+        console.log(id);
         setTotalItems(response.data.totalElements);
         setItemsPerPage(response.data.numberOfElements);
         setLoading(false);

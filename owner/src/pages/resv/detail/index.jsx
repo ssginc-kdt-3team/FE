@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { axiosWithBaseUrl } from 'App';
 import { Card } from 'antd';
-import Reject from "pages/resv/detail/rejectbtn";
+import Reject from "pages/resv/detail/Rejectbtn";
 
 function ResvDetail() {
+  //resvlist 에서  예약id 받아오기 
   const { id } = useParams();
   const [resv, setResv] = useState(null);
   
@@ -20,18 +21,6 @@ function ResvDetail() {
       });
   }, [id]);
 
-  // const handleReject = () => {
-  //   axios
-  //     .post(`http://localhost:8080/owner/reservation/reject/${id}`)
-  //     .then((res) => {
-  //       console.log(res.data);
-  //       // setResv({ ...resv, status: "CANCEL" }); // 예약 상태를"CANCEL"로 업데이트
-  //       console.log("Reservation rejected");
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
 
   return (
     <Card

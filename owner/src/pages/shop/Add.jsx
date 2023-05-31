@@ -4,9 +4,10 @@ import { Card, Button, DatePicker, TimePicker, Form, Input, Upload, Modal } from
 import { PlusOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import dayjs from 'dayjs';
+import { useSelector } from 'react-redux';
 
-//시간 형식
-const format = 'HH:mm';
+
+const format = 'HH:mm';    //시간 형식
 
 const normFile = (e) => {
   if (Array.isArray(e)) {
@@ -17,9 +18,10 @@ const normFile = (e) => {
 
 function ShopAdd() {
   // form data 상태변수
+  const id = useSelector((state) => state.user.id); 
   const [shopName, setShopName] = useState('');
   const [ownerName, setOwnerName] = useState('');
-  const [ownerId, setownerId] = useState('14');
+  // const [ownerId, setownerId] = useState('14');
   const [branchId, setBranchId] = useState('1');
   const [shopInfo, setShopInfo] = useState('');
   const [location, setLocation] = useState('');
@@ -52,7 +54,7 @@ function ShopAdd() {
       businessCeo: businessCeo,
       businessNumber: businessNumber,
       orderCloseTime: orderCloseTime.format(format),
-      ownerId: ownerId, // ownerId 값 추가
+      Id: id, // ownerId 값 추가
       branchId: branchId, // branchId 값 추가
     };
 
@@ -86,9 +88,6 @@ function ShopAdd() {
       navigate('/mgt/info');
     } catch (error) {
       console.error('Error adding shop:', error);
-      console.log(formData.shopData);
-      console.log(formData.shopImg);
-      console.log(formData.businessImg);
     }
   };
 
@@ -152,8 +151,8 @@ function ShopAdd() {
         <Form.Item label="지점id" name="branchId" required>
           <Input value={branchId} onChange={(e) => setBranchId(e.target.value)} />
         </Form.Item>
-        <Form.Item label="점주id" name="ownerId" required>
-          <Input value={ownerId} onChange={(e) => setownerId(e.target.value)} />
+        <Form.Item label="점주id" name="id" required>
+          <Input value={id} onChange={(e) => id(e.target.value)} />
         </Form.Item>
         <Form.Item label="매장명" name="shopName" required>
           <Input value={shopName} onChange={(e) => setShopName(e.target.value)} />

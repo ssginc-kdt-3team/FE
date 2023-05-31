@@ -5,18 +5,21 @@ import { Button } from 'antd';
 import axios from 'axios';
 import MenuList from '../menu/List';
 import ShopDetail from './Detail';
+//userSlice의 id 값 가져오기
+import { useSelector } from 'react-redux';
 
 function MgtInfo() {
+  const id = useSelector((state) => state.user.id);  
   const navigate = useNavigate();
-  // const { id } = useParams(); // owner id
   const [shopInfo, setShopInfo] = useState(null);
   const [menulist, setMenuList] = useState(null);
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/owner/shop/detail/${14}`)
+      .get(`http://localhost:8080/owner/shop/detail/${id}`)
       .then((res) => {
         console.log(res.data);
+        console.log(id);
         setShopInfo(res.data);
         setMenuList(res.data.menus);
       })
