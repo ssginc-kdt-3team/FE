@@ -28,15 +28,15 @@
   padding-bottom: 24px;
 }
 /* 사용자명 */
-#mobNavWrap > div > span {
+/* #mobNavWrap > div > span {
   padding-left: 2px;
-  font-size: 25px;
-}
+  font-size: 24px;
+} */
 /* 로그인 */
-#mobNavWrap > div > a {
+/* #mobNavWrap > div > a {
   padding-left: 2px;
   color: var(--main);
-}
+} */
 
 /* 메뉴 */
 #mobNavWrap > ul:last-child {

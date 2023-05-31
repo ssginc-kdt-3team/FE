@@ -18,7 +18,7 @@
 /* 중간 */
 #middleWrap > p > span {
   color: var(--description);
-  margin-right: 20px;
+  margin-right: 16px;
 }
 
 /* 하단 */

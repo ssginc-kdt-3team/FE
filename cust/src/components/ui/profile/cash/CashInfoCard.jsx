@@ -13,7 +13,7 @@ const Li = styled.li`
 
 const P = styled.p`
   color: var(--description);
-  margin: 16px 20px 16px 0;
+  margin: 16px 0 16px 16px;
 `;
 
 function CashInfoCard({data, remainedCash}) {
@@ -24,13 +24,13 @@ function CashInfoCard({data, remainedCash}) {
       <Li className='space-between' style={{ padding: '5px 0' }}>
         <div>
           <div className='flex center-h'>
-            <P>{data.dateTime}</P>
             <CashStatusTag status={data.type}/>
+            <P>{data.dateTime}</P>
           </div>
           <h3 style={{ paddingBottom: '16px' }}>{data.reason}</h3>
         </div>
 
-        <div className='flex flex-col' style={ data.type ? { fontSize: '22px', color: 'var(--main)' } : { fontSize: '22px' } }>
+        <div className='flex flex-col' style={ data.type ? { fontSize: '20px', color: 'var(--main)' } : { fontSize: '20px' } }>
           {data.type ? '+ ' : '- ' }
           {(parseInt(data.price)).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원
           {
