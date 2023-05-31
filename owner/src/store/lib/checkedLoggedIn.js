@@ -1,6 +1,5 @@
 import { setLoggedIn } from './storage';
 
-
 const checkedLoggedIn = (ctx, next) => {
 const isLoggedIn = ctx.store.getState().storage.isLoggedIn;
 
