@@ -1,11 +1,11 @@
 import { Modal, Rate } from 'antd';
 import React, { useReducer } from 'react';
-import styles from '../../assets/css/modal/Modal.module.css';
+import styles from '../../../assets/css/modal/Modal.module.css';
 import { useRecoilValue } from 'recoil';
-import { loginState } from '../../state/loginState';
+import { loginState } from '../../../state/loginState';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { isEmpty, isPointSelected } from '../../utils/review/reviewValidation';
+import { isEmpty, isPointSelected } from '../../../utils/reservation/reviewValidation';
 import { Button } from 'antd';
 
 // action에 따라 안에 데이터를 어떻게 변화시킬지 설정

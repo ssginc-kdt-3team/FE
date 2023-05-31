@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../../../assets/css/ui/reservation/TimePicker.module.css';
+import styles from '../../../../assets/css/ui/reservation/TimePicker.module.css';
 
 function CashBtn({value, selectedOption, handleOptionChange}) {
   // console.log('selectedDate : ' + selectedDate);
@@ -16,7 +16,7 @@ function CashBtn({value, selectedOption, handleOptionChange}) {
         checked={selectedOption === value}
         onChange={handleOptionChange}
       />
-      {value}
+      {value.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
     </label>
   );
 }

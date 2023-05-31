@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../../../assets/css/ui/reservation/TimePicker.module.css';
+import styles from '../../../../assets/css/ui/reservation/TimePicker.module.css';
 import CashBtn from './CashBtn';
 
 function CashPicker({selectedOption, setSelectedOption}) {

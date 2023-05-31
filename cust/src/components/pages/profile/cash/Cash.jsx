@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import PageTitle from '../../ui/PageTitle';
+import PageTitle from '../../../ui/PageTitle';
 import styled from 'styled-components';
 import { useRecoilValue } from 'recoil';
-import { loginState } from '../../../state/loginState';
+import { loginState } from '../../../../state/loginState';
 import axios from 'axios';
-import Paging from '../../ui/Paging';
-import CashInfoCard from '../../ui/profile/CashInfoCard';
+import moment from 'moment';
+import Paging from '../../../ui/Paging';
+import CashInfoCard from '../../../ui/profile/cash/CashInfoCard';
 import { Button } from 'antd';
-import TypeFilter from '../../ui/profile/TypeFilter';
-import DateFilter from '../../ui/profile/DateFilter';
-import SelectChargeOption from '../../modal/SelectChargeOption';
+import TypeFilter from '../../../ui/profile/cash/TypeFilter';
+import DateFilter from '../../../ui/profile/cash/DateFilter';
+import SelectChargeOption from '../../../modal/profile/cash/SelectChargeOption';
 
 const Ul = styled.ul`
   max-width: 800px;
@@ -95,11 +96,20 @@ function Cash() {
             <Button type='primary' className='button button-s' style={buttonStyle}>인출</Button>
           </div>
           
+          {/* 필터 */}
           <Div className='space-between'>
             <TypeFilter type={type} setType={setType} setCurrentPage={setCurrentPage}/>
             <DateFilter dateRange={dateRange} setDateRange={setDateRange} setCurrentPage={setCurrentPage}/>
           </Div>
-          <Ul className='flex flex-col' style={{ borderTop: '1px solid var(--input-border)' }}>
+
+          {/* 총 개수, 조회 기간 */}
+          <Div className='space-between box' style={{ paddingTop: '16px', border: '1px solid var(--input-border)' }}>
+            <div>총 <span style={{ color: 'var(--main)', fontWeight: '500' }}>{totalItems}</span>개</div>
+            <span>{moment(new Date()).clone().subtract(dateRange, 'month').format("YYYY-MM-DD")} ~ {moment(new Date()).format("YYYY-MM-DD")}</span>
+          </Div>
+
+          {/* 리스트 */}
+          <Ul className='flex flex-col' style={{ borderTop: '0px solid var(--input-border)' }}>
             {
               cashList && cashList.map( cash => (
                 <CashInfoCard key={cash.id} data={cash} remainedCash={remainedCash}/>

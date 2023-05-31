@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import CashStatusTag from './CashStatusTag';
 import { Button } from 'antd';
 import axios from 'axios';
-import Refund from '../../modal/Refund';
+import Refund from '../../../modal/profile/cash/Refund';
 
 const Li = styled.li`
   width: 100%;
@@ -30,11 +30,17 @@ function CashInfoCard({data, remainedCash}) {
           <h3 style={{ paddingBottom: '16px' }}>{data.reason}</h3>
         </div>
 
-        <div className='flex flex-col' style={{ fontSize: '22px' }}>
-          {data.type ? '+ ' + data.price : '- ' + data.price }
-          <span className='flex-end mt-5'>
-            <Button type='primary' className='button button-xs' onClick={() => setIsModalOpen(true)}>환불</Button>
-          </span>
+        <div className='flex flex-col' style={ data.type ? { fontSize: '22px', color: 'var(--main)' } : { fontSize: '22px' } }>
+          {data.type ? '+ ' : '- ' }
+          {(parseInt(data.price)).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원
+          {
+            data.canRefund ? (
+              <span className='flex-end' style={{ marginTop: '8px' }}>
+                <Button type='primary' className='button button-xs' onClick={() => setIsModalOpen(true)}>환불</Button>
+              </span>
+            )
+            : ''
+          }
         </div>
       </Li>
       

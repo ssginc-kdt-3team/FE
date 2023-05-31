@@ -5,7 +5,7 @@ import styles from '../../../assets/css/pages/authentication/Join.module.css';
 import { useNavigate } from 'react-router-dom';
 import { isEmailValid } from '../../../utils/authentication/emailValidation';
 import { isInputEmpty, isPasswordValid, checkEmailDup } from '../../../utils/authentication/joinValidation';
-import Postcode from '../../popUp/PostCode';
+import Postcode from '../../popUp/authentication/PostCode';
 import { Button } from 'antd';
 
 // action에 따라 안에 데이터를 어떻게 변화시킬지 설정
