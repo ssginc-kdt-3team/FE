@@ -28,7 +28,10 @@ const LoginForm = () => {
         .then((res) => {
           console.log(res.data.id);
           if (res.data === '') {
-            alert('로그인에 실패하였습니다.\n아이디와 비밀번호를 확인하세요.');
+            Modal.error({
+              title: '로그인 실패',
+              content: '아이디와 비밀번호를 확인해주세요.',
+            });
           } else {
 
             dispatch(setUser({ id: res.data.id }));

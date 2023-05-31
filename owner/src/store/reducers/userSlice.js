@@ -15,11 +15,19 @@ const userSlice = createSlice({
       },
       clearUser: (state) => {
         state.id = '';
+        console.log(state);
       },
     },
   });
 
 
 export const { setUser, clearUser } = userSlice.actions;
+
+export const clearUserAsync = () => (dispatch) => {
+  // 비동기 작업 수행 가능
+  setTimeout(() => {
+    dispatch(clearUser());
+  }, 1000);
+};
 
 export default userSlice; 

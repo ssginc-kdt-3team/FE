@@ -28,13 +28,6 @@ const mgt = {
             url: '/mgt/review',
             icon: icons.ChromeOutlined
         },
-        // {
-        //     id: 'menulist',
-        //     title: '메뉴 조회',
-        //     type: 'item',
-        //     url: '/mgt/menu/list',
-        //     icon: icons.ChromeOutlined
-        // },
         {
             id: 'menureg',
             title: '메뉴 등록',
