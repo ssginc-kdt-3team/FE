@@ -2,7 +2,7 @@ import { Button, Modal } from 'antd';
 import React, { useEffect, useState } from 'react';
 import styles from '../../assets/css/modal/Modal.module.css';
 import axios from 'axios';
-import { confirm } from '../../utils/confirm';
+import { confirm, error } from '../../utils/notification';
 
 // const { confirm } = Modal;
 
@@ -15,7 +15,8 @@ function Refund({isModalOpen, setIsModalOpen, data, remainedCash}) {
       })
       .catch(err => { // 오류 처리
         console.log(err);
-        alert(err.response.data);
+        // alert(err.response.data);
+        error(err.response.data, '');
       })
       
      })
