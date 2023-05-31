@@ -1,0 +1,25 @@
+import { Modal } from 'antd';
+import styles from '../assets/css/modal/Modal.module.css'
+
+export const confirm = (title, content, func) => {
+  const { confirm } = Modal;
+  
+  confirm({
+    title: title,
+    icon: '',
+    content: content,
+    okButtonProps: {
+      className: `button ${styles.confirmBtn}`,
+    },
+    cancelButtonProps: {
+      className: `button buttonReverse ${styles.confirmBtn}`,
+    },
+    okText: '확인',
+    cancelText: '취소',
+    onOk() {
+      // console.log('OK');
+      func();
+    }
+  });
+
+}

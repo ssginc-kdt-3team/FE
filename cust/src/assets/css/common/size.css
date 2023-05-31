@@ -14,9 +14,12 @@
 
   --button-fontSize: 18px;
   --button-fontSize-s: 16px;
+  --button-fontSize-xs: 15px;
   --button-width: 180px;
   --button-width-s: 100px;
   --button-height-s: 40px;
+  --button-width-xs: 70px;
+  --button-height-xs: 33px;
 
   --border-radius : 10px;
   --border-radius-m: 8px;
@@ -44,6 +47,15 @@
 }
 
 /* 마진 */
+.mt-5 {
+  margin-top: 5px;
+}
+.mt-8 {
+  margin-top: 8px;
+}
+.mt-10 {
+  margin-top: 10px;
+}
 .mt-45 {
   margin-top: 45px;
 }
