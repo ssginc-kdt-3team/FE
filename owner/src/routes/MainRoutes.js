@@ -16,7 +16,7 @@ import MenuUpdate from '../pages/mgt/menu/Update';
 import ResvAcList from '../pages/resv/activeList/index';
 import ResvList from '../pages/resv/list/index';
 import ResTdList from '../pages/resv/todayList/index';
-import ResvDeposit from '../pages/deposit/Table';
+import DepositTable from '../pages/deposit/Table';
 import ResvDetail from '../pages/resv/detail/index';
 
 
@@ -76,7 +76,7 @@ const MainRoutes = {
                 },
                 {
                     path: '/resv/deposit',
-                    element: <ResvDeposit />
+                    element: <DepositTable />
                 },
                 {
                     path: '/resv/detail/:id',
