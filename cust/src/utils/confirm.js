@@ -1,4 +1,5 @@
 import { Modal } from 'antd';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
 import styles from '../assets/css/modal/Modal.module.css'
 
 export const confirm = (title, content, func) => {
@@ -6,7 +7,7 @@ export const confirm = (title, content, func) => {
   
   confirm({
     title: title,
-    icon: '',
+    icon: <ExclamationCircleOutlined style={{ color: 'var(--main)' }}/>,
     content: content,
     okButtonProps: {
       className: `button ${styles.confirmBtn}`,
