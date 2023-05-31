@@ -1,11 +1,11 @@
 import { Modal } from 'antd';
 import React, { useEffect, useState } from 'react';
-import styles from '../../assets/css/modal/Modal.module.css';
+import styles from '../../../../assets/css/modal/Modal.module.css';
 import { useRecoilValue } from 'recoil';
-import { loginState } from '../../state/loginState';
+import { loginState } from '../../../../state/loginState';
 import { Button } from 'antd';
-import CashPicker from '../ui/profile/CashPicker';
-import Charge from '../popUp/Charge';
+import CashPicker from '../../../ui/profile/cash/CashPicker';
+import Charge from '../../../popUp/profile/cash/Charge';
 
 
 function SelectChargeOption({isModalOpen, setIsModalOpen}) {

@@ -1,8 +1,8 @@
 import { Button, Modal } from 'antd';
 import React, { useEffect, useState } from 'react';
-import styles from '../../assets/css/modal/Modal.module.css';
+import styles from '../../../../assets/css/modal/Modal.module.css';
 import axios from 'axios';
-import { confirm, error } from '../../utils/notification';
+import { confirm, error } from '../../../../utils/notification';
 
 // const { confirm } = Modal;
 
@@ -19,7 +19,7 @@ function Refund({isModalOpen, setIsModalOpen, data, remainedCash}) {
         error(err.response.data, '');
       })
       
-     })
+    })
   }
 
   return (

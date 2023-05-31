@@ -19,8 +19,8 @@ import ShopList from "./components/pages/shop/ShopList";
 import Shop from "./components/pages/shop/Shop";
 import Review from "./components/pages/profile/Review";
 import Profile from "./components/pages/profile/Profile";
-import Cash from "./components/pages/profile/Cash";
-import ChargeResult from "./components/pages/profile/ChargeResult";
+import Cash from "./components/pages/profile/cash/Cash";
+import ChargeResult from "./components/pages/profile/cash/ChargeResult";
 
 function App() {
   return ( // 이 안에 JSX 문법 적용
