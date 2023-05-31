@@ -1,11 +1,14 @@
 // third-party
-import { configureStore } from '@reduxjs/toolkit';
-
-// project import
 import reducers from './reducers';
+import { configureStore } from '@reduxjs/toolkit';
 import { persistStore } from 'redux-persist';
 
+
+// project import
+import storage from './lib/storage';
+
 // ==============================|| REDUX TOOLKIT - MAIN STORE ||============================== //
+
 
 const store = configureStore({
     reducer: reducers
@@ -13,6 +16,36 @@ const store = configureStore({
 
 const { dispatch } = store;
 
-const persistor = persistStore(store);
+export const persistor = persistStore(store);
+export { store, dispatch };
 
-export { store, dispatch, persistor  };
+
+
+
+//persist 설정
+// const persistConfig = {
+//     key: 'root',
+//     storage,
+//     whitelist: ['user'] // state를 유지할 reducer
+// }
+
+// export const store = configureStore({
+//     reducer: persistReducer,
+//     middeleware: (getDefaultMiddleware) => 
+//     getDefaultMiddleware({
+//         serializableCheck: false,
+//     }),
+//     })
+
+// // persistor 생성
+// export const persistor = persistStore(store);
+// export default store;
+
+// // // rootReducer를 persist되는 Reduce로 설정
+// // const persistedReducer = persistReducer(persistConfig)
+
+// // //persistor 생성
+// // export const persistor = persistStore(store);
+// // const { dispatch } = store;
+
+// // export { store, dispatch };

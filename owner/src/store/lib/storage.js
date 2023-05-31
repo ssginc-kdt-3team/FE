@@ -1,4 +1,6 @@
+//localsotorage에 저장
 import { createSlice } from '@reduxjs/toolkit';
+
 
 const storageInitialState  = {
   isLoggedIn: false,

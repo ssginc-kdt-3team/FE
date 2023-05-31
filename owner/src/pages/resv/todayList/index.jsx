@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
-import Table from "./table";
-import Filter from "./filter";
+import Table from "./Table";
+import Filter from "./Filter";
 
 const ResvTdList = () => {
   return (

@@ -3,6 +3,8 @@ import { Card, Button } from 'antd';
 import { useNavigate } from '../../../../node_modules/react-router-dom/dist/index';
 // import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+
 
 const Img = styled.img`
   width: 100%;
@@ -16,7 +18,10 @@ const Span = styled.span`
 
 function ShopDetail({data}) {
   const navigate = useNavigate();
-  const { id } = data;
+  const userId = useSelector((state) => state.user.id); // useSelector를 사용하여 Redux 상태에서 id 값을 가져옵니다.
+  // data 객체에 useSelector에서 가져온 id 값을 할당합니다.
+  const updatedData = { ...data, id: userId };
+
 
   return (
     <>
@@ -41,7 +46,7 @@ function ShopDetail({data}) {
                 <p><Span>주문 마감 시간</Span>{data.orderCloseTime}</p>
                 <p><Span>대표자명</Span>{data.businessCeo}</p>
                 <p><Span>사업자등록번호</Span>{data.businessNumber}</p>
-                <Button type='primary' onClick={() => navigate(`/mgt/info/update/${14}`)}>
+                <Button type='primary' onClick={() => navigate(`/mgt/info/update/${userId}`)}>
                 수정
               </Button>
               </div>

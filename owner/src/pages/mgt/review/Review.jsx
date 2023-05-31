@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from '../../../../node_modules/react-router-dom/dist/index';
 import { Table, Button, Rate, Modal  } from "antd";
-// import axios from 'axios';
-import Paging from 'components/pagination/paging';
+import Paging from 'components/pagination/Paging';
 import { axiosWithBaseUrl } from 'App';
 import styles from '../../../assets/css/pages/mgt/review.module.css';
+import { useSelector } from 'react-redux';
+
 
 function MgtReview() {
   const navigate = useNavigate();
-
+  const id = useSelector((state) => state.user.id); 
   const [reviewList, setReviewList] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);          // 현재 페이지
   const [totalItems, setTotalItems] = useState(0);            // 총 아이템 수
@@ -73,9 +74,7 @@ function MgtReview() {
     setModalVisible(false);
   };
   useEffect(() => {
-    // axios.get(`/shop/detail/review/${shopId}/${currentPage}`)   
-    // axiosWithBaseUrl.get(`/shop/detail/review/1/${currentPage}`) 
-    axiosWithBaseUrl.get(`/owner/reviewList/${14}/${currentPage}`) 
+    axiosWithBaseUrl.get(`/owner/reviewList/${id}/${currentPage}`) 
     .then(res => {
       console.log(res.data);
       setReviewList(res.data.content);
@@ -86,7 +85,7 @@ function MgtReview() {
       // alert("오류가 발생하였습니다.");
       console.log(err);
     })
-  }, [currentPage])
+  }, [id, currentPage])
 
   return (
     <>

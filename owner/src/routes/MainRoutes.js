@@ -1,45 +1,39 @@
 import { lazy } from 'react';
+import checkedLoggedIn from '../store/lib/checkedLoggedIn'; 
 
-// project import
+// project import 정적으로 모듈 불러오기(동기적)
 import Loadable from 'components/Loadable';
 import MainLayout from 'layout/MainLayout';
-import MyProfile from '../pages/profile/myprofile';
-import ProfileUpdate from '../pages/profile/update';
-import ShopAdd from '../pages/shop/Add';
-import MgtInfo from '../pages/mgt/information/Index';
-import MgtReview from '../pages/mgt/review/Review';
-import MenuReg from '../pages/mgt/menu/Add';
-import MgtInfoUpdate from '../pages/mgt/information/Update';
-// import MenuList from '../pages/mgt/menu/mefnulist';
-import MenuDetail from '../pages/mgt/menu/Detail';
-import MenuUpdate from '../pages/mgt/menu/Update';
-import ResvAcList from '../pages/resv/activeList/index';
-import ResvList from '../pages/resv/list/index';
-import ResTdList from '../pages/resv/todayList/index';
-import DepositTable from '../pages/deposit/Table';
-import ResvDetail from '../pages/resv/detail/index';
 
-
-
-// render - dashboard
+// render - 동적으로 모듈 불러오기(비동기적)
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard')));
+const MyProfile = Loadable(lazy(() => import('../pages/profile/Myprofile')));
+const ProfileUpdate = Loadable(lazy(() => import('../pages/profile/Update')));
+const ShopAdd = Loadable(lazy(() => import('../pages/shop/Add')));
+const MgtInfo = Loadable(lazy(() => import('../pages/mgt/information/Index')));
+const MgtReview = Loadable(lazy(() => import('../pages/mgt/review/Review')));
+const MenuReg = Loadable(lazy(() => import('../pages/mgt/menu/Add')));
+const MgtInfoUpdate = Loadable(lazy(() => import('../pages/mgt/information/Update')));
+const MenuDetail = Loadable(lazy(() => import('../pages/mgt/menu/Detail')));
+const MenuUpdate = Loadable(lazy(() => import('../pages/mgt/menu/Update')));
+const ResvAcList = Loadable(lazy(() => import('../pages/resv/activeList/index')));
+const ResvList = Loadable(lazy(() => import('../pages/resv/list/index')));
+const ResTdList = Loadable(lazy(() => import('../pages/resv/todayList/index')));
+const DepositTable = Loadable(lazy(() => import('../pages/deposit/Table')));
+const ResvDetail = Loadable(lazy(() => import('../pages/resv/detail/index')));
 
-// render - sample page
-
-// render - utilities
-// const Typography = Loadable(lazy(() => import('pages/components-overview/Typography')));
-// const Shadow = Loadable(lazy(() => import('pages/components-overview/Shadow')));
-// const AntIcons = Loadable(lazy(() => import('pages/components-overview/AntIcons')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
     path: '/',
     element: <MainLayout />,
+    canActivate: [checkedLoggedIn],
     children: [
         {
             path: '/main',
-            element: <DashboardDefault />
+            element: <DashboardDefault />,
+
         },
         {
             path: '/profile',

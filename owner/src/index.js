@@ -8,14 +8,14 @@ import 'simplebar/src/simplebar.css';
 // third-party
 import { Provider as ReduxProvider } from 'react-redux';
 import { PersistGate } from 'redux-persist/lib/integration/react';
-import { persistStore } from 'redux-persist'
+// import { persistStore } from 'redux-persist'
 
 // apex-chart
 import 'assets/third-party/apex-chart.css';
 
 // project import
 import App from './App';
-import { store }  from 'store/';
+import { store, persistor }  from 'store';
 import reportWebVitals from './reportWebVitals';
 
 // ==============================|| MAIN - REACT DOM RENDER  ||============================== //
@@ -24,7 +24,7 @@ import reportWebVitals from './reportWebVitals';
 
 const container = document.getElementById('root');
 const root = createRoot(container); // createRoot(container!) if you use TypeScript
-const persistor = persistStore(store);
+// const persistor = persistStore(store);
 
 root.render(
     <StrictMode>
