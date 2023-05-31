@@ -92,7 +92,7 @@ function Cash() {
           <PageTitle title={remainedCash.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} type="cash"/>
           <div className='flex flex-gap-10'>
             <Button className='button buttonReverse button-s' onClick={() => setIsModalOpen(true)} style={buttonStyle}>충전하기</Button>
-            <Button type='primary' className='button button-s' style={buttonStyle}>환불</Button>
+            <Button type='primary' className='button button-s' style={buttonStyle}>인출</Button>
           </div>
           
           <Div className='space-between'>
@@ -102,7 +102,7 @@ function Cash() {
           <Ul className='flex flex-col' style={{ borderTop: '1px solid var(--input-border)' }}>
             {
               cashList && cashList.map( cash => (
-                <CashInfoCard key={cash.id} data={cash}/>
+                <CashInfoCard key={cash.id} data={cash} remainedCash={remainedCash}/>
               ))
             }
           </Ul>

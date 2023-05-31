@@ -78,3 +78,9 @@
   height: var(--button-height-s);
   font-size: var(--button-fontSize-s);
 }
+
+.button-xs {
+  width: var(--button-width-xs);
+  height: var(--button-height-xs);
+  font-size: var(--button-fontSize-xs);
+}

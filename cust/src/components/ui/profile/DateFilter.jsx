@@ -11,8 +11,8 @@ function DateFilter({dateRange, setDateRange, setCurrentPage}) {
   }
 
   return (
-    <Select bordered={false} size='large' value={dateRange} onChange={(e) => handleDateRangeSelect(e)}>
-      <Option value={12}>전체</Option>
+    <Select bordered={false} size='large' value={dateRange} onChange={(e) => handleDateRangeSelect(e)} style={{ marginRight: '-11px' }}>
+      <Option value={12}>최대(1년)</Option>
       <Option value={1}>1개월</Option>
       <Option value={3}>3개월</Option>
       <Option value={6}>6개월</Option>
