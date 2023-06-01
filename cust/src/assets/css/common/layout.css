@@ -74,8 +74,14 @@
 .flex-gap-10 {
   gap: 10px;
 }
+.flex-gap-16 {
+  gap: 16px;
+}
 .flex-gap-20 {
   gap: 20px;
+}
+.flex-gap-32 {
+  gap: 32px;
 }
 .flex-gap-40 {
   gap: 40px;

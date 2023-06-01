@@ -110,7 +110,7 @@ function AddReview({isModalOpen, setIsModalOpen, isReviewed, setIsReviewed}) {
         </textarea>
       </form>
 
-      <div id={styles.bottomWrap}>
+      <div id={styles.buttonWrap}>
         <Button className='button buttonReverse' onClick={handleClose}>취소</Button>
         <Button type="primary" className='button' onClick={handleReviewSubmit}>완료</Button>
       </div>

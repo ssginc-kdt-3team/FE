@@ -45,7 +45,7 @@ function SelectChargeOption({isModalOpen, setIsModalOpen}) {
         <CashPicker selectedOption={selectedOption} setSelectedOption={setSelectedOption}/>
       </form>
 
-      <div id={styles.bottomWrap}>
+      <div id={styles.buttonWrap}>
         <Button className='button buttonReverse' onClick={() => setIsModalOpen(false)}>취소</Button>
         <Charge chargeInfo={chargeInfo}/>
       </div>
