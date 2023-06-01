@@ -25,7 +25,7 @@ const AuthCard = ({ children, ...other }) => (
         boxShadow
         shadow={(theme) => theme.customShadows.z1}
     >
-        <Box sx={{ p: { xs: 2, sm: 3, md: 4, xl: 5 }}}>{children}</Box>
+        <Box sx={{ p: { xs: 3, sm: 4, md: 8, xl: 6 }}}>{children}</Box>
     </MainCard>
 );
 

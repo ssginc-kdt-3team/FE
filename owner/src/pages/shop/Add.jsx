@@ -21,7 +21,7 @@ function ShopAdd() {
   const id = useSelector((state) => state.user.id); 
   const [shopName, setShopName] = useState('');
   const [ownerName, setOwnerName] = useState('');
-  // const [ownerId, setownerId] = useState('14');
+  const [phone, setPhone] = useState('');
   const [branchId, setBranchId] = useState('1');
   const [shopInfo, setShopInfo] = useState('');
   const [location, setLocation] = useState('');
@@ -151,17 +151,32 @@ function ShopAdd() {
         <Form.Item label="지점id" name="branchId" required>
           <Input value={branchId} onChange={(e) => setBranchId(e.target.value)} />
         </Form.Item>
-        <Form.Item label="점주id" name="id" required>
+        <Form.Item label="점주id" name="id" required hidden>
           <Input value={id} onChange={(e) => id(e.target.value)} />
         </Form.Item>
         <Form.Item label="매장명" name="shopName" required>
           <Input value={shopName} onChange={(e) => setShopName(e.target.value)} />
         </Form.Item>
-        <Form.Item label="매장 설명" name="shopInfo" required>
+        <Form.Item label="매장 설명"  name="shopInfo" required
+         rules={[
+          {
+          max: 50,
+          whitespace: true,
+          message: '50자 이내로 입력해주세요.',
+          },
+          ]}
+          >
           <Input value={shopInfo} onChange={(e) => setShopInfo(e.target.value)} />
         </Form.Item>
-        <Form.Item label="지점 내 위치" name="location" required>
-          <Input value={location} onChange={(e) => setLocation(e.target.value)} />
+        <Form.Item label="지점 내 위치" name="location" required
+           rules={[
+            {
+            pattern: /^[A-Z]\d{2}$/,
+             message: '알파벳 대문자 1개와 숫자 2개로 입력해주세요. 예시: A01',
+              },
+               ]}
+              >
+            <Input value={location} onChange={(e) => setLocation(e.target.value)} />
         </Form.Item>
         <Form.Item label="좌석 수" name="seat" required>
           <Input value={seat} onChange={(e) => setSeat(e.target.value)} />
@@ -171,7 +186,6 @@ function ShopAdd() {
           <Input value={ownerName} onChange={(e) => setOwnerName(e.target.value)} />
         </Form.Item>
 
-        {/* 나중에 추가하기
          <Form.Item
           label="매장 전화번호"
           name="phone"
@@ -181,7 +195,7 @@ function ShopAdd() {
           ]}
         >
           <Input value={phone} onChange={(e) => setPhone(e.target.value)} />
-        </Form.Item>  */}
+        </Form.Item>  
 
         <Form.Item label="개업일" name="openDay" required>
           <DatePicker value={openDay} onChange={setOpenDay} />
@@ -189,12 +203,31 @@ function ShopAdd() {
         <Form.Item label="오픈시간" name="openTime" required>
           <TimePicker format={format} value={openTime} onChange={setOpenTime} />
         </Form.Item>
-        <Form.Item label="닫는시간" name="closeTime" required>
-          <TimePicker format={format} value={closeTime} onChange={setCloseTime} />
-        </Form.Item>
-        <Form.Item label="주문마감시간" name="orderCloseTime" required>
-          <TimePicker format={format} value={orderCloseTime} onChange={setOrderCloseTime} />
-        </Form.Item>
+        <Form.Item
+  label="마감시간"
+  name="closeTime"
+  required
+>
+  <TimePicker format={format} value={closeTime} onChange={setCloseTime} />
+</Form.Item>
+<Form.Item
+  label="주문마감시간"
+  name="orderCloseTime"
+  required
+  rules={[
+    ({ getFieldValue }) => ({
+      validator(_, value) {
+        const closeTimeValue = getFieldValue('closeTime');
+        if (!value || closeTimeValue.isAfter(value)) {
+          return Promise.resolve();
+        }
+        return Promise.reject(new Error('주문 마감시간은 마감시간 이전이어야 합니다.'));
+      },
+    }),
+  ]}
+>
+  <TimePicker format={format} value={orderCloseTime} onChange={setOrderCloseTime} />
+</Form.Item>
       {/* 사진 업로드 */}
       <Form.Item
           label="매장 사진"
@@ -223,7 +256,11 @@ function ShopAdd() {
         <Form.Item label="사업주 이름" name="businessCeo" required>
           <Input value={businessCeo} onChange={(e) => setBusinessCeo(e.target.value)} />
         </Form.Item>
-        <Form.Item label="사업자 등록번호" name="businessNumber" required>
+        <Form.Item label="사업자 등록번호" name="businessNumber" required
+         rules={[
+          { required: true, message: '사업자 등록번호를 입력해주세요.' },
+          { len: 10, message: '사업자 등록번호는 10자리여야 합니다.' },
+        ]}>
           <Input value={businessNumber} onChange={(e) => setBusinessNumber(e.target.value)} />
         </Form.Item>
         <Form.Item
