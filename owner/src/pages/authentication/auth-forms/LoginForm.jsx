@@ -61,7 +61,7 @@ const LoginForm = () => {
             name="email"
             rules={[
               {
-                required: true,
+                // required: true,
                 message: '이메일을 입력하세요.',
               },
             ]}
@@ -72,6 +72,10 @@ const LoginForm = () => {
               value={email}
               autoComplete="email"
               onChange={(e) => setEmail(e.target.value)}
+              sx={{
+                width: '200px', // 원하는 너비 값 설정
+              }}
+              
             />
           </Form.Item>
 
@@ -80,7 +84,7 @@ const LoginForm = () => {
             name="password"
             rules={[
               {
-                required: true,
+                // required: true,
                 message: '비밀번호를 입력하세요.',
               },
             ]}
@@ -90,23 +94,29 @@ const LoginForm = () => {
               placeholder="비밀번호"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              sx={{
+                width: '200px', // 원하는 너비 값 설정
+              }}
             />
           </Form.Item>
 
-          <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Button
-              className="button mt-45"
-              type="primary"
-              onClick={handleLogin}
-              htmlType="submit"
-              style={{ marginLeft: '20px' }}
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <Form.Item>
+          <Button
+            className="button"
+            type="primary"
+            onClick={handleLogin}
+            htmlType="submit"
+            style={{ marginTop: '10px', backgroundColor: '#cf1322' }}
             >
               로그인
             </Button>
           </Form.Item>
+          </div>
         </Form>
+        
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '5px', marginLeft: '80px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '5px', justifyContent: 'center' }}>          
           <div onClick={() => navigate('/find-id')}>아이디 찾기</div>
           <div onClick={() => navigate('/find-pw')}>비밀번호 찾기</div>
         </div>

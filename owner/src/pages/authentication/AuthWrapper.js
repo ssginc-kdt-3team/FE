@@ -8,28 +8,34 @@ import { Box, Grid } from '@mui/material';
 // project import
 import AuthCard from './AuthCard';
 import Logo from 'components/Logo';
-// import AuthFooter from 'components/cards/AuthFooter';
 
 // // assets
-// import AuthBackground from 'assets/images/auth/AuthBackground';
 
 // ==============================|| AUTHENTICATION - WRAPPER ||============================== //
 
 const AuthWrapper = ({ children }) => (
+    //배경
     <Box sx={{ minHeight: '100vh' }}>
         <Grid
             container
             direction="column"
-            justifyContent="flex-end"
+            justifyContent="center"
+            alignItems="center"
             sx={{
                 minHeight: '100vh'
             }}
         >
-            <Grid item xs={12} sx={{ ml: 3, mt: 3 }}>
-            <div style={{ marginLeft: '620px'}}>
+            <Grid 
+            item xs={12} 
+            sx={{  mt: 5 }} 
+            >
+            {/* <div style={{ marginLeft: '620px'}} > */}
+            <div>
+             {/* 스타필드 로고 */}
                 <Logo />
             </div>
             </Grid>
+            {/* authcard wrapper */}
             <Grid item xs={12}>
                 <Grid
                     item
@@ -37,15 +43,16 @@ const AuthWrapper = ({ children }) => (
                     container
                     justifyContent="center"
                     alignItems="center"
-                    sx={{ minHeight: { xs: 'calc(100vh - 134px)', md: 'calc(100vh - 112px)' } }}
-                >
+                    sx={{
+                        minHeight: { xs: 'calc(90vh - 134px)', md: 'calc(85vh - 112px)' },
+                        // backgroundColor: 'lightblue', // 배경색 지정
+                      }}
+                    >
+                    {/* 로그인 카드 */}
                     <Grid item>
                         <AuthCard>{children}</AuthCard>
                     </Grid>
                 </Grid>
-            </Grid>
-            <Grid item xs={12} sx={{ m: 3, mt: 1 }}>
-                {/* <AuthFooter /> */}
             </Grid>
         </Grid>
     </Box>
