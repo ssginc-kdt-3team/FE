@@ -115,6 +115,10 @@
   margin: 0;
   text-align: center;
 }
+#payInfoWrap > p:first-child > span:nth-child(2) {
+  border-right: 1px solid var(--input-border);
+  border-left: 1px solid var(--input-border);
+}
 /* 결제 정보 */
 #payInfo {
   width: fit-content;

@@ -15,6 +15,7 @@ import { loginState } from '../../../state/loginState';
 import Filter from '../../ui/reservation/Filter';
 import { Button } from 'antd';
 import Pay from '../../modal/reservation/Pay';
+import { error } from '../../../utils/notification';
 
 const initialResvInfo = { // 초기값을 가지는 객체
   reservationDate: "",
@@ -87,14 +88,17 @@ function AddResv() {
   };
 
   // 예약하기 처리
-  const handleReserve = () => {
+  const handlePayModal = () => {
     console.log(resvInfo);
     console.log(shopName);
-    // console.log(resvInfo.reservationDate.slice(11, ));
-    // if(resvInfo.reservationDate.slice(11, ) === "00:00:00") { // 시간 선택 검증
-    //   alert("시간을 선택하세요.");
-    //   return;
-    // }
+
+    console.log(resvInfo.reservationDate.slice(11, ));
+    if(resvInfo.reservationDate.slice(11, ) === "00:00:00") { // 시간 선택 검증
+      error("시간을 선택하세요.", '');
+      return;
+    }
+
+    setIsModalOpen(true); // 예약금 결제 모달 열기
 
     // axios.post('/customer/reservation/add', resvInfo)
     // .then(res => {
@@ -191,7 +195,7 @@ function AddResv() {
             {/* 버튼 */}
             <div id={styles.buttonWrap} className='center width-100 flex-gap-20'>
               <Button className='button buttonReverse' onClick={() => navigate(-1)}>취소</Button>
-              <Button type='primary' className='button' onClick={() => setIsModalOpen(true)}>결제하기</Button>
+              <Button type='primary' className='button' onClick={handlePayModal}>결제하기</Button>
             </div>
           </form>
         </div>

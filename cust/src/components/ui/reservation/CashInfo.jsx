@@ -5,6 +5,7 @@ import { error } from '../../../utils/notification';
 import axios from 'axios';
 import SelectChargeOption from '../../modal/profile/cash/SelectChargeOption';
 import { Button } from 'antd';
+import { cashFormat } from '../../../utils/cashFormat';
 
 function CashInfo() {
   const loginInfo = useRecoilValue(loginState);
@@ -27,7 +28,7 @@ function CashInfo() {
   return (
     <>
       <div className='center-h flex-gap-20'>
-        <p><span>충전금 잔액</span>{remainedCash}원</p>
+        <p><span>충전금 잔액</span>{cashFormat(remainedCash)}원</p>
         <Button className='button buttonReverse button-s' onClick={() => setIsModalOpen(true)}>충전하기</Button>
       </div>
 
