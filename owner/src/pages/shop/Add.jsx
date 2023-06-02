@@ -6,9 +6,10 @@ import axios from 'axios';
 import dayjs from 'dayjs';
 import { useSelector } from 'react-redux';
 
+//시간 형식
+const format = 'HH:mm'; 
 
-const format = 'HH:mm';    //시간 형식
-
+//사진 업로드
 const normFile = (e) => {
   if (Array.isArray(e)) {
     return e;
@@ -32,17 +33,15 @@ function ShopAdd() {
   const [openTime, setOpenTime] = useState(dayjs('12:00', format));
   const [closeTime, setCloseTime] = useState(dayjs('12:00', format));
   const [openDay, setOpenDay] = useState(dayjs());
-  const [photos, setPhotos] = useState([]);                            //shopImg
-  const [businessPhotos, setBusinessPhotos] = useState([]);             //businessImg
+  const [photos, setPhotos] = useState([]);                              //shopImg
+  const [businessPhotos, setBusinessPhotos] = useState([]);              //businessImg
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
   const formRef = useRef(null);
 
   //등록하기
   const handleSubmit = async () => {
-    // formData > shopData, shopImg, businessImg
-  
-    const shopData = {
+      const shopData = {
       shopName: shopName,
       openTime: openTime.format(format),
       closeTime: closeTime.format(format),
@@ -54,10 +53,11 @@ function ShopAdd() {
       businessCeo: businessCeo,
       businessNumber: businessNumber,
       orderCloseTime: orderCloseTime.format(format),
-      Id: id, // ownerId 값 추가
+      Id: id, // ownerId
       branchId: branchId, // branchId 값 추가
     };
 
+    // formData > shopData, shopImg, businessImg
     const formData = new FormData();
     const json = JSON.stringify(shopData);
     const blob = new Blob([json], { type: "application/json" });
@@ -81,10 +81,7 @@ function ShopAdd() {
         });
       console.log(response);
       console.log(formData);
-      console.log(formData.shopData);
-      console.log(formData.shopImg);
-      console.log(formData.businessImg);
-      
+      //등록되면 매장 정보 페이지로 이동
       navigate('/mgt/info');
     } catch (error) {
       console.error('Error adding shop:', error);
@@ -103,10 +100,6 @@ function ShopAdd() {
 
 
   //모달
-  // const handleSubmit = () => {
-  //    onFileUpload();
-  //      };
-
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -122,8 +115,8 @@ function ShopAdd() {
 
   // 정보 입력 폼
   return (
-    <Card
-      title="매장 등록"
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
+    <Card title="매장 등록"
       style={{
         width: 1000,
       }}
@@ -297,6 +290,7 @@ function ShopAdd() {
         </Form.Item>
       </Form>
     </Card>
+    </div>
   );
 }
 

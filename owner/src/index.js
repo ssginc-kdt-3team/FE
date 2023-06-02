@@ -29,11 +29,11 @@ const persistor = persistStore(store);
 root.render(
     <StrictMode>
         <ReduxProvider store={store}>
+            {/* <PersistGate loading={null} persistor={persistor}> */}
             <BrowserRouter basename="/">
-                {/* <PersistGate loading={null} persistor={persistor}> */}
                     <App />
-                {/* </PersistGate> */}
             </BrowserRouter>
+            {/* </PersistGate> */}
         </ReduxProvider>
     </StrictMode>
 );
