@@ -1,68 +1,37 @@
-// third-party
-import reducers from './reducers';
 import { configureStore } from '@reduxjs/toolkit';
-import { persistStore, PERSIST, PURGE } from 'redux-persist';
-
+import { persistStore } from 'redux-persist';
+import { loadState, saveState } from '../store/lib/storage';
 // project import
-import storage from './lib/storage';
+import persistedReducer from './reducers';
 
 // ==============================|| REDUX TOOLKIT - MAIN STORE ||============================== //
 
-
 const store = configureStore({
-    reducer: reducers,
-    middleware: (getDefaultMiddleware) =>
-    //미들웨어 작성시 에러 주의
-          getDefaultMiddleware(
-              {
-                  serializableCheck: {
-                      ignoredActions: [PERSIST, PURGE],
-                  },
-              }
-          )
-  
-  })
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+  getDefaultMiddleware({
+    serializableCheck: false,
+  }),
+});
+store.subscribe(() => {
+    saveState(store.getState()); // 상태 변경 시 localStorage에 저장
+  });
 
+const persistor = persistStore(store);
 
-//persist 설정
-const persistConfig = {
-    key: 'root',
-    storage,
-    whitelist: ['user'] // state를 유지할 reducer
-}
+export { store, persistor };
 
-const { dispatch } = store;
+// import { configureStore } from '@reduxjs/toolkit';
 
-export const persistor = persistStore(store);
-export { store, dispatch };
+// // project import
+// import reducers from './reducers';
 
+// // ==============================|| REDUX TOOLKIT - MAIN STORE ||============================== //
 
+// const store = configureStore({
+//     reducer: reducers
+// });
 
+// const { dispatch } = store;
 
-//persist 설정
-// const persistConfig = {
-//     key: 'root',
-//     storage,
-//     whitelist: ['user'] // state를 유지할 reducer
-// }
-
-// export const store = configureStore({
-//     reducer: persistReducer,
-//     middeleware: (getDefaultMiddleware) => 
-//     getDefaultMiddleware({
-//         serializableCheck: false,
-//     }),
-//     })
-
-// // persistor 생성
-// export const persistor = persistStore(store);
-// export default store;
-
-// // // rootReducer를 persist되는 Reduce로 설정
-// // const persistedReducer = persistReducer(persistConfig)
-
-// // //persistor 생성
-// // export const persistor = persistStore(store);
-// // const { dispatch } = store;
-
-// // export { store, dispatch };
+// export { store, dispatch };

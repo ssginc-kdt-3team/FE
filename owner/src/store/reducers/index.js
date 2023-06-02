@@ -1,46 +1,47 @@
-// third-party
 import { combineReducers } from 'redux';
-// import { persistStore } from 'redux-persist';
-// import { configureStore } from '@reduxjs/toolkit';
-// import persistReducer from 'redux-persist/es/persistReducer';
-// import { getDefaultMiddleware } from '@reduxjs/toolkit';
+import { persistReducer } from 'redux-persist';
+import storage from '../lib/storage';
+// import storage from 'redux-persist/lib/storage';
+
 
 // project import
 import menu from './menu';
-import userSlice  from './userSlice';
-import storage from '../lib/storage'
-// import authReducer from '../reducers/authReducer'
+import userSlice from './userSlice';
+import loginSilce from './loginSilce';
 
 // ==============================|| COMBINE REDUCERS ||============================== //
 
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['user', 'loginstate'], // state to persist
+  serialize: false, 
+};
 
 const reducers = combineReducers({
-     menu,
-     user: userSlice.reducer,
-     storage
+  menu,
+  user: userSlice.reducer,
+  loginstate: loginSilce.reducer
 });
 
-export default reducers;
+const persistedReducer = persistReducer(persistConfig, reducers);
 
+export default persistedReducer;
 
-// //persist 설정
-// const persistConfig = {
-//      key: 'root',
-//      storage,
-//      whitelist: ['user'] // state를 유지할 reducer
-//  }
- 
+// // third-party
+// import { combineReducers } from 'redux';
 
-//  // rootReducer를 persist되는 Reduce로 설정
-// const persistedReducer = persistReducer(persistConfig)
+// // project import
+// import menu from './menu';
+// import userSlice  from './userSlice';
+// import storage from '../lib/storage'
 
-// export const store = configureStore({
-// reducer: persistReducer,
-// middeleware: (getDefaultMiddleware) => 
-// getDefaultMiddleware({
-//      serializableCheck: false,
-// }),
-// })
+// // ==============================|| COMBINE REDUCERS ||============================== //
 
-// //persistor 생성
-// export const persistor = persistStore(store);
+// const reducers = combineReducers({
+//      menu,
+//      user: userSlice.reducer,
+//      storage
+// });
+
+// export default reducers;

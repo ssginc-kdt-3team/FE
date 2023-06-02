@@ -11,10 +11,10 @@ const Noshow = ({ id, fetchResTdvList, reservationDate }) => {
 
   //모달
   const showModal = () => {
-    if (currentTime > resDate) {   //현재시간이 예약시간 이전인 경우 
-      setIsModalOpen(true);
+    if (currentTime > resDate) {        
+      setIsModalOpen(true);                //현재시간이 예약시간 이후인 경우 
     } else {
-      Modal.warning({
+      Modal.warning({                       //현재시간이 예약시간 이전인 경우 
         title: '노쇼 처리 불가',
         content: '예약시간 이전에는 노쇼 처리가 불가합니다.',
       });

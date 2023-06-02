@@ -1,13 +1,10 @@
 import { useState, useEffect } from "react";
 import { axiosWithBaseUrl } from "App";
-import { Table, Tag, Button } from "antd";
+import { Table, Tag, Button, Typography, Divider } from "antd";
 import { Link } from "react-router-dom";
 import Paging from "components/pagination/Paging";
 import { DatePicker } from 'antd';
-//userSlice의 id 값 가져오기
-import { useSelector } from 'react-redux';
-
-// const monthFormat = 'YYYY/MM';
+import { useSelector } from 'react-redux';  //userSlice의 id 값 가져오기
 
 const DepositTable = () => {
    const id = useSelector((state) => state.user.id);  
@@ -16,8 +13,8 @@ const DepositTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(10);
-  const [selectedDate, setSelectedDate] = useState({year:"2023", month:"5"});
-  const [selectedStatus, setSelectedStatus] = useState("ALL");
+  const [selectedDate, setSelectedDate] = useState({year:"2023", month:"6"});   // 기본값 2023년 6월
+  const [selectedStatus, setSelectedStatus] = useState("ALL");                  // 기본값 ALL
 
   useEffect(() => {
     fetchResvList();
@@ -25,7 +22,7 @@ const DepositTable = () => {
 
   const fetchResvList = () => {
     setLoading(true);
-    const currentPageInt = parseInt(currentPage, 10); // Convert currentPage to an integer
+    const currentPageInt = parseInt(currentPage, 10); 
     const requestBody = {
     year: selectedDate.year,
     month: selectedDate.month,
@@ -34,7 +31,6 @@ const DepositTable = () => {
 
     axiosWithBaseUrl
        .post(`/owner/deposit/${id}/${currentPageInt}`, requestBody)
-      // .get(`/owner/reservation/list/${3}/noshoww/${currentPageInt}`, { params, data: requestBody })
       .then((response) => {
         setResvList(response.data.content);
         console.log(response.data.content);
@@ -52,13 +48,11 @@ const DepositTable = () => {
   const handleDatePickerChange = (dates, dateStrings) => {
     setSelectedDate({ year: dates.year(), month: dates.month() + 1 });
     console.log(dateStrings);
-    // fetchResvList(); // 날짜 선택 시 예약 리스트를 가져옵니다.
   };
 
   const handleStatusChange = (status) => {
     setSelectedStatus(status);
     console.log(status);
-    // fetchResvList();
   };
   
 
@@ -67,17 +61,19 @@ const DepositTable = () => {
       title: "예약일자",
       dataIndex: "reservationDate",
       key: "reservationDate",
+      align: "center",
       render: reservationDate => {
         return reservationDate.slice(0, 10) + " " + reservationDate.slice(11, 19)
       }
     },
+    //상태별 태그 추가
     {
       title: "예약금상태",
       dataIndex: "depositStatus",
       key: "depositStatus",
+      align: "center",
       render: (text) => {
         let color, content;
-
         if (text === "ALL_PENALTY") {
           color = "volcano";
           content = "전액";
@@ -94,40 +90,42 @@ const DepositTable = () => {
         return <Tag color={color}>{content}</Tag>;
       }
       },
+      //예약금 상세로 이동
       {
         title: "예약자명",
         dataIndex: "customerName",
         key: "customerName",
+        align: "center",
         render: (text, record) => (
-          <Link to={`/resv/detail/${record.id}`}>{text}</Link>
+          <Link to={`/resv/detail/${record.id}`} style={{ color: 'black' }}>{text}</Link>
         ),                                                                        
         
       },
-      // {
-      //   title: "예약자 번호",
-      //   dataIndex: "phoneNumber",
-      //   key: "phoneNumber",
-      // },
       {
         title: "예약인원",
         dataIndex: "people",
         key: "people",
+        align: "center",
       },
 
       {
         title: "예약금",
         dataIndex: "originDeposit",
         key: "originDeposit",
+        align: "center",
       },
       {
         title: "위약금",
         dataIndex: "penaltyValue",
         key: "penaltyValue",
+        align: "center",
       }
     ];
   
     return (
       <>
+      <Typography.Title level={3}>예약금 내역 조회</Typography.Title>
+
           <DatePicker 
            format="YYYY-MM" picker="month"
            onChange={handleDatePickerChange}
@@ -139,11 +137,14 @@ const DepositTable = () => {
           <Button onClick={() => handleStatusChange("RETURN")}>환불</Button>
           {/* <Button onClick={() => handleStatusChange("cancel")}>정상취소</Button> */}
         
+        <Divider style={{ marginTop: "30px", fontSize: '18px', fontWeight: 'bold' }}>예약금 목록</Divider>
+
         <Table
           columns={columns}
           dataSource={resvList}
           pagination={false}
           loading={loading}
+          align="center"
         />
         <Paging
           page={currentPage}

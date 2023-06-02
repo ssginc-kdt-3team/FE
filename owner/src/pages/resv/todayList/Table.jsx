@@ -5,10 +5,9 @@ import Paging from "components/pagination/Paging";
 import { axiosWithBaseUrl } from "App";
 import Enter from "pages/resv/todayList/Enterbtn";
 import Noshow from "pages/resv/todayList/Noshowbtn";
-//userSlice의 id 값 가져오기
-import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';                //userSlice의 id 값 가져오기
 
-
+//오늘 예약 조회 테이블
 const ResvTdTable = () => {
  const id = useSelector((state) => state.user.id);  
   const [resvList, setResvList] = useState([]);           // 현재 페이지의 예약 목록을 저장 
@@ -20,14 +19,12 @@ const ResvTdTable = () => {
 
   useEffect(() => {
     fetchResTdvList();                                     // 함수를 호출하여 페이지가 변경될 때마다 고객 목록을 가져옴
-  }, [currentPage, selectedType]);                         //currentPage가 변경될 때마다 fetchCustomerList 함수가 호출
-
-
+  }, [currentPage, selectedType]);                         //currentPage가 변경될 때마다 fetchResTdvList 함수 호출
 
   const fetchResTdvList = () => {
     setLoading(true);
     axiosWithBaseUrl
-      .get(`/owner/reservation/activetime/${id}/${selectedType}/${currentPage}`) // 점주 id
+      .get(`/owner/reservation/activetime/${id}/${selectedType}/${currentPage}`) // 점주 id, 시간 type 선택, 페이징
       .then((response) => {
         setResvList(response.data.content);
         console.log(response.data.content);
@@ -42,11 +39,11 @@ const ResvTdTable = () => {
       });
   };
 
-  const handleTypeChange = (type) => {
+  const handleTypeChange = (type) => {    //type 변경
     setSelectedType(type);
   };
   
-
+  //table columns
   const columns = [
     {
       title: "예약일자",
@@ -69,6 +66,7 @@ const ResvTdTable = () => {
         return  reservationDate.slice(11, 13) + '시' + reservationDate.slice(14, 16) + '분'
       }
     },
+    // 상태별 태그
     {
       title: "예약상태",
       dataIndex: "status",
@@ -97,6 +95,7 @@ const ResvTdTable = () => {
         return <Tag color={color}>{content}</Tag>;
       },
     },
+    // 예약 상세로 이동
     {
       title: "예약자명",
       dataIndex: "name",
@@ -134,13 +133,16 @@ const ResvTdTable = () => {
       key: "buttons",
       width: 150,
       align: 'center',
+      //예약 상태가 RESERVATION 일 때 완료, 노쇼 버튼 보임
       render: (text, record) => {
         if (text === "RESERVATION") {
           return (
             <>
             <Space>
+              {/* 완료버튼 */}
               <Enter id={record.id} fetchResTdvList={fetchResTdvList} reservationDate={record.reservationDate}  />
-              <span style={{ marginLeft: '3px' }} />
+              <span style={{ marginLeft: '3px' }} />  
+              {/* 노쇼버튼 */}
               <Noshow id={record.id} fetchResTdvList={fetchResTdvList} reservationDate={record.reservationDate} />
             </Space>
             </>
