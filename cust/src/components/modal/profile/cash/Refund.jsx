@@ -29,13 +29,13 @@ function Refund({isModalOpen, setIsModalOpen, data, remainedCash}) {
       centered
       open={isModalOpen}
     >
-      <div id={styles.refundInfoWrap} className='flex flex-col'>
+      <div id={styles.refundInfoWrap} className='flex flex-col flex-gap-20'>
         <p><span>충전금 잔액</span>{remainedCash.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</p>
         <p><span>환불예정 금액</span>{(parseInt(data.price)).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</p>
         <p><span>환불 후 충전금</span>{(parseInt(remainedCash) - parseInt(data.price)).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</p>
       </div>
 
-      <div id={styles.bottomWrap}>
+      <div id={styles.buttonWrap}>
         <Button className='button buttonReverse' onClick={() => setIsModalOpen(false)}>취소</Button>
         <Button type="primary" className='button' onClick={handleRefund}>완료</Button>
       </div>

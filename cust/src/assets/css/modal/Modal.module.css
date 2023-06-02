@@ -2,6 +2,10 @@
   width: 420px !important;
 }
 
+.wide {
+  width: 500px !important;
+}
+
 /* 모달 */
 .modalWrap > div:nth-child(2) {
   width: 100%;
@@ -98,7 +102,42 @@
 }
 #refundInfoWrap span {
   color: var(--description);
-  margin-right: 20px;
+  margin-right: 16px;
+}
+
+/* 예약금 결제 */
+#payInfoWrap {
+  width: 100%;
+  font-size: var(--input-fontSize);
+}
+/* 예약 정보 */
+#payInfoWrap > p:first-child {
+  margin: 0;
+  text-align: center;
+}
+/* 결제 정보 */
+#payInfo {
+  width: fit-content;
+  margin: 0 auto;
+}
+#payInfo p {
+  margin: 8px 0;
+}
+#payInfo p > span {
+  color: var(--description);
+  margin-right: 16px;
+}
+/* 포인트 */
+#pointWrap input {
+  width: var(--button-width-s);
+  height: var(--button-height-s);
+  padding: 5px 0 ;
+  border: 0;
+  border-bottom: 1px solid var(--input-border);
+  font-size: var(--input-fontSize);
+}
+#pointWrap input:focus {
+  border-bottom: 1px solid var(--main);
 }
 
 /* 모달 푸터(기존 버튼) */
@@ -107,7 +146,7 @@
 }
 
 /* 버튼 */
-#bottomWrap {
+#buttonWrap {
   margin-top: 60px;
   display: flex;
   justify-content: center;
@@ -115,7 +154,7 @@
   gap: 10px;
 }
 
-#bottomWrap > button {
+#buttonWrap > button {
   width: var(--button-width-s);
   height: var(--button-height-s);
   font-size: var(--button-fontSize-s);

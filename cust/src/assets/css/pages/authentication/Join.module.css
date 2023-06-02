@@ -20,7 +20,7 @@
   /* margin-bottom: 10px; */
 }
 .joinInput:focus {
-  outline: none;
+  /* outline: none; */
   border-bottom: 1px solid var(--main);
 }
 

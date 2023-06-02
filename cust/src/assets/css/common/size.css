@@ -9,12 +9,8 @@
   --footer-height: 334px;
 
   /* size */
-  --input-fontSize: 18px;
   --input-height: 50px;
 
-  --button-fontSize: 18px;
-  --button-fontSize-s: 16px;
-  --button-fontSize-xs: 15px;
   --button-width: 180px;
   --button-width-s: 100px;
   --button-height-s: 40px;
@@ -24,6 +20,16 @@
   --border-radius : 10px;
   --border-radius-m: 8px;
   --border-radius-s: 6px;
+
+  /* font */
+  --header-top-fontSize: 13px;
+
+  --input-fontSize: 18px;
+
+  --button-fontSize: 18px;
+  --button-fontSize-s: 16px;
+  --button-fontSize-xs: 15px;
+
 
 
   /* resvForm */

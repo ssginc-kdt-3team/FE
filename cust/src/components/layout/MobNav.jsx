@@ -13,8 +13,15 @@ function MobNav({isNavOpen, setIsNavOpen}) {
     <>
       <div id={styles.mobNavWrap} className={isNavOpen ? styles.open : styles.close}>
         <div>
-          { loginInfo.isLoggedin ? <span>{loginInfo.id}</span> : <Link to='/login' onClick={() => setIsNavOpen(false)}>로그인</Link> }
-          { loginInfo.isLoggedin ? ' 번 님 환영합니다!' : '이 필요합니다.' }
+          <Link 
+            to={loginInfo.isLoggedin ? `/profile/${loginInfo.id}` : '/login'} 
+            onClick={() => setIsNavOpen(false)}
+            style={loginInfo.isLoggedin ? { paddingLeft: '2px', fontSize: '24px' } : { paddingLeft: '2px', color: 'var(--main)' }}
+          >
+            {loginInfo.isLoggedin ? loginInfo.id : '로그인'}
+          </Link>
+          {/* { loginInfo.isLoggedin ? <span>{loginInfo.id}</span> : <Link to='/login' onClick={() => setIsNavOpen(false)}>로그인</Link> } */}
+          {loginInfo.isLoggedin ? ' 번 님 환영합니다!' : '이 필요합니다.'}
         </div>
         
         <ul>

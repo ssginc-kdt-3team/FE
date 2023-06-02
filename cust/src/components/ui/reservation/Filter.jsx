@@ -4,7 +4,7 @@ import { Select } from 'antd';
 
 const { Option } = Select;
 
-function Filter({state, setState, branchId, setBranchId, shopId, setShopId, resvInfo, setResvInfo}) {
+function Filter({state, setState, branchId, setBranchId, shopId, setShopId, resvInfo, setResvInfo, setShopName}) {
   const [branchList, setBranchList] = useState(null);
   const [shopList, setShopList] = useState(null);
   
@@ -18,6 +18,12 @@ function Filter({state, setState, branchId, setBranchId, shopId, setShopId, resv
   // 매장 선택 처리
   const handleShopSelect = (e) => { // 매장 정보가 변경될 때 마다
     console.log(e);
+
+    const selectedShop = shopList.find(shop => shop.id === e); // 선택된 매장을 shopList에서 찾아서
+    if(selectedShop) {
+      setShopName(selectedShop.name); // 매장명을 설정
+    }
+
     setResvInfo({ // 예약 정보 업데이트
       ...resvInfo,
       shopId: e
@@ -45,6 +51,7 @@ function Filter({state, setState, branchId, setBranchId, shopId, setShopId, resv
         if(state === null) {
           console.log('state 없음');
           setShopId(res2.data[0].id); // shopId를 각 지점별 매장 리스트의 첫 번째 원소로
+          setShopName(res2.data[0].name); // 매장명 설정
         }
       }
       catch (err) {
@@ -53,7 +60,7 @@ function Filter({state, setState, branchId, setBranchId, shopId, setShopId, resv
     };
   
     fetchData(); // 처음 렌더링 시에도 실행되도록 함
-  }, [branchId, setShopId, state]); // 지점, 매장, 날짜가 변할 때 마다 리렌더링
+  }, [branchId, setShopId, state, setShopName]); // 지점, 매장, 날짜가 변할 때 마다 리렌더링
 
   return (
     <>

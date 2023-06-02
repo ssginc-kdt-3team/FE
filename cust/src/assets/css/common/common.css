@@ -74,6 +74,9 @@ input {
   -moz-appearance: none; */
   background-color: #fff;
 }
+input:focus {
+  outline: none;
+}
 
 .select {
   width: 200px;
