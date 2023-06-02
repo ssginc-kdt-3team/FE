@@ -1,13 +1,9 @@
 import { useState, useEffect } from "react";
 import { axiosWithBaseUrl } from "App";
-import { Table, Tag, Button } from "antd";
+import { Table, Tag, Button, Typography, Divider, DatePicker } from "antd";
 import { Link } from "react-router-dom";
 import Paging from "components/pagination/Paging";
-import { DatePicker } from 'antd';
-
-//userSlice의 id 값 가져오기
-import { useSelector } from 'react-redux';
-
+import { useSelector } from 'react-redux';   //userSlice의 id 값 가져오기
 
 const { RangePicker } = DatePicker;
 
@@ -27,19 +23,14 @@ const ResvTable = () => {
 
   const fetchResvList = () => {
     setLoading(true);
-    const currentPageInt = parseInt(currentPage, 10); // Convert currentPage to an integer
+    const currentPageInt = parseInt(currentPage, 10); //  currentPage to an integer
     const requestBody = {
       start: selectedDate.start,                       // selectedDate 객체에서 시작 날짜
       end: selectedDate.end,                           // selectedDate 객체에서 종료 날짜
     };
-    // let type = selectedType;
-    // if (selectedType === "all") {
-    //   type = "noshow, reservation, done, cancel, imminent";
-    // }
 
     axiosWithBaseUrl
        .post(`/owner/reservation/list/${id}/${selectedType}/${currentPageInt}`, requestBody)
-      // .get(`/owner/reservation/list/${3}/noshoww/${currentPageInt}`, { params, data: requestBody })
       .then((response) => {
         setResvList(response.data.content);
         console.log(response.data.content);
@@ -57,13 +48,13 @@ const ResvTable = () => {
   const handleRangePickerChange = (dates, dateStrings) => {
     setSelectedDate({ start: dateStrings[0], end: dateStrings[1] });
     console.log(dateStrings);
-    fetchResvList(); // 날짜 선택 시 예약 리스트를 가져옵니다.
+    fetchResvList();                                                    // 날짜 선택 시 예약 리스트를 가져옴
   };
 
     const handleTypeChange = (type) => {
     setSelectedType(type);
     console.log(type);
-    // fetchResvList();
+    // fetchResvList(); 
   };
   
 
@@ -72,14 +63,27 @@ const ResvTable = () => {
       title: "예약일자",
       dataIndex: "reservationDate",
       key: "reservationDate",
+      align: 'center',
+  
       render: reservationDate => {
-        return reservationDate.slice(0, 10) + " " + reservationDate.slice(11, 19)
+        return reservationDate.slice(0, 4) + '년' + reservationDate.slice(5, 7) + '월' + reservationDate.slice(8, 10) + '일' 
+      }
+    },
+    {
+      title: "예약시간",
+      dataIndex: "reservationDate",
+      key: "reservationDate",
+      align: 'center',
+      render: reservationDate => {
+        return  reservationDate.slice(11, 13) + '시' + reservationDate.slice(14, 16) + '분'
       }
     },
     {
       title: "예약상태",
       dataIndex: "status",
       key: "status",
+      align: 'center',
+      // 상태별 태그
       render: (text) => {
         let color, content;
 
@@ -102,12 +106,14 @@ const ResvTable = () => {
         return <Tag color={color}>{content}</Tag>;
       }
       },
+      // 예약 상세페이지로 이동
       {
         title: "예약자명",
         dataIndex: "name",
         key: "name",
+        align: 'center',
         render: (text, record) => (
-          <Link to={`/resv/detail/${record.id}`}>{text}</Link>
+          <Link to={`/resv/detail/${record.id}` }style={{ color: 'black' }}>{text}</Link>
         ),                                                                        
         
       },
@@ -115,41 +121,56 @@ const ResvTable = () => {
         title: "예약자 번호",
         dataIndex: "phoneNumber",
         key: "phoneNumber",
+        align: 'center',
       },
       {
         title: "예약인원",
         dataIndex: "people",
         key: "people",
+        align: 'center',
       },
       {
         title: "예약금",
         dataIndex: "originValue",
         key: "originValue",
+        align: 'center',
       },
       {
         title: "위약금",
         dataIndex: "penaltyValue",
         key: "penaltyValue",
+        align: 'center',
       }
     ];
   
     return (
       <>
+      <Typography.Title level={3}  style={{ marginBottom: "30px"}}>예약 내역 조회</Typography.Title>
+      {/* <Divider  orientation="left" orientationMargin="0" style={{ color: 'black', fontWeight: 'bold' ,fontSize: '15px', borderColor: 'white' }}>조회</Divider> */}
+
+
         <RangePicker
           format="YYYY-MM-DD"
           onChange={handleRangePickerChange}
         />
-          <Button onClick={() => handleTypeChange("all")}>전체</Button>
+         {/* selectedType */}
+          <Button onClick={() => handleTypeChange("all")}>전체</Button>            
           <Button onClick={() => handleTypeChange("reservation")}>예약중</Button>
           <Button onClick={() => handleTypeChange("done")}>완료</Button>
           <Button onClick={() => handleTypeChange("noshow")}>노쇼</Button>
           <Button onClick={() => handleTypeChange("cancel")}>정상취소</Button>
           <Button onClick={() => handleTypeChange("imminent")}>취소</Button>
+        
+        <Divider style={{ marginTop: "30px", fontSize: '18px', fontWeight: 'bold' }}>전체 예약 목록</Divider>
+
         <Table
           columns={columns}
           dataSource={resvList}
           pagination={false}
           loading={loading}
+          align="center"
+          style={{ marginTop: "20px"}}
+
         />
         <Paging
           page={currentPage}

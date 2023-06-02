@@ -1,4 +1,4 @@
-import { setLoggedIn } from './storage';
+import { setLoggedIn } from '../reducers/loginSilce';
 
 const checkedLoggedIn = (ctx, next) => {
 const isLoggedIn = ctx.store.getState().storage.isLoggedIn;

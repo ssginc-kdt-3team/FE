@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { setLoggedIn } from '../../../store/lib/storage';
+import { setLoggedIn } from '../../../store/reducers/loginSilce';
 import { clearUser } from '../../../store/reducers/userSlice'; 
 import { Modal } from 'antd';
 import { LogoutOutlined } from '@ant-design/icons';

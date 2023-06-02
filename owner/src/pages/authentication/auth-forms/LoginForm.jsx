@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { axiosWithBaseUrl } from "App";
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../../store/reducers/userSlice'; 
-import { setLoggedIn } from '../../../store/lib/storage';
+import { setLoggedIn } from '../../../store/reducers/loginSilce';
 import { Form, Input, Button, Modal  } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { isEmailValid } from '../../../utils/auth';
@@ -27,6 +27,7 @@ const LoginForm = () => {
         })
         .then((res) => {
           console.log(res.data.id);
+          console.log(res.data);
           if (res.data === '') {
             Modal.error({
               title: '로그인 실패',

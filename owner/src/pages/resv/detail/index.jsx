@@ -4,6 +4,7 @@ import { axiosWithBaseUrl } from 'App';
 import { Card, Typography, Divider, Tag } from 'antd';
 import Reject from "pages/resv/detail/Rejectbtn";
 
+//예약 상세 정보
 function ResvDetail() {
   //resvlist 에서  예약id 받아오기 
   const { id } = useParams();
@@ -21,6 +22,7 @@ function ResvDetail() {
       });
   }, [id]);
 
+  //상태별 태그 표시
   function getStatusTag(status) {
     let color;
     let content;
@@ -48,6 +50,7 @@ function ResvDetail() {
             <Typography.Title level={4}>예약 상세 정보</Typography.Title>
           </div>
         }
+        // 예약 상태 RESERVATION 이면 거절버튼 보임 , 거절사유 선택 추가하기
         extra={resv && resv.status === "RESERVATION" ? <Reject id={id} /> : null}
         style={{
           width: 800,
@@ -58,7 +61,8 @@ function ResvDetail() {
             <li style={{ listStyle: "none" }}>
             <p>
                 예약 상태 {getStatusTag(resv.status)}
-              </p>            </li>
+            </p>            
+            </li>
             <Divider>예약 정보</Divider>
             <ul>
               <li style={{ listStyle: "none" }}>

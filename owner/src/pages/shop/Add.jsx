@@ -89,7 +89,6 @@ function ShopAdd() {
   };
 
   const onFinish = () => {
-    // Handle form submission if needed
   };
 
   const handleFileChange = (info) => {
@@ -189,38 +188,33 @@ function ShopAdd() {
         >
           <Input value={phone} onChange={(e) => setPhone(e.target.value)} />
         </Form.Item>  
-
         <Form.Item label="개업일" name="openDay" required>
           <DatePicker value={openDay} onChange={setOpenDay} />
         </Form.Item>
         <Form.Item label="오픈시간" name="openTime" required>
           <TimePicker format={format} value={openTime} onChange={setOpenTime} />
         </Form.Item>
+        <Form.Item label="마감시간" name="closeTime" required >
+          <TimePicker format={format} value={closeTime} onChange={setCloseTime} />
+        </Form.Item>
         <Form.Item
-  label="마감시간"
-  name="closeTime"
-  required
->
-  <TimePicker format={format} value={closeTime} onChange={setCloseTime} />
-</Form.Item>
-<Form.Item
-  label="주문마감시간"
-  name="orderCloseTime"
-  required
-  rules={[
-    ({ getFieldValue }) => ({
-      validator(_, value) {
-        const closeTimeValue = getFieldValue('closeTime');
-        if (!value || closeTimeValue.isAfter(value)) {
-          return Promise.resolve();
-        }
-        return Promise.reject(new Error('주문 마감시간은 마감시간 이전이어야 합니다.'));
-      },
-    }),
-  ]}
->
-  <TimePicker format={format} value={orderCloseTime} onChange={setOrderCloseTime} />
-</Form.Item>
+          label="주문마감시간"
+          name="orderCloseTime"
+          required
+          rules={[
+           ({ getFieldValue }) => ({
+           validator(_, value) {
+            const closeTimeValue = getFieldValue('closeTime');
+            if (!value || closeTimeValue.isAfter(value)) {
+            return Promise.resolve();
+            }
+            return Promise.reject(new Error('주문 마감시간은 마감시간 이전이어야 합니다.'));
+            },
+            }),
+          ]}
+        >
+        <TimePicker format={format} value={orderCloseTime} onChange={setOrderCloseTime} />
+      </Form.Item>
       {/* 사진 업로드 */}
       <Form.Item
           label="매장 사진"

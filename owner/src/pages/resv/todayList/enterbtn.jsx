@@ -1,19 +1,19 @@
-import { Button, Modal, Alert } from 'antd';
+import { Button, Modal } from 'antd';
 import { useState } from 'react';
 import { axiosWithBaseUrl } from "App";
 
 const Enter = ({ id, fetchResTdvList, reservationDate }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const currentTime = new Date();
-  const resDate = new Date(reservationDate);
+  const currentTime = new Date();                               // 현재시간
+  const resDate = new Date(reservationDate);                    // 예약시간
 
-  //모달
+  //모달 - 정상, 경고
   const showModal = () => {
-    if (currentTime > resDate) {   //현재시간이 예약시간 이전인 경우 
+    if (currentTime > resDate) {                                //현재시간이 예약시간 이후인 경우 - 입장 모달
       setIsModalOpen(true);
     } else {
-      Modal.error({
+      Modal.error({                                              //현재시간이 예약시간 이전인 경우 - 경고 모달
         title: '완료 처리 불가',
         content: '예약시간 이전에는 입장 완료 처리가 불가합니다.',
       });
@@ -29,7 +29,7 @@ const Enter = ({ id, fetchResTdvList, reservationDate }) => {
     setIsModalOpen(false);
   };
 
-  //입장완료 처리
+  //입장완료 처리 API
   const handleEnter = (id) => {
     axiosWithBaseUrl
       .post(`/owner/reservation/enter/${id}`)
@@ -53,7 +53,7 @@ const Enter = ({ id, fetchResTdvList, reservationDate }) => {
       >
         입장
       </Button>
-      {/* 모달 내용 */}
+      {/* 모달 */}
       <Modal
         title="입장"
         visible={isModalOpen}
