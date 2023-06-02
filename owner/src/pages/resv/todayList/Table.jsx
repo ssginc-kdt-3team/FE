@@ -1,4 +1,4 @@
-import { Table, Tag, Button  } from "antd";
+import { Table, Tag, Button, Space, Divider, Typography   } from "antd";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Paging from "components/pagination/Paging";
@@ -7,6 +7,7 @@ import Enter from "pages/resv/todayList/Enterbtn";
 import Noshow from "pages/resv/todayList/Noshowbtn";
 //userSlice의 id 값 가져오기
 import { useSelector } from 'react-redux';
+
 
 const ResvTdTable = () => {
  const id = useSelector((state) => state.user.id);  
@@ -51,13 +52,28 @@ const ResvTdTable = () => {
       title: "예약일자",
       dataIndex: "reservationDate",
       key: "reservationDate",
-      width: 250,
+      width: 150,
+      align: 'center',
+  
+      render: reservationDate => {
+        return reservationDate.slice(0, 4) + '년' + reservationDate.slice(5, 7) + '월' + reservationDate.slice(8, 10) + '일' 
+      }
+    },
+    {
+      title: "예약시간",
+      dataIndex: "reservationDate",
+      key: "reservationDate",
+      width: 150,
+      align: 'center',
+      render: reservationDate => {
+        return  reservationDate.slice(11, 13) + '시' + reservationDate.slice(14, 16) + '분'
+      }
     },
     {
       title: "예약상태",
       dataIndex: "status",
       key: "status",
-      width: 200,
+      width: 150,
       align: "center",
       render: (text) => {
         let color;
@@ -86,8 +102,9 @@ const ResvTdTable = () => {
       dataIndex: "name",
       key: "name",
       width: 150,
+      align: 'center',
       render: (text, record) => (
-        <Link to={`/resv/detail/${record.id}`}>{text}</Link>
+        <Link to={`/resv/detail/${record.id}` } style={{ color: 'black' }}>{text}</Link>
       ),
     },
     {
@@ -95,31 +112,37 @@ const ResvTdTable = () => {
       dataIndex: "phoneNumber",
       key: "phoneNumber",
       width: 200,
+      align: 'center',
     },
     {
       title: "예약인원",
       dataIndex: "people",
       key: "people",
-      width: 150,
+      width: 100,
+      align: 'center',
     },
     {
       title: "유아 수",
       dataIndex: "child",
       key: "child",
-      width: 150,
+      width: 100,
+      align: 'center',
     },
     {
       title: "버튼",
       dataIndex: "status",
       key: "buttons",
+      width: 150,
+      align: 'center',
       render: (text, record) => {
         if (text === "RESERVATION") {
           return (
             <>
-              <Enter id={record.id} fetchResTdvList={fetchResTdvList} />
-              <Noshow id={record.id} fetchResTdvList={fetchResTdvList} />
-              {/* <Button type="primary" onClick={() => handleEnter(record.id)}>입장</Button> */}
-              {/* <Button danger onClick={() => handleNoshow(record.id)}>노쇼</Button> */}
+            <Space>
+              <Enter id={record.id} fetchResTdvList={fetchResTdvList} reservationDate={record.reservationDate}  />
+              <span style={{ marginLeft: '3px' }} />
+              <Noshow id={record.id} fetchResTdvList={fetchResTdvList} reservationDate={record.reservationDate} />
+            </Space>
             </>
           );
         }
@@ -130,17 +153,28 @@ const ResvTdTable = () => {
   
   return (
     <>
-      <Button onClick={() => handleTypeChange("E")}>전체</Button>
-      <Button onClick={() => handleTypeChange("A")}>1시간</Button>
-      <Button onClick={() => handleTypeChange("B")}>3시간</Button>
-      <Button onClick={() => handleTypeChange("C")}>점심시간</Button>
-      <Button onClick={() => handleTypeChange("D")}>저녁시간</Button>
+
+<Typography.Title level={3}>오늘 예약 조회</Typography.Title>
+
+ <Divider  orientation="left" orientationMargin="0" style={{ color: 'black', fontWeight: 'bold' ,fontSize: '15px', borderColor: 'white' }}>시간별 조회</Divider>
+
+  <div style={{ textAlign: "" }}>
+  <Button onClick={() => handleTypeChange("E")}>전체</Button>
+  <Button onClick={() => handleTypeChange("A")}>1시간</Button>
+  <Button onClick={() => handleTypeChange("B")}>3시간</Button>
+  <Button onClick={() => handleTypeChange("C")}>점심시간</Button>
+  <Button onClick={() => handleTypeChange("D")}>저녁시간</Button>
+  </div>
+      <Divider style={{ marginTop: "30px", fontSize: '18px', fontWeight: 'bold' }}>오늘 예약 목록</Divider>
       <Table
         columns={columns}
         dataSource={resvList}
         pagination={false}
         loading={loading}
+        align="center"
         x="max-content"
+        style={{ marginTop: "10px"}}
+
       />
       <Paging
         page={currentPage}

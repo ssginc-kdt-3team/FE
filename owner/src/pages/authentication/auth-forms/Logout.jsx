@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setLoggedIn } from '../../../store/lib/storage';
 import { clearUser } from '../../../store/reducers/userSlice'; 
 import { Modal } from 'antd';
+import { LogoutOutlined } from '@ant-design/icons';
+
 
 const Logout = () => {
   const dispatch = useDispatch();
@@ -24,7 +26,8 @@ const Logout = () => {
 
   return (
     <div onClick={handleLogout} style={{ cursor: 'pointer' }}>
-      <span>로그아웃</span>
+        <LogoutOutlined />
+       <span style={{ fontWeight: 'bold' }}>로그아웃</span>
     </div>
   );
 };

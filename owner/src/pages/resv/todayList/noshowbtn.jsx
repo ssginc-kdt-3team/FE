@@ -3,11 +3,22 @@ import { useState } from 'react';
 import { axiosWithBaseUrl } from "App";
 
 
-const Noshow = ({ id, fetchResTdvList }) => {
+const Noshow = ({ id, fetchResTdvList, reservationDate }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   
+  const currentTime = new Date();
+  const resDate = new Date(reservationDate);
+
+  //모달
   const showModal = () => {
-    setIsModalOpen(true);
+    if (currentTime > resDate) {   //현재시간이 예약시간 이전인 경우 
+      setIsModalOpen(true);
+    } else {
+      Modal.warning({
+        title: '노쇼 처리 불가',
+        content: '예약시간 이전에는 노쇼 처리가 불가합니다.',
+      });
+    }
   };
   const handleOk = () => {
     setIsModalOpen(false);
@@ -22,8 +33,7 @@ const Noshow = ({ id, fetchResTdvList }) => {
       .post(`/owner/reservation/noshow/${id}`)
       .then((res) => {
         console.log(res.data);
-        // setResv({ ...resv, status: "NOSHOW" }); // 예약 상태를"CANCEL"로 업데이트
-        console.log("Reservation noshow");
+        console.log("노쇼 완료");
         fetchResTdvList(); 
       })
       .catch((error) => {
@@ -33,10 +43,17 @@ const Noshow = ({ id, fetchResTdvList }) => {
 
   return (
     <>
-      <Button type="danger" onClick={showModal}>
-        노쇼
+      <Button 
+      type="primary" 
+      onClick={showModal}
+      style={{ backgroundColor: '#ffd666' }}
+      >
+       노쇼
       </Button>
-      <Modal title="노쇼" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+      <Modal title="노쇼"
+       open={isModalOpen} 
+       onOk={handleOk} 
+       onCancel={handleCancel}>
         <p>노쇼 처리하시겠습니까?</p>
       </Modal>
     </>

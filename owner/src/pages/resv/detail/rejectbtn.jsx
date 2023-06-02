@@ -33,7 +33,11 @@ const Reject = ({id}) => {
 
   return (
     <>
-      <Button type="primary" onClick={showModal}>
+      <Button 
+      type="primary" 
+      onClick={showModal}
+      style={{ backgroundColor: '#cf1322' }}
+      >
         거절
       </Button>
       <Modal title="거절" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>

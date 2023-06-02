@@ -67,6 +67,9 @@ const DepositTable = () => {
       title: "예약일자",
       dataIndex: "reservationDate",
       key: "reservationDate",
+      render: reservationDate => {
+        return reservationDate.slice(0, 10) + " " + reservationDate.slice(11, 19)
+      }
     },
     {
       title: "예약금상태",
