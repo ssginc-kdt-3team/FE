@@ -30,6 +30,8 @@
   --button-fontSize-s: 16px;
   --button-fontSize-xs: 15px;
 
+  --info-fontSize: 12px;
+
 
 
   /* resvForm */
@@ -91,4 +93,14 @@
 }
 .pr-75 {
   padding-right: 75px !important;
+}
+
+
+
+@media screen and (max-width: 768px) {
+  :root {  
+    /* font */
+    --input-fontSize: 16px;
+  }
+  
 }
