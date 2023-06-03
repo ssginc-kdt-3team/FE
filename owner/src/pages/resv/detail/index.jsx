@@ -10,7 +10,7 @@ function ResvDetail() {
   const { id } = useParams();
   const [resv, setResv] = useState(null);
   
-  useEffect(() => {
+  const fetchResvDetail = () => {
     axiosWithBaseUrl
       .get(`/owner/reservation/${id}`)
       .then((res) => {
@@ -20,7 +20,12 @@ function ResvDetail() {
       .catch((error) => {
         console.log(error);
       });
-  }, [id]);
+  };
+
+  useEffect(() => {
+    fetchResvDetail();                                  
+  }, []);    
+  
 
   //상태별 태그 표시
   function getStatusTag(status) {
@@ -51,7 +56,7 @@ function ResvDetail() {
           </div>
         }
         // 예약 상태 RESERVATION 이면 거절버튼 보임 , 거절사유 선택 추가하기
-        extra={resv && resv.status === "RESERVATION" ? <Reject id={id} /> : null}
+        extra={resv && resv.status === "RESERVATION" ? <Reject id={id}  fetchResvDetail={fetchResvDetail} /> : null} 
         style={{
           width: 800,
         }}

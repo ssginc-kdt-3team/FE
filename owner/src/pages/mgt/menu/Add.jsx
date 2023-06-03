@@ -2,8 +2,7 @@ import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, Button, Form, Input, Upload, Modal } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-import axios from 'axios';
-
+import { axiosWithBaseUrl } from 'App';
 
 const normFile = (e) => {
   if (Array.isArray(e)) {
@@ -39,7 +38,8 @@ function MenuAdd() {
     });
   
     try {
-      const response = await axios.post('http://localhost:8080/owner/menu/add', formData, {
+      const response = await axiosWithBaseUrl
+      .post('/owner/menu/add', formData, {
         headers: {
           "Content-Type": "multipart/form-data"
         }

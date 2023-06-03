@@ -50,12 +50,23 @@ const Noshow = ({ id, fetchResTdvList, reservationDate }) => {
       >
        노쇼
       </Button>
-      <Modal title="노쇼"
-       open={isModalOpen} 
-       onOk={handleOk} 
-       onCancel={handleCancel}>
-        <p>노쇼 처리하시겠습니까?</p>
-      </Modal>
+      <Modal
+      title="노쇼"
+      open={isModalOpen}
+      onOk={handleOk}
+      onCancel={handleCancel}
+      okText="네"
+      cancelText="취소"
+      //적용 안됨 다시 수정하기
+      sx={{
+        '.ant-btn-primary': {
+          backgroundColor: 'red',
+          borderColor: 'red',
+        },
+      }}
+    >
+  <p>노쇼 처리하시겠습니까?</p>
+</Modal>
     </>
   );
 };
