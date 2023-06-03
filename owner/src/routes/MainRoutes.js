@@ -11,7 +11,7 @@ const MyProfile = Loadable(lazy(() => import('../pages/profile/Myprofile')));
 const ProfileUpdate = Loadable(lazy(() => import('../pages/profile/Update')));
 const ShopAdd = Loadable(lazy(() => import('../pages/shop/Add')));
 const MgtInfo = Loadable(lazy(() => import('../pages/mgt/information/Index')));
-const MgtReview = Loadable(lazy(() => import('../pages/mgt/review/Review')));
+const MgtReview = Loadable(lazy(() => import('../pages/mgt/review/List')));
 const MenuReg = Loadable(lazy(() => import('../pages/mgt/menu/Add')));
 const MgtInfoUpdate = Loadable(lazy(() => import('../pages/mgt/information/Update')));
 const MenuDetail = Loadable(lazy(() => import('../pages/mgt/menu/Detail')));

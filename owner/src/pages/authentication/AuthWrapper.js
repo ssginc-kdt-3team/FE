@@ -45,7 +45,7 @@ const AuthWrapper = ({ children }) => (
                     alignItems="center"
                     sx={{
                         minHeight: { xs: 'calc(90vh - 134px)', md: 'calc(85vh - 112px)' },
-                        // backgroundColor: 'lightblue', // 배경색 지정
+                        // backgroundColor: 'lightblue', // 배경색 
                       }}
                     >
                     {/* 로그인 카드 */}

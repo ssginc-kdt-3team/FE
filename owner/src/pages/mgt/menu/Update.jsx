@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Card, Button, Form, Input, Upload, Modal } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-import axios from 'axios';
+import { axiosWithBaseUrl } from 'App';
 
 const normFile = (e) => {
   if (Array.isArray(e)) {
@@ -47,13 +47,6 @@ function MenuUpdate() {
     const json = JSON.stringify(menuData);
     const blob = new Blob([json], { type: "application/json" });
     formData.append("menuData", blob);
-    // const json = JSON.stringify(menuData);
-    // const blob = new Blob([json], { type: "application/json" });
-    // formData.append("menuData", blob);
-
-    // formData.append('menuData', JSON.stringify(menuData)); // Append menuData as a JSON string
-    // formData.append('menuData', JSON.stringify(menuData));
-    
     if (photos.length > 0) {
       formData.append('menuImg', photos[0].originFileObj);
     } else {
@@ -62,7 +55,8 @@ function MenuUpdate() {
     try {
 
 
-     const response = await axios.post(`http://localhost:8080/owner/menu/update/${state.id}`, formData, {
+     const response = await axiosWithBaseUrl
+     .post(`/owner/menu/update/${state.id}`, formData, {
         headers: {
             //  contentType : 'application/json'
           'Content-Type': 'multipart/form-data',

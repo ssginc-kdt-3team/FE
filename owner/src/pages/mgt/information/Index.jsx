@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'antd';
-import axios from 'axios';
+import { axiosWithBaseUrl } from 'App';
 import MenuList from '../menu/List';
 import ShopDetail from './Detail';
 //userSlice의 id 값 가져오기
@@ -15,8 +15,8 @@ function MgtInfo() {
   const [menulist, setMenuList] = useState(null);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:8080/owner/shop/detail/${id}`)
+    axiosWithBaseUrl
+      .get(`/owner/shop/detail/${id}`)
       .then((res) => {
         console.log(res.data);
         console.log(id);

@@ -62,10 +62,15 @@ const LoginForm = () => {
             name="email"
             rules={[
               {
+                type: 'email',
+                message: '이메일 형식이 아닙니다.',
+              },
+              {
                 // required: true,
                 message: '이메일을 입력하세요.',
               },
             ]}
+            style={{ width: '250px', marginLeft: '10px' }}
           >
             <Input
               type="email"
@@ -73,9 +78,6 @@ const LoginForm = () => {
               value={email}
               autoComplete="email"
               onChange={(e) => setEmail(e.target.value)}
-              sx={{
-                width: '200px', // 원하는 너비 값 설정
-              }}
               
             />
           </Form.Item>
@@ -88,7 +90,16 @@ const LoginForm = () => {
                 // required: true,
                 message: '비밀번호를 입력하세요.',
               },
+              {
+                min: 8,
+                message: '8자리 이상이어야 합니다.',
+              },
+              {
+                max: 16,
+                message: '16자리 이하여야 합니다.',
+              },
             ]}
+            style={{ width: '260px' }}
           >
             <Input.Password
               autoComplete="current-password"

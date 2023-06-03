@@ -4,6 +4,7 @@ import { Table, Tag, Button, Typography, Divider, DatePicker } from "antd";
 import { Link } from "react-router-dom";
 import Paging from "components/pagination/Paging";
 import { useSelector } from 'react-redux';   //userSlice의 id 값 가져오기
+import StatusFilter from "./Statusfilter";
 
 const { RangePicker } = DatePicker;
 
@@ -147,19 +148,14 @@ const ResvTable = () => {
       <>
       <Typography.Title level={3}  style={{ marginBottom: "30px"}}>예약 내역 조회</Typography.Title>
       {/* <Divider  orientation="left" orientationMargin="0" style={{ color: 'black', fontWeight: 'bold' ,fontSize: '15px', borderColor: 'white' }}>조회</Divider> */}
-
-
         <RangePicker
           format="YYYY-MM-DD"
           onChange={handleRangePickerChange}
         />
+        <div style={{ marginTop: '10px' }}></div>
+
          {/* selectedType */}
-          <Button onClick={() => handleTypeChange("all")}>전체</Button>            
-          <Button onClick={() => handleTypeChange("reservation")}>예약중</Button>
-          <Button onClick={() => handleTypeChange("done")}>완료</Button>
-          <Button onClick={() => handleTypeChange("noshow")}>노쇼</Button>
-          <Button onClick={() => handleTypeChange("cancel")}>정상취소</Button>
-          <Button onClick={() => handleTypeChange("imminent")}>취소</Button>
+         <StatusFilter />
         
         <Divider style={{ marginTop: "30px", fontSize: '18px', fontWeight: 'bold' }}>전체 예약 목록</Divider>
 
