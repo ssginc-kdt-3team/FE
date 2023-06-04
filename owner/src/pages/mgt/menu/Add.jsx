@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Card, Button, Form, Input, Upload, Modal } from 'antd';
+import { Card, Button, Form, Input, Upload, Modal, Typography } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { axiosWithBaseUrl } from 'App';
 
@@ -45,7 +45,7 @@ function MenuAdd() {
         }
       });
       console.log(response);
-      navigate('/');
+      navigate('/mgt/info');
     } catch (error) {
       console.error('Error adding menu:', error);
     }
@@ -79,10 +79,17 @@ function MenuAdd() {
   };
   
   return (
+    <div style={{ display: "flex", justifyContent: "center", alignItems: "center"}}>
     <Card
-      title="메뉴 등록"
+      title={
+        <div style={{ textAlign: "center", marginBottom: "5px" }}>
+          <Typography.Title level={4}>메뉴 등록</Typography.Title>
+        </div>
+      }
       style={{
-        width: 1000,
+        width: '600px',
+         height:'500px',
+         marginTop: '100px'
       }}
     >
       <Form
@@ -133,8 +140,7 @@ function MenuAdd() {
             </div>
           </Upload>
         </Form.Item>
-        <Form.Item>
-          <Button type="primary" onClick={showModal}>
+        <Form.Item style={{ display: 'flex', justifyContent: 'center' }}>          <Button type="primary" onClick={showModal} style={{ backgroundColor: '#cf1322' }}>
             등록하기
           </Button>
           <Modal title="등록" visible={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
@@ -143,6 +149,7 @@ function MenuAdd() {
         </Form.Item>
       </Form>
     </Card>
+    </div>
   );
 }
 

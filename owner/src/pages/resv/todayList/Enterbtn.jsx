@@ -16,6 +16,7 @@ const Enter = ({ id, fetchResTdvList, reservationDate }) => {
       Modal.error({                                              //현재시간이 예약시간 이전인 경우 - 경고 모달
         title: '완료 처리 불가',
         content: '예약시간 이전에는 입장 완료 처리가 불가합니다.',
+        okText : '닫기'
       });
     }
   };
@@ -53,12 +54,14 @@ const Enter = ({ id, fetchResTdvList, reservationDate }) => {
       >
         입장
       </Button>
-      {/* 모달 */}
+      {/* 정상 처리 모달 */}
       <Modal
         title="입장"
         visible={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
+        okText="네"
+        cancelText="취소"
       >
         <p>입장 처리하시겠습니까?</p>
       </Modal>

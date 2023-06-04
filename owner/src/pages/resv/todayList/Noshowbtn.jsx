@@ -17,6 +17,7 @@ const Noshow = ({ id, fetchResTdvList, reservationDate }) => {
       Modal.warning({                       //현재시간이 예약시간 이전인 경우 
         title: '노쇼 처리 불가',
         content: '예약시간 이전에는 노쇼 처리가 불가합니다.',
+        okText : '닫기'
       });
     }
   };
@@ -57,7 +58,6 @@ const Noshow = ({ id, fetchResTdvList, reservationDate }) => {
       onCancel={handleCancel}
       okText="네"
       cancelText="취소"
-      //적용 안됨 다시 수정하기
       sx={{
         '.ant-btn-primary': {
           backgroundColor: 'red',
