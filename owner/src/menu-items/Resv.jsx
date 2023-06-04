@@ -1,10 +1,11 @@
 // assets
-import { ChromeOutlined, QuestionOutlined } from '@ant-design/icons';
+import {  UnorderedListOutlined, BarChartOutlined, LineChartOutlined } from '@ant-design/icons';
 
 // icons
 const icons = {
-    ChromeOutlined,
-    QuestionOutlined
+    UnorderedListOutlined,
+    BarChartOutlined,
+    LineChartOutlined 
 };
 
 // ==============================|| MENU ITEMS - SAMPLE PAGE & DOCUMENTATION ||============================== //
@@ -19,21 +20,21 @@ const resv = {
             title: '오늘 예약 조회',
             type: 'item',
             url: '/resv/tdlist',
-            icon: icons.ChromeOutlined
+            icon: icons.UnorderedListOutlined
         },
         {
             id: 'resvlist',
             title: '예약 내역 조회',
             type: 'item',
             url: '/resv/list',
-            icon: icons.ChromeOutlined
+            icon: icons.BarChartOutlined
         },
         {
             id: 'resvdeposit',
             title: '예약금 내역 조회',
             type: 'item',
             url: '/resv/deposit',
-            icon: icons.ChromeOutlined
+            icon: icons.LineChartOutlined
         }
     ]
 };

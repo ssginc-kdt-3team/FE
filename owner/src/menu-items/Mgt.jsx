@@ -1,12 +1,13 @@
 // assets
-import { ChromeOutlined, QuestionOutlined } from '@ant-design/icons';
+import { ChromeOutlined, QuestionOutlined, ShopOutlined , ProfileOutlined} from '@ant-design/icons';
 
 // icons
 const icons = {
     ChromeOutlined,
-    QuestionOutlined
-};
-
+    QuestionOutlined,
+    ShopOutlined,
+    ProfileOutlined 
+}
 // ==============================|| MENU ITEMS - SAMPLE PAGE & DOCUMENTATION ||============================== //
 
 const mgt = {
@@ -19,22 +20,23 @@ const mgt = {
             title: '매장 정보',
             type: 'item',
             url: '/mgt/info',
-            icon: icons.ChromeOutlined
+            icon: icons.ShopOutlined
         },
         {
             id: 'mgtlist',
             title: '매장 후기 조회',
             type: 'item',
             url: '/mgt/review',
-            icon: icons.ChromeOutlined
+            icon: icons.ProfileOutlined
         },
-        {
-            id: 'menureg',
-            title: '메뉴 등록',
-            type: 'item',
-            url: '/mgt/menu/register',
-            icon: icons.ChromeOutlined
-        }
+        //매장 정보로 이동
+        // {
+        //     id: 'menureg',
+        //     title: '메뉴 등록',
+        //     type: 'item',
+        //     url: '/mgt/menu/register',
+        //     icon: icons.ChromeOutlined
+        // }
     ]
 };
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Button } from 'antd';
+import { Card, Button, Typography } from 'antd';
 import { useNavigate } from '../../../../node_modules/react-router-dom/dist/index';
 // import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -27,18 +27,22 @@ function ShopDetail({data}) {
     <>
       {
         data && (
-          <Card>
-            
-            {/* title="Default size card" 
-            extra={<Button type="primary" onClick={() => navigate(`/mgt/info/update/${'아이디'}`)}>수정</Button>}  */}
-            
-            <div className='grid-2c flex-gap-40 width-100'>
-              <Img src={data.shopImgUrl} alt={data.shopName}/>
-
-              <div>
-                <h2 style={{ borderBottom: '1px solid #ccc' }}>{data.shopName}</h2>
-                <h3>{data.shopInfo}</h3>
-                <p><Span>이름</Span>{data.ownerName}</p>
+          <Card style={{ width : '900px'}}
+          // 매장명
+          title={
+            <div style={{ textAlign: "center", marginBottom: "5px" }}>
+              <Typography.Title level={3}>{data.shopName}</Typography.Title>
+            </div>
+          }>
+            {/* 매장 이미지 */}
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+         <    Img src={data.shopImgUrl} alt={data.shopName} style={{ width: '350px', height: 'auto' }}/>
+          </div> 
+          {/* 매장정보*/}
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <div style={{ whiteSpace: 'nowrap', textAlign: 'center' }}>
+               <h3>{data.shopInfo}</h3>
+                <p><Span>점주명</Span>{data.ownerName}</p>
                 <p><Span>지점명</Span>{data.branchName}</p>
                 <p><Span>위치</Span>{data.location}</p>
                 <p><Span>오픈시간</Span>{data.openTime}</p>
@@ -46,11 +50,16 @@ function ShopDetail({data}) {
                 <p><Span>주문 마감 시간</Span>{data.orderCloseTime}</p>
                 <p><Span>대표자명</Span>{data.businessCeo}</p>
                 <p><Span>사업자등록번호</Span>{data.businessNumber}</p>
-                <Button type='primary' onClick={() => navigate(`/mgt/info/update/${userId}`)}>
-                수정
-              </Button>
-              </div>
-            </div>
+
+                {/* 수정하기 버튼 */}
+            <Button 
+              type='primary' 
+              onClick={() => navigate(`/mgt/info/update/${userId}`)} 
+              style={{ backgroundColor: '#cf1322' }}>
+              수정하기
+            </Button>
+          </div>
+        </div>
           </Card>
         )
       }

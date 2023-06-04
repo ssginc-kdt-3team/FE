@@ -158,7 +158,7 @@ const ResvTdTable = () => {
 
 <Typography.Title level={3}>오늘 예약 조회</Typography.Title>
 
- <Divider  orientation="left" orientationMargin="0" style={{ color: 'black', fontWeight: 'bold' ,fontSize: '15px', borderColor: 'white' }}>시간별 조회</Divider>
+ {/* <Divider  orientation="left" orientationMargin="0" style={{ color: 'black', fontWeight: 'bold' ,fontSize: '15px', borderColor: 'white' }}>시간별 조회</Divider> */}
 
   <div style={{ textAlign: "" }}>
   <Button onClick={() => handleTypeChange("E")}>전체</Button>

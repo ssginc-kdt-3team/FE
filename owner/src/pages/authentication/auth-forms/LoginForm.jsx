@@ -35,7 +35,7 @@ const LoginForm = () => {
             });
           } else {
 
-            dispatch(setUser({ id: res.data.id }));
+            dispatch(setUser({ id: res.data.id, username: res.data.name }));
             dispatch(setLoggedIn(true));
 
             Modal.success({

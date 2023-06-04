@@ -7,7 +7,7 @@ import Logout from '../../../pages/authentication/auth-forms/Logout'
 
 // project import
 import AppBarStyled from './AppBarStyled';
-// import HeaderContent from './HeaderContent';
+import { useSelector } from 'react-redux';
 
 // assets
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
@@ -17,12 +17,15 @@ import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 const Header = ({ open, handleDrawerToggle }) => {
     const theme = useTheme();
     const matchDownMD = useMediaQuery(theme.breakpoints.down('lg'));
+    const id = useSelector((state) => state.user.id);  
+    const username = useSelector((state) => state.user.username);
 
     const iconBackColor = 'grey.100';
     const iconBackColorOpen = 'grey.200';
 
     // common header
     const mainHeader = (
+        
         <Toolbar sx={{ justifyContent: 'space-between' }}>
             <IconButton
                 disableRipple
@@ -34,7 +37,10 @@ const Header = ({ open, handleDrawerToggle }) => {
             >
                 {!open ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
             </IconButton>
-            {/* 로그아웃 버튼 */}
+
+            {/* <div>{id && <span>{id} 님</span>}</div> */}
+
+             {/* 로그아웃 버튼 */}
             <Logout />
         </Toolbar>
     );

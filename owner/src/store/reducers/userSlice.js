@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const userInitialState  = {
-    id:''
+    id:'',
+    username: ''
 };
 
 //createSlice : reducer, action 생성 (둘을 캡슐화한 버전이 createSlice)
