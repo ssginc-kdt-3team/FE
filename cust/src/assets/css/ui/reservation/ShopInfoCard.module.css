@@ -6,7 +6,7 @@
 
 /* 상단 */
 #topWrap {
-  font-size: 22px;
+  font-size: var(--title-fontSize);
 }
 
 /* 하단 */

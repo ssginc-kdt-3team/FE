@@ -30,6 +30,9 @@
   --button-fontSize-s: 16px;
   --button-fontSize-xs: 15px;
 
+  
+  --pageTitle-fontSize: 26px;
+  --title-fontSize: 22px;
   --info-fontSize: 12px;
 
 
@@ -101,6 +104,8 @@
   :root {  
     /* font */
     --input-fontSize: 16px;
+
+    --pageTitle-fontSize: 24px;
   }
   
 }

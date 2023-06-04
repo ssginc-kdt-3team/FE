@@ -1,5 +1,6 @@
 import React from 'react';
 import { Tag } from 'antd';
+import { styled } from 'styled-components';
 
 const getStatusColor = (status) => {
   switch (status) {
@@ -35,15 +36,15 @@ const getStatusName = (status) => {
   }
 };
 
-const style = {
-  fontSize: '16px',
-  margin: 0,
-  padding: '3px 7px'
-};
+const TAG = styled(Tag)`
+  font-size: 16px;
+  margin: 0;
+  padding: 3px 7px;
+`;
 
 function ResvStatusTag({status}) {
   return (
-    <Tag color={getStatusColor(status)} style={style}>{getStatusName(status)}</Tag>
+    <TAG color={getStatusColor(status)}>{getStatusName(status)}</TAG>
   );
 }
 
