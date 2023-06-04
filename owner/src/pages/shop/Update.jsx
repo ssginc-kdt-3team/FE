@@ -20,25 +20,25 @@ const normFile = (e) => {
 function MgtInfoUpdate() {
   const { state } = useLocation();
   const id = useSelector((state) => state.user.id); 
-   // form data 상태변수
-  const [shopName, setShopName] = useState('');
-  const [ownerName, setOwnerName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [branchId, setBranchId] = useState('1');
-  const [shopInfo, setShopInfo] = useState('');
+  const navigate = useNavigate();
   const [location, setLocation] = useState('');
-  const [businessCeo, setBusinessCeo] = useState('');
-  const [businessNumber, setBusinessNumber] = useState('');
-  const [orderCloseTime, setOrderCloseTime] = useState('');
-  const [seat, setSeat] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const formRef = useRef(null);
+   // form data 상태변수
+  const [shopName, setShopName] = useState(null);
+  const [ownerName, setOwnerName] = useState(null);
+  const [phone, setPhone] = useState(null);
+  const [branchId, setBranchId] = useState(null);
+  const [shopInfo, setShopInfo] = useState(null);
+  const [businessCeo, setBusinessCeo] = useState(null);
+  const [businessNumber, setBusinessNumber] = useState(null);
+  const [orderCloseTime, setOrderCloseTime] = useState(null);
+  const [seat, setSeat] = useState(null);
   const [openTime, setOpenTime] = useState(dayjs('12:00', format));
   const [closeTime, setCloseTime] = useState(dayjs('12:00', format));
   const [openDay, setOpenDay] = useState(dayjs());
   const [photos, setPhotos] = useState([]);                              //shopImg
   const [shopImgUrl, setShopImgUrl] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const navigate = useNavigate();
-  const formRef = useRef(null);
 
   useEffect(() => {
     if (state) {
@@ -79,14 +79,14 @@ function MgtInfoUpdate() {
 
     try {
       const response = await axiosWithBaseUrl
-      .post('/owner/shop/update/${id}', formData, {
+      .post(`/owner/shop/update/${id}`, formData, {
        headers: {
         'Content-Type': 'multipart/form-data',
         },
         });
       console.log(response);
       console.log(formData);
-      //등록되면 매장 정보 페이지로 이동
+      //수정되면 매장 정보 페이지로 이동
       navigate('/mgt/info');
     } catch (error) {
       console.error('Error adding shop:', error);

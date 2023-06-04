@@ -1,8 +1,6 @@
 import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
 import storage from '../lib/storage';
-// import storage from 'redux-persist/lib/storage';
-
 
 // project import
 import menu from './menu';
@@ -15,7 +13,7 @@ const persistConfig = {
   key: 'root',
   storage,
   whitelist: ['user', 'loginstate'], // state to persist
-  serialize: false, 
+  serialize: true, 
 };
 
 const reducers = combineReducers({

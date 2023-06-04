@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { persistStore } from 'redux-persist';
 import { loadState, saveState } from '../store/lib/storage';
+
 // project import
 import persistedReducer from './reducers';
 
@@ -13,13 +14,18 @@ const store = configureStore({
     serializableCheck: false,
   }),
 });
+
 store.subscribe(() => {
     saveState(store.getState()); // 상태 변경 시 localStorage에 저장
   });
 
+  
 const persistor = persistStore(store);
 
 export { store, persistor };
+
+
+
 
 // import { configureStore } from '@reduxjs/toolkit';
 

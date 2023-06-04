@@ -28,4 +28,5 @@ export const clearUserAsync = () => (dispatch) => {
     dispatch(clearUser());
   }, 1000);
 };
+
 export default userSlice; 

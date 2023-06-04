@@ -7,11 +7,11 @@ import 'simplebar/src/simplebar.css';
 
 // third-party
 import { Provider as ReduxProvider } from 'react-redux';
+import { store, persistor } from 'store';
 import { PersistGate } from 'redux-persist/integration/react';
 
 // project import
 import App from './App';
-import { store, persistor } from 'store';
 import reportWebVitals from './reportWebVitals';
 
 // ==============================|| MAIN - REACT DOM RENDER  ||============================== //
@@ -22,11 +22,11 @@ const root = createRoot(container);
 root.render(
   <StrictMode>
     <ReduxProvider store={store}>
-     <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter basename="/">
+        <PersistGate loading={null} persistor={persistor}>
           <App />
+          </PersistGate>
         </BrowserRouter>
-      </PersistGate>
     </ReduxProvider>
   </StrictMode>
 );

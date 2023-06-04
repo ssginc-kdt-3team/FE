@@ -50,12 +50,13 @@ function ShopAdd() {
       shopInfo: shopInfo,
       location: location,
       seat: seat,
+      phone: phone,
       ownerName: ownerName,
       businessCeo: businessCeo,
       businessNumber: businessNumber,
       orderCloseTime: orderCloseTime.format(format),
-      Id: id, // ownerId
-      branchId: branchId, // branchId 값 추가
+      ownerId: id, // ownerId
+      branchId: branchId, // branchId
     };
 
     // formData > shopData, shopImg, businessImg
@@ -147,13 +148,14 @@ function ShopAdd() {
         {/* 지점선택 필터 css 추가하기*/}
         <div style={{ display: 'flex', alignItems: 'justifybetween',  marginleft: '50px' }}>
         <p style={{ marginLeft: '0px' }} >입점하실 지점을 선택해주세요.</p>
-          <FilterTemp branchId={branchId} handleBranchSelect={handleBranchSelect} />
+          <FilterTemp branchId={branchId} handleBranchSelect={handleBranchSelect} style={{ width: '30px' }}/>
         </div>
 
         <Form.Item label="지점id" name="branchId" required hidden>
-          <Input value={branchId} onChange={(e) => setBranchId(e.target.value)} />
+          <Input id="branchId" value={branchId} onChange={(e) => setBranchId(e.target.value)} />
         </Form.Item>
-        <Form.Item label="점주id" name="id" required hidden>
+
+        <Form.Item label="점주id" name="ownerId" required hidden>
           <Input value={id} onChange={(e) => id(e.target.value)} />
         </Form.Item>
         <Form.Item label="매장명" name="shopName" required  style={{ width: 'calc(135% - 0px)'}} >
