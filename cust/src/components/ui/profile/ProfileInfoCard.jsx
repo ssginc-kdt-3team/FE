@@ -55,13 +55,13 @@ function ProfileInfoCard() {
         {/* 충전금 */}
         <div className='center flex-col'>
           <label>충전금</label>
-          <p>{cashFormat(remainedCash)}원</p>
+          <p>{cashFormat(remainedCash)}</p>
         </div>
         
         {/* 포인트 */}
         <div className='center flex-col'>
           <label>포인트</label>
-          <p>{cashFormat(remainedPoint)}P</p>
+          <p>{cashFormat(remainedPoint)}</p>
         </div>
         
         {/* 쿠폰 */}
