@@ -18,6 +18,7 @@ const Logout = () => {
     Modal.success({
       title: '로그아웃 성공',
       content: '로그아웃 되었습니다.',
+      okText: "닫기"
     });
 
     navigate('/');

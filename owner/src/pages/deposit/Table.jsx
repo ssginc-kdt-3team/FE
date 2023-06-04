@@ -97,7 +97,7 @@ const DepositTable = () => {
         key: "customerName",
         align: "center",
         render: (text, record) => (
-          <Link to={`/resv/detail/${record.id}`} style={{ color: 'black' }}>{text}</Link>
+          <Link to={`/resv/deposit/detail/${record.id}`} style={{ color: 'black' }}>{text}</Link>
         ),                                                                        
         
       },

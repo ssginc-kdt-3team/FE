@@ -8,11 +8,3 @@ export const logout = () => ({
     type: LOGOUT,
   });
 
-
-
-// export const setOwnerID = (id) => {
-//     return {
-//       type: 'SET_OWNERID',
-//       payload: id,
-//     };
-//   };

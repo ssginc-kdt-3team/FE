@@ -78,6 +78,7 @@ function MgtReview() {
       title: "작성일",
       dataIndex: "writeTime",
       key: "writeTime",
+      align: 'center',
       render: writeTime => {
         return writeTime.slice(0, 10) + " " + writeTime.slice(11, 19)
       }
@@ -85,18 +86,21 @@ function MgtReview() {
     {
       title: "고객명",
       dataIndex: "userName",
-      key: "userName"
+      key: "userName",
+      align: 'center'
     },
     {
       title: "제목",
       dataIndex: "title",
-      key: "title"
+      key: "title",
+      align: 'center',
     },
     //보기 -> 내용 모달
     {
       title: "내용",
       dataIndex: "contents",
       key: "contents",
+      align: 'center',
       render: (_, record) => (
         <Button onClick={() => handleOpenModal(record)}>
           보기
@@ -107,6 +111,7 @@ function MgtReview() {
       title: "별점",
       dataIndex: "point",
       key: "point",
+      align: 'center',
       render: point => (
         <Rate disabled value={point} />
       ),
@@ -114,7 +119,8 @@ function MgtReview() {
     {
       title: "상태",
       dataIndex: "reviewStatus",
-      key: "reviewStatus"
+      key: "reviewStatus",
+      align: 'center',
     }
   ];
 
@@ -154,7 +160,7 @@ function MgtReview() {
         <Modal
         visible={modalVisible}
         onCancel={handleCloseModal}
-        title="리뷰 내용"
+        title="후기 내용"
         footer={null}
       >
         {selectedReview && selectedReview.contents}
