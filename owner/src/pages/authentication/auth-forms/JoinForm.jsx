@@ -211,7 +211,7 @@ const Join = () => {
           </Form.Item>
 
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-            <Button type='primary' htmlType='submit' style={{ marginLeft: '120px' }}>
+            <Button type='primary' htmlType='submit' style={{ marginLeft: '120px', backgroundColor: '#cf1322' }}>
               완료
             </Button>
             <Button onClick={() => navigate('/')} style={{ marginLeft: '10px' }}>

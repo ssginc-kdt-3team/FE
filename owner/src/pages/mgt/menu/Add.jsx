@@ -143,7 +143,13 @@ function MenuAdd() {
         <Form.Item style={{ display: 'flex', justifyContent: 'center' }}>          <Button type="primary" onClick={showModal} style={{ backgroundColor: '#cf1322' }}>
             등록하기
           </Button>
-          <Modal title="등록" visible={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+          <Modal 
+          title="등록" 
+          visible={isModalOpen} 
+          onOk={handleOk} 
+          okText="네"
+          cancelText="취소"
+          onCancel={handleCancel}>
             <p>메뉴를 등록하시겠습니까?</p>
           </Modal>
         </Form.Item>

@@ -24,7 +24,7 @@ function FilterTemp({ type, setType, branchId, setBranchId }) {
     }
   }
 
-  // 지점 정보, 지점별 매장 정보 가져오기
+  // 지점 정보 가져오기
   useEffect(() => {
     const fetchData = async () => {
       try {

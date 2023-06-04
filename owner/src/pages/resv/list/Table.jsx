@@ -65,7 +65,6 @@ const ResvTable = () => {
       dataIndex: "reservationDate",
       key: "reservationDate",
       align: 'center',
-  
       render: reservationDate => {
         return reservationDate.slice(0, 4) + '년' + reservationDate.slice(5, 7) + '월' + reservationDate.slice(8, 10) + '일' 
       }

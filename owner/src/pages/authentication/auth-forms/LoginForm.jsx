@@ -41,6 +41,7 @@ const LoginForm = () => {
             Modal.success({
               title: '로그인 성공',
               content: '로그인에 성공하였습니다.',
+              okText: "닫기"
             });
 
             navigate('/main', { replace: true });
