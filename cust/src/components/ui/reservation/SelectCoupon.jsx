@@ -40,7 +40,7 @@ function SelectCoupon({couponId, setCouponId, setCouponDiscountValue}) {
 
   return (
     <Select bordered={false} size='large' value={couponId} onChange={handleCouponSelect} style={{ width: '150px' }}>
-      <Option value={-1}>사용 안함</Option>
+      <Option value={-1}>사용 안 함</Option>
       {
         couponList && couponList.map( coupon => (
           <Option key={coupon.couponId} value={coupon.couponId}>{coupon.couponName}</Option>

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from 'styled-components';
 
-const TitleH2 = styled.h2`
+const H2 = styled.h2`
   font-size: 26px;
   font-weight: 500;
   margin: 60px 0 60px 0;
@@ -14,7 +14,7 @@ const TitleH2 = styled.h2`
 
 function PageSubTitle({title}) {
   return (
-    <TitleH2>{title}</TitleH2>
+    <H2>{title}</H2>
   );
 }
 

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import moment from 'moment';
 import dayjs from 'dayjs';
-import styles from '../../../assets/css/pages/reservation/ResvAdd.module.css';
+import styles from '../../../assets/css/pages/reservation/AddResv.module.css';
 import '../../../assets/css/ui/reservation/Calendar.css'; // css import
 import Counter from '../../ui/reservation/Counter';
 import TimePicker from '../../ui/reservation/TimePicker';
@@ -33,7 +33,7 @@ const initialResvInfo = { // 초기값을 가지는 객체
 function AddResv() {
   const { state } = useLocation();
   if(state)
-    console.log('[넘어온 state] 지점id :' + state.branchId + ' / 매장id : ' + state.shopId);
+    console.log('[넘어온 state] 지점id:' + state.branchId + ' / 매장id: ' + state.shopId);
   
   const [locationState, setLocationState] = useState(state === null ? null : state); // 받아온 state 값을 useState로 관리
 
@@ -46,8 +46,8 @@ function AddResv() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [branchId, setBranchId] = useState(state ? state.branchId : 1); // 선택된 지점 id, state가 있으면 초기값을 state의 branchId로 설정
-  const [shopId, setShopId] = useState(state ? state.shopId : 0); // 선택된 매장 id, state가 있으면 초기값을 state의 shopId로 설정
+  const [branchId, setBranchId] = useState(1); // 선택된 지점 id, state가 있으면 초기값을 state의 branchId로 설정
+  const [shopId, setShopId] = useState(0); // 선택된 매장 id, state가 있으면 초기값을 state의 shopId로 설정
   initialResvInfo.shopId = shopId; // 초기값의 shopId 설정
 
   const [selectedDate, setSelectedDate] = useState(moment(new Date()).format("YYYY-MM-DD")); // 선택된 날짜

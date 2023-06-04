@@ -54,6 +54,7 @@
 
 .react-calendar__navigation button {
   width: 50px;
+  font-size: var(--input-fontSize);
   background: none;
 }
 

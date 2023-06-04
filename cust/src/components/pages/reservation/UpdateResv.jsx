@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Calendar from 'react-calendar';
 import moment from 'moment';
 import dayjs from 'dayjs';
-import styles from '../../../assets/css/pages/reservation/ResvAdd.module.css';
+import styles from '../../../assets/css/pages/reservation/AddResv.module.css';
 import '../../../assets/css/ui/reservation/Calendar.css'; // css import
 import Counter from '../../ui/reservation/Counter';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -11,7 +11,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import TimePicker from '../../ui/reservation/TimePicker';
 import { blockCalendar } from '../../../utils/reservation/blockCalendar';
 import PageTitle from '../../ui/PageTitle';
-import { Button } from 'antd';
+import { Button, Select } from 'antd';
+
+const { Option } = Select;
 
 function UpdateResv() {
   const { resvId } = useParams();
@@ -101,18 +103,18 @@ function UpdateResv() {
         <form id={styles.resvForm} className='flex flex-col flex-gap-40'>
           <div id={styles.topWrap} className='flex flex-gap-40'>
             {/* 지점 선택 */}
-            <select disabled>
+            <Select className='select' bordered={false} size='large' value={previousResvInfo.branchName} disabled>
               {
-                previousResvInfo && (<option value={previousResvInfo.branchName}>{previousResvInfo.branchName}</option>)
+                previousResvInfo && (<Option value={previousResvInfo.branchName}>{previousResvInfo.branchName}</Option>)
               }          
-            </select>
+            </Select>
 
             {/* 매장 선택 */}   
-            <select disabled>
+            <Select className='select' bordered={false} size='large' value={previousResvInfo.shopName} disabled>
               {
-                previousResvInfo && (<option value={previousResvInfo.shopName}>{previousResvInfo.shopName}</option>)
+                previousResvInfo && (<Option value={previousResvInfo.shopName}>{previousResvInfo.shopName}</Option>)
               }
-            </select>
+            </Select>
           </div>
         
           <div id={styles.middleWrap} className='grid-2c flex-gap-80'>

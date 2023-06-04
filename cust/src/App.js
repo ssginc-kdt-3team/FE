@@ -52,8 +52,8 @@ function App() {
           <Route path="/shop/:branchId/:shopId" element={<Shop/>}/>
 
           {/* profile */}
-          <Route path="/profile/:userId/" element={<Profile/>}/>
-          <Route path="/profile/:userId/review" element={<Review/>}/>
+          <Route path="/profile" element={<Profile/>}/>
+          <Route path="/profile/review" element={<Review/>}/>
           <Route path="/cash" element={<Cash/>}/>
 
           {/* Charge */}

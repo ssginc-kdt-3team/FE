@@ -27,7 +27,7 @@
   margin: 50px 0 80px 0;
 }
 .modalWrap > div:nth-child(2) > div:nth-child(2) > div {
-  font-size: 22px;
+  font-size: var(--title-fontSize);
   font-weight: 500;
 }
 

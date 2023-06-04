@@ -12,7 +12,7 @@
   align-items: center;
 }
 #topWrap > div:first-child {
-  font-size: 22px;
+  font-size: var(--title-fontSize);
 }
 
 /* 중간 */

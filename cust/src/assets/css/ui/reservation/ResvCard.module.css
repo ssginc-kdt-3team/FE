@@ -12,7 +12,7 @@
 }
 #topWrap > h1:first-child {
   width: 75%;
-  font-size: 22px;
+  font-size: var(--title-fontSize);
 }
 
 /* 하단 */
