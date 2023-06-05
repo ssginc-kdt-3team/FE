@@ -36,78 +36,46 @@ function Filter({state, setState, branchId, setBranchId, shopId, setShopId, resv
   // console.log(state);
   console.log('[Filter] 지점id: ' + branchId + ' / 매장id: ' + shopId  + ' / 매장명: ' + shopName);
 
-  // // 지점 정보, 지점별 매장 정보 가져오기
-  // useEffect(() => {
-  //   const fetchData = async () => { // async는 함수 앞에 붙여서 해당 함수가 Promise를 반환하는 비동기 함수임을 나타냄
-  //     try {
-  //       // if(state !== null) {
-  //       //   setBranchId(state.branchId);
-  //       //   setShopId(state.shopId);
-  //       // }
+  // 지점 정보, 지점별 매장 정보 가져오기
+  useEffect(() => {
+    axios.get('/branch/all')
+    .then(res1 => {
+      console.log(res1.data);
+      setBranchList(res1.data);
 
-  //       const [res1, res2] = await Promise.all([ // await는 Promise가 실행 될 때까지 대기
-  //         axios.get('/branch/all'),
-  //         axios.get(`/branch/shops/${branchId}`),
-  //       ]);
-  //       console.log(res1.data);
-  //       console.log(res2.data);
-  //       setBranchList(res1.data);
-  //       setShopList(res2.data);
-  //       if(state === null) {
-  //         console.log('state 없음');
-  //         setShopId(res2.data[0].id); // shopId를 각 지점별 매장 리스트의 첫 번째 원소로
-  //         setShopName(res2.data[0].name); // 매장명 설정
-  //       }
-  //     }
-  //     catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-  
-  //   fetchData(); // 처음 렌더링 시에도 실행되도록 함
-  // }, [branchId, setShopId, state, setShopName]); // 지점, 매장, 날짜가 변할 때 마다 리렌더링
+      // if(state !== null){
+      //   console.log('state 있음');
+      //   setBranchId(state.branchId);
+      //   // setShopId(state.shopId);
+      // }
 
-  // // 지점 정보, 지점별 매장 정보 가져오기
-  // useEffect(() => {
-  //   axios.get('/branch/all')
-  //   .then(res1 => {
-  //     console.log(res1.data);
-  //     setBranchList(res1.data);
+      return axios.get(`/branch/shops/${branchId}`);
+    })
+    .then(res2 => {
+      console.log(res2.data);
+      setShopList(res2.data);
 
-  //     if(state !== null){
-  //       console.log('state 있음');
-  //       setBranchId(state.branchId);
-  //       // setShopId(state.shopId);
-  //     }
+      if(state === null) {
+        console.log('state 없음');
+        setShopId(res2.data[0].id); // shopId를 각 지점별 매장 리스트의 첫 번째 원소로
+        setShopName(res2.data[0].name); // 매장명 설정
+      }
+      else {
+        // console.log('state 있음');
+        // setShopId(state.shopId); // shopId를 각 지점별 매장 리스트의 첫 번째 원소로
 
-  //     return axios.get(`/branch/shops/${branchId}`);
-  //   })
-  //   .then(res2 => {
-  //     console.log(res2.data);
-  //     setShopList(res2.data);
+        const selectedShop = res2.data.find(shop => shop.id === parseInt(state.shopId)); // 선택된 매장을 shopList에서 찾아서
+        if(selectedShop) {
+          console.log('넘어온 state의 매장 id에 해당하는 매장명')
+          setShopName(selectedShop.name); // 매장명을 설정
+        }
+      }
+    })
+    .catch(err => {
+      console.log(err);
+    })
 
-  //     if(state === null) {
-  //       console.log('state 없음');
-  //       setShopId(res2.data[0].id); // shopId를 각 지점별 매장 리스트의 첫 번째 원소로
-  //       setShopName(res2.data[0].name); // 매장명 설정
-  //     }
-  //     else {
-  //       console.log('state 있음');
-  //       setShopId(state.shopId); // shopId를 각 지점별 매장 리스트의 첫 번째 원소로
-  //       // setShopName(res2.data[0].name); // 매장명 설정
-
-  //       const selectedShop = res2.data.find(shop => shop.id === state.shopId); // 선택된 매장을 shopList에서 찾아서
-  //       if(selectedShop) {
-  //         console.log('넘어온 state의 매장 id에 해당하는 매장명')
-  //         setShopName(selectedShop.name); // 매장명을 설정
-  //       }
-  //     }
-  //   })
-  //   .catch(err => {
-  //     console.log(err);
-  //   })
-
-  // }, [branchId, setBranchId, setShopId, state, setShopName]); // 지점, 매장, 날짜가 변할 때 마다 리렌더링
+  }, [branchId, setBranchId, setShopId, state, setShopName]); // 지점, 매장, 날짜가 변할 때 마다 리렌더링
 
   return (
     <>

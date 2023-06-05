@@ -45,7 +45,7 @@
   flex-direction: column;
 }
 
-#background {
+/* #background {
   width: 350px;
   height: calc(100vh - var(--mob-header-height));
   background-color: #373737;
@@ -63,7 +63,7 @@
   -o-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
   transform: translateY(-100vh);
-}
+} */
 
 /* .open {
   top: 0;
@@ -75,11 +75,11 @@
   bottom: 100vh;
 } */
 .open {
-  transform: translateY(0vh) !important;
+  transform: translateX(0) !important;
 }
 
 .close {
-  transform: translateY(-100vh) !important;
+  transform: translateX(100vw) !important;
 }
 
 @media screen and (max-width: 768px) {

@@ -5,7 +5,7 @@ import { error } from '../../../utils/notification';
 import axios from 'axios';
 import SelectChargeOption from '../../modal/profile/cash/SelectChargeOption';
 import { Button } from 'antd';
-import { cashFormat } from '../../../utils/cashFormat';
+import { cashFormat } from '../../../utils/format';
 
 function CashInfo() {
   const loginInfo = useRecoilValue(loginState);

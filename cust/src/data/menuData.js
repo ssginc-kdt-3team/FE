@@ -16,7 +16,7 @@ const menuData = [
       },
       {
         id: 2,
-        name: '유효한 예약 내역',
+        name: '현재 예약 내역',
         link: "/resv/active"
       }
     ]

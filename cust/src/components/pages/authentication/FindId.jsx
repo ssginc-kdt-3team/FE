@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Button } from 'antd';
 import { isInputEmpty } from '../../../utils/authentication/joinValidation';
+import { onlyNum } from '../../../utils/format';
 
 function FindId() {
   const navigate = useNavigate();
@@ -56,7 +57,15 @@ function FindId() {
 
           <div>
             <label>PHONE</label>
-            <input className={styles.loginInput} type='text' name='phone' value={inputInfo.phone} placeholder='휴대폰 번호' onChange={handleInput}/>
+            <input 
+              className={styles.loginInput} 
+              type='text' 
+              name='phone' 
+              value={inputInfo.phone} 
+              placeholder='휴대폰 번호' 
+              onInput={(e) => { e.target.value = onlyNum(e.target.value) }}
+              onChange={handleInput}
+            />
           </div>
 
           {/* <div className='button mt-45' onClick={() => navigate(`/find-id/result?userId=${result}`)}>아이디 찾기</div> */}

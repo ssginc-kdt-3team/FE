@@ -44,7 +44,7 @@ function Profile() {
               </div>
             </Link>
 
-            <Link to='/' className='box'>
+            <Link to='/point' className='box'>
               <div>
                 포인트 내역
                 <img src={next} alt='move to page'/>
