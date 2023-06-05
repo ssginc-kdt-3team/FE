@@ -127,7 +127,13 @@ function MenuUpdate() {
           <Button type="primary" onClick={showModal}>
             수정하기
           </Button>
-          <Modal title="수정" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+          <Modal
+           title="수정"
+            open={isModalOpen} 
+            onOk={handleOk} 
+            onCancel={handleCancel}
+            okText="네"
+            cancelText="취소">
             <p>메뉴 정보를 수정하시겠습니까?</p>
           </Modal>
         </Form.Item>

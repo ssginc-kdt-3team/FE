@@ -66,7 +66,36 @@ const DepositTable = () => {
         return reservationDate.slice(0, 10) + " " + reservationDate.slice(11, 19)
       }
     },
-    //상태별 태그 추가
+    //예약 상태별 태그 추가 
+    {
+      title: "예약상태",
+      dataIndex: "reservationStatus",
+      key: "reservationStatus",
+      align: 'center',
+      // 상태별 태그
+      render: (text) => {
+        let color, content;
+
+        if (text === "NOSHOW") {
+          color = "volcano";
+          content = "노쇼";
+        } else if (text === "DONE") {
+          color = "green";
+          content = "완료";
+        } else if (text === "CANCEL") {
+          color = "gold";
+          content = "취소";
+        } else if (text === "IMMINENT") {
+          color = "magenta";
+          content = "취소";
+        } else {
+          color = "blue";
+          content = "예약 중";
+        }
+        return <Tag color={color}>{content}</Tag>;
+      }
+      },
+    //예약금 상태별 태그 추가
     {
       title: "예약금상태",
       dataIndex: "depositStatus",

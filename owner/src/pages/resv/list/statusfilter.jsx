@@ -19,5 +19,3 @@ const StatusFilter = ({ onStatusFilter }) => {
 };
 
 export default StatusFilter;
-
-//ResvTable selectedType

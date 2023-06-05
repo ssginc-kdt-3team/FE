@@ -4,8 +4,8 @@ import { axiosWithBaseUrl } from 'App';
 
 
 const Reject = ({id, fetchResvDetail}) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [rejectReason, setRejectReason] = useState(null); // 거절 사유 상태
+  const [isModalOpen, setIsModalOpen] = useState(false);    // 모달 오픈
+  const [rejectReason, setRejectReason] = useState(null);   // 거절 사유 상태
 
   
   const showModal = () => {
@@ -26,8 +26,7 @@ const Reject = ({id, fetchResvDetail}) => {
       .then((res) => {
         console.log(res.data);
         console.log("Reservation rejected");
-        fetchResvDetail();
-        // Perform any necessary actions after rejecting the reservation
+        fetchResvDetail();                        //reject 버튼 누르고 detail fetch 
       })
       .catch((error) => {
         console.log(error);
@@ -46,7 +45,13 @@ const Reject = ({id, fetchResvDetail}) => {
       <Button type="primary" onClick={showModal} style={{ backgroundColor: '#cf1322' }}>
         거절
       </Button>
-      <Modal title="거절" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+      <Modal 
+      title="거절" 
+      open={isModalOpen} 
+      onOk={handleOk} 
+      onCancel={handleCancel}
+      okText="네"
+      cancelText="취소">
         <p>예약 거절 처리하시겠습니까?</p>
         <Select placeholder="거절 사유 선택" onChange={handleRejectReason} style={{ marginTop: '10px', width: '100%' }}>
           {rejectReasons.map((reason) => (
