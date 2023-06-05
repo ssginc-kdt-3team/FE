@@ -99,10 +99,10 @@ function ResvDetail() {
                 <p>예약자 번호: {resv.phoneNumber}</p>
               </li>
               <li style={{ listStyle: "none" }}>
-                <p>예약금: {resv.deposit}</p>
+                <p>예약금: {resv.originValue}</p>
               </li>
               <li style={{ listStyle: "none" }}>
-                <p>위약금: {resv.penalty}</p>
+                <p>위약금: {resv.penaltyValue}</p>
               </li>
             </ul>
           </div>

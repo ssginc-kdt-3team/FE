@@ -5,7 +5,7 @@ import Paging from "components/pagination/Paging";
 import { axiosWithBaseUrl } from "App";
 import Enter from "pages/resv/todayList/Enterbtn";
 import Noshow from "pages/resv/todayList/Noshowbtn";
-import { useSelector } from 'react-redux';                //userSlice의 id 값 가져오기
+import { useSelector } from 'react-redux';               // userSlice의 id 값 가져오기
 
 //오늘 예약 조회 테이블
 const ResvTdTable = () => {

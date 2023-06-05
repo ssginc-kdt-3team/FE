@@ -14,7 +14,6 @@ function FilterTemp({ type, setType, branchId, setBranchId }) {
     setBranchId(e); // branchId 변경
     setType('branch'); // type을 branch로 변경
 
-    // Set the selected branch name in the Form.Item component
     if (selectedBranch) {
       selectedBranch.name = selectedBranch.name || '';
       const input = document.getElementById('branchNameInput');

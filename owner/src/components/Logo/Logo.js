@@ -11,9 +11,9 @@ import { Link } from 'react-router-dom';
 const Logo = () => {
     const theme = useTheme();
     return (
-        <Link to="/"> 
+        // <Link to="/"> 
        <img src={logo} alt="Stafield" style={{ height: 'auto', width: '140px', marginLeft: '0px'}} />
-        </Link>
+        // </Link>
     );
 };
 
