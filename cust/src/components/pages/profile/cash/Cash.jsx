@@ -6,11 +6,12 @@ import { loginState } from '../../../../state/loginState';
 import axios from 'axios';
 import moment from 'moment';
 import Paging from '../../../ui/Paging';
-import CashInfoCard from '../../../ui/profile/cash/CashInfoCard';
+import CashPointInfoCard from '../../../ui/profile/CashPointInfoCard';
 import { Button } from 'antd';
-import TypeFilter from '../../../ui/profile/cash/TypeFilter';
-import DateFilter from '../../../ui/profile/cash/DateFilter';
+import TypeFilter from '../../../ui/profile/TypeFilter';
+import DateFilter from '../../../ui/profile/DateFilter';
 import SelectChargeOption from '../../../modal/profile/cash/SelectChargeOption';
+import { cashFormat } from '../../../../utils/format';
 
 const Ul = styled.ul`
   max-width: 800px;
@@ -90,7 +91,7 @@ function Cash() {
     <>
       <div className='container'>
         <div className='center flex-col'>
-          <PageTitle title={remainedCash.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} type="cash"/>
+          <PageTitle title={cashFormat(remainedCash)} type="cash"/>
           <div className='flex flex-gap-10'>
             <Button className='button buttonReverse button-s' onClick={() => setIsModalOpen(true)} style={buttonStyle}>충전하기</Button>
             <Button type='primary' className='button button-s' style={buttonStyle}>인출</Button>
@@ -112,7 +113,7 @@ function Cash() {
           <Ul className='flex flex-col' style={{ borderTop: '0px solid var(--input-border)' }}>
             {
               cashList && cashList.map( cash => (
-                <CashInfoCard key={cash.id} data={cash} remainedCash={remainedCash}/>
+                <CashPointInfoCard key={cash.id} data={cash} remained={remainedCash} isCash={true}/>
               ))
             }
           </Ul>

@@ -46,8 +46,8 @@ function AddResv() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [branchId, setBranchId] = useState(1); // 선택된 지점 id, state가 있으면 초기값을 state의 branchId로 설정
-  const [shopId, setShopId] = useState(0); // 선택된 매장 id, state가 있으면 초기값을 state의 shopId로 설정
+  const [branchId, setBranchId] = useState(state === null ? 1 : state.branchId); // 선택된 지점 id, state가 있으면 초기값을 state의 branchId로 설정
+  const [shopId, setShopId] = useState(state === null ? 0 : state.shopId); // 선택된 매장 id, state가 있으면 초기값을 state의 shopId로 설정
   initialResvInfo.shopId = shopId; // 초기값의 shopId 설정
 
   const [selectedDate, setSelectedDate] = useState(moment(new Date()).format("YYYY-MM-DD")); // 선택된 날짜

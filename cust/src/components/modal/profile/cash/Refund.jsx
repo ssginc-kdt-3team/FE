@@ -2,7 +2,8 @@ import { Button, Modal } from 'antd';
 import React, { useEffect, useState } from 'react';
 import styles from '../../../../assets/css/modal/Modal.module.css';
 import axios from 'axios';
-import { confirm, error } from '../../../../utils/notification';
+import { confirm, error, success } from '../../../../utils/notification';
+import { cashFormat } from '../../../../utils/format';
 
 // const { confirm } = Modal;
 
@@ -12,6 +13,7 @@ function Refund({isModalOpen, setIsModalOpen, data, remainedCash}) {
       axios.post(`/customer/charge/refund/${data.id}`)
       .then(res => {
         console.log(res);
+        success('환불이 완료되었습니다.', '');
       })
       .catch(err => { // 오류 처리
         console.log(err);
@@ -30,9 +32,9 @@ function Refund({isModalOpen, setIsModalOpen, data, remainedCash}) {
       open={isModalOpen}
     >
       <div id={styles.refundInfoWrap} className='flex flex-col flex-gap-20'>
-        <p><span>충전금 잔액</span>{remainedCash.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</p>
-        <p><span>환불예정 금액</span>{(parseInt(data.price)).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</p>
-        <p><span>환불 후 충전금</span>{(parseInt(remainedCash) - parseInt(data.price)).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</p>
+        <p><span>충전금 잔액</span>{cashFormat(remainedCash)}원</p>
+        <p><span>환불예정 금액</span>{cashFormat(parseInt(data.price))}원</p>
+        <p><span>환불 후 충전금</span>{cashFormat(parseInt(remainedCash) - parseInt(data.price))}원</p>
       </div>
 
       <div id={styles.buttonWrap}>

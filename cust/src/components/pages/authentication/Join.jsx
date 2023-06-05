@@ -5,6 +5,7 @@ import styles from '../../../assets/css/pages/authentication/Join.module.css';
 import { useNavigate } from 'react-router-dom';
 import { isEmailValid } from '../../../utils/authentication/emailValidation';
 import { isInputEmpty, isPasswordValid, checkEmailDup } from '../../../utils/authentication/joinValidation';
+import { onlyNum } from '../../../utils/format';
 import Postcode from '../../popUp/authentication/PostCode';
 import { Button } from 'antd';
 
@@ -149,7 +150,14 @@ function Join() {
           {/* 휴대폰 번호 */}
           <div id={styles.phoneWrap}>
             <label>PHONE</label>
-            <input className={styles.joinInput} name="phone" type='text' placeholder='휴대폰 번호' onChange={handleInput}/>
+            <input 
+              className={styles.joinInput} 
+              name="phone" 
+              type='text' 
+              placeholder='휴대폰 번호' 
+              onInput={(e) => { e.target.value = onlyNum(e.target.value) }} 
+              onChange={handleInput}
+            />
           </div>
 
           {/* 이메일 */}

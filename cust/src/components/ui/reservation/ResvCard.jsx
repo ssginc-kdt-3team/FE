@@ -18,7 +18,7 @@ function ResvCard({data}) {
 
           <div id={styles.bottomWrap}>
             <p>
-              <span>예약 시간</span>{data.expectedDate} {data.expectedTime.slice(0, 5)}
+              <span>예약 시간</span>{data.expectedDate} {data.expectedTime.slice(0, 8)}
             </p>
             
             <p>
