@@ -21,7 +21,7 @@ const ResvList = Loadable(lazy(() => import('../pages/resv/list/index')));
 const ResTdList = Loadable(lazy(() => import('../pages/resv/todayList/index')));
 const DepositTable = Loadable(lazy(() => import('../pages/deposit/Table')));
 const ResvDetail = Loadable(lazy(() => import('../pages/resv/detail/index')));
-const DepositDetail =  Loadable(lazy(() => import('../pages/deposit/detail')));
+const DepositDetail =  Loadable(lazy(() => import('../pages/deposit/Detail')));
 
 
 // ==============================|| MAIN ROUTING ||============================== //

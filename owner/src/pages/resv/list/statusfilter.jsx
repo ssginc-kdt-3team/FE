@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "antd";
+import { Button, Tag } from "antd";
 
 const StatusFilter = ({ onStatusFilter }) => {
   const handleFilterClick = (status) => {
@@ -20,4 +20,4 @@ const StatusFilter = ({ onStatusFilter }) => {
 
 export default StatusFilter;
 
-//ResvTable selectedType
+//ResvTable selectedType이름수정
