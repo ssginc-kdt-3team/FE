@@ -22,6 +22,7 @@ import Profile from "./components/pages/profile/Profile";
 import Cash from "./components/pages/profile/cash/Cash";
 import ChargeResult from "./components/pages/profile/cash/ChargeResult";
 import Point from "./components/pages/profile/Point";
+import Coupon from "./components/pages/profile/Coupon";
 
 function App() {
   return ( // 이 안에 JSX 문법 적용
@@ -57,6 +58,7 @@ function App() {
           <Route path="/profile/review" element={<Review/>}/>
           <Route path="/cash" element={<Cash/>}/>
           <Route path="/point" element={<Point/>}/>
+          <Route path="/coupon" element={<Coupon/>}/>
 
           {/* Charge */}
           <Route path="/chargeResult" element={<ChargeResult/>}/>
