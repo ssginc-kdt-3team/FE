@@ -4,8 +4,8 @@ import styles from '../../../assets/css/modal/Modal.module.css';
 import axios from 'axios';
 import { confirm, error, success } from '../../../utils/notification';
 import SelectCoupon from '../../ui/reservation/SelectCoupon';
-import Point from '../../ui/reservation/Point';
-import { cashFormat } from '../../../utils/cashFormat';
+import ApplyPoint from '../../ui/reservation/ApplyPoint';
+import { cashFormat } from '../../../utils/format';
 import CashInfo from '../../ui/reservation/CashInfo';
 import { useNavigate } from 'react-router-dom';
 
@@ -95,7 +95,7 @@ function Pay({isModalOpen, setIsModalOpen, data, setData, shopName}) {
           </div>
           
           {/* 포인트 */}
-          <Point 
+          <ApplyPoint 
             pointValue={pointValue} 
             setPointValue={setPointValue} 
             initialDeposit={initialDeposit} 

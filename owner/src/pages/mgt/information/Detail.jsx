@@ -27,7 +27,7 @@ function ShopDetail({data}) {
     <>
       {
         data && (
-          <Card style={{ width : '900px'}}
+          <Card style={{ width : '700px'}}
           // 매장명
           title={
             <div style={{ textAlign: "center", marginBottom: "5px" }}>

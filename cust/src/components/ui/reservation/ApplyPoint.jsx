@@ -6,7 +6,7 @@ import { error } from '../../../utils/notification';
 import { Button } from 'antd';
 import styles from '../../../assets/css/modal/Modal.module.css';
 import { canUsePoint, isPointValid } from '../../../utils/reservation/pointValidation';
-import { cashFormat } from '../../../utils/cashFormat';
+import { cashFormat, onlyNum } from '../../../utils/format';
 import { styled } from 'styled-components';
 
 const Span = styled.span`
@@ -15,7 +15,7 @@ const Span = styled.span`
   margin-top: 5px;
 `;
 
-function Point({pointValue, setPointValue, initialDeposit, finalDeposit, isCouponUsed, couponDiscountValue}) {
+function ApplyPoint({pointValue, setPointValue, initialDeposit, finalDeposit, isCouponUsed, couponDiscountValue}) {
   const loginInfo = useRecoilValue(loginState);
 
   const [remainedPoint, setRemainedPoint] = useState(0);
@@ -85,7 +85,7 @@ function Point({pointValue, setPointValue, initialDeposit, finalDeposit, isCoupo
           <input 
             type="text" 
             value={pointValue} 
-            onInput={(e) => { e.target.value = e.target.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1'); }}
+            onInput={(e) => { e.target.value = onlyNum(e.target.value) }}
             onChange={handlePointOnChange} 
             onBlur={handlePointOnBlur}
           />
@@ -97,4 +97,4 @@ function Point({pointValue, setPointValue, initialDeposit, finalDeposit, isCoupo
   );
 }
 
-export default Point;
+export default ApplyPoint;

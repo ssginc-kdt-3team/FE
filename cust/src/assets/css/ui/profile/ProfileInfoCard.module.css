@@ -27,8 +27,8 @@
   font-weight: normal;
   margin: 0;
 }
-#summaryWrap p {
-  margin-bottom: 0;
+#summaryWrap a {
+  margin-top: 16px;
   font-size: var(--title-fontSize);
   color: var(--main);
 }
@@ -40,7 +40,7 @@
   }
 
   /* 요약 정보 */
-#summaryWrap p {
+#summaryWrap a {
   font-size: var(--input-fontSize);
 }
 }

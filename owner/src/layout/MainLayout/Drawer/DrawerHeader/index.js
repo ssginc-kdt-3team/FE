@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -16,7 +17,9 @@ const DrawerHeader = ({ open }) => {
     return (
         <DrawerHeaderStyled theme={theme} open={open}>
             <Stack spacing={0} alignItems="center" justifyContent="center">
+            <Link to="/main"> 
                 <Logo />
+                </Link>
             </Stack>
         </DrawerHeaderStyled>
     );

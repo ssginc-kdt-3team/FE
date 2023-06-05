@@ -4,7 +4,7 @@ import styles from '../../../assets/css/ui/profile/ProfileInfoCard.module.css'
 import axios from 'axios';
 import { useRecoilValue } from 'recoil';
 import { loginState } from '../../../state/loginState';
-import { cashFormat } from '../../../utils/cashFormat';
+import { cashFormat } from '../../../utils/format';
 import next from '../../../assets/images/icons/next.png';
 import { Link } from 'react-router-dom';
 
@@ -55,25 +55,25 @@ function ProfileInfoCard() {
         {/* 충전금 */}
         <div className='center flex-col'>
           <label>충전금</label>
-          <p>{cashFormat(remainedCash)}</p>
+          <Link to='/cash'>{cashFormat(remainedCash)}</Link>
         </div>
         
         {/* 포인트 */}
         <div className='center flex-col'>
           <label>포인트</label>
-          <p>{cashFormat(remainedPoint)}</p>
+          <Link to='/point'>{cashFormat(remainedPoint)}</Link>
         </div>
         
         {/* 쿠폰 */}
         <div className='center flex-col'>
           <label>쿠폰</label>
-          <p>0</p>
+          <Link to='/'>0</Link>
         </div>
         
         {/* 현재 예약 */}
         <div className='center flex-col'>
           <label>현재 예약</label>
-          <p>0</p>
+          <Link to='/resv/active'>0</Link>
         </div>  
       </div>
     </div>

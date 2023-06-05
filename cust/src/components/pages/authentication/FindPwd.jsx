@@ -4,6 +4,7 @@ import styles from '../../../assets/css/pages/authentication/Login.module.css';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'antd';
 import { isInputEmpty } from '../../../utils/authentication/joinValidation';
+import { onlyNum } from '../../../utils/format';
 import axios from 'axios';
 
 function FindPwd() {
@@ -62,7 +63,15 @@ function FindPwd() {
 
           <div>
             <label>PHONE</label>
-            <input className={styles.loginInput} type='text' name='phone' value={inputInfo.phone} placeholder='휴대폰 번호' onChange={handleInput}/>
+            <input 
+              className={styles.loginInput} 
+              type='text' 
+              name='phone' 
+              value={inputInfo.phone} 
+              placeholder='휴대폰 번호' 
+              onInput={(e) => { e.target.value = onlyNum(e.target.value) }}
+              onChange={handleInput}
+            />
           </div>
 
           <Button type='primary' className='button mt-45' onClick={handleFindPwd}>비밀번호 찾기</Button>

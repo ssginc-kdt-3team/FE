@@ -26,6 +26,9 @@ function PageTitle({title, type="default"}) {
     case "cash":
       result = <H1 style={{ marginBottom: '35px' }}>충전금 잔액 <Span>{title}</Span>원</H1>;
       break;
+    case "point":
+      result = <H1>포인트 잔액 <Span>{title}</Span>원</H1>;
+      break;
     default:
       result = <H1 style={{fontWeight: '500'}}>{title}</H1>;
   }

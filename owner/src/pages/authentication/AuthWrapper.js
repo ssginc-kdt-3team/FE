@@ -1,6 +1,6 @@
 //로그인, 회원가입 배경
-
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 // material-ui
 import { Box, Grid } from '@mui/material';
@@ -32,7 +32,9 @@ const AuthWrapper = ({ children }) => (
             {/* <div style={{ marginLeft: '620px'}} > */}
             <div>
              {/* 스타필드 로고 */}
+             <Link to="/"> 
                 <Logo />
+            </Link>
             </div>
             </Grid>
             {/* authcard wrapper */}
