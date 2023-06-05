@@ -90,7 +90,7 @@ function Point() {
         
         {/* 필터 */}
         <Div className='space-between'>
-          <TypeFilter type={type} setType={setType} setCurrentPage={setCurrentPage}/>
+          <TypeFilter type={type} setType={setType} setCurrentPage={setCurrentPage} isCash={false}/>
           <DateFilter dateRange={dateRange} setDateRange={setDateRange} setCurrentPage={setCurrentPage}/>
         </Div>
 

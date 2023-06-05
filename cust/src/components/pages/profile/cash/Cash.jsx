@@ -99,7 +99,7 @@ function Cash() {
           
           {/* 필터 */}
           <Div className='space-between'>
-            <TypeFilter type={type} setType={setType} setCurrentPage={setCurrentPage}/>
+            <TypeFilter type={type} setType={setType} setCurrentPage={setCurrentPage} isCash={true}/>
             <DateFilter dateRange={dateRange} setDateRange={setDateRange} setCurrentPage={setCurrentPage}/>
           </Div>
 
