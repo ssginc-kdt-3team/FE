@@ -7,6 +7,7 @@ export const loginState = atom({
   key: 'loginState',
   default: {
     id: -1,
+    name: '',
     isLoggedin: false
   },
   effects_UNSTABLE: [persistAtom],

@@ -43,7 +43,7 @@ function ProfileInfoCard() {
   return (
     <div id={styles.profileInfoWrap} className='box flex flex-col flex-gap-60'>
       <div className='flex flex-gap-16'>
-        <h1>지수 님</h1>
+        <h1>{loginInfo.name} 님</h1>
         <GradeTag status={grade}/>
       </div>
 

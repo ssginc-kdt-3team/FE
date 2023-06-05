@@ -7,11 +7,19 @@ import close from '../../assets/images/icons/close.png';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import MobNav from './MobNav';
 import SubMenu from './SubMenu';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { loginState } from '../../state/loginState';
 
 function Header() {
-  const loginInfo = useRecoilValue(loginState);
+  const [loginInfo, setLoginInfo] = useRecoilState(loginState);
+
+  const handleLogout = () => {
+    setLoginInfo({
+      id: -1,
+      name: '',
+      isLoggedin: false
+    });
+  }
 
   // 모바일 Nav 상태
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -43,7 +51,8 @@ function Header() {
           <div id={styles.topWrap} className='flex-end'>
             <Link to="/login" style={loginInfo.isLoggedin ? { display: 'none' } : { display: 'block' }}><span>로그인</span></Link>
             <Link to="/join" style={loginInfo.isLoggedin ? { display: 'none' } : { display: 'block' }}><span>회원가입</span></Link>
-            <Link to="/profile" style={loginInfo.isLoggedin ? { display: 'block' } : { display: 'none' }}><span>{loginInfo.id}번 님</span></Link>
+            <Link to="/profile" style={loginInfo.isLoggedin ? { display: 'block' } : { display: 'none' }}><span>{loginInfo.name} 님</span></Link>
+            <span onClick={handleLogout} style={loginInfo.isLoggedin ? { display: 'block', cursor: 'pointer' } : { display: 'none' }}>로그아웃</span>
           </div>
 
           {/* 로고 */}

@@ -43,6 +43,7 @@ function Login() {
           else {
             setLoginState({ // 로그인된 상태로 변경
               id: res.data.id,
+              name: res.data.name,
               isLoggedin: true
             });
             // setUserInfo({ // 사용자 정보 저장

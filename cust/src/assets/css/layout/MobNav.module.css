@@ -6,7 +6,7 @@
   /* opacity: 0.2; */
   /* margin: 0; */
   margin: var(--mob-header-height) 0 0 0;
-  padding: 20px;
+  padding: 32px 20px;
   /* box-sizing: border-box; */
   
   position: absolute;
@@ -24,9 +24,9 @@
 }
 
 /* 사용자명/로그인 */
-#mobNavWrap > div {
-  padding-bottom: 24px;
-}
+/* #mobNavWrap > div {
+  padding-bottom: 32px;
+} */
 /* 사용자명 */
 /* #mobNavWrap > div > span {
   padding-left: 2px;
@@ -37,6 +37,11 @@
   padding-left: 2px;
   color: var(--main);
 } */
+
+/* 로그아웃 */
+#mobNavWrap > div > span:last-child {
+  color: var(--description);
+}
 
 /* 메뉴 */
 #mobNavWrap > ul:last-child {

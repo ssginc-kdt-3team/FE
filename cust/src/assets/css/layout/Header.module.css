@@ -12,14 +12,14 @@
   height: 15%;
   padding: 0 20px;
 }
-#topWrap > a {
+#topWrap > a, #topWrap > span {
   display: flex;
   align-items: center;
   font-size: 13px;
   color: var(--topMenu-font);
 }
 /* 구분선 */
-#topWrap > a:first-child::after {
+#topWrap > a:first-child::after, #topWrap > span:last-child::before {
   width: 1px;
   height: 10px;
   content: "";
