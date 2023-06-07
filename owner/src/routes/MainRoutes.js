@@ -5,6 +5,8 @@ import checkedLoggedIn from '../store/lib/checkedLoggedIn';
 import Loadable from 'components/Loadable';
 import MainLayout from 'layout/MainLayout';
 
+// import MgtInfo from '../pages/mgt/information/index';
+
 // render - 동적으로 모듈 불러오기(비동기적)
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard')));
 const MyProfile = Loadable(lazy(() => import('../pages/profile/Myprofile')));

@@ -68,3 +68,4 @@ function MgtInfo() {
   );
 }
 
+export default MgtInfo;

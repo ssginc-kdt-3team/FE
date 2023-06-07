@@ -4,7 +4,7 @@ import { Card, Typography, Button } from 'antd';
 import { axiosWithBaseUrl } from 'App';
 import { useSelector } from 'react-redux';
 
-function MyProfile() {
+function UserProfile() {
   const id = useSelector((state) => state.user.id);
   const [ownerData, setOwnerData] = useState(null);
   const navigate = useNavigate();
@@ -15,6 +15,7 @@ function MyProfile() {
         const response = await 
         axiosWithBaseUrl.get(`/owner/detail/${id}`);
         setOwnerData(response.data);
+        console.log(response.data);
       } catch (error) {
         console.log(error);
       }
@@ -29,7 +30,7 @@ function MyProfile() {
         <Card
           title={
             <div style={{ textAlign: 'center', marginBottom: '5px' }}>
-              <Typography.Title level={4}>마이 프로필</Typography.Title>
+              <Typography.Title level={4}>{ownerData.ownerName} 점주님 환영합니다.</Typography.Title>
             </div>
           }
           style={{ width: 400, marginTop: '20px' }}
@@ -39,13 +40,6 @@ function MyProfile() {
           {/* <p>주소: {ownerData.ownerAddress}</p> */}
           {/* <p>번호: {ownerData.ownerPhone}</p>
           <p>생년월일: {ownerData.ownerBirthday}</p> */}
-          <Button
-            type='primary'
-            onClick={() => navigate(`/profile/update/${id}`)}
-            style={{ backgroundColor: '#cf1322', marginTop: '10px' }}
-          >
-            수정하기
-          </Button>
         </Card>
       )}
     </div>
@@ -53,4 +47,4 @@ function MyProfile() {
 }
 
 
-export default MyProfile
+export default UserProfile;

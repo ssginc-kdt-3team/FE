@@ -10,8 +10,7 @@
 // const IncomeAreaChart = () => {
 //   const id = useSelector((state) => state.user.id);
 //   const [monthlyresv, setMonthlyResv] = useState([]);
-
-//   const data = {
+//   const [data, setData] = useState({
 //     labels: ["분기", "지난달", "이번달"],
 //     datasets: [
 //       {
@@ -33,9 +32,8 @@
 //         borderWidth: 1,
 //       },
 //     ],
-//   };
-
-//   const options = {
+//   });
+//   const [options, setOptions] = useState({
 //     scales: {
 //       xAxes: {
 //         stacked: true,
@@ -44,9 +42,8 @@
 //         stacked: true,
 //       },
 //     },
-//   };
+//   });
 
-//   //점주 id - 예약 데이터 가져옴 ()
 //   useEffect(() => {
 //     axiosWithBaseUrl
 //       .get(`/owner/main/reservation/${id}`)
@@ -58,6 +55,22 @@
 //         console.log(err);
 //       });
 //   }, [id]);
+
+//   useEffect(() => {
+//     // 데이터와 옵션을 업데이트
+//     setData((prevData) => ({
+//       ...prevData,
+//       datasets: prevData.datasets.map((dataset) => ({
+//         ...dataset,
+//         data: [/* update data here based on monthlyresv */],
+//       })),
+//     }));
+
+//     setOptions((prevOptions) => ({
+//       ...prevOptions,
+//       // 업데이트할 옵션 설정
+//     }));
+//   }, [monthlyresv]);
 
 //   return (
 //     <div style={{ width: "500px", height: "500px", margin: "0 auto" }}>
