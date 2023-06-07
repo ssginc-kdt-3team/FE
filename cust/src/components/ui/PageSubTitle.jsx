@@ -2,12 +2,13 @@ import React from "react";
 import styled from 'styled-components';
 
 const H2 = styled.h2`
-  font-size: 26px;
+  height: var(--pageTitle-fontSize);
+  font-size: var(--pageTitle-fontSize);
+  line-height: var(--pageTitle-fontSize);
   font-weight: 500;
   margin: 60px 0 60px 0;
 
   @media screen and (max-width: 768px) {
-    font-size: 24px;
     margin: 40px 0 40px 0;
   }
 `;

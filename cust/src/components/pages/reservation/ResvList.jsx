@@ -21,7 +21,7 @@ function ResvList({isActiveList}) {
   // 사용자 예약 내역 호출
   // 첫 렌더링 때 데이터 가져온다
   useEffect(() => {
-    axiosWithToken.get(`/customer/reservation/${isActiveList ? 'listActive' : 'listAll'}/${userId}/${currentPage}`) // 2는 사용자 id
+    axios.get(`/customer/reservation/${isActiveList ? 'listActive' : 'listAll'}/${userId}/${currentPage}`) // 2는 사용자 id
     .then(res => {
       console.log(res.data);
       setResvList(res.data.content); // 
