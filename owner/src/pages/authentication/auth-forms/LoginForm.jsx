@@ -27,6 +27,7 @@ const LoginForm = () => {
         })
         .then((res) => {
           console.log(res.data.id);
+          console.log(res.data.name);
           console.log(res.data);
           if (res.data === '') {
             Modal.error({
@@ -35,7 +36,7 @@ const LoginForm = () => {
             });
           } else {
 
-            dispatch(setUser({ id: res.data.id, username: res.data.name }));
+            dispatch(setUser({ id: res.data.id, name: res.data.name }));
             dispatch(setLoggedIn(true));
 
             Modal.success({

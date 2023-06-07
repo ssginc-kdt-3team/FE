@@ -83,7 +83,7 @@ const Join = () => {
       .post('http://localhost:8080/owner/join', data)
       .then((res) => {
         console.log(res.data);
-        navigate('/login');
+        navigate('/');
       })
       .catch((err) => {
         console.log(err);

@@ -34,8 +34,9 @@ function ShopAdd() {
   const [openTime, setOpenTime] = useState(dayjs('12:00', format));
   const [closeTime, setCloseTime] = useState(dayjs('12:00', format));
   const [openDay, setOpenDay] = useState(dayjs());
+
   const [photos, setPhotos] = useState([]);                              //shopImg
-  const [businessPhotos, setBusinessPhotos] = useState([]);              //businessImg
+  const [businessPhotos, setBusinessPhotos] = useState([]);   //businessImg
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
   const formRef = useRef(null);
@@ -55,8 +56,8 @@ function ShopAdd() {
       businessCeo: businessCeo,
       businessNumber: businessNumber,
       orderCloseTime: orderCloseTime.format(format),
-      ownerId: id, // ownerId
-      branchId: branchId, // branchId
+      ownerId: id,          // ownerId
+      branchId: branchId,    // branchId
     };
 
     // formData > shopData, shopImg, businessImg
@@ -210,6 +211,7 @@ function ShopAdd() {
         <Form.Item label="마감시간" name="closeTime" required style={{ width: 'calc(160% - 0px)'}}>
           <TimePicker format={format} value={closeTime} onChange={setCloseTime} />
         </Form.Item>
+
         <Form.Item
           label="주문마감시간"
           name="orderCloseTime"
@@ -229,6 +231,7 @@ function ShopAdd() {
         >
         <TimePicker format={format} value={orderCloseTime} onChange={setOrderCloseTime} />
       </Form.Item>
+
       {/* 사진 업로드 */}
       <Form.Item
           label="매장 사진"
@@ -245,7 +248,7 @@ function ShopAdd() {
             name="photos"
             action="/upload.do"
             listType="picture-card"
-            beforeUpload={() => false} // Disable automatic upload
+            beforeUpload={() => false}  // 자동 업로드 방지
             onChange={handleFileChange}
             fileList={photos}
           >
@@ -287,7 +290,7 @@ function ShopAdd() {
             name="businessPhotos"
             action="/upload.do"
             listType="picture-card"
-            beforeUpload={() => false} // Disable automatic upload
+            beforeUpload={() => false} // 자동 업로드 방지
             onChange={handleFileChange}
             fileList={businessPhotos}
           >
@@ -299,11 +302,21 @@ function ShopAdd() {
           </Form.Item>
 
         <Form.Item>
-          <Button type="primary" onClick={handleSubmit}  style={{ backgroundColor: '#cf1322', justifyContent: 'center'  }}>
+          <Button 
+          type="primary" 
+          onClick={showModal}  
+          style={{ backgroundColor: '#cf1322', 
+          justifyContent: 'center' }}>
             등록하기
           </Button>
 
-          <Modal title="등록" visible={isModalOpen} onOk={handleSubmit} onCancel={handleCancel}>
+          <Modal 
+          title="매장등록" 
+          okText="네"
+          cancelText="취소"
+          visible={isModalOpen}
+          onOk={handleSubmit} 
+          onCancel={handleCancel}>
             <p>매장을 등록하시겠습니까?</p>
           </Modal>
         </Form.Item>

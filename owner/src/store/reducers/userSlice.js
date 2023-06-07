@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const userInitialState  = {
     id:'',
-    username: ''
+    name: ''
 };
 
 //createSlice : reducer, action 생성 (둘을 캡슐화한 버전이 createSlice)
@@ -13,9 +13,11 @@ const userSlice = createSlice({
       setUser: (state, action) => {
         console.log(state);
         state.id = action.payload.id;
+        state.name = action.payload.name;
       },
       clearUser: (state) => {
         state.id = '';
+        state.name = '';
         console.log(state);
       },
     },
