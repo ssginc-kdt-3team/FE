@@ -35,7 +35,10 @@ function AddResv() {
   if(state)
     console.log('[넘어온 state] 지점id:' + state.branchId + ' / 매장id: ' + state.shopId);
   
-  const [locationState, setLocationState] = useState(state === null ? null : state); // 받아온 state 값을 useState로 관리
+  // const [locationState, setLocationState] = useState(state === null ? null : state); // 받아온 state 값을 useState로 관리
+  // setLocationState(null);
+  
+  const [isFromShop, setIsFromShop] = useState(state === null ? false : true); // 받아온 state 값에 따라 구분
 
   const loginInfo = useRecoilValue(loginState);
   initialResvInfo.userId = loginInfo.id; // 초기값의 userId 설정
@@ -49,6 +52,7 @@ function AddResv() {
   const [branchId, setBranchId] = useState(state === null ? 1 : state.branchId); // 선택된 지점 id, state가 있으면 초기값을 state의 branchId로 설정
   const [shopId, setShopId] = useState(state === null ? 0 : state.shopId); // 선택된 매장 id, state가 있으면 초기값을 state의 shopId로 설정
   initialResvInfo.shopId = shopId; // 초기값의 shopId 설정
+  // state = null;
 
   const [selectedDate, setSelectedDate] = useState(moment(new Date()).format("YYYY-MM-DD")); // 선택된 날짜
 
@@ -120,8 +124,9 @@ function AddResv() {
           <form id={styles.resvForm} className='flex flex-col flex-gap-40'>
             <div id={styles.topWrap} className='flex flex-gap-40'>
               <Filter 
-                state={locationState} 
-                setState={setLocationState}
+                state={state}
+                isFromShop={isFromShop} 
+                setIsFromShop={setIsFromShop}
                 branchId={branchId} 
                 setBranchId={setBranchId} 
                 shopId={shopId} 

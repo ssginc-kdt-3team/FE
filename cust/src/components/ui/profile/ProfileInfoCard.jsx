@@ -11,20 +11,28 @@ import { Link } from 'react-router-dom';
 function ProfileInfoCard() {
   const loginInfo = useRecoilValue(loginState);
 
+  const [grade, setGrade] = useState(''); // 충전금 현황
   const [remainedCash, setRemainedCash] = useState(0); // 충전금 현황
   const [remainedPoint, setRemainedPoint] = useState(0); // 포인트 현황
+  const [coupon, setCoupon] = useState(0); // 쿠폰 현황
+  const [activeResv, setActiveResv] = useState(0); // 현재 예약 현황
 
   useEffect(() => {
     axios.all([
+      axios.get(`customer/grade/${loginInfo.id}`), // 등급
       axios.get(`/customer/charge/check/${loginInfo.id}`), // 층전금 현황
       axios.get(`/customer/point/check/${loginInfo.id}`), // 포인트 현황
+      axios.get(`customer/coupon/${loginInfo.id}`), // 쿠폰 현황
+      axios.get(`/customer/reservation/listActive/${loginInfo.id}/1`), // 현재 예약 현황
       // axios.get(url3)
     ])
-    .then(axios.spread((res1, res2) => {
+    .then(axios.spread((res1, res2, res3, res4, res5) => {
       console.log(res1);
-      setRemainedCash(res1.data.value);
-      console.log(res2);
-      setRemainedPoint(res2.data.value);
+      setGrade(res1.data.name);
+      setRemainedCash(res2.data.value);
+      setRemainedPoint(res3.data.value);
+      setCoupon(res4.data.length);
+      setActiveResv(res5.data.totalElements);
     }))
     .catch(err => {
       console.log(err);
@@ -35,8 +43,8 @@ function ProfileInfoCard() {
   return (
     <div id={styles.profileInfoWrap} className='box flex flex-col flex-gap-60'>
       <div className='flex flex-gap-16'>
-        <h1>지수 님</h1>
-        <GradeTag status='Gold'/>
+        <h1>{loginInfo.name} 님</h1>
+        <GradeTag status={grade}/>
       </div>
 
       {/* <div className='flex flex-gap-32'>
@@ -67,13 +75,13 @@ function ProfileInfoCard() {
         {/* 쿠폰 */}
         <div className='center flex-col'>
           <label>쿠폰</label>
-          <Link to='/'>0</Link>
+          <Link to='/coupon'>{coupon}</Link>
         </div>
         
         {/* 현재 예약 */}
         <div className='center flex-col'>
           <label>현재 예약</label>
-          <Link to='/resv/active'>0</Link>
+          <Link to='/resv/active'>{activeResv}</Link>
         </div>  
       </div>
     </div>

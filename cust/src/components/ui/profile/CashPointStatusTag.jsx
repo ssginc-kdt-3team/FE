@@ -8,9 +8,9 @@ const TAG = styled(Tag)`
   padding: 3px 7px;
 `;
 
-function CashStatusTag({status}) {
+function CashStatusTag({status, isCash}) {
   return (
-    <TAG color={status ? 'blue' : 'green'}>{status ? '충전' : '사용'}</TAG>
+    <TAG color={status ? 'blue' : 'green'}>{status ? isCash ? '충전' : '적립' : '사용'}</TAG>
   );
 }
 

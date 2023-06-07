@@ -2,26 +2,38 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from '../../assets/css/layout/MobNav.module.css';
 import menuData from "../../data/menuData";
-import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { loginState } from '../../state/loginState';
 import MobNavMenu from '../ui/MobNavMenu';
 
 function MobNav({isNavOpen, setIsNavOpen}) {
-  const loginInfo = useRecoilValue(loginState);
+  const [loginInfo, setLoginInfo] = useRecoilState(loginState);
+
+  const handleLogout = () => {
+    setLoginInfo({
+      id: -1,
+      name: '',
+      isLoggedin: false
+    });
+  }
 
   return (
     <>
       <div id={styles.mobNavWrap} className={isNavOpen ? styles.open : styles.close}>
-        <div>
-          <Link 
-            to={loginInfo.isLoggedin ? `/profile/${loginInfo.id}` : '/login'} 
-            onClick={() => setIsNavOpen(false)}
-            style={loginInfo.isLoggedin ? { paddingLeft: '2px', fontSize: '24px' } : { paddingLeft: '2px', color: 'var(--main)' }}
-          >
-            {loginInfo.isLoggedin ? loginInfo.id : '로그인'}
-          </Link>
-          {/* { loginInfo.isLoggedin ? <span>{loginInfo.id}</span> : <Link to='/login' onClick={() => setIsNavOpen(false)}>로그인</Link> } */}
-          {loginInfo.isLoggedin ? ' 번 님 환영합니다!' : '이 필요합니다.'}
+        <div className='space-between' style={{ padding: '0 2px 32px 2px' }}>
+          <span>
+            <Link 
+              to={loginInfo.isLoggedin ? `/profile/` : '/login'} 
+              onClick={() => setIsNavOpen(false)}
+              style={{ padding: '0 2px', fontSize: '16px', color: 'var(--main)' }}
+            >
+              {loginInfo.isLoggedin ? loginInfo.name : '로그인'}
+            </Link>
+            {/* { loginInfo.isLoggedin ? <span>{loginInfo.id}</span> : <Link to='/login' onClick={() => setIsNavOpen(false)}>로그인</Link> } */}
+            {loginInfo.isLoggedin ? ' 님 환영합니다!' : '이 필요합니다.'}
+          </span>
+
+          <span onClick={handleLogout}>로그아웃</span>
         </div>
         
         <ul>
