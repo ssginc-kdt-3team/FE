@@ -36,6 +36,11 @@
   --info-fontSize: 12px;
 
 
+  /* device */
+  --device-width-sm: 800px;
+  --device-width-m: 992px;
+  --device-width-ml: 1024px;
+  --device-width-l: 1200px;
 
   /* resvForm */
   --resvForm-max-width: 1024px;

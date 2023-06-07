@@ -23,30 +23,30 @@ const menuData = [
   },
   {
     id: 3,
-    name: "매장",
+    name: "매장 안내",
     link: "/branch"
 
   },
   {
     id: 4,
-    name: "이용 안내",
+    name: "예약 안내",
     link: "/",
-    subMenu : [
-      {
-        id: 1,
-        name: '예약 서비스 안내',
-        link: "/"
-      },
-      {
-        id: 2,
-        name: '리워드 안내',
-        link: "/"
-      }
-    ]
+    // subMenu : [
+    //   {
+    //     id: 1,
+    //     name: '예약 서비스 안내',
+    //     link: "/"
+    //   },
+    //   {
+    //     id: 2,
+    //     name: '리워드 안내',
+    //     link: "/"
+    //   }
+    // ]
   },
   {
     id: 5,
-    name: "FAQ",
+    name: "리워드 안내",
     link: "/"
   }
 ]
