@@ -10,7 +10,7 @@ const DashboardDefault = Loadable(lazy(() => import('pages/dashboard')));
 const MyProfile = Loadable(lazy(() => import('../pages/profile/Myprofile')));
 const ProfileUpdate = Loadable(lazy(() => import('../pages/profile/Update')));
 const ShopAdd = Loadable(lazy(() => import('../pages/shop/Add')));
-const MgtInfo = Loadable(lazy(() => import('../pages/mgt/information/Index')));
+const MgtInfo = Loadable(lazy(() => import('../pages/mgt/information/index')));
 const MgtReview = Loadable(lazy(() => import('../pages/mgt/review/List')));
 const MenuReg = Loadable(lazy(() => import('../pages/mgt/menu/Add')));
 const MgtInfoUpdate = Loadable(lazy(() => import('../pages/shop/Update')));

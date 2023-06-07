@@ -148,7 +148,7 @@ function ShopAdd() {
         {/* 지점선택 필터 css 추가하기*/}
         <div style={{ display: 'flex', alignItems: 'justifybetween',  marginleft: '50px' }}>
         <p style={{ marginLeft: '0px' }} >입점하실 지점을 선택해주세요.</p>
-          <FilterTemp branchId={branchId} handleBranchSelect={handleBranchSelect} style={{ width: '30px' }}/>
+          <FilterTemp branchname={branchId} handleBranchSelect={handleBranchSelect} style={{ width: '30px' }}/>
         </div>
 
         <Form.Item label="지점id" name="branchId" required hidden>
@@ -255,6 +255,7 @@ function ShopAdd() {
             </div>
           </Upload>
         </Form.Item>
+        
         <Form.Item label="사업주 이름" name="businessCeo" required style={{ width: 'calc(200% - 0px)'}}>
           <Input value={businessCeo} onChange={(e) => setBusinessCeo(e.target.value)} />
         </Form.Item>
@@ -296,6 +297,7 @@ function ShopAdd() {
             </div>
           </Upload>
           </Form.Item>
+
         <Form.Item>
           <Button type="primary" onClick={handleSubmit}  style={{ backgroundColor: '#cf1322', justifyContent: 'center'  }}>
             등록하기

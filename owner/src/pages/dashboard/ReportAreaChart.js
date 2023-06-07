@@ -94,7 +94,7 @@ const ReportAreaChart = () => {
 
     const [series] = useState([
         {
-            name: 'Series 1',
+            name: 'Series 2',
             data: [58, 115, 28, 83, 63, 75, 35, 55]
         }
     ]);
