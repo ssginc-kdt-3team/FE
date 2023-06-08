@@ -63,7 +63,7 @@ const DashboardDefault = () => {
                   <Typography variant="h6" color="textSecondary">
                     {`이번 달 : ${currentDate.slice(0, 6)}`}
                   </Typography>
-                  <Typography variant="h5">총: 100건</Typography>
+                  {/* <Typography variant="h5">총: 100건</Typography> */}
                 </Stack>
               </Box>
               <IncomeAreaChart />

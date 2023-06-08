@@ -14,9 +14,14 @@ const barChartOptions = {
   chart: {
     type: "bar",
     height: 365,
+    // width: 500,
     stacked: true,
     toolbar: {
       show: false,
+    },
+    stroke: {
+      height:1,
+      colors: ['#fff']
     },
   },
   plotOptions: {
@@ -35,6 +40,7 @@ const barChartOptions = {
     },
     axisTicks: {
       show: false,
+      width: 8, 
     },
   },
   yaxis: {
@@ -47,33 +53,39 @@ const barChartOptions = {
 
 const MonthlyBarChart = () => {
   const theme = useTheme();
-  const id = useSelector((state) => state.user.id); // 점주 id
-  const [monthlyresvData, setMonthlyResvData] = useState({
-    cancelValue: "",
-    doneValue: "",
-    noShowValue: "",
-    whole: "",
-  });
-  const { primary, secondary } = theme.palette.text;
+  const id = useSelector((state) => state.user.id);              // 점주 id
+  // const [monthlyresvData, setMonthlyResvData] = useState({
+  //   doneValue: '',
+  //   cancelValue: '',
+  //   noShowValue: '',
+  //   whole: '',
+  // });
+  // const { primary, secondary } = theme.palette.text;
+  const { secondary } = theme.palette.text;
   const info = theme.palette.info.light;
-  const [currentDate, setCurrentDate] = useState("");
+  const [monthlyresv, setMonthlyResv] = useState([]);
+  const [currentDate, setCurrentDate] = useState('');
+  //y축 데이터
   const [series, setSeries] = useState([
     {
-      name: "취소",
-      data: 'cancelValue',
+      name: "완료",
       group: "resv",
+      data: 'doneValue',
     },
     {
       name: "노쇼",
-      data: 'noShowValue',
       group: "resv",
+      data: 'noShowValue'
     },
     {
-      name: "완료",
-      data: 'doneValue',
+      name: "취소",
       group: "resv",
+      data: 'cancelValue',
     },
-  ]); // y축 data
+    {
+      data: 'whole'
+    }
+  ]); 
   const [options, setOptions] = useState(barChartOptions);
 
   // 점주 id - 월별 데이터 가져옴
@@ -82,7 +94,7 @@ const MonthlyBarChart = () => {
       .get(`/owner/main/reservation/${id}`)
       .then((res) => {
         console.log(res.data);
-        setMonthlyResvData(res.data);
+        setMonthlyResv(res.data); 
       })
       .catch((err) => {
         console.log(err);
@@ -90,8 +102,14 @@ const MonthlyBarChart = () => {
   }, [id]);
 
   useEffect(() => {
-    const { cancelValue, doneValue, noShowValue, whole } = monthlyresvData;
-    const monthLabels = ['분기', '지난달', '이번달'];
+    // const { cancelValue, doneValue, noShowValue, whole } = monthlyresvData;
+    const monthLabels = ['이번달', '지난달', '분기'];
+    if (monthlyresv.length > 0) {
+    const doneData = monthlyresv.map((resv) => parseInt(resv.doneValue));
+    const noshowData = monthlyresv.map((resv) => parseInt(resv.noShowValue));
+    const cancelData = monthlyresv.map((resv) => parseInt(resv.cancelValue));
+    const wholeData = monthlyresv.map((resv) => parseInt(resv.whole));
+    // const monthLabels = monthlyresv.map((resv) => parseInt(resv));
 
     setOptions((prevState) => ({
       ...prevState,
@@ -109,13 +127,17 @@ const MonthlyBarChart = () => {
       },
     }));
 
-    setSeries((prevState) => {
-      prevState[0].data = [doneValue];
-      prevState[1].data = [noShowValue];
-      prevState[2].data = [cancelValue];
+    setSeries(
+      [ {data:doneData}, {data:noshowData}, {data:cancelData}], 
+      (prevState) => {
+      prevState[0].data = [doneData];
+      prevState[1].data = [noshowData];
+      prevState[2].data = [cancelData];
       return [...prevState];
     });
-  }, [info, secondary, monthlyresvData]);
+  }
+  }, [info, secondary, monthlyresv]);
+
 
   return (
     <>

@@ -79,7 +79,6 @@ const MonthlyDepositChart = () => {
     const monthLabels = ['Last 3 Months', 'Last 2 Months', 'Last Month', 'This Month'];
     const penaltyData = [last3MonthPenalty, last2MonthPenalty, lastMonthPenalty, thisMonthPenalty];
 
-
     const today = new Date();
     const formattedDate = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
     setCurrentDate(formattedDate);
