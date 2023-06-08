@@ -3,7 +3,7 @@ import { cashFormat } from '../../../utils/format';
 
 function CouponCard({data}) {
   return (
-    <li className='box'>
+    <li className='box shadow-box'>
       <div className='space-between'>
         <h3>{data.couponName}</h3>
         <span style={{ color: 'var(--description)'}}>{data.couponCode}</span>

@@ -7,7 +7,7 @@ function ShopInfoCardR({data}) {
     <>
       {
         data && (
-          <div id={styles.shopInfoWrap} className='box flex flex-col flex-gap-20'>
+          <div id={styles.shopInfoWrap} className='box shadow-box flex flex-col flex-gap-20'>
             <div id={styles.topWrap}>매장 정보</div>
 
             <div id={styles.bottomWrap}>

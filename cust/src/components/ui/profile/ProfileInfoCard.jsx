@@ -41,7 +41,7 @@ function ProfileInfoCard() {
   }, [loginInfo])
 
   return (
-    <div id={styles.profileInfoWrap} className='box flex flex-col flex-gap-60'>
+    <div id={styles.profileInfoWrap} className='box shadow-box flex flex-col flex-gap-60'>
       <div className='flex flex-gap-16'>
         <h1>{loginInfo.name} 님</h1>
         <GradeTag status={grade}/>

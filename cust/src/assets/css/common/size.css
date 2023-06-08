@@ -49,6 +49,10 @@
   /* Calendar */
   --calendar-max-width: calc((var(--resvForm-max-width) - 80px) / 2);
   --calendar-width: calc((var(--resvForm-width) - 80px) / 2);
+
+  /* Carousel */
+  --carousel-max-width: calc(var(--device-width-l) * 0.8);
+  --carousel-width: 65vw;
 }
 
 /* 너비 */

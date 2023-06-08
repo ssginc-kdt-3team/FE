@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import styles from '../../../assets/css/modal/Modal.module.css';
 import axios from 'axios';
 import { confirm, error, success } from '../../../utils/notification';
-import SelectCoupon from '../../ui/reservation/SelectCoupon';
+import CouponSelector from '../../ui/reservation/CouponSelector';
 import ApplyPoint from '../../ui/reservation/ApplyPoint';
 import { cashFormat } from '../../../utils/format';
 import CashInfo from '../../ui/reservation/CashInfo';
@@ -91,7 +91,7 @@ function Pay({isModalOpen, setIsModalOpen, data, setData, shopName}) {
           {/* 쿠폰 */}
           <div className='grid-2c'>
             <p className='flex'><span>쿠폰 할인</span><div>{cashFormat(couponDiscountValue)}원</div></p>
-            <SelectCoupon couponId={couponId} setCouponId={setCouponId} setCouponDiscountValue={setCouponDiscountValue}/>
+            <CouponSelector couponId={couponId} setCouponId={setCouponId} setCouponDiscountValue={setCouponDiscountValue}/>
           </div>
           
           {/* 포인트 */}
