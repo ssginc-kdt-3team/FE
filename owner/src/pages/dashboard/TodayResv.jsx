@@ -38,7 +38,7 @@ const barChartOptions = {
     }
   },
   yaxis: {
-    show: true
+    show: false
   },
   grid: {
     show: true
@@ -100,13 +100,13 @@ const MonthlyBarChart = () => {
             }
           }
         },
-        colors: [info, theme.palette.grey[500]],
+        colors: ['#2E66A1', theme.palette.grey[500]],
         tooltip: {
           theme: 'light'
         }
       }));
 
-      setSeries([{ data: numData },  {  name: '노쇼율', data: noShowData  }]);
+      setSeries([{ data: numData },  {  name: '예상 노쇼율', data: noShowData  }]);
       setTotalNum(total);
     }
   }, [info, secondary, todayresv]);
@@ -115,20 +115,22 @@ const MonthlyBarChart = () => {
     <>
       <Grid item>
         {/* <Typography variant="h4">오늘 예약 현황</Typography> */}
-        <Typography variant="h6" color="textSecondary">
+        {/* <Typography variant="h6" color="textSecondary">
         {`오늘 날짜 : ${currentDate}`}
-        </Typography>
-      </Grid>
+        </Typography> */}
+     
       
-        <Typography variant="h5" style={{marginLeft: '35px', marginTop: '10px'}}>총:{totalNum}건</Typography>
+        <Typography variant="h4" style={{marginLeft: '5px', marginTop: '10px'}}>총:{totalNum}건</Typography>
         
         <div id="chart">
             <ReactApexChart
              options={options} 
              series={series} 
              type="bar" 
-             height={365} />
+             width={800}
+             height={400} />
         </div>
+        </Grid>
     </>
   );
 };

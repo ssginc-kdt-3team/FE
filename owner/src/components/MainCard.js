@@ -19,8 +19,8 @@ const headerSX = {
 const MainCard = forwardRef(
     (
         {
-            border = true,
-            boxShadow,
+            border = false,
+            boxShadow = true,
             children,
             content = true,
             contentSX = {},
@@ -28,8 +28,8 @@ const MainCard = forwardRef(
             divider = true,
             elevation,
             secondary,
-            shadow,
-            sx = {},
+            shadow ,
+            sx = { },
             title,
             codeHighlight,
             ...others
@@ -38,6 +38,7 @@ const MainCard = forwardRef(
     ) => {
         const theme = useTheme();
         boxShadow = theme.palette.mode === 'dark' ? boxShadow || true : boxShadow;
+        
 
         return (
             <Card
@@ -47,9 +48,9 @@ const MainCard = forwardRef(
                 sx={{
                     ...sx,
                     border: border ? '1px solid' : 'none',
-                    borderRadius: 2,
+                    borderRadius: 1,
                     borderColor: theme.palette.mode === 'dark' ? theme.palette.divider : theme.palette.grey.A800,
-                    boxShadow: boxShadow && (!border || theme.palette.mode === 'dark') ? shadow || theme.customShadows.z1 : 'inherit',
+                    boxShadow: boxShadow && (!border || theme.palette.mode === 'dark') ? shadow || '0px 2px 4px rgba(0, 0, 0, 0.1)' : 'inherit',
                     ':hover': {
                         boxShadow: boxShadow ? shadow || theme.customShadows.z1 : 'inherit'
                     },
