@@ -1,82 +1,136 @@
-// import React, { useEffect, useState } from "react";
-// import { useSelector } from "react-redux";
-// import { axiosWithBaseUrl } from "App";
-// import { Bar } from "react-chartjs-2";
-// import { CategoryScale, Chart } from "chart.js";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { axiosWithBaseUrl } from "App";
 
-// Chart.register(CategoryScale);
-// Chart.register({ scale: { type: "linear", display: true, position: "left" } });
+import { useTheme } from "@mui/material/styles";
+import { Typography, Grid } from "@mui/material";
 
-// const IncomeAreaChart = () => {
-//   const id = useSelector((state) => state.user.id);
-//   const [monthlyresv, setMonthlyResv] = useState([]);
-//   const [data, setData] = useState({
-//     labels: ["분기", "지난달", "이번달"],
-//     datasets: [
-//       {
-//         label: "완료",
-//         data: [],
-//         backgroundColor: "rgba(75, 192, 192, 0.2)",
-//         borderWidth: 1,
-//       },
-//       {
-//         label: "노쇼",
-//         data: [],
-//         backgroundColor: "rgba(255, 99, 132, 0.2)",
-//         borderWidth: 1,
-//       },
-//       {
-//         label: "취소",
-//         data: [],
-//         backgroundColor: "rgba(54, 162, 235, 0.2)",
-//         borderWidth: 1,
-//       },
-//     ],
-//   });
-//   const [options, setOptions] = useState({
-//     scales: {
-//       xAxes: {
-//         stacked: true,
-//       },
-//       yAxes: {
-//         stacked: true,
-//       },
-//     },
-//   });
+import ReactApexChart from "react-apexcharts";
 
-//   useEffect(() => {
-//     axiosWithBaseUrl
-//       .get(`/owner/main/reservation/${id}`)
-//       .then((res) => {
-//         console.log(res.data);
-//         setMonthlyResv(res.data);
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//   }, [id]);
+// ==============================||메인3 예약통계 ||============================== //
 
-//   useEffect(() => {
-//     // 데이터와 옵션을 업데이트
-//     setData((prevData) => ({
-//       ...prevData,
-//       datasets: prevData.datasets.map((dataset) => ({
-//         ...dataset,
-//         data: [/* update data here based on monthlyresv */],
-//       })),
-//     }));
+// chart options
+const barChartOptions = {
+  chart: {
+    type: "bar",
+    height: 365,
+    stacked: true,
+    toolbar: {
+      show: false,
+    },
+  },
+  plotOptions: {
+    bar: {
+      columnWidth: "45%",
+      borderRadius: 4,
+    },
+  },
+  dataLabels: {
+    enabled: false,
+  },
+  xaxis: {
+    categories: [],
+    axisBorder: {
+      show: false,
+    },
+    axisTicks: {
+      show: false,
+    },
+  },
+  yaxis: {
+    show: true,
+  },
+  grid: {
+    show: true,
+  },
+};
 
-//     setOptions((prevOptions) => ({
-//       ...prevOptions,
-//       // 업데이트할 옵션 설정
-//     }));
-//   }, [monthlyresv]);
+const MonthlyBarChart = () => {
+  const theme = useTheme();
+  const id = useSelector((state) => state.user.id); // 점주 id
+  const [monthlyresvData, setMonthlyResvData] = useState({
+    cancelValue: "",
+    doneValue: "",
+    noShowValue: "",
+    whole: "",
+  });
+  const { primary, secondary } = theme.palette.text;
+  const info = theme.palette.info.light;
+  const [currentDate, setCurrentDate] = useState("");
+  const [series, setSeries] = useState([
+    {
+      name: "취소",
+      data: 'cancelValue',
+      group: "resv",
+    },
+    {
+      name: "노쇼",
+      data: 'noShowValue',
+      group: "resv",
+    },
+    {
+      name: "완료",
+      data: 'doneValue',
+      group: "resv",
+    },
+  ]); // y축 data
+  const [options, setOptions] = useState(barChartOptions);
 
-//   return (
-//     <div style={{ width: "500px", height: "500px", margin: "0 auto" }}>
-//       <Bar data={data} options={options} />
-//     </div>
-//   );
-// };
+  // 점주 id - 월별 데이터 가져옴
+  useEffect(() => {
+    axiosWithBaseUrl
+      .get(`/owner/main/reservation/${id}`)
+      .then((res) => {
+        console.log(res.data);
+        setMonthlyResvData(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [id]);
 
-// export default IncomeAreaChart;
+  useEffect(() => {
+    const { cancelValue, doneValue, noShowValue, whole } = monthlyresvData;
+    const monthLabels = ['분기', '지난달', '이번달'];
+
+    setOptions((prevState) => ({
+      ...prevState,
+      xaxis: {
+        categories: monthLabels,
+        labels: {
+          style: {
+            colors: [secondary],
+          },
+        },
+      },
+       colors: ['#80c7fd', '#008FFB', '#80f1cb', '#00E396'],
+       tooltip: {
+        theme: "light",
+      },
+    }));
+
+    setSeries((prevState) => {
+      prevState[0].data = [doneValue];
+      prevState[1].data = [noShowValue];
+      prevState[2].data = [cancelValue];
+      return [...prevState];
+    });
+  }, [info, secondary, monthlyresvData]);
+
+  return (
+    <>
+      <Grid item>
+        <div id="chart">
+          <ReactApexChart
+            options={options}
+            series={series}
+            type="bar"
+            height={365}
+          />
+        </div>
+      </Grid>
+    </>
+  );
+};
+
+export default MonthlyBarChart;

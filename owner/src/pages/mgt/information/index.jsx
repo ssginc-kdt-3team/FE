@@ -32,7 +32,7 @@ function MgtInfo() {
     <div>
       <div className='grid-2c flex-gap-80'>
         {/* 운영정보 */}
-        <div>
+        {/* <div>
           <div className='space-between'>
             {shopInfo ? (
               <ShopDetail data={shopInfo} />
@@ -45,7 +45,7 @@ function MgtInfo() {
             </div>
             )}
           </div>
-        </div>
+        </div> */}
 
         {/* 메뉴 정보 */}
         {shopInfo && (

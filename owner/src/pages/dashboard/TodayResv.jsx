@@ -1,4 +1,3 @@
-//메인 오늘 예약 현황
 import React,  { useEffect, useState } from "react";
 import { useSelector } from 'react-redux';
 import { axiosWithBaseUrl } from "App";
@@ -10,7 +9,7 @@ import { Typography, Grid } from '@mui/material';
 // third-party
 import ReactApexChart from 'react-apexcharts';
 
-// ==============================|| REPORT ReactApexChart ||============================== //
+// ==============================||메인2 오늘 예약 현황 ||============================== //
 // chart options
 const barChartOptions = {
   chart: {
@@ -77,12 +76,13 @@ const MonthlyBarChart = () => {
     if (todayresv.length > 0) {
       const timeCategories = todayresv.map((resv) => resv.time);
       const numData = todayresv.map((resv) => parseInt(resv.num));
-      const noShowData = todayresv.map((resv) => parseInt(resv.num));
+      const noShowData = todayresv.map((resv) => parseInt(resv.expectationNoShowNum));
       const total = numData.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+      
       const today = new Date();
       const formattedDate = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
-      
       setCurrentDate(formattedDate);
+
       setOptions((prevState) => ({
         ...prevState,
         //x축 data
@@ -114,12 +114,14 @@ const MonthlyBarChart = () => {
   return (
     <>
       <Grid item>
-          {/* <Typography variant="h4">오늘 예약 현황</Typography> */}
-              <Typography variant="h6" color="textSecondary">
-          {`오늘 날짜 : ${currentDate}`}
-          </Typography>
-            </Grid>
-          <Typography variant="h5" style={{marginLeft: '35px', marginTop: '10px'}}>총:{totalNum}건</Typography>
+        {/* <Typography variant="h4">오늘 예약 현황</Typography> */}
+        <Typography variant="h6" color="textSecondary">
+        {`오늘 날짜 : ${currentDate}`}
+        </Typography>
+      </Grid>
+      
+        <Typography variant="h5" style={{marginLeft: '35px', marginTop: '10px'}}>총:{totalNum}건</Typography>
+        
         <div id="chart">
             <ReactApexChart
              options={options} 

@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { axiosWithBaseUrl } from "App";
+
+// material-ui
 import { useTheme } from "@mui/material/styles";
-import { Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
+
+// third-party
 import ReactApexChart from "react-apexcharts";
+
+// ==============================|| 메인4 위약금 통계 ||============================== //
 
 const barChartOptions = {
   chart: {
-    type: "bar",
+    type: 'bar',
     height: 365,
     toolbar: {
       show: false
@@ -15,7 +21,7 @@ const barChartOptions = {
   },
   plotOptions: {
     bar: {
-      columnWidth: "45%",
+      columnWidth: '45%',
       borderRadius: 4
     }
   },
@@ -23,7 +29,7 @@ const barChartOptions = {
     enabled: false
   },
   xaxis: {
-    categories: ["지난 3개월", "지난 2개월", "지난 1개월", "이번 달"],
+    categories: [],
     axisBorder: {
       show: false
     },
@@ -41,20 +47,26 @@ const barChartOptions = {
 
 const MonthlyDepositChart = () => {
   const theme = useTheme();
-  const id = useSelector((state) => state.user.id);
-  const [monthlyDeposit, setMonthlyDeposit] = useState([]);
-  const { secondary } = theme.palette.text;
-  const [currentDate, setCurrentDate] = useState("");
-  const [series, setSeries] = useState([]);
+  const id = useSelector((state) => state.user.id);  // 점주 id
+  const [monthlyData, setMonthlyData] = useState({
+    last3MonthPenalty: '',
+    last2MonthPenalty:'',
+    lastMonthPenalty: '',
+    thisMonthPenalty: ''
+  });
+  const { primary, secondary } = theme.palette.text;
+  const info = theme.palette.info.light;
+  const [currentDate, setCurrentDate] = useState('');
+  const [series, setSeries] = useState([{ name: '위약금', data: '' }]); // y축 data
   const [options, setOptions] = useState(barChartOptions);
-  const [thisMonthPenalty, setThisMonthPenalty] = useState(0);
 
+  // 점주 id - 월별 위약금 데이터 가져옴
   useEffect(() => {
     axiosWithBaseUrl
       .get(`/owner/main/deposit/${id}`)
       .then((res) => {
         console.log(res.data);
-        setMonthlyDeposit(res.data);
+        setMonthlyData(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -62,71 +74,60 @@ const MonthlyDepositChart = () => {
   }, [id]);
 
   useEffect(() => {
+    const { last3MonthPenalty, last2MonthPenalty, lastMonthPenalty, thisMonthPenalty } = monthlyData;
+
+    const monthLabels = ['Last 3 Months', 'Last 2 Months', 'Last Month', 'This Month'];
+    const penaltyData = [last3MonthPenalty, last2MonthPenalty, lastMonthPenalty, thisMonthPenalty];
+
+
     const today = new Date();
     const formattedDate = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
     setCurrentDate(formattedDate);
 
-    if (monthlyDeposit.length > 0) {
-      const numData = [
-        monthlyDeposit[0]?.last3MonthPenalty || 0,
-        monthlyDeposit[0]?.last2MonthPenalty || 0,
-        monthlyDeposit[0]?.lastMonthPenalty || 0,
-        monthlyDeposit[0]?.thisMonthPenalty || 0
-      ];
 
-      const total = numData.reduce(
-        (accumulator, currentValue) => accumulator + currentValue,
-        0
-      );
-
-      setOptions((prevState) => ({
-        ...prevState,
-        xaxis: {
-          categories: ["지난 3개월", "지난 2개월", "지난 1개월", "이번 달"],
-          axisTicks: {
-            show: false
-          },
-          labels: {
-            style: {
-              colors: [secondary]
-            }
-          }
+    setOptions((prevState) => ({
+      ...prevState,
+      xaxis: {
+        categories: monthLabels,
+        axisBorder: {
+          show: false
         },
-      }));
-
-      setSeries([{ data: numData, name: "위약금" }]);
-      setThisMonthPenalty(monthlyDeposit[0]?.thisMonthPenalty || 0);
-    } else {
-      setOptions((prevState) => ({
-        ...prevState,
-        xaxis: {
-          categories: [],
-          axisTicks: {
-            show: false
-          },
-          labels: {
-            style: {
-              colors: [secondary]
-            }
-          }
+        axisTicks: {
+          show: false
         },
-      }));
+        labels: {
+          style: {
+            colors: [secondary]
+          }
+        }
+      },
+      colors: [info],
+      tooltip: {
+        theme: 'light'
+      }
+    }));
 
-      setSeries([]);
-      setThisMonthPenalty(0);
-    }
-  }, [monthlyDeposit, secondary]);
+    setSeries([{ data: penaltyData }]);
+  }, [info, secondary, monthlyData]);
 
   return (
-    <div style={{ width: "500px", height: "500px", margin: "0 auto" }}>
+    <>
+      <Grid item>
       <Typography variant="h6" color="textSecondary">
-        {`이번 달 : ${currentDate.slice(0, 6)}`}
+        {`이번 달: ${currentDate.slice(0, 6)}`}
       </Typography>
-      <Typography variant="h5" style={{ marginLeft: "35px", marginTop: "10px" }}>
-        이번달 위약금: {thisMonthPenalty}원
-      </Typography>
-      <ReactApexChart options={options} series={series} type="bar" height={365} />
-    </div>
+      <Typography variant="h5" style={{marginLeft: '35px', marginTop: '10px'}}>이번달 위약금:{monthlyData.thisMonthPenalty}원</Typography>
+
+        <div id="chart">
+          <ReactApexChart
+            options={options}
+            series={series}
+            type="bar"
+            height={365}
+          />
+        </div>
+      </Grid>
+    </>
   );
 };
 

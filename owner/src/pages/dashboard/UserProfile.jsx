@@ -4,6 +4,10 @@ import { Card, Typography, Button } from 'antd';
 import { axiosWithBaseUrl } from 'App';
 import { useSelector } from 'react-redux';
 
+
+// ==============================|| 메인1 점주 정보 ||============================== //
+
+
 function UserProfile() {
   const id = useSelector((state) => state.user.id);
   const [ownerData, setOwnerData] = useState(null);

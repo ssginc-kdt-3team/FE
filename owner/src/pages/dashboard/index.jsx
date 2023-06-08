@@ -22,39 +22,38 @@ const DashboardDefault = () => {
           {/* <Grid item justifyContent="space-between" alignItems="center" xs={12} md={5} lg={4}> */}
           <Grid container justifyContent="space-between" alignItems="center">
             <Grid item>
-              {/* 점주 프로필 */}
+          {/* 메인 1 점주 프로필 */}
               <UserProfile />
             </Grid>
-
+          {/* 메인 2 오늘 예약 현황 */}
         <Grid item>
         <Grid item>
           <Typography variant="h4" marginTop="20px">오늘 예약 현황</Typography>
         </Grid>
-          <MainCard sx={{ mt: 2, width: '800px', height: '500px'}} content={false}>
+      <MainCard sx={{ mt: 2, width: '800px', height: '500px'}} content={false}>
 
-      <Box sx={{ p: 4, pb: 0 }}>
-        <Stack spacing={2}>
-          <Grid container alignItems="center">
-          </Grid>
+           <Box sx={{ p: 4, pb: 0 }}>
+            <Stack spacing={2}>
+              <Grid container alignItems="center">
+             </Grid>
          
-        </Stack>
+           </Stack>
 
-        {/* 오늘 예약 현황 chart */}
-        <MonthlyBarChart />
-      </Box>
-    </MainCard>
-  </Grid>
-</Grid>
-
+            {/* 오늘 예약 현황 chart */}
+            <MonthlyBarChart />
+          </Box>
+        </MainCard>
+      </Grid>
+    </Grid>
 
       </div>
 
-          {/* 이번달 예약 현황
+        {/* 메인 3 예약 통계 */}
           <div>
           <Grid item justifyContent="space-between" alignItems="center" xs={12} md={5} lg={4}>
             <Grid container>
               <Grid item>
-                <Typography variant="h4" marginTop="20px">이번달 예약 현황</Typography>
+                <Typography variant="h4" marginTop="20px">예약 통계</Typography>
               </Grid>
             </Grid>
       
@@ -71,17 +70,17 @@ const DashboardDefault = () => {
             </MainCard>
           </Grid>
           </div>
-       */}
-          {/* 예약금 통계 */}
+
+          {/* 메인 4 예약금 통계 */}
           <div>
-          <Grid item justifyContent="center" alignItems="center" xs={12} md={5} lg={4}>
+          <Grid item justifyContent="center" alignItems="center" xs={9} md={5} lg={4}>
             <Grid container>
               <Grid item>
                 <Typography variant="h4" marginTop="20px">이번달 정산 위약금</Typography>
               </Grid>
             </Grid>
       
-            <MainCard sx={{ mt: 2, width: '500px' }} content={false}>
+            <MainCard sx={{ mt: 2, width: '600px' }} content={false}>
               <Box sx={{ p: 4, pb: 0 }}>
                 <Stack spacing={2}>
                   {/* <Typography variant="h6" color="textSecondary">
