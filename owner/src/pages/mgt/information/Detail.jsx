@@ -34,10 +34,12 @@ function ShopDetail({data}) {
               <Typography.Title level={3}>{data.shopName}</Typography.Title>
             </div>
           }>
+            
             {/* 매장 이미지 */}
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-         <    Img src={data.shopImgUrl} alt={data.shopName} style={{ width: '350px', height: 'auto' }}/>
+         <    Img src={data.shopImgUrl} alt={data.shopName} style={{ width: '100px', height: 'auto' }}/>
           </div> 
+
           {/* 매장정보*/}
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <div style={{ whiteSpace: 'nowrap', textAlign: 'center' }}>
@@ -51,7 +53,7 @@ function ShopDetail({data}) {
                 <p><Span>대표자명</Span>{data.businessCeo}</p>
                 <p><Span>사업자등록번호</Span>{data.businessNumber}</p>
 
-                {/* 수정하기 버튼 */}
+          {/* 수정하기 버튼 */}
             <Button 
               type='primary' 
               onClick={() => navigate(`/mgt/info/update/${userId}`)} 
