@@ -38,7 +38,7 @@ const barChartOptions = {
     }
   },
   yaxis: {
-    show: true
+    show: false
   },
   grid: {
     show: true
@@ -76,12 +76,14 @@ const MonthlyDepositChart = () => {
   useEffect(() => {
     const { last3MonthPenalty, last2MonthPenalty, lastMonthPenalty, thisMonthPenalty } = monthlyData;
 
-    const monthLabels = ['Last 3 Months', 'Last 2 Months', 'Last Month', 'This Month'];
+    const monthLabels = ['2023.3', '2023.4', '2023.5', `${currentDate.slice(0, 6)}`];
     const penaltyData = [last3MonthPenalty, last2MonthPenalty, lastMonthPenalty, thisMonthPenalty];
 
     const today = new Date();
     const formattedDate = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
     setCurrentDate(formattedDate);
+
+    
 
 
     setOptions((prevState) => ({
@@ -111,18 +113,19 @@ const MonthlyDepositChart = () => {
 
   return (
     <>
-      <Grid item>
-      <Typography variant="h6" color="textSecondary">
-        {`이번 달: ${currentDate.slice(0, 6)}`}
-      </Typography>
-      <Typography variant="h5" style={{marginLeft: '35px', marginTop: '10px'}}>이번달 위약금:{monthlyData.thisMonthPenalty}원</Typography>
+      <Grid item style={{padding:'20px'}}>
+      {/* <Typography variant="h6" color="textSecondary"  marginLeft='30px'>
+        {` ${currentDate.slice(0, 6)}`}
+      </Typography> */}
+      <Typography variant="h5" style={{marginLeft: '10px', marginBottom: '10px'}}>이번달 위약금:{monthlyData.thisMonthPenalty}원</Typography>
 
         <div id="chart">
           <ReactApexChart
             options={options}
             series={series}
             type="bar"
-            height={365}
+            height={300}
+            width={350}
           />
         </div>
       </Grid>

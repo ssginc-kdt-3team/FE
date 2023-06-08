@@ -23,6 +23,11 @@ const barChartOptions = {
       height:1,
       colors: ['#fff']
     },
+    dataLabels: {
+      formatter: (val) => {
+
+      }
+    },
   },
   plotOptions: {
     bar: {
@@ -65,6 +70,8 @@ const MonthlyBarChart = () => {
   const info = theme.palette.info.light;
   const [monthlyresv, setMonthlyResv] = useState([]);
   const [currentDate, setCurrentDate] = useState('');
+  const [previousMonths, setPreviousMonths] = useState([]);
+
   //y축 데이터
   const [series, setSeries] = useState([
     {
@@ -103,13 +110,19 @@ const MonthlyBarChart = () => {
 
   useEffect(() => {
     // const { cancelValue, doneValue, noShowValue, whole } = monthlyresvData;
-    const monthLabels = ['이번달', '지난달', '분기'];
+  
     if (monthlyresv.length > 0) {
     const doneData = monthlyresv.map((resv) => parseInt(resv.doneValue));
     const noshowData = monthlyresv.map((resv) => parseInt(resv.noShowValue));
     const cancelData = monthlyresv.map((resv) => parseInt(resv.cancelValue));
     const wholeData = monthlyresv.map((resv) => parseInt(resv.whole));
     // const monthLabels = monthlyresv.map((resv) => parseInt(resv));
+    
+    const today = new Date();
+    const formattedDate = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
+    setCurrentDate(formattedDate);
+
+    const monthLabels = ['이번달', '지난달', '분기'];
 
     setOptions((prevState) => ({
       ...prevState,
@@ -142,12 +155,17 @@ const MonthlyBarChart = () => {
   return (
     <>
       <Grid item>
-        <div id="chart">
+
+        {/* <Typography variant="h6" color="textSecondary" marginLeft="10px">
+        {`이번 달: ${currentDate.slice(0, 6)}`}
+      </Typography> */}
+
+        <div id="chart" style={{marginTop:'15px'}}>
           <ReactApexChart
             options={options}
             series={series}
             type="bar"
-            height={365}
+            height={300}
           />
         </div>
       </Grid>
