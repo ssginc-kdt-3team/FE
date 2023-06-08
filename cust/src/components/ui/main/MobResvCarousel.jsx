@@ -3,13 +3,13 @@ import PageSubTitle from '../../ui/PageSubTitle';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
-import styles from '../../../assets/css/ui/main/ResvInfoCarousel.module.css';
-import next from '../../../assets/images/icons/next.png';
+import styles from '../../../assets/css/ui/main/MobResvCarousel.module.css';
 import { useRecoilValue } from 'recoil';
 import { loginState } from '../../../state/loginState';
 import axios from 'axios';
 import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import MobResvCard from './MobResvCard';
 
 const settings = {
   dots: false,
@@ -17,11 +17,11 @@ const settings = {
   autoplay: false,
   slidesToShow: 1,
   slidesToScroll: 1,
-	prevArrow : <img src={next} alt='previous'/>,	// 이전 화살표 모양 설정
-	nextArrow : <img src={next} alt='next'/>, // 다음 화살표 모양 설정
+	prevArrow : '',	// 이전 화살표 모양 설정
+	nextArrow : '', // 다음 화살표 모양 설정
 };
 
-function ResvInfoCarousel() {
+function MobResvCarousel() {
   const loginInfo = useRecoilValue(loginState);
 
   const navigate = useNavigate();
@@ -40,30 +40,14 @@ function ResvInfoCarousel() {
   }, [loginInfo]);
 
   return (
-    <div id={styles.carouselWrap} className='box border-box center-h flex-col'>
-      <PageSubTitle title='예약 내역'/>
-
+    <div id={styles.carouselWrap}>
       {
         loginInfo.id !== -1 ? ( // 로그인 되어 있고
           resvList && resvList.length !== 0 ? ( // 리스트가 있으면
             <Slider {...settings} className={styles.sliderWrap}>
               {
                 resvList.map( data => (
-                  <div key={data.reservationId}>
-                    {/* 매장명 */}
-                    <h2>{data.shopName}</h2>
-
-                    {/* 예약 시간 */}
-                    <label>예약 시간</label>
-                    <p>{data.expectedDate} {data.expectedTime}</p>
-                    
-                    {/* 예약 인원 */}
-                    <label>예약 인원</label>
-                    <p>{data.people}명 (유아 {data.child}명)</p>
-
-                    {/* 버튼 */}
-                    <Button type='primary' className='button button-s' onClick={() => navigate(`/resv/${data.reservationId}`)}>상세보기</Button>
-                  </div>
+                  <MobResvCard data={data}/>
                 ))
               }
             </Slider>
@@ -104,4 +88,4 @@ function ResvInfoCarousel() {
   );
 }
 
-export default ResvInfoCarousel;
+export default MobResvCarousel;

@@ -1,13 +1,13 @@
 import { Select } from 'antd';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-// import { styled } from 'styled-components';
+import { styled } from 'styled-components';
 
-// const Label = styled.label`
-//   color: var(--description);
-//   margin: 0;
-//   display: inline-block;
-// `;
+const Label = styled.label`
+  color: var(--description);
+  margin: 0;
+  display: inline-block;
+`;
 
 const { Option } = Select;
 
@@ -31,17 +31,17 @@ function BranchSelector({branchId, setBranchId}) {
   }, [])
 
   return (
-    // <div className='center-h'>
-    //   <Label>매장 선택</Label>
-      <Select bordered={false} size='large' value={branchId} onChange={(e) => handleBranchSelect(e)} style={{margin: '-11px 0 0 -11px'}}>
-          {/* <Option value={branchId}>점포 변경</Option> */}
+    <div className='center-h'>
+      <Label>지점 선택</Label>
+      <Select bordered={false} size='large' value={branchId} onChange={(e) => handleBranchSelect(e)}>
+        {/* <Option value={branchId}>점포 변경</Option> */}
         {
           branchList && branchList.map( branch => (
             <Option key={branch.id} value={branch.id}>{branch.name}</Option>
           ))
         }
       </Select>
-    // </div>
+    </div>
   );
 }
 

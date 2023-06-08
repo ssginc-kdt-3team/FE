@@ -52,7 +52,7 @@
 
   /* Carousel */
   --carousel-max-width: calc(var(--device-width-l) * 0.8);
-  --carousel-width: 65vw;
+  --carousel-width: 70vw;
 }
 
 /* 너비 */

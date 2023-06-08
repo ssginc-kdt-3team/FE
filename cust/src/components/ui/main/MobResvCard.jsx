@@ -3,12 +3,13 @@ import { Link } from 'react-router-dom';
 import styles from '../../../assets/css/ui/reservation/ResvCard.module.css'
 import ResvStatusTag from '../../ui/reservation/ResvStatusTag';
 
-function ResvCard({data}) {
+function MobResvCard({data}) {
   console.log(data);
+
   return (
-    <li>
+    <li style={{padding: '0 10px'}}>
       <Link to={`/resv/${data.reservationId}`}>
-        <div id={styles.resvCardWrap} className='box'>
+        <div id={styles.resvCardWrap} className='box border-box'>
           <div id={styles.topWrap} className='space-between'>
             <h1>{data.shopName}</h1>
             {/* <ResvStatus status={data.reservationStatus}/> */}
@@ -31,4 +32,4 @@ function ResvCard({data}) {
   );
 }
 
-export default ResvCard;
+export default MobResvCard;

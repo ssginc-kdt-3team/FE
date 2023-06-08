@@ -29,6 +29,16 @@ const settings = {
   slidesToScroll: 4,
 	prevArrow : <img src={next} alt='previous'/>,	// 이전 화살표 모양 설정
 	nextArrow : <img src={next} alt='next'/>, // 다음 화살표 모양 설정
+  responsive: [ // 반응형 웹 구현 옵션
+		{ 
+			breakpoint: 768, //화면 사이즈 768px일 때
+			settings: {	
+				//위에 옵션이 디폴트 , 여기에 추가하면 그걸로 변경
+				slidesToShow: 2,
+        slidesToScroll: 2,
+			} 
+		}
+	]
 };
 
 function RecdShopCarousel() {
