@@ -1,0 +1,20 @@
+#carouselWrap {
+  display: none;
+}
+
+/* 버튼 */
+.sliderWrap > button {
+  display: none !important;
+}
+
+/* 마커 */
+.sliderWrap li::marker {
+  content: none;
+} 
+
+
+@media screen and (max-width: 768px) {
+  #carouselWrap {
+    display: block;
+  }
+}

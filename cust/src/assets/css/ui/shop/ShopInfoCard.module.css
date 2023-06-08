@@ -46,6 +46,9 @@
   }
 
   /* 상세 정보 */
+  #topWrap > div {
+    width: 100%;
+  }
   #topWrap > div > p:first-child {
     margin-top: 0;
   }

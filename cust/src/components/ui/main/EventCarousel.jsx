@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styles from '../../../assets/css/ui/main/BranchCarousel.module.css';
+import styles from '../../../assets/css/ui/main/EventCarousel.module.css';
 import axios from 'axios';
 import Slider from 'react-slick';
 import '../../../assets/css/ui/slick-dots.css';

@@ -16,6 +16,13 @@ const Img = styled.img`
   border: 1px solid var(--border);
   border-radius: var(--border-radius);
   object-fit: cover; /* 여백 X */
+  
+  @media screen and (max-width: 768px) {
+    max-width: calc((100vw - 60px) / 2) !important;
+    width: calc((100vw - 60px) / 2) !important;
+    max-height: calc((100vw - 60px) / 2) !important;
+    height: calc((100vw - 60px) / 2) !important;
+  }
 `;
 
 const H3 = styled.h3`
