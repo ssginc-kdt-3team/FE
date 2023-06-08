@@ -10,7 +10,6 @@ import { Typography, Grid } from '@mui/material';
 // third-party
 import ReactApexChart from 'react-apexcharts';
 
-
 // ==============================|| REPORT ReactApexChart ||============================== //
 // chart options
 const barChartOptions = {
@@ -82,8 +81,8 @@ const MonthlyBarChart = () => {
       const total = numData.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
       const today = new Date();
       const formattedDate = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
+      
       setCurrentDate(formattedDate);
-
       setOptions((prevState) => ({
         ...prevState,
         //x축 data
@@ -112,19 +111,22 @@ const MonthlyBarChart = () => {
     }
   }, [info, secondary, todayresv]);
   
-
   return (
     <>
       <Grid item>
-              {/* <Typography variant="h4">오늘 예약 현황</Typography> */}
+          {/* <Typography variant="h4">오늘 예약 현황</Typography> */}
               <Typography variant="h6" color="textSecondary">
-            {`오늘 날짜 : ${currentDate}`}
+          {`오늘 날짜 : ${currentDate}`}
           </Typography>
             </Grid>
-    <Typography variant="h5" style={{marginLeft: '35px', marginTop: '10px'}}>총:{totalNum}건</Typography>
-    <div id="chart">
-      <ReactApexChart options={options} series={series} type="bar" height={365} />
-    </div>
+          <Typography variant="h5" style={{marginLeft: '35px', marginTop: '10px'}}>총:{totalNum}건</Typography>
+        <div id="chart">
+            <ReactApexChart
+             options={options} 
+             series={series} 
+             type="bar" 
+             height={365} />
+        </div>
     </>
   );
 };

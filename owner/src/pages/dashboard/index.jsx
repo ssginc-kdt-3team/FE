@@ -77,7 +77,7 @@ const DashboardDefault = () => {
           <Grid item justifyContent="center" alignItems="center" xs={12} md={5} lg={4}>
             <Grid container>
               <Grid item>
-                <Typography variant="h4" marginTop="20px">이번달 정산 예약금</Typography>
+                <Typography variant="h4" marginTop="20px">이번달 정산 위약금</Typography>
               </Grid>
             </Grid>
       
