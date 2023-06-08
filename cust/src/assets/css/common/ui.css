@@ -2,10 +2,12 @@
   background-color: white;
   border-radius: var(--border-radius);
   padding: 20px;
-  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.05);
 }
 .border-box {
   border: 1px solid var(--input-border);
+}
+.shadow-box {
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.05);
 }
 
 /* 버튼 */

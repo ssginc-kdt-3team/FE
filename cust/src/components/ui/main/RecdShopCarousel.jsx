@@ -10,8 +10,8 @@ import RecdShopCard from './RecdShopCard';
 import styles from '../../../assets/css/ui/main/RecdShopCarousel.module.css';
 
 const Div = styled.div`
-  max-width: var(--device-width-ml);
-  width: 85vw;
+  max-width: var(--carousel-max-width);
+  width: var(--carousel-width);
   margin: 0 auto;
   
   @media screen and (max-width: 768px) {
@@ -39,7 +39,7 @@ function RecdShopCarousel() {
   const [recdShopList, setRecdShopList] = useState(null);
 
   useEffect(() => {
-    axios.get(`/shop/list/1`)
+    axios.post(`/shop/list/${loginInfo.id}`)
     .then(res => {
       console.log(res.data);
       setRecdShopList(res.data);
@@ -47,14 +47,14 @@ function RecdShopCarousel() {
     .catch(err => {
       console.log(err);
     })
-  }, [])
+  }, [loginInfo])
 
   return (
     <Div>
       <Slider {...settings} className={styles.sliderWrap}>
         {
           recdShopList && recdShopList.map( shop => (
-            <RecdShopCard key={shop.id} data={shop}/>
+            <RecdShopCard key={shop.shopId} data={shop}/>
             // <img src={shop.shopImgUrl} alt={shop.name}/>
           ))
         }

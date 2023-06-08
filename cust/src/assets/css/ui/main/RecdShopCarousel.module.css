@@ -1,6 +1,6 @@
 .sliderWrap > img {
-  width: 45px;
-  height: 45px;
+  width: 40px;
+  height: 40px;
   right: -75px;
 }
 
@@ -13,15 +13,15 @@
 
 /* 카드 너비 설정 */
 .sliderWrap > div > div > div {
-  max-width: calc(var(--device-width-ml) / 4) !important;
-  width: calc(85vw / 4) !important;
+  max-width: calc(var(--carousel-max-width) / 4) !important;
+  width: calc(var(--carousel-width) / 4) !important;
   /* max-height: calc(var(--device-width-ml) / 4) !important;
   height: calc(85vw / 4) !important; */
 }
 
 .sliderWrap > div > div > div > div {
-  max-width: calc(var(--device-width-ml) / 4) !important;
-  width: calc(85vw / 4) !important;
+  max-width: calc(var(--carousel-max-width) / 4) !important;
+  width: calc(var(--carousel-width) / 4) !important;
   /* max-height: calc(var(--device-width-ml) / 4) !important;
   height: calc(85vw / 4) !important; */
   padding: 20px;

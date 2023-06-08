@@ -1,0 +1,17 @@
+#cardWrap {
+
+}
+
+/* 매장명 */
+#nameWrap > p {
+  font-size: var(--input-fontSize);
+}
+#nameWrap > h1 {
+  font-size: 40px;
+}
+
+/* 매장 정보 */
+#infoWrap > p > span {
+  color: var(--description);
+  margin-right: 16px;
+}

@@ -49,7 +49,7 @@ function ResvInfoCard({data, resvId}) {
     <>
       {
         data && (
-          <div id={styles.resvInfoWrap} className='box flex flex-col flex-gap-20'>
+          <div id={styles.resvInfoWrap} className='box shadow-box flex flex-col flex-gap-20'>
             <div id={styles.topWrap} className='space-between'>
               <div>{data.shopName}</div>
               <ResvStatusTag status={data.reservationStatus}/>

@@ -34,7 +34,7 @@ function ReviewCard({data}) {
   }
 
   return (
-    <div className='box' style={{ width: '100%' }}>
+    <div className='box shadow-box' style={{ width: '100%' }}>
       <div id={styles.titleWrap} className='space-between'>
         <div className='center-h'>
           <Rate disabled defaultValue={data.point} style={{ width: '132px' }}/>

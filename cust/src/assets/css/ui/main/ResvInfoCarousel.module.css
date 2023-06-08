@@ -17,13 +17,13 @@
   text-align: center;
 } 
 .sliderWrap > div h2 {
-  margin: 30px 0;
+  margin: 32px 0;
 } 
 .sliderWrap > div label {
   color: var(--description);
 } 
 .sliderWrap > div button {
-  margin: 16px 0;
+  margin: 16px 0 32px 0;
 }
 
 /* 안내 메세지 */

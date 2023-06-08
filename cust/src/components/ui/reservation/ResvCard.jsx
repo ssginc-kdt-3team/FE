@@ -8,7 +8,7 @@ function ResvCard({data}) {
   return (
     <li>
       <Link to={`/resv/${data.reservationId}`}>
-        <div id={styles.resvCardWrap} className='box'>
+        <div id={styles.resvCardWrap} className='box shadow-box'>
           <div id={styles.topWrap} className='space-between'>
             <h1>{data.shopName}</h1>
             {/* <ResvStatus status={data.reservationStatus}/> */}

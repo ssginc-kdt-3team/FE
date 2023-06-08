@@ -8,6 +8,12 @@
   object-fit: cover; /* 여백 X */
 }
 
+#topWrap > div {
+  width: 320px;
+}
+#topWrap > div > p:first-child {
+  margin-top: 0;
+}
 #topWrap p > span {
   color: var(--description);
   margin-right: 20px;

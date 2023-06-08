@@ -40,7 +40,7 @@ function ResvInfoCarousel() {
   }, [loginInfo]);
 
   return (
-    <div id={styles.carouselWrap} className='box border-box center-h flex-col'>
+    <div id={styles.carouselWrap} className='box border-box  shadow-box center-h flex-col'>
       <PageSubTitle title='예약 내역'/>
 
       {

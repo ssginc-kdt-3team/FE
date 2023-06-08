@@ -6,7 +6,7 @@ function CustInfoCard({data}) {
     <>
       {
         data && (
-          <div id={styles.custInfoWrap} className='box flex flex-col flex-gap-20'>
+          <div id={styles.custInfoWrap} className='box shadow-box flex flex-col flex-gap-20'>
             <div id={styles.topWrap}>예약자 정보</div>
 
             <div id={styles.bottomWrap}>

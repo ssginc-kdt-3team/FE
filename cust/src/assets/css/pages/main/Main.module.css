@@ -1,16 +1,16 @@
-#container {
+/* #container {
 
-}
+} */
 
 /* 예약 정보 */
-#topWrap {
-  height: calc(100vh - var(--header-height));
+/* #topWrap {
+  height: calc(100vh - var(--header-height)); */
   /* background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url(../../images/background.jpg) no-repeat center;
   background-size: cover; */
-}
+/* } */
 
 
-#middleWrap {
+/* #middleWrap {
   height: calc(100vh - var(--header-height));
   border-top: 1px solid #fff;
-}
+} */

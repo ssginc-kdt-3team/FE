@@ -16,7 +16,7 @@ const settings = {
   slidesToScroll: 1,
 };
 
-function BranchCarousel() {
+function EventCarousel() {
   const [branchList, setBranchList] = useState(null);
 
   useEffect(() => {
@@ -41,4 +41,4 @@ function BranchCarousel() {
   );
 }
 
-export default BranchCarousel;  
+export default EventCarousel;  

@@ -9,10 +9,10 @@ const Div = styled.div`
 `;
 
 const Img = styled.img`
-  max-width: calc(var(--device-width-ml) / 4 - 40px) !important;
-  width: calc(85vw / 4 - 40px) !important;
-  max-height: calc(var(--device-width-ml) / 4 - 40px) !important;
-  height: calc(85vw / 4 - 40px) !important;
+  max-width: calc(var(--carousel-max-width) / 4 - 40px) !important;
+  width: calc(var(--carousel-width) / 4 - 40px) !important;
+  max-height: calc(var(--carousel-max-width) / 4 - 40px) !important;
+  height: calc(var(--carousel-width) / 4 - 40px) !important;
   border: 1px solid var(--border);
   border-radius: var(--border-radius);
   object-fit: cover; /* 여백 X */
@@ -31,9 +31,9 @@ const P = styled.p`
 function RecdShopCard({data}) {
   return (
     <Link to={`/shop/${data.branchId}/${data.shopId}`}>
-      <Img src={data.shopImgUrl} alt={data.name}/>
-      <H3>{data.name}</H3>
-      <P>하하하하하하핳하하하하하하하하하핳핳하하하핳</P>
+      <Img src={data.shopImgUrl} alt={data.shopName}/>
+      <H3>{data.shopName}</H3>
+      <P>{data.shopInfo}</P>
     </Link>
   );
 }

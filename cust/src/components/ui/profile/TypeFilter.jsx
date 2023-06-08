@@ -11,7 +11,7 @@ function TypeFilter({type, setType, setCurrentPage, isCash}) {
   };
 
   return (
-    <Radio.Group id={styles.radioWrap} className='box' value={type} buttonStyle="solid" size="large" onChange={handleTypeRadio} style={{ padding: 0 }}>
+    <Radio.Group id={styles.radioWrap} className='box shadow-box' value={type} buttonStyle="solid" size="large" onChange={handleTypeRadio} style={{ padding: 0 }}>
       <Radio.Button value="all" style={ type === 'all' ? { background: 'var(--main)', color: '#fff', borderColor: 'var(--main)' } : {} }>전체</Radio.Button>
       <Radio.Button value="get" style={ type === 'get' ? { background: 'var(--main)', color: '#fff', borderColor: 'var(--main)' } : {} }>{isCash ? '충전' : '적립'}</Radio.Button>
       <Radio.Button value="lost" style={ type === 'lost' ? { background: 'var(--main)', color: '#fff', borderColor: 'var(--main)' } : {} }>사용</Radio.Button>

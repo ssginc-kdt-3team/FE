@@ -30,28 +30,28 @@ function Profile() {
 
           {/* 페이지 이동 카드 */}
           <div id={styles.cardWrap} className='grid-4c flex-gap-40'>
-            <Link to='/resv' className='box'>
+            <Link to='/resv' className='box shadow-box'>
               <div>
                 예약 내역
                 <img src={next} alt='move to page'/>
               </div>
             </Link>
 
-            <Link to='/cash' className='box'>
+            <Link to='/cash' className='box shadow-box'>
               <div>
                 충전금 내역
                 <img src={next} alt='move to page'/>
               </div>
             </Link>
 
-            <Link to='/point' className='box'>
+            <Link to='/point' className='box shadow-box'>
               <div>
                 포인트 내역
                 <img src={next} alt='move to page'/>
               </div>
             </Link>
 
-            <Link to='/profile/review' className='box'>
+            <Link to='/profile/review' className='box shadow-box'>
               <div>
                 작성한 후기
                 <img src={next} alt='move to page'/>
