@@ -57,8 +57,8 @@ function ShopAdd() {
       businessCeo: businessCeo,
       businessNumber: businessNumber,
       orderCloseTime: orderCloseTime.format(format),
-      ownerId: id,          // ownerId
-      branchId: branchId,    // branchId
+      ownerId: id,                                    // ownerId
+      branchId: branchId,                             // branchId
     };
    
     // formData > shopData, shopImg, businessImg
@@ -151,25 +151,25 @@ function ShopAdd() {
         }}
         onFinish={onFinish}
       >
-
-        {/* 지점선택 -> 지점 id*/}
-        <div style={{ display: 'flex', alignItems: 'justifybetween',  marginleft: '50px' }}>
-        <p style={{ marginLeft: '0px' }} >입점하실 지점을 선택해주세요.</p>
-          <FilterTemp branchname={branchId} handleBranchSelect={handleBranchSelect} style={{ width: '30px' }}/>
-        </div>
+    
+        <Form.Item label="점주id" name="ownerId" required hidden>
+          <Input value={id} onChange={(e) => id(e.target.value)} />
+        </Form.Item>
+        {/* 지점 id  */}
         <Form.Item label="지점id" name="branchId" required hidden>
           <Input value={branchId} onChange={(e) => setBranchId(e.target.value)} />
         </Form.Item>
 
-
-        {/* 점주 id  */}
-        <Form.Item label="점주id" name="ownerId" required hidden>
-          <Input value={id} onChange={(e) => id(e.target.value)} />
-        </Form.Item>
-         {/* 매장카테고리 */}
-         <div style={{ display: 'flex', alignItems: 'justifybetween',  marginLeft: '50px' }}>
+        {/* 지점선택 -> 지점 id*/}
+        <div style={{ display: 'flex', alignItems: 'justifybetween',  marginleft: '50px' }}>
+          <div>
+            <p style={{ marginLeft: '0px' }} >입점하실 지점을 선택해주세요.</p>
+           <FilterTemp branchname={branchId} handleBranchSelect={handleBranchSelect} />
+          </div>
+               {/* 매장카테고리 */}
+          <div >
          <p style={{ marginLeft: '0px' }} >매장의 카테고리를 선택해주세요.</p>
-         <Select defaultValue="KOREA" style={{ width: '50px'}} value={shopCategory} onChange={handleCategorySelect} 
+         <Select defaultValue="KOREA" style={{ width: '100px'}} value={shopCategory} onChange={handleCategorySelect} 
               options={[
               { value: 'KOREA', label: '한식'},
               { value: 'CHINA', label: '중식'},
@@ -180,8 +180,8 @@ function ShopAdd() {
         </div>
          <Form.Item label="매장카테고리" name="shopCategory" required hidden  >
           <Input value={shopCategory} onChange={(e) => setShopCategory(e.target.value)} />
-          console.log(e.target.value);
         </Form.Item>
+        </div>
         
         {/* 매장명 */}
         <Form.Item label="매장명" name="shopName" required  style={{ width: 'calc(135% - 0px)'}} >

@@ -32,7 +32,7 @@ const Join = () => {
   const validateMessages = {
     required: '${label} is required!',
     types: {
-      email: '${label} is not a valid email!',
+      email: '${label} 형식이 아닙니다.',
     },
   };
 

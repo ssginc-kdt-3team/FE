@@ -15,7 +15,7 @@ const ShopAdd = Loadable(lazy(() => import('../pages/shop/Add')));
 const MgtInfo = Loadable(lazy(() => import('../pages/mgt/information/index')));
 const MgtReview = Loadable(lazy(() => import('../pages/mgt/review/List')));
 const MenuReg = Loadable(lazy(() => import('../pages/mgt/menu/Add')));
-const MgtInfoUpdate = Loadable(lazy(() => import('../pages/shop/Update')));
+const ShopUpdate = Loadable(lazy(() => import('../pages/shop/Update')));
 const MenuDetail = Loadable(lazy(() => import('../pages/mgt/menu/Detail')));
 const MenuUpdate = Loadable(lazy(() => import('../pages/mgt/menu/Update')));
 const ResvAcList = Loadable(lazy(() => import('../pages/resv/activeList/index')));
@@ -94,7 +94,7 @@ const MainRoutes = {
                 },
                 {
                     path: '/mgt/info/update/:id',
-                    element: <MgtInfoUpdate />
+                    element: <ShopUpdate />
                 },
                 {
                     path: '/mgt/review',

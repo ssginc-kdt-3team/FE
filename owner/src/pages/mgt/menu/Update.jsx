@@ -68,9 +68,6 @@ function MenuUpdate() {
     } catch (error) {
       console.error('Error updating menu:', error);
       console.log(formData.menuData);
-      console.log(formData.price);
-      console.log(formData.name);
-      console.log(formData.menuImgUrl);
       // Handle error
     }
   };

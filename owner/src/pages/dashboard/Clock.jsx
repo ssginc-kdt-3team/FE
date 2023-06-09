@@ -10,6 +10,7 @@ const Clock = () => {
 
     return () => {
       clearInterval(timerID);
+      console.log(time);
     };
   }, []);
 
