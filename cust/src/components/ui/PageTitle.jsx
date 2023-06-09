@@ -6,12 +6,12 @@ const H1 = styled.h1`
   font-size: var(--pageTitle-fontSize);
   /* font-weight: 500; */
   text-align: center;
-  margin: 30px 0 50px 0;
+  margin: 50px 0 80px 0;
 
-  /* @media screen and (max-width: 768px) { */
+  @media screen and (max-width: 768px) {
     /* font-size: 24px; */
-    /* margin: 60px 0 80px 0; */
-  /* } */
+    margin: 30px 0 50px 0;
+  }
 `;
 
 const Span = styled.span`

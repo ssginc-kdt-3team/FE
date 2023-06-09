@@ -12,9 +12,25 @@
   content: none;
 } 
 
+/* 로그인 카드, 예약 없음 카드 */
+.infoMessageWrap {
+  margin: 0 10px;
+}
+/* 버튼 */
+.infoMessageWrap  button {
+  width: var(--button-width);
+}
+
 
 @media screen and (max-width: 768px) {
   #carouselWrap {
     display: block;
+  }
+  
+  /* 버튼 */
+  .infoMessageWrap  button {
+    width: var(--button-width-s);
+    height: var(--button-height-s);
+    font-size: var(--button-fontSize-s);
   }
 }

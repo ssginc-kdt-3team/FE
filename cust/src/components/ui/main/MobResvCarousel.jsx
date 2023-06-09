@@ -53,14 +53,13 @@ function MobResvCarousel() {
             </Slider>
           )
           : ( // 리스트가 없으면
-              <div className={`${styles.infoMessageWrap} center`}>
+              <div className={`${styles.infoMessageWrap} box border-box center`}>
                 <div className='flex flex-col flex-gap-32'>
                   현재 예약 내역이 없습니다.
                   <Button 
                     type='primary' 
                     className='button' 
                     onClick={() => navigate('/resv/add')}
-                    style={{width: 'var(--button-width)'}}
                   >
                     예약하기
                   </Button>
@@ -69,14 +68,13 @@ function MobResvCarousel() {
           )
         )
         : ( // 로그인이 되어있지 않으면
-            <div className={`${styles.infoMessageWrap} center`}>
+            <div className={`${styles.infoMessageWrap} box border-box center`}>
               <div className='center flex-col flex-gap-32'>
                 로그인이 필요합니다.
                 <Button 
                   type='primary' 
                   className='button' 
                   onClick={() => navigate('/login')}
-                  style={{width: 'var(--button-width)'}}
                 >
                   로그인
                 </Button>
