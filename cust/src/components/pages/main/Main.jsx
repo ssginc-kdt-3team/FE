@@ -30,7 +30,7 @@ function Main() {
   const [branchImg, setBranchImg] = useState('');
 
   return (
-    <div id={styles.container} className='flex flex-col flex-gap-80'>
+    <div id={styles.container} className='flex flex-col flex-gap-40'>
       <section id={styles.topWrap}>
         <Div className='flex flex-gap-40'>
           {/* 배너 */}

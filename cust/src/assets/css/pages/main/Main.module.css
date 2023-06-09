@@ -3,11 +3,11 @@
 }
 
 /* 예약 정보 */
-/* #topWrap {
-  height: calc(100vh - var(--header-height)); */
+#topWrap {
+  height: calc(85vh - var(--header-height));
   /* background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url(../../images/background.jpg) no-repeat center;
   background-size: cover; */
-/* } */
+}
 #topWrap > div:first-child {
   padding-top: 80px;
 }
@@ -42,6 +42,7 @@
 
   /* 상단 */
   #topWrap {
+    height: auto;
     padding: 0 10px;
   }
   #topWrap > div:first-child {
