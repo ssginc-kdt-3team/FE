@@ -51,7 +51,7 @@ function ShopDetail({data}) {
                 <p><Span>닫는시간</Span>{data.closeTime}</p>
                 <p><Span>주문 마감 시간</Span>{data.orderCloseTime}</p>
                 <p><Span>대표자명</Span>{data.businessCeo}</p>
-                <p><Span>사업자등록번호</Span>{data.businessNumber}</p>
+                {/* <p><Span>사업자등록번호</Span>{data.businessNumber}</p> */}
 
           {/* 수정하기 버튼 */}
             <Button 

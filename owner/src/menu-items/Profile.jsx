@@ -10,12 +10,12 @@ const icons = {
 
 const profile = {
     id: 'owner-profile',
-    title: '프로필',
+    title: '정보관리',
     type: 'group',
     children: [
         {
             id: 'profile',
-            title:'마이프로필',
+            title:'내정보관리',
             type: 'item',
             url: '/profile',
             icon: icons.UserOutlined

@@ -15,11 +15,11 @@ const Logout = () => {
     dispatch(clearUser());
     dispatch(setLoggedIn(false));
     console.log(id);
-    Modal.success({
-      title: '로그아웃 성공',
-      content: '로그아웃 되었습니다.',
-      okText: "닫기"
-    });
+    // Modal.success({
+    //   title: '로그아웃 성공',
+    //   content: '로그아웃 되었습니다.',
+    //   okText: "닫기"
+    // });
 
     navigate('/');
   };

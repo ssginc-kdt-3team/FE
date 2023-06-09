@@ -100,13 +100,13 @@ const MonthlyBarChart = () => {
             }
           }
         },
-        colors: ['#2E66A1', theme.palette.grey[500]],
+        colors: ['#CD5C5C', theme.palette.grey[500]],
         tooltip: {
           theme: 'light'
         }
       }));
 
-      setSeries([{ data: numData },  {  name: '예상 노쇼율', data: noShowData  }]);
+      setSeries([{ data: numData },  { name: '예상 노쇼율', data: noShowData  }]);
       setTotalNum(total);
     }
   }, [info, secondary, todayresv]);
@@ -130,7 +130,14 @@ const MonthlyBarChart = () => {
              width={800}
              height={400} />
         </div>
+        <Grid container justifyContent="flex-end">
+          <Typography variant="subtitle2" style={{ color: '#cccccc', marginLeft: '5px', marginBottom: '20px' }}>
+            예상 노쇼율은 지난 3개월의 시간별 노쇼 평균치를 기준으로 계산된 수치입니다.
+          </Typography>
         </Grid>
+
+        </Grid>
+        
     </>
   );
 };
