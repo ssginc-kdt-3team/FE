@@ -4,6 +4,7 @@ import { useRecoilValue } from 'recoil';
 import { loginState } from '../../../state/loginState';
 import { Rate } from 'antd';
 import axios from 'axios';
+import { confirm, error, success } from '../../../utils/notification';
 
 function ReviewCard({data}) {
   console.log(data);
@@ -13,24 +14,21 @@ function ReviewCard({data}) {
 
   const [isContentWrapOpen, setIsContentWrapOpen] = useState(false);
 
-  const handleReviewDelete = () => {
+  const confirmReviewDelete = () => {
     // console.log(data.reviewId);
-    
-    if(window.confirm('후기를 삭제하시겠습니까?')) {
+    confirm('후기를 삭제하시겠습니까?', () => {
       axios.post(`/customer/review/delete/${data.reviewId}`)
       .then(res => {
         console.log(res);
         if(res.data === true)
-          alert("후기가 삭제되었습니다.");
+          success("후기가 삭제되었습니다.");
         // navigate('/resv');
       })
       .catch(err => { // 오류 처리
-        alert("오류가 발생하였습니다.");
+        error("오류가 발생하였습니다.");
         console.log(err);
       });
-    }
-    else 
-      return;
+    })
   }
 
   return (
@@ -59,7 +57,7 @@ function ReviewCard({data}) {
           <div id={styles.name}>{data.userName.slice(0, 1)}{'O'.repeat(data.userName.length - 2)}{data.userName.slice(-1, )}</div>
           <div 
             id={styles.deleteBtn} 
-            onClick={handleReviewDelete}
+            onClick={confirmReviewDelete}
             style={data.userId === loginInfo.id ? { display: 'block' } : { display: 'none' }}
           >
             삭제

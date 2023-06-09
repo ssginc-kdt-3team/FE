@@ -9,6 +9,8 @@ import Charge from '../../../popUp/profile/cash/Charge';
 
 
 function SelectChargeOption({isModalOpen, setIsModalOpen}) {
+  console.log('화면크기: ' + window.innerWidth);
+
   const loginInfo = useRecoilValue(loginState);
 
   const [selectedOption, setSelectedOption] = useState('5000'); // 처음은 1번으로
@@ -19,6 +21,11 @@ function SelectChargeOption({isModalOpen, setIsModalOpen}) {
     price : selectedOption,
 		customerId : loginInfo.id
   })
+
+  const handleModalClose = () => {
+    setSelectedOption('5000'); // 초기값으로 변경
+    setIsModalOpen(false); // 모달 닫기
+  }
 
   useEffect(() => {
     setChargeInfo( prevChargeInfo => ({
@@ -36,18 +43,12 @@ function SelectChargeOption({isModalOpen, setIsModalOpen}) {
       open={isModalOpen}
     >
       <form id={styles.chargeForm} className='flex flex-col'>
-        {/* <div className='flex'><input type="radio" name="price" value="5000" onChange={handleRadio}/><span>5000</span></div>
-        <div className='flex'><input type="radio" name="price" value="10000" onChange={handleRadio}/><span>10000</span></div>
-        <div className='flex'><input type="radio" name="price" value="20000" onChange={handleRadio}/><span>20000</span></div>
-        <div className='flex'><input type="radio" name="price" value="30000" onChange={handleRadio}/><span>30000</span></div>
-        <div className='flex'><input type="radio" name="price" value="40000" onChange={handleRadio}/><span>40000</span></div>
-        <div className='flex'><input type="radio" name="price" value="50000" onChange={handleRadio}/><span>50000</span></div> */}
         <CashPicker selectedOption={selectedOption} setSelectedOption={setSelectedOption}/>
       </form>
 
       <div id={styles.buttonWrap}>
-        <Button className='button buttonReverse' onClick={() => setIsModalOpen(false)}>취소</Button>
-        <Charge chargeInfo={chargeInfo}/>
+        <Button className='button buttonReverse' onClick={handleModalClose}>취소</Button>
+        <Charge chargeInfo={chargeInfo} windowSize={window.innerWidth}/>
       </div>
     </Modal>
   );

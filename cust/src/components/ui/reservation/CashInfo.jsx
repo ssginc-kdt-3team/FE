@@ -21,7 +21,7 @@ function CashInfo() {
     })
     .catch(err => { // 오류 처리
       console.log(err);
-      error(err.response.data.error, '');
+      error(err.response.data.error);
     })
   }, [loginInfo.id])
 

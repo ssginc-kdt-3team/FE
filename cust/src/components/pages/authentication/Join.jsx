@@ -8,6 +8,7 @@ import { isInputEmpty, isPasswordValid, checkEmailDup } from '../../../utils/aut
 import { onlyNum } from '../../../utils/format';
 import Postcode from '../../popUp/authentication/PostCode';
 import { Button } from 'antd';
+import { error, success } from '../../../utils/notification';
 
 // action에 따라 안에 데이터를 어떻게 변화시킬지 설정
 const reducer = (state, action) => {
@@ -108,12 +109,12 @@ function Join() {
     if(!isInputEmpty(userInfo)) { // 빈칸 확인
       // if(isEmailValid(userInfo.email)) { // 이메일 검증
       if(!canUseEamil) { // 이메일이 이미 사용중이면
-        alert("이메일 중복확인을 해주세요.");
+        error("이메일 중복확인을 해주세요.");
         return;
       }
       
       if(!isPasswordConfirmed) { // 비밀번호 확인
-        alert("비밀번호를 확인해주세요.");
+        error("비밀번호를 확인해주세요.");
         return;
       }
       
@@ -123,14 +124,14 @@ function Join() {
       .then(res => { // 받아오는 정보가 있다
         console.log(res.data);
         if(res.data === "")
-          alert("회원가입에 실패하였습니다.");
+          error("회원가입에 실패하였습니다.");
         else {
-          alert('회원가입에 성공하였습니다.');
+          success('회원가입에 성공하였습니다.');
           navigate('/login', { replace: true });
         }
       })
       .catch(err => { // 오류 처리
-        alert("오류가 발생하였습니다.");
+        error("오류가 발생하였습니다.");
         console.log(err);
       });
     }

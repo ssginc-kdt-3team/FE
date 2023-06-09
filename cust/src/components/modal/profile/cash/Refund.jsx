@@ -9,16 +9,16 @@ import { cashFormat } from '../../../../utils/format';
 
 function Refund({isModalOpen, setIsModalOpen, data, remainedCash}) {
   const handleRefund = () => {
-    confirm('환불 하시겠습니까?', '', () => { 
+    confirm('환불 하시겠습니까?', () => { 
       axios.post(`/customer/charge/refund/${data.id}`)
       .then(res => {
         console.log(res);
-        success('환불이 완료되었습니다.', '');
+        success('환불이 완료되었습니다.');
       })
       .catch(err => { // 오류 처리
         console.log(err);
         // alert(err.response.data);
-        error(err.response.data, '');
+        error(err.response.data);
       })
       
     })

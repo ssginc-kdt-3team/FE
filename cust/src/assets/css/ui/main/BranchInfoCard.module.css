@@ -19,6 +19,9 @@
 }
 
 /* 매장 정보 */
+#detailsWrap > p {
+  margin: 8px 0;
+}
 #detailWrap > p > span {
   color: var(--description);
   margin-right: 16px;

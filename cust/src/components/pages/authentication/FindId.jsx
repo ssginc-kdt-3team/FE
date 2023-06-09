@@ -6,6 +6,7 @@ import axios from 'axios';
 import { Button } from 'antd';
 import { isInputEmpty } from '../../../utils/authentication/joinValidation';
 import { onlyNum } from '../../../utils/format';
+import { error, success } from '../../../utils/notification';
 
 function FindId() {
   const navigate = useNavigate();
@@ -34,13 +35,13 @@ function FindId() {
       .then(res => { // 받아오는 정보가 있다
         console.log(res);
         if(res.data !== null) {
-          alert('아이디 찾기에 성공하였습니다.');
+          success('아이디 찾기에 성공하였습니다.');
           navigate(`/find-id/result`, { replace: true, state: { name: inputInfo.name, email: res.data } });
         }
       })
       .catch(err => { // 오류 처리
         console.log(err);
-        alert(err.response.data);
+        error(err.response.data);
       });
     }
   }

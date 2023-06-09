@@ -25,6 +25,7 @@ const Title = styled.div`
 const Img = styled.img`
   width: 100%;
   height: 100%;
+  border: 1px solid var(--border);
   border-radius: var(--border-radius);
   /*object-fit: contain; /* 여백 O */
   object-fit: cover; /* 여백 X */

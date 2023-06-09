@@ -29,6 +29,7 @@ const Title = styled.div`
 const Img = styled.img`
   width: 100%;
   height: 100%;
+  /* border: 1px soild var(--border); */
   border-radius: var(--border-radius);
   /*object-fit: contain; /* 여백 O */
   object-fit: cover; /* 여백 X */
@@ -53,6 +54,7 @@ const Btn = styled.button`
 const Li = styled.li`
   /* width: 250px;
   height: 250px; */
+  border: 1px solid var(--border);
   border-radius: var(--border-radius);
   font-size: 20px;
   
@@ -84,11 +86,6 @@ const Li = styled.li`
   }
 `;
 
-const buttonStyle = {
-  width: 'var(--button-width-s)',
-  height: 'var(--button-height-s)',
-  fontSize: 'var(--button-fontSize-s)'
-}
 
 function BranchShopCard({data, isShopCard=false, branchId=1}) {
   const navigate = useNavigate();
@@ -96,22 +93,22 @@ function BranchShopCard({data, isShopCard=false, branchId=1}) {
   return (
     <Li id={styles.tile}>
       <Img src={isShopCard ? data.shopImgUrl ? data.shopImgUrl : noImage : data.branchImgUrl ? data.branchImgUrl : noImage} alt='' onClick={() => navigate(isShopCard ? `/shop/${branchId}/${data.id}` : `/shop/${data.id}`)}/>
-        <ContentWrap className='center flex-col flex-gap-20'>
-          <Title onClick={() => navigate(isShopCard ? `/shop/${branchId}/${data.id}` : `/shop/${data.id}`)}>{data.name}</Title>
-          {
-            isShopCard ? (
-              <Button 
-                className='button buttonReverse buttonTransparent'
-                onClick={() => navigate("/resv/add", { state : { branchId: `${branchId}`, shopId: `${data.id}` }})}
-                disabled={data.shopStatus === 'OPEN' ? false : true}
-                style={{...buttonStyle, ...data.shopStatus === 'OPEN' ? {} : { opacity: '0.25' }}}
-              >
-                예약하기
-              </Button>
-            )
-            : ''
-          }
-        </ContentWrap>
+      <ContentWrap className='center flex-col flex-gap-20'>
+        <Title onClick={() => navigate(isShopCard ? `/shop/${branchId}/${data.id}` : `/shop/${data.id}`)}>{data.name}</Title>
+        {
+          isShopCard ? (
+            <Button 
+              className='button buttonReverse buttonTransparent button-s'
+              onClick={() => navigate("/resv/add", { state : { branchId: `${branchId}`, shopId: `${data.id}` }})}
+              disabled={data.shopStatus === 'OPEN' ? false : true}
+              style={data.shopStatus === 'OPEN' ? {} : { opacity: '0.25' }}
+            >
+              예약하기
+            </Button>
+          )
+          : ''
+        }
+      </ContentWrap>
     </Li>
   );
 }

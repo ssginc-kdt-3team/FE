@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { isEmpty, isPointSelected } from '../../../utils/reservation/reviewValidation';
 import { Button } from 'antd';
+import { error, success } from './../../../utils/notification';
 
 // action에 따라 안에 데이터를 어떻게 변화시킬지 설정
 const reducer = (state, action) => {
@@ -63,14 +64,14 @@ function AddReview({isModalOpen, setIsModalOpen, isReviewed, setIsReviewed}) {
         .then(res => {
           console.log(res);
           if(res.data) {
-            alert('후기가 등록되었습니다.');
+            success('후기가 등록되었습니다.');
             handleClose();
             setIsReviewed(true);
           }
         })
         .catch(err => {
           console.log(err);
-          alert('오류가 발생하였습니다.');
+          error('오류가 발생하였습니다.');
         })
       }
     }

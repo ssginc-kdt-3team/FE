@@ -87,7 +87,7 @@ function UpdateResv() {
     // .then(res => {
     //   console.log(res);
     //   console.log(resvInfo);
-    //   alert('수정이 완료되었습니다.');
+    //   success('수정이 완료되었습니다.');
     //   navigate(`/resv/${resvId}`, { replace: true }); // 예약상세 화면으로 이동
     // })
     // .catch(err => console.log(err))
@@ -103,18 +103,22 @@ function UpdateResv() {
         <form id={styles.resvForm} className='flex flex-col flex-gap-40'>
           <div id={styles.topWrap} className='flex flex-gap-40'>
             {/* 지점 선택 */}
-            <Select className='select' bordered={false} size='large' value={previousResvInfo.branchName} disabled>
-              {
-                previousResvInfo && (<Option value={previousResvInfo.branchName}>{previousResvInfo.branchName}</Option>)
-              }          
-            </Select>
+            {
+              previousResvInfo && (
+                <Select className='select' bordered={false} size='large' value={previousResvInfo.branchName} disabled>
+                  <Option value={previousResvInfo.branchName}>{previousResvInfo.branchName}</Option>
+                </Select>
+              )
+            }
 
-            {/* 매장 선택 */}   
-            <Select className='select' bordered={false} size='large' value={previousResvInfo.shopName} disabled>
-              {
-                previousResvInfo && (<Option value={previousResvInfo.shopName}>{previousResvInfo.shopName}</Option>)
-              }
-            </Select>
+            {/* 매장 선택 */} 
+            {
+              previousResvInfo && (
+                <Select className='select' bordered={false} size='large' value={previousResvInfo.shopName} disabled>
+                  <Option value={previousResvInfo.shopName}>{previousResvInfo.shopName}</Option>
+                </Select>
+              )
+            }  
           </div>
         
           <div id={styles.middleWrap} className='grid-2c flex-gap-80'>

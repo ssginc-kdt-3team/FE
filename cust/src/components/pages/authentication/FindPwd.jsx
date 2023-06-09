@@ -6,6 +6,7 @@ import { Button } from 'antd';
 import { isInputEmpty } from '../../../utils/authentication/joinValidation';
 import { onlyNum } from '../../../utils/format';
 import axios from 'axios';
+import { error, success } from '../../../utils/notification';
 
 function FindPwd() {
   const navigate = useNavigate();
@@ -35,13 +36,13 @@ function FindPwd() {
       .then(res => { // 받아오는 정보가 있다
         console.log(res);
         if(res.data !== null) {
-          alert('비밀번호 찾기에 성공하였습니다.');
+          success('비밀번호 찾기에 성공하였습니다.');
           navigate(`/find-pwd/result`, { replace: true, state: { name: inputInfo.name, password: res.data } });
         }
       })
       .catch(err => { // 오류 처리
         console.log(err);
-        alert(err.response.data);
+        error(err.response.data);
       });
     }
   }

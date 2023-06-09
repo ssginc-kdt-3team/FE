@@ -10,6 +10,7 @@ import styled from 'styled-components';
 import PageSubTitle from '../../ui/PageSubTitle';
 import axios from 'axios';
 import Paging from '../../ui/Paging';
+import { error } from '../../../utils/notification';
 
 function Shop() {
   const { shopId } = useParams();
@@ -44,7 +45,7 @@ function Shop() {
       setMenuList(res.data.menus);
     })
     .catch(err => { // 오류 처리
-      alert("오류가 발생하였습니다.");
+      error("오류가 발생하였습니다.");
       console.log(err);
     })
   }, [shopId])
@@ -58,7 +59,7 @@ function Shop() {
       setItemsPerPage(res.data.pageable.pageSize); // 페이지당 아이템 수 설정
     })
     .catch(err => { // 오류 처리
-      alert("오류가 발생하였습니다.");
+      error("오류가 발생하였습니다.");
       console.log(err);
     })
   }, [shopId, currentPage])

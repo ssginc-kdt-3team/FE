@@ -11,7 +11,7 @@ const getStatusColor = (status) => {
     case 'Gold':
       return 'gold';
     default:
-      return 'blue';
+      return 'white';
   }
 };
 
