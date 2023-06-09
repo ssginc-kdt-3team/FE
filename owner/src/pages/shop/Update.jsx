@@ -44,7 +44,7 @@ function ShopUpdate() {
   const navigate = useNavigate();
   const formRef = useRef(null);
 
-
+//ownerid가 아니라 shopid 였다ㅏㅏㅏ
   useEffect(() => {
     if (state) {
       setOwnerName(state.name);
