@@ -17,12 +17,14 @@ import FindPwResult from "./components/pages/authentication/FindPwdResult";
 import BranchList from "./components/pages/shop/BranchList";
 import ShopList from "./components/pages/shop/ShopList";
 import Shop from "./components/pages/shop/Shop";
-import Review from "./components/pages/profile/Review";
+import ReviewList from "./components/pages/profile/ReviewList";
 import Profile from "./components/pages/profile/Profile";
 import Cash from "./components/pages/profile/cash/Cash";
 import ChargeResult from "./components/pages/profile/cash/ChargeResult";
-import Point from "./components/pages/profile/Point";
-import Coupon from "./components/pages/profile/Coupon";
+import PointList from "./components/pages/profile/PointList";
+import CouponList from "./components/pages/profile/CouponList";
+import Event from "./components/pages/event/Event";
+import EventList from "./components/pages/event/EventList";
 
 function App() {
   return ( // 이 안에 JSX 문법 적용
@@ -55,10 +57,14 @@ function App() {
 
           {/* profile */}
           <Route path="/profile" element={<Profile/>}/>
-          <Route path="/profile/review" element={<Review/>}/>
+          <Route path="/profile/review" element={<ReviewList/>}/>
           <Route path="/cash" element={<Cash/>}/>
-          <Route path="/point" element={<Point/>}/>
-          <Route path="/coupon" element={<Coupon/>}/>
+          <Route path="/point" element={<PointList/>}/>
+          <Route path="/coupon" element={<CouponList/>}/>
+
+          {/* event */}
+          <Route path="/event" element={<EventList/>}/>
+          <Route path="/event/:eventId" element={<Event/>}/>
 
           {/* Charge */}
           <Route path="/chargeResult" element={<ChargeResult/>}/>

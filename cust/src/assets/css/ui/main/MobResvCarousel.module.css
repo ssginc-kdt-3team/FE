@@ -25,10 +25,15 @@
 @media screen and (max-width: 768px) {
   #carouselWrap {
     display: block;
+    z-index: 93;
+  }
+
+  .infoMessageWrap {
+    height: 162px;
   }
   
   /* 버튼 */
-  .infoMessageWrap  button {
+  .infoMessageWrap button {
     width: var(--button-width-s);
     height: var(--button-height-s);
     font-size: var(--button-fontSize-s);

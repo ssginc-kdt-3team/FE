@@ -191,7 +191,7 @@ function AddResv() {
                 {/* 요구사항 */}
                 <div>
                   <label>요구사항 <span>* 100자 이하로 작성해주세요.</span></label>
-                  <textarea name='memo' type='text' cols={50} rows={3} maxLength="100" onChange={handleTextArea}></textarea>
+                  <textarea name='memo' type='text' cols={50} rows={4} maxLength="100" onChange={handleTextArea}></textarea>
                 </div>
 
               </div>

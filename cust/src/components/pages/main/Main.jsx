@@ -4,12 +4,11 @@ import { useSetRecoilState } from 'recoil';
 import { loginState } from '../../../state/loginState';
 import styles from '../../../assets/css/pages/main/Main.module.css';
 import styled from 'styled-components';
-import ResvInfoCarousel from '../../ui/main/ResvInfoCarousel';
+import ResvCarousel from '../../ui/main/ResvCarousel';
 import EventCarousel from '../../ui/main/EventCarousel';
 import PageTitle from './../../ui/PageTitle';
 import RecdShopCarousel from '../../ui/main/RecdShopCarousel';
 import BranchInfoCard from '../../ui/main/BranchInfoCard';
-import MobResvCard from '../../ui/main/MobResvCard';
 import MobResvCarousel from '../../ui/main/MobResvCarousel';
 
 const Div = styled.div`
@@ -37,7 +36,7 @@ function Main() {
           <EventCarousel/>
 
           {/* 예약 정보 카드 */}
-          <ResvInfoCarousel/>
+          <ResvCarousel/>
           <MobResvCarousel/>
         </Div>
       </section>
