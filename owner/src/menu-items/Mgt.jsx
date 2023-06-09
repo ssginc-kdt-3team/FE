@@ -17,7 +17,7 @@ const mgt = {
     children: [
         {
             id: 'mgtrtlist',
-            title: '매장 정보',
+            title: '메뉴 정보 조회',
             type: 'item',
             url: '/mgt/info',
             icon: icons.ShopOutlined

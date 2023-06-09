@@ -39,11 +39,11 @@ const LoginForm = () => {
             dispatch(setUser({ id: res.data.id, name: res.data.name }));
             dispatch(setLoggedIn(true));
 
-            Modal.success({
-              title: '로그인 성공',
-              content: '로그인에 성공하였습니다.',
-              okText: "닫기"
-            });
+            // Modal.success({
+            //   title: '로그인 성공',
+            //   content: '로그인에 성공하였습니다.',
+            //   okText: "닫기"
+            // });
 
             navigate('/main', { replace: true });
           }
@@ -72,7 +72,7 @@ const LoginForm = () => {
                 message: '이메일을 입력하세요.',
               },
             ]}
-            style={{ width: '250px', marginLeft: '10px' }}
+           style={{ width: '250px', marginLeft: '10px' }} 
           >
             <Input
               type="email"

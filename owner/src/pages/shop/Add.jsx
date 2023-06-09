@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Card, Button, DatePicker, TimePicker, Form, Input, Upload, Modal } from 'antd';
+import { Card, Button, DatePicker, TimePicker, Form, Input, Upload, Modal, Select } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { axiosWithBaseUrl } from 'App';
 import dayjs from 'dayjs';
@@ -21,8 +21,8 @@ const normFile = (e) => {
 function ShopAdd() {
   // form data 상태변수
   const id = useSelector((state) => state.user.id); 
+  const ownerName = useSelector((state) => state.user.name); 
   const [shopName, setShopName] = useState('');
-  const [ownerName, setOwnerName] = useState('');
   const [phone, setPhone] = useState('');
   const [branchId, setBranchId] = useState('1');
   const [shopInfo, setShopInfo] = useState('');
@@ -34,7 +34,7 @@ function ShopAdd() {
   const [openTime, setOpenTime] = useState(dayjs('12:00', format));
   const [closeTime, setCloseTime] = useState(dayjs('12:00', format));
   const [openDay, setOpenDay] = useState(dayjs());
-
+  const [shopCategory, setShopCategory ] = useState('');
   const [photos, setPhotos] = useState([]);                              //shopImg
   const [businessPhotos, setBusinessPhotos] = useState([]);   //businessImg
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -49,6 +49,7 @@ function ShopAdd() {
       closeTime: closeTime.format(format),
       openDay: openDay.format('YYYY-MM-DD'),
       shopInfo: shopInfo,
+      shopCategory: shopCategory,
       location: location,
       seat: seat,
       phone: phone,
@@ -59,7 +60,7 @@ function ShopAdd() {
       ownerId: id,          // ownerId
       branchId: branchId,    // branchId
     };
-
+   
     // formData > shopData, shopImg, businessImg
     const formData = new FormData();
     const json = JSON.stringify(shopData);
@@ -105,6 +106,11 @@ function ShopAdd() {
     setBranchId(branchId);
   };
 
+  
+  const handleCategorySelect = (shopCategory) => {
+    setShopCategory(shopCategory);
+  };
+
   //모달
   const showModal = () => {
     setIsModalOpen(true);
@@ -136,7 +142,7 @@ function ShopAdd() {
         }}
         layout="horizontal"
         style={{
-          maxWidth: 500,
+          maxWidth: 600,
         }}
         initialValues={{
           openTime: dayjs('12:00', format),
@@ -146,22 +152,42 @@ function ShopAdd() {
         onFinish={onFinish}
       >
 
-        {/* 지점선택 필터 css 추가하기*/}
+        {/* 지점선택 -> 지점 id*/}
         <div style={{ display: 'flex', alignItems: 'justifybetween',  marginleft: '50px' }}>
         <p style={{ marginLeft: '0px' }} >입점하실 지점을 선택해주세요.</p>
           <FilterTemp branchname={branchId} handleBranchSelect={handleBranchSelect} style={{ width: '30px' }}/>
         </div>
-
         <Form.Item label="지점id" name="branchId" required hidden>
-          <Input id="branchId" value={branchId} onChange={(e) => setBranchId(e.target.value)} />
+          <Input value={branchId} onChange={(e) => setBranchId(e.target.value)} />
         </Form.Item>
 
+
+        {/* 점주 id  */}
         <Form.Item label="점주id" name="ownerId" required hidden>
           <Input value={id} onChange={(e) => id(e.target.value)} />
         </Form.Item>
-        <Form.Item label="매장명" name="shopName" required  style={{ width: 'calc(135% - 0px)'}} >
-          <Input value={shopName} onChange={(e) => setShopName(e.target.value)} />
+         {/* 매장카테고리 */}
+         <div style={{ display: 'flex', alignItems: 'justifybetween',  marginLeft: '50px' }}>
+         <p style={{ marginLeft: '0px' }} >매장의 카테고리를 선택해주세요.</p>
+         <Select defaultValue="KOREA" style={{ width: '50px'}} value={shopCategory} onChange={handleCategorySelect} 
+              options={[
+              { value: 'KOREA', label: '한식'},
+              { value: 'CHINA', label: '중식'},
+              { value: 'JAPAN', label: '일식'},
+              { value: 'ASIAN', label: '아시안'},
+	            { value: 'WEST', label: '양식'},
+            ]} />
+        </div>
+         <Form.Item label="매장카테고리" name="shopCategory" required hidden  >
+          <Input value={shopCategory} onChange={(e) => setShopCategory(e.target.value)} />
+          console.log(e.target.value);
         </Form.Item>
+        
+        {/* 매장명 */}
+        <Form.Item label="매장명" name="shopName" required  style={{ width: 'calc(135% - 0px)'}} >
+          <Input value={shopName} onChange={(e) => setShopName(e.target.value)} style={{ width: '300px' }}/>
+        </Form.Item>
+        {/* 매장 설명 */}
         <Form.Item label="매장 설명"  name="shopInfo" required style={{ width: 'calc(170% - 0px)'}}
          rules={[
           {
@@ -169,28 +195,29 @@ function ShopAdd() {
           whitespace: true,
           message: '50자 이내로 입력해주세요.',
           },
-          ]}
-          >
+          ]}>
           <Input value={shopInfo} onChange={(e) => setShopInfo(e.target.value)} />
         </Form.Item>
+        {/* 지점 내 매장 위치 */}
         <Form.Item label="지점 내 위치" name="location" required  style={{ width: 'calc(200% - 0px)'}}
            rules={[
-            {
-            pattern: /^[A-Z]\d{2}$/,
-             message: '알파벳 대문자 1개와 숫자 2개로 입력해주세요. 예시: A01',
-              },
-               ]}
-              >
-            <Input value={location} onChange={(e) => setLocation(e.target.value)} />
+                    {
+                    pattern: /^[A-Z]\d{2}$/,
+                    message: '알파벳 대문자 1개와 숫자 2개로 입력해주세요. 예시: A01',
+                     },
+                  ]}>
+          <Input value={location} onChange={(e) => setLocation(e.target.value)} style={{ width: '200px' }}
+           placeholder={'예시: A01'} />
         </Form.Item>
+        {/* 좌석 수  */}
         <Form.Item label="좌석 수" name="seat" required  style={{ width: 'calc(140% - 0px)'}}>
           <Input value={seat} onChange={(e) => setSeat(e.target.value)} />
         </Form.Item>
-        {/* 점주 id에서 name 가져오기  */}
-        <Form.Item label="점주명" name="ownername" required style={{ width: 'calc(140% - 0px)'}}>
-          <Input value={ownerName} onChange={(e) => setOwnerName(e.target.value)} />
+        {/* 점주 명 점주 id에서 name 가져오기  */}
+        <Form.Item label="점주명" name="ownerName-" required hidden style={{ width: 'calc(140% - 0px)'}}>
+        <Input value={ownerName} onChange={(e) => ownerName(e.target.value)} />
         </Form.Item>
-
+        {/* 매장 전화번호 */}
          <Form.Item
           label="매장 전화번호"
           name="phone"
@@ -202,16 +229,19 @@ function ShopAdd() {
         >
           <Input value={phone} onChange={(e) => setPhone(e.target.value)} />
         </Form.Item>  
+        {/* 개업일 */}
         <Form.Item label="개업일" name="openDay" required style={{ width: 'calc(140% - 0px)'}}>
           <DatePicker value={openDay} onChange={setOpenDay} />
         </Form.Item>
+        {/* 오픈시간 */}
         <Form.Item label="오픈시간" name="openTime" required style={{ width: 'calc(160% - 0px)'}}>
           <TimePicker format={format} value={openTime} onChange={setOpenTime} />
         </Form.Item>
+        {/* 마감시간 */}
         <Form.Item label="마감시간" name="closeTime" required style={{ width: 'calc(160% - 0px)'}}>
           <TimePicker format={format} value={closeTime} onChange={setCloseTime} />
         </Form.Item>
-
+        {/* 주문마감시간 */}
         <Form.Item
           label="주문마감시간"
           name="orderCloseTime"
@@ -227,12 +257,11 @@ function ShopAdd() {
             return Promise.reject(new Error('주문 마감시간은 마감시간 이전이어야 합니다.'));
             },
             }),
-          ]}
-        >
+          ]}>
         <TimePicker format={format} value={orderCloseTime} onChange={setOrderCloseTime} />
       </Form.Item>
 
-      {/* 사진 업로드 */}
+      {/* 매장 사진 */}
       <Form.Item
           label="매장 사진"
           name="shopImg"
@@ -258,11 +287,11 @@ function ShopAdd() {
             </div>
           </Upload>
         </Form.Item>
-        
+        {/* 사업주이름 */}
         <Form.Item label="사업주 이름" name="businessCeo" required style={{ width: 'calc(200% - 0px)'}}>
           <Input value={businessCeo} onChange={(e) => setBusinessCeo(e.target.value)} />
         </Form.Item>
-
+        {/* 사업자 등록번호 */}
         <Form.Item 
         label="사업자 등록번호" 
         name="businessNumber" 
@@ -274,7 +303,7 @@ function ShopAdd() {
         ]}>
           <Input value={businessNumber} onChange={(e) => setBusinessNumber(e.target.value)} style={{ width: '150px'}}/>
         </Form.Item>
-
+        {/* 사업자 등록증 사진 */}
         <Form.Item
           label="사업자 등록증 사진"
           name="businessImg"
@@ -300,7 +329,7 @@ function ShopAdd() {
             </div>
           </Upload>
           </Form.Item>
-
+        {/* 등록하기 버튼 */}
         <Form.Item>
           <Button 
           type="primary" 
@@ -309,7 +338,7 @@ function ShopAdd() {
           justifyContent: 'center' }}>
             등록하기
           </Button>
-
+        {/* 등록하기 확인 모달 */}
           <Modal 
           title="매장등록" 
           okText="네"
@@ -317,7 +346,7 @@ function ShopAdd() {
           visible={isModalOpen}
           onOk={handleSubmit} 
           onCancel={handleCancel}>
-            <p>매장을 등록하시겠습니까?</p>
+          <p>매장을 등록하시겠습니까?</p>
           </Modal>
         </Form.Item>
       </Form>

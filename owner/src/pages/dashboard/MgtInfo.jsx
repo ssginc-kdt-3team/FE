@@ -13,9 +13,9 @@ const Span = styled.span`
   margin-right: 20px;
 `;
 
-function MgtInfo({data}) {
+function MgtInfo() {
   const id = useSelector((state) => state.user.id); 
-  const [shopInfo, setShopInfo] = useState(null);
+  const [data, setData] = useState(null);
 
   useEffect(() => {
     axiosWithBaseUrl
@@ -23,7 +23,7 @@ function MgtInfo({data}) {
       .then((res) => {
         console.log(res.data);
         console.log(id);
-        setShopInfo(res.data);
+        setData(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -35,16 +35,17 @@ function MgtInfo({data}) {
       {
         data && (
         <div style={{ textAlign: "center", marginBottom: "5px" }}>
-              <Typography.Title level={5}>{data.shopName}</Typography.Title>
+              <Typography.Title level={4}>{data.shopName}</Typography.Title>
           
           {/* 매장정보*/}
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <div style={{ whiteSpace: 'nowrap', textAlign: 'center' }}>
-               <h3>{data.shopInfo}</h3>
-                <p><Span>지점명</Span>{data.branchName}</p>
-                <p><Span>오픈시간</Span>{data.openTime}</p>
-                <p><Span>닫는시간</Span>{data.closeTime}</p>
-                <p><Span>주문 마감 시간</Span>{data.orderCloseTime}</p>
+                <p><Span>지점명 :</Span>{data.branchName}</p>
+                <p><Span>오픈시간 :</Span>{data.openTime}</p>
+                <p><Span>닫는시간 :</Span>{data.closeTime}</p>
+                <p><Span>주문마감시간 :</Span>{data.orderCloseTime}</p>
+                <p><Span>좌석 수 :</Span>{data.seat}</p>
+
           </div>
         </div>
         </div>

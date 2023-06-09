@@ -24,9 +24,9 @@ const barChartOptions = {
       colors: ['#fff']
     },
     dataLabels: {
-      formatter: (val) => {
-
-      }
+      formatter: function (val) {
+        return val.toFixed(2) + '%';
+      },
     },
   },
   plotOptions: {
@@ -59,19 +59,12 @@ const barChartOptions = {
 const MonthlyBarChart = () => {
   const theme = useTheme();
   const id = useSelector((state) => state.user.id);              // 점주 id
-  // const [monthlyresvData, setMonthlyResvData] = useState({
-  //   doneValue: '',
-  //   cancelValue: '',
-  //   noShowValue: '',
-  //   whole: '',
-  // });
-  // const { primary, secondary } = theme.palette.text;
   const { secondary } = theme.palette.text;
   const info = theme.palette.info.light;
   const [monthlyresv, setMonthlyResv] = useState([]);
   const [currentDate, setCurrentDate] = useState('');
   const [previousMonths, setPreviousMonths] = useState([]);
-
+  const [ labels, setLabels ] = useState({});
   //y축 데이터
   const [series, setSeries] = useState([
     {
@@ -116,8 +109,11 @@ const MonthlyBarChart = () => {
     const noshowData = monthlyresv.map((resv) => parseInt(resv.noShowValue));
     const cancelData = monthlyresv.map((resv) => parseInt(resv.cancelValue));
     const wholeData = monthlyresv.map((resv) => parseInt(resv.whole));
-    // const monthLabels = monthlyresv.map((resv) => parseInt(resv));
-    
+    const doneRate = monthlyresv.map((resv) => parseInt(resv.doneRate));
+    const noshowRate  = monthlyresv.map((resv) => parseInt(resv.noshowRate));
+    const cancelRate = monthlyresv.map((resv) => parseInt(resv.cancelRate)); 
+
+
     const today = new Date();
     const formattedDate = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
     setCurrentDate(formattedDate);
@@ -134,7 +130,7 @@ const MonthlyBarChart = () => {
           },
         },
       },
-       colors: ['#80c7fd', '#008FFB', '#80f1cb', '#00E396'],
+       colors: ['#3b5998', '#8b9dc3', '#dfe3ee', '#00E396'],
        tooltip: {
         theme: "light",
       },
@@ -148,6 +144,17 @@ const MonthlyBarChart = () => {
       prevState[2].data = [cancelData];
       return [...prevState];
     });
+
+    setLabels(
+      [ {data:doneRate}, {data:noshowRate}, {data:cancelRate}], 
+      (prevState) => {
+      prevState[0].data = [doneData];
+      prevState[1].data = [noshowData];
+      prevState[2].data = [cancelData];
+      return [...prevState];
+    });
+
+    
   }
   }, [info, secondary, monthlyresv]);
 

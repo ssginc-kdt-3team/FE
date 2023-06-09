@@ -54,7 +54,7 @@ const MonthlyDepositChart = () => {
     lastMonthPenalty: '',
     thisMonthPenalty: ''
   });
-  const { primary, secondary } = theme.palette.text;
+  const { secondary } = theme.palette.text;
   const info = theme.palette.info.light;
   const [currentDate, setCurrentDate] = useState('');
   const [series, setSeries] = useState([{ name: '위약금', data: '' }]); // y축 data
@@ -83,9 +83,6 @@ const MonthlyDepositChart = () => {
     const formattedDate = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
     setCurrentDate(formattedDate);
 
-    
-
-
     setOptions((prevState) => ({
       ...prevState,
       xaxis: {
@@ -102,22 +99,22 @@ const MonthlyDepositChart = () => {
           }
         }
       },
-      colors: [info],
+      colors: ['#03396c'],
       tooltip: {
         theme: 'light'
       }
     }));
 
-    setSeries([{ data: penaltyData }]);
+    setSeries([{ data: penaltyData}]);
   }, [info, secondary, monthlyData]);
 
   return (
     <>
-      <Grid item style={{padding:'20px'}}>
+      <Grid item style={{padding:'10px'}}  justifyContent="center" alignItems="center" >
       {/* <Typography variant="h6" color="textSecondary"  marginLeft='30px'>
         {` ${currentDate.slice(0, 6)}`}
       </Typography> */}
-      <Typography variant="h5" style={{marginLeft: '10px', marginBottom: '10px'}}>이번달 위약금:{monthlyData.thisMonthPenalty}원</Typography>
+      <Typography variant="h5" style={{marginLeft: '10px', marginBottom: '5px', textAlign: 'center' , color: '#8b8589'}}>이번달 위약금:{monthlyData.thisMonthPenalty.toLocaleString()}원</Typography>
 
         <div id="chart">
           <ReactApexChart
