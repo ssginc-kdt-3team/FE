@@ -2,7 +2,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 16px;
 }
 
 /* 상단 */
@@ -16,6 +16,9 @@
 }
 
 /* 하단 */
+#bottomWrap > p {
+  margin: 8px 0;
+}
 #bottomWrap > p > span {
   color: var(--description);
   margin-right: 16px;

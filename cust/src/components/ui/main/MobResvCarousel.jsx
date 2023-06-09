@@ -54,7 +54,7 @@ function MobResvCarousel() {
           )
           : ( // 리스트가 없으면
               <div className={`${styles.infoMessageWrap} box border-box center`}>
-                <div className='flex flex-col flex-gap-32'>
+                <div className='center flex-col flex-gap-32'>
                   현재 예약 내역이 없습니다.
                   <Button 
                     type='primary' 

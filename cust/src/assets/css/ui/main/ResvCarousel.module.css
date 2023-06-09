@@ -2,6 +2,8 @@
   width: calc(30% - 20px);
   height: 100%;
   padding: 0 40px;
+  /* background-color: #fff; */
+  z-index: 93;
 }
 
 .sliderWrap {

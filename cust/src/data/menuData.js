@@ -29,25 +29,25 @@ const menuData = [
   },
   {
     id: 4,
-    name: "예약 안내",
+    name: "이용 안내",
     link: "/",
-    // subMenu : [
-    //   {
-    //     id: 1,
-    //     name: '예약 서비스 안내',
-    //     link: "/"
-    //   },
-    //   {
-    //     id: 2,
-    //     name: '리워드 안내',
-    //     link: "/"
-    //   }
-    // ]
+    subMenu : [
+      {
+        id: 1,
+        name: '예약 서비스 안내',
+        link: "/"
+      },
+      {
+        id: 2,
+        name: '리워드 안내',
+        link: "/"
+      }
+    ]
   },
   {
     id: 5,
-    name: "리워드 안내",
-    link: "/"
+    name: "이벤트",
+    link: "/event"
   }
 ]
 

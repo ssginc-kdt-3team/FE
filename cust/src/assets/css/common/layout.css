@@ -35,6 +35,12 @@
   align-items: center;
 }
 
+.flex-start {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .grid-2c {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -73,6 +79,9 @@
 }
 .flex-gap-10 {
   gap: 10px;
+}
+.flex-gap-8 {
+  gap: 8px;
 }
 .flex-gap-16 {
   gap: 16px;

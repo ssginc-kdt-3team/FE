@@ -1,0 +1,29 @@
+.eventCard {
+  width: 100%;
+}
+
+.eventCard > div {
+  margin-bottom: 16px;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.eventCard img {
+  width: 100%;
+  transition: 0.5s;
+  display: block;
+}
+
+.eventCard img:hover {
+  transform: scale(1.05);
+}
+
+.eventCard p {
+  margin: 0;
+  padding-left: 8px;
+  gap: 4px;
+}
+.eventCard p > span:first-child {
+  font-size: var(--input-fontSize);
+  font-weight: 500;
+}

@@ -2,6 +2,7 @@
   width: calc(70% - 20px);
   padding: 0;
   /* box-shadow: none; */
+  /* border: 1px solid #fff; */
 }
 
 .sliderWrap {
@@ -10,6 +11,7 @@
 }
 .sliderWrap > div {
   border-radius: var(--border-radius);
+  box-shadow: 80px 80px 128px rgb(0 0 0 / 10%);
 }
 /* 버튼 안보이게 */
 .sliderWrap > button {

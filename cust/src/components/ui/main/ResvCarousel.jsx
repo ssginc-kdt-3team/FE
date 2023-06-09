@@ -3,7 +3,7 @@ import PageSubTitle from '../../ui/PageSubTitle';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
-import styles from '../../../assets/css/ui/main/ResvInfoCarousel.module.css';
+import styles from '../../../assets/css/ui/main/ResvCarousel.module.css';
 import next from '../../../assets/images/icons/next.png';
 import { useRecoilValue } from 'recoil';
 import { loginState } from '../../../state/loginState';

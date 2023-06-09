@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:8080';
+axios.defaults.baseURL = 'http://10.10.10.159:8080';
+// axios.defaults.baseURL = 'http://localhost:8080';
 // axios.defaults.withCredentials = true;
 
 export const axiosWithToken = axios.create({
