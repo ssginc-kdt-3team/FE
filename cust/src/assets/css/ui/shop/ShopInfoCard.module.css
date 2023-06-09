@@ -2,6 +2,7 @@
 #topWrap > img {
   width: 320px;
   height: 240px;
+  border: 1px solid var(--border);
   border-radius: var(--border-radius);
 
   /* object-fit: contain; /* 여백 O */
@@ -14,9 +15,12 @@
 #topWrap > div > p:first-child {
   margin-top: 0;
 }
+#topWrap > p {
+  margin: 8px 0;
+}
 #topWrap p > span {
   color: var(--description);
-  margin-right: 20px;
+  margin-right: 16px;
 }
 
 /* 버튼 */

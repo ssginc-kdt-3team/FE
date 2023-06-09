@@ -64,7 +64,7 @@ function Header() {
           </div>
 
           {/* 메뉴 */}
-          <ul id={styles.bottomWrap} className='center flex-gap-45' onMouseOver={() => setIsSubMenuOpen(false)} onMouseOut={() => setIsSubMenuOpen(false)}>
+          <ul id={styles.bottomWrap} className='center flex-gap-45' onMouseOver={() => setIsSubMenuOpen(true)} onMouseOut={() => setIsSubMenuOpen(false)}>
             {
               menuData && menuData.map( data => (
                 <Link to={data.link} key={data.id}>

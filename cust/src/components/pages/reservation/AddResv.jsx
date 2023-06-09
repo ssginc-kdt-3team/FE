@@ -12,7 +12,7 @@ import PageTitle from '../../ui/PageTitle';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { loginState } from '../../../state/loginState';
-import Filter from '../../ui/reservation/Filter';
+import BranchShopSelecter from '../../ui/reservation/BranchShopSelecter';
 import { Button } from 'antd';
 import Pay from '../../modal/reservation/Pay';
 import { error } from '../../../utils/notification';
@@ -98,7 +98,7 @@ function AddResv() {
 
     console.log(resvInfo.reservationDate.slice(11, ));
     if(resvInfo.reservationDate.slice(11, ) === "00:00:00") { // 시간 선택 검증
-      error("시간을 선택하세요.", '');
+      error("시간을 선택하세요.");
       return;
     }
 
@@ -107,7 +107,7 @@ function AddResv() {
     // axios.post('/customer/reservation/add', resvInfo)
     // .then(res => {
     //   console.log(res);
-    //   alert('예약이 등록되었습니다.');
+    //   success('예약이 등록되었습니다.');
     //   navigate("/resv", { replace: true });
     // })
     // .catch(err => console.log(err))
@@ -123,7 +123,7 @@ function AddResv() {
           {/* 지점이랑 매장의 id, 이름 가져와서 option 안에 넣는다 */}
           <form id={styles.resvForm} className='flex flex-col flex-gap-40'>
             <div id={styles.topWrap} className='flex flex-gap-40'>
-              <Filter 
+              <BranchShopSelecter 
                 state={state}
                 isFromShop={isFromShop} 
                 setIsFromShop={setIsFromShop}

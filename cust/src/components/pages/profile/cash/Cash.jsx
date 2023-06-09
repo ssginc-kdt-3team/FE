@@ -12,6 +12,7 @@ import TypeFilter from '../../../ui/profile/TypeFilter';
 import DateFilter from '../../../ui/profile/DateFilter';
 import SelectChargeOption from '../../../modal/profile/cash/SelectChargeOption';
 import { cashFormat } from '../../../../utils/format';
+import { error } from '../../../../utils/notification';
 
 const Ul = styled.ul`
   max-width: 800px;
@@ -69,7 +70,7 @@ function Cash() {
     })
     .catch(err => { // 오류 처리
       console.log(err);
-      alert("오류가 발생하였습니다.");
+      error("오류가 발생하였습니다.");
     })
   }, [loginInfo.id, type, dateRange, currentPage])
 
@@ -83,7 +84,7 @@ function Cash() {
     })
     .catch(err => { // 오류 처리
       console.log(err);
-      alert(err.response.data.error);
+      error(err.response.data.error);
     })
   }, [loginInfo.id])
 

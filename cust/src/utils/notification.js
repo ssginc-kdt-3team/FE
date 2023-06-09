@@ -2,18 +2,17 @@ import { Modal } from 'antd';
 import { ExclamationCircleFilled, CloseCircleFilled, CheckCircleFilled } from '@ant-design/icons';
 import styles from '../assets/css/modal/Modal.module.css'
 
-export const confirm = (title, content, func) => {
+export const confirm = (title, func) => {
   const { confirm } = Modal;
   
   confirm({
     title: title,
     icon: <ExclamationCircleFilled style={{ color: 'var(--main)' }}/>,
-    content: content,
     okButtonProps: {
-      className: `button ${styles.confirmBtn}`,
+      className: `button button-xs`,
     },
     cancelButtonProps: {
-      className: `button buttonReverse ${styles.confirmBtn}`,
+      className: `button buttonReverse button-xs`,
     },
     okText: '확인',
     cancelText: '취소',
@@ -25,29 +24,27 @@ export const confirm = (title, content, func) => {
 
 }
 
-export const error = (title, content) => {
+export const error = (title) => {
   const { error } = Modal;
 
   error({
     title: title,
     icon: <CloseCircleFilled  style={{ color: 'var(--main)' }}/>,
-    content: content,
     okButtonProps: {
-      className: `button ${styles.confirmBtn}`,
+      className: `button button-xs`,
     },
     okText: '확인'
   });
 }
 
-export const success = (title, content) => {
+export const success = (title) => {
   const { success } = Modal;
 
   success({
     title: title,
     icon: <CheckCircleFilled  style={{ color: 'var(--main)' }}/>,
-    content: content,
     okButtonProps: {
-      className: `button ${styles.confirmBtn}`,
+      className: `button button-xs`,
     },
     okText: '확인'
   });

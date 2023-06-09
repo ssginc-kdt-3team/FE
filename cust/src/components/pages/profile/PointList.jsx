@@ -11,6 +11,7 @@ import { loginState } from '../../../state/loginState';
 import Paging from '../../ui/Paging';
 import axios from 'axios';
 import CashPointInfoCard from '../../ui/profile/CashPointInfoCard';
+import { error } from '../../../utils/notification';
 
 const Ul = styled.ul`
   max-width: 800px;
@@ -65,7 +66,7 @@ function Point() {
     })
     .catch(err => { // 오류 처리
       console.log(err);
-      alert("오류가 발생하였습니다.");
+      error("오류가 발생하였습니다.");
     })
   }, [loginInfo.id, type, dateRange, currentPage])
 
@@ -79,7 +80,7 @@ function Point() {
     })
     .catch(err => { // 오류 처리
       console.log(err);
-      alert(err.response.data.error);
+      error(err.response.data.error);
     })
   }, [loginInfo.id])
 

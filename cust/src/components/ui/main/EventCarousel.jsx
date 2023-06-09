@@ -4,6 +4,7 @@ import axios from 'axios';
 import Slider from 'react-slick';
 import '../../../assets/css/ui/slick-dots.css';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const Img = styled.img`
   width: 100%;
@@ -17,7 +18,7 @@ const settings = {
   dots: true,
   infinite: true,
   speed: 500,
-  autoplay: false,
+  autoplay: true,
   autoplaySpeed: 4000,
   pauseOnHover : true, // 슬라이드 이동	시 마우스 호버하면 슬라이더 멈추게 설정
   // vertical : true, // 세로 방향 슬라이드 옵션
@@ -44,7 +45,9 @@ function EventCarousel() {
       <Slider {...settings} dotsClass='slick-dots' className={styles.sliderWrap}>
         {
           eventList && eventList.map( event => (
-            <Img key={event.id} src={event.bannerUrl} alt={event.title}/>
+            <Link to={`/event/${event.id}`}>
+              <Img key={event.id} src={event.bannerUrl} alt={event.title}/>
+            </Link>
           ))
         }
       </Slider>

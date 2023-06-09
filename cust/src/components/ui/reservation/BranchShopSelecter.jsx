@@ -12,16 +12,17 @@ function Filter({isFromShop, setIsFromShop, branchId, setBranchId, shopId, setSh
   // 지점 선택 처리
   const handleBranchSelect = (value) => {
     setBranchId(value); // 지점 id 변경
+    setIsFromShop(false); // << 첫 렌더링 이후에 지점 바꾸면 매장을 지점별 매장목록의 첫 번째 매장으로 설정
   }
 
   // 매장 선택 처리
   const handleShopSelect = (e) => { // 매장 정보가 변경될 때 마다
     console.log(e);
 
-    const selectedShop = shopList.find(shop => shop.id === e); // 선택된 매장을 shopList에서 찾아서
-    if(selectedShop) {
-      setShopName(selectedShop.name); // 매장명을 설정
-    }
+    // const selectedShop = shopList.find(shop => shop.id === e); // 선택된 매장을 shopList에서 찾아서
+    // if(selectedShop) {
+    //   setShopName(selectedShop.name); // 매장명을 설정
+    // }
 
     setResvInfo({ // 예약 정보 업데이트
       ...resvInfo,
@@ -59,19 +60,31 @@ function Filter({isFromShop, setIsFromShop, branchId, setBranchId, shopId, setSh
         setShopId(res.data[0].id); // shopId를 각 지점별 매장 리스트의 첫 번째 원소로
         setShopName(res.data[0].name); // 매장명 설정
       }
-      else {
-        const selectedShop = res.data.find(shop => shop.id === parseInt(shopId)); // 선택된 매장을 shopList에서 찾아서
-        if(selectedShop) {
-          console.log('넘어온 state의 매장 id에 해당하는 매장명')
-          setShopName(selectedShop.name); // 매장명을 설정
-        }
-      }
+      // else {
+      //   const selectedShop = res.data.find(shop => shop.id === parseInt(shopId)); // 선택된 매장을 shopList에서 찾아서
+      //   if(selectedShop) {
+      //     console.log('넘어온 state의 매장 id에 해당하는 매장명')
+      //     setShopName(selectedShop.name); // 매장명을 설정
+      //   }
+      // }
     })
     .catch(err => {
       console.log(err);
     })
 
-  }, [branchId, isFromShop, setShopId, setShopName, shopId]); // 지점, 매장, 날짜가 변할 때 마다 리렌더링
+  }, [branchId, isFromShop, setShopId, setShopName]); // 지점, 매장, 날짜가 변할 때 마다 리렌더링
+
+
+  // 매장명 설정 처리
+  useEffect(() => {
+    if(shopList) {
+      const selectedShop = shopList.find(shop => shop.id === parseInt(shopId)); // 선택된 매장을 shopList에서 찾아서
+      if(selectedShop) {
+        // console.log('넘어온 state의 매장 id에 해당하는 매장명')
+        setShopName(selectedShop.name); // 매장명을 설정
+      }
+    }
+  }, [shopList, setShopName, shopId])
 
   return (
     <>

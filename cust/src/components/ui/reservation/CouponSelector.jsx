@@ -34,7 +34,7 @@ function SelectCoupon({couponId, setCouponId, setCouponDiscountValue}) {
       .catch(err => { // 오류 처리
         console.log(err);
         // alert(err.response.data);
-        error(err.response.data, '');
+        error(err.response.data);
       })
   }, [loginInfo, setCouponId])
 

@@ -10,6 +10,7 @@ import { isEmailValid } from '../../../utils/authentication/emailValidation';
 import { axiosWithToken } from '../../../index';
 import { isInputEmpty } from '../../../utils/authentication/loginValidation';
 import { Button } from 'antd';
+import { error, success } from '../../../utils/notification';
 
 function Login() {
   const setLoginState = useSetRecoilState(loginState);
@@ -39,7 +40,7 @@ function Login() {
           // axiosWithToken.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
 
           if(res.data === "")
-            alert('로그인에 실패하였습니다.\n아이디와 비밀번호를 확인하세요.');
+            error('로그인에 실패하였습니다.\n아이디와 비밀번호를 확인하세요.');
           else {
             setLoginState({ // 로그인된 상태로 변경
               id: res.data.id,
@@ -52,12 +53,12 @@ function Login() {
             //   name: "temp.name",
             //   email: "temp.email"
             // })
-            alert('로그인에 성공하였습니다.');
+            // success('로그인에 성공하였습니다.');
             navigate('/', { replace: true }); // 메인화면으로 이동
           }
         })
         .catch(err => { // 오류 처리
-          alert("오류가 발생하였습니다.");
+          error("오류가 발생하였습니다.");
           console.log(err);
         });
       }
@@ -66,14 +67,35 @@ function Login() {
       return;
   }
 
+  // 엔터 처리
+  const onEnterPressed = (e) => {
+    if(e.key ==='Enter') {
+      handleLogin();
+    }
+  }
+
   return (
     <div className='container'>
       <div className='center flex-col'>
         <PageTitle title="로그인"/>
         <form className={styles.loginForm}>
-          <input className={styles.loginInput} type='email' value={email} placeholder='이메일' onChange={(e) => setEmail(e.currentTarget.value)}/>
+          <input 
+            className={styles.loginInput} 
+            type='email' 
+            value={email} 
+            placeholder='이메일' 
+            onChange={(e) => setEmail(e.currentTarget.value)}
+            onKeyPress={onEnterPressed}
+          />
 
-          <input className={styles.loginInput} type='password' value={password} placeholder='비밀번호' onChange={(e) => setPassword(e.currentTarget.value)}/>
+          <input 
+            className={styles.loginInput} 
+            type='password' 
+            value={password} 
+            placeholder='비밀번호' 
+            onChange={(e) => setPassword(e.currentTarget.value)}
+            onKeyPress={onEnterPressed}
+          />
 
           <Button type='primary' className='button mt-45' onClick={handleLogin}>로그인</Button>
 

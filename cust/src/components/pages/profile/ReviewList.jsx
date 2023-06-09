@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useRecoilValue } from 'recoil';
 import { loginState } from '../../../state/loginState';
 import styled from 'styled-components';
+import { error } from '../../../utils/notification';
 
 const Ul = styled.ul`
   max-width: 800px;
@@ -37,7 +38,7 @@ function Review() {
       setItemsPerPage(res.data.pageable.pageSize); // 페이지당 아이템 수 설정
     })
     .catch(err => { // 오류 처리
-      alert("오류가 발생하였습니다.");
+      error("오류가 발생하였습니다.");
       console.log(err);
     })
   }, [loginInfo.id, currentPage])
