@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import  '../../assets/css/pages/main/calendar.css';
+import dayjs from 'dayjs';
 
 function MainCalendar() {
   const [value, onChange] = useState(new Date()); // 초기값은 현재 날짜
@@ -10,8 +11,8 @@ function MainCalendar() {
     <Calendar 
         onChange={onChange} 
         value={value}
-        formatShortWeekday={(locale, date) => ''}
-        />
+        formatDay ={(locale, date) => dayjs(date).format('DD')}
+        /> 
     </div>
   );
 }

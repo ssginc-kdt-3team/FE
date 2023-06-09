@@ -54,9 +54,9 @@ function MyProfile() {
         >
           <p>점주명: {ownerData.ownerName}</p>
           <p>이메일: {ownerData.ownerEmail}</p>
-          {/* <p>주소: {ownerData.ownerAddress}</p> */}
-          {/* <p>번호: {ownerData.ownerPhone}</p>
-          <p>생년월일: {ownerData.ownerBirthday}</p> */}
+          {/* <p>주소: {ownerData.ownerAddress}</p>  */}
+          <p>번호: {ownerData.ownerPhone}</p> 
+          <p>생년월일: {ownerData.ownerBirthday}</p>
           <Button
             type='primary'
             onClick={() => navigate(`/profile/update/${id}`)}
@@ -70,7 +70,7 @@ function MyProfile() {
 
            {/* 운영정보 */}
          <div>
-          <div className='space-between'>
+          <div >
             {shopInfo ? (
               <ShopDetail data={shopInfo} />
             ) : (
