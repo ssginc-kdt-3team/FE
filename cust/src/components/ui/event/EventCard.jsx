@@ -11,7 +11,7 @@ function EventCard({data}) {
             <img src={data.bannerUrl} alt={data.title}/>
           </div>
           <p className='flex flex-col'>
-            <span>[{data.branchName}] {data.title}</span>
+            <span>{data.branchName} | {data.title}</span>
             <span>{data.startDate.slice(0, 11)} ~ {data.endDate.slice(0, 11)}</span>
           </p>
         </div>

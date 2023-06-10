@@ -77,7 +77,7 @@ function Login() {
   return (
     <div className='container'>
       <div className='center flex-col'>
-        <PageTitle title="로그인"/>
+        <PageTitle title="LOGIN" phrase='로그인'/>
         <form className={styles.loginForm}>
           <input 
             className={styles.loginInput} 

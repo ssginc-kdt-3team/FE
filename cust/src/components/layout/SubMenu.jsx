@@ -11,7 +11,7 @@ function SubMenu({isSubMenuOpen, setIsSubMenuOpen}) {
       onMouseOver={() => setIsSubMenuOpen(true)} 
       onMouseOut={() => setIsSubMenuOpen(false)}
     >      
-      <ul className='center flex-gap-45'>
+      <ul className='center flex-gap-48'>
         {
           menuData && menuData.map( data => (
             <li key={data.id}>

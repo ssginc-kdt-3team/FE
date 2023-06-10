@@ -16,9 +16,9 @@
 }
 
 /* 중간 */
-#middleWrap > p {
+/* #middleWrap > p {
   margin: 8px 0;
-}
+} */
 #middleWrap > p > span {
   color: var(--description);
   margin-right: 16px;

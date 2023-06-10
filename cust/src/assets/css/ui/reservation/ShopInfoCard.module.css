@@ -10,13 +10,27 @@
 }
 
 /* 하단 */
-#bottomWrap > img {
+#bottomWrap > div {
+  position: relative;
   width: 100%;
+  height: 0;
+  margin-bottom: 16px;
+  padding-bottom: 75%; /* 4:3 비율에 해당하는 값 */
+}
+
+#bottomWrap > div > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 1px solid var(--border);
   border-radius: var(--border-radius);
+  object-fit: cover;
 }
-#bottomWrap > p {
+/* #bottomWrap > p {
   margin: 8px 0;
-}
+} */
 #bottomWrap > p > span {
   color: var(--description);
   margin-right: 16px;

@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from '../../assets/css/ui/MobNavMenu.module.css';
-import next from '../../assets/images/icons/next.png';
+import styles from '../../../assets/css/ui/layout/MobNavMenu.module.css';
+import next from '../../../assets/images/icons/next.png';
 import { useNavigate } from 'react-router-dom';
 
 function MobNavMenu({data, setIsNavOpen}) {
@@ -17,7 +17,7 @@ function MobNavMenu({data, setIsNavOpen}) {
         data && (
           <li id={styles.mobNavMenuWrap} >
             <div id={styles.topWrap} className='space-between' onClick={()=> handleNavigate(data.link)}>
-              <ion-icon name='cube'></ion-icon>
+              <ion-icon name={data.icon}></ion-icon>
               <h1>{data.name}</h1>
               <img src={next} alt='move to page'/>
             </div>

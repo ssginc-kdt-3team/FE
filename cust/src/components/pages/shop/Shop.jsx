@@ -66,8 +66,8 @@ function Shop() {
 
   return (
     <div className='container flex flex-col' style={{padding: '20px 0px 0px 0px'}}>
-      <PageTitle title={shopInfo && shopInfo.shopName}/>
-      <div id={styles.contentWrap} className='center flex-col flex-gap-40'>
+      <PageTitle title={shopInfo && shopInfo.shopName} phrase={shopInfo && shopInfo.shopInfo}/>
+      <div id={styles.contentWrap} className='center flex-col'>
         {/* 매장 정보 */}
         <ShopInfoCard data={shopInfo}/>
         

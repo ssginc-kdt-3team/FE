@@ -58,7 +58,7 @@ function ResvInfoCard({data, resvId}) {
               <ResvStatusTag status={data.reservationStatus}/>
             </div>
 
-            <div id={styles.middleWrap}>
+            <div id={styles.middleWrap} className='flex flex-col'>
               <p><span>예약 시간</span>{data.expectedTime.slice(0, 19)}</p>
               <p><span>예약 인원</span>{data.people}명 (유아 {data.child}명)</p>
               <p><span>요청 사항</span>{data.memo}</p>

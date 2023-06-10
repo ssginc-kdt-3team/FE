@@ -35,7 +35,7 @@ function ResvList({isActiveList}) {
   return (
     <div className='container background'>
       <div className='center flex-col'>
-        <PageTitle title="예약 내역"/>
+        <PageTitle title='RESERVATION' phrase={isActiveList ? '현재 예약 내역 조회' : '예약 내역 조회'}/>
 
         <ul id={styles.list} className='flex flex-col flex-gap-40'>
           {

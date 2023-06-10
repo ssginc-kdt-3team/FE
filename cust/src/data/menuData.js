@@ -2,12 +2,14 @@ const menuData = [
   {
     id: 1,
     name: "예약하기",
-    link: "/resv/add"
+    link: "/resv/add",
+    icon: 'calendar'
   },
   {
     id: 2,
     name: "예약 내역",
     link: "/resv",
+    icon: 'albums',
     subMenu : [
       {
         id: 1,
@@ -24,13 +26,14 @@ const menuData = [
   {
     id: 3,
     name: "매장 안내",
-    link: "/branch"
-
+    link: "/branch",
+    icon: 'fast-food'
   },
   {
     id: 4,
     name: "이용 안내",
     link: "/",
+    icon: 'information-circle',
     subMenu : [
       {
         id: 1,
@@ -47,7 +50,8 @@ const menuData = [
   {
     id: 5,
     name: "이벤트",
-    link: "/event"
+    link: "/event",
+    icon: 'gift'
   }
 ]
 

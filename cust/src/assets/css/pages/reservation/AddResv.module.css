@@ -56,8 +56,16 @@
     gap: 20px;
   } */
 
+  /* 카운터 */
+  #detailWrap > div:first-child > div {
+    justify-content: space-between;
+    align-items: center;
+    gap: 0;
+  }
+
   /* 취소/확인 버튼 */
   #buttonWrap {
+    margin: 0;
     flex-direction: column; 
     gap: 10px;
   }

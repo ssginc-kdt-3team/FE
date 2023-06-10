@@ -16,14 +16,9 @@ function ResvCard({data}) {
             {/* <div>{data.reservationStatus}</div> */}
           </div>
 
-          <div id={styles.bottomWrap}>
-            <p>
-              <span>예약 시간</span>{data.expectedDate} {data.expectedTime.slice(0, 8)}
-            </p>
-            
-            <p>
-              <span>예약 인원</span>{data.people}명 (유아 {data.child}명)
-            </p>
+          <div id={styles.bottomWrap} className='flex flex-col'>
+            <p><span>예약 시간</span>{data.expectedDate} {data.expectedTime.slice(0, 8)}</p>
+            <p><span>예약 인원</span>{data.people}명 (유아 {data.child}명)</p>
           </div>
         </div>
       </Link>

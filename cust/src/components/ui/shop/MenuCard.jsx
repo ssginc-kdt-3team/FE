@@ -68,7 +68,7 @@ const Li = styled.li`
 function MenuCard({data}) {
   return (
     <Li id={styles.tile} className={styles.menuTile}>
-      <Img src={noImage} alt=''/>
+      <Img src={data.menuImgUrl ? data.menuImgUrl : noImage} alt=''/>
       <ContentWrap className='center flex-col flex-gap-20'>
         <Title>{data.menuName}</Title>
         <Price>{data.menuPrice}원</Price>

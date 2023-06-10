@@ -57,7 +57,7 @@ function Event() {
         {
           eventInfo && (
             <>
-              <PageTitle title={eventInfo.title}/>
+              <PageTitle title={eventInfo.title} phrase={`스타필드 ${eventInfo.branchName}`}/>
               
               <Div className='center flex-col flex-gap-40'>
                 {/* 이미지 */}

@@ -34,7 +34,7 @@ function EventList() {
   return (
     <div className='container background'>
       <div className='center flex-col'>
-        <PageTitle title='이벤트' />
+        <PageTitle title='EVENTS' phrase='이벤트'/>
 
         <Ul className='grid-2c flex-gap-40'>
           {

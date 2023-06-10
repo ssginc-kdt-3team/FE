@@ -117,7 +117,7 @@ function AddResv() {
     <>
       <div className='container'>
         <div className='center flex-col'>
-          <PageTitle title="예약하기"/>
+          <PageTitle title='RESERVATION' phrase='예약하기'/>
 
           {/* 지점, 매장 */}
           {/* 지점이랑 매장의 id, 이름 가져와서 option 안에 넣는다 */}

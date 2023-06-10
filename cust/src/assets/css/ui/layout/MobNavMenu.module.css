@@ -18,6 +18,8 @@
   padding-bottom: 10px;
 } */
 #topWrap > ion-icon {
+  /* margin-top: 1px; */
+  font-size: 16px;
   color: var(--main);
 }
 #topWrap > h1 {
