@@ -26,7 +26,7 @@ function ShopList() {
   return (
     <div className='container'>
       <div className='center flex-col'>
-        <PageTitle title="매장"/>
+        <PageTitle title='SHOP'/>
         <ul id={styles.tileWrap} className='grid-4c flex-gap-10'>
           {
             shopList && shopList.map( shop => (

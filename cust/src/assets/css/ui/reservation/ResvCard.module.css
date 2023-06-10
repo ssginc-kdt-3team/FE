@@ -16,9 +16,9 @@
 }
 
 /* 하단 */
-#bottomWrap > p {
+/* #bottomWrap > p {
   margin: 8px 0;
-}
+} */
 #bottomWrap > p > span {
   color: var(--description);
   margin-right: 16px;

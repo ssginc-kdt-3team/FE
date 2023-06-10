@@ -6,7 +6,7 @@
   --mob-header-height: 90px;
 
   /* footer */
-  --footer-height: 334px;
+  --footer-height: 264px;
 
   /* size */
   --input-height: 50px;
@@ -28,7 +28,7 @@
 
   --button-fontSize: 18px;
   --button-fontSize-s: 16px;
-  --button-fontSize-xs: 15px;
+  --button-fontSize-xs: 14px;
 
   
   --pageTitle-fontSize: 26px;
@@ -53,6 +53,12 @@
   /* Carousel */
   --carousel-max-width: calc(var(--device-width-l) * 0.8);
   --carousel-width: 70vw;
+
+  /* Modal */
+  --modal-gap: 45px;
+
+  /* coupon */
+  --coupon-width: 312px
 }
 
 /* 너비 */

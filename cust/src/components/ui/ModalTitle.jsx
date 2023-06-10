@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import styled from 'styled-components';
 
 const H2 = styled.h2`
@@ -15,10 +15,11 @@ const H2 = styled.h2`
   }
 `;
 
-function PageSubTitle({title}) {
+
+function ModalTitle({title}) {
   return (
     <H2>{title}</H2>
   );
 }
 
-export default PageSubTitle;
+export default ModalTitle;

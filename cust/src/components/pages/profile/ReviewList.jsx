@@ -46,7 +46,7 @@ function Review() {
   return (
     <div className='container background'>
       <div className='center flex-col'>
-        <PageTitle title="후기"/>
+        <PageTitle title="Reviews" phrase='작성한 후기'/>
 
         <Ul className='flex flex-col flex-gap-40'>
           {

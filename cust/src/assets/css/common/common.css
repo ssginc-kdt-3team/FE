@@ -37,7 +37,7 @@ body::-webkit-scrollbar-thumb {
 header {
   width: 100vw;
   height: var(--header-height);
-  background-color: white;
+  background-color: #fff;
   /* background: rgba(255, 255, 255, 0.85); */
   /* opacity: 0.5; */
   /* backdrop-filter: blur(10px); */
@@ -48,6 +48,12 @@ header {
   right: 0;
   z-index: 98;
   transition: 0.5s;
+}
+
+footer {
+  width: 100%;
+  height: var(--footer-height);
+  background-color: var(--footer-bg);
 }
 
 ul {
@@ -114,6 +120,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 p {
+  margin: 4px 0;
   word-wrap: break-word; /* 긴 단어를 줄바꿈할 때 단어 내에서 줄바꿈 처리 */
   overflow-wrap: break-word; /* word-wrap의 대체 속성 */
 }
@@ -123,7 +130,8 @@ p {
   width: 100%;
   min-height: 100%;
   margin: 0 auto;
-  padding: 20px 20px 60px 20px;
+  /* padding: 20px 20px 60px 20px; */
+  padding: 0 20px 56px 20px;
 }
 
 .background {
@@ -147,8 +155,13 @@ p {
     height: var(--mob-header-height);
   }
 
+  footer {
+    height: fit-content;
+  }
+
   .container {
     width: 100vw;
     min-height: calc(100vh - var(--mob-header-height));
+    padding-bottom: 32px;
   }
 }

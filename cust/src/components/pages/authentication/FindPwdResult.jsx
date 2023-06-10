@@ -24,9 +24,9 @@ function FindPwdResult() {
   return (
     <div className='container'>
       <div className='center flex-col'>
-        <PageTitle title="비밀번호 찾기"/>
+        <PageTitle title='FIND PASSWORD' phrase={`${state.name}님의 정보와 일치하는 비밀번호 입니다.`}/>
         <div className={styles.loginForm} style={{gap: '10px'}}>
-          <p style={{textAlign: 'center', marginTop: 0}}>{state.name}님의 정보와 일치하는 비밀번호 입니다.</p>
+          {/* <p style={{textAlign: 'center', marginTop: 0}}>{state.name}님의 정보와 일치하는 비밀번호 입니다.</p> */}
           <P>{state.password}</P>
 
           <Button type='primary' className='button mt-75' onClick={() => navigate("/login", { replace: true })}>로그인 하기</Button>

@@ -22,7 +22,7 @@ function BranchList() {
   return (
     <div className='container'>
       <div className='center flex-col'>
-        <PageTitle title="지점"/>
+        <PageTitle title='BRANCH'/>
         <ul id={styles.tileWrap} className='grid-4c flex-gap-10'>
           {
             branchList && branchList.map( branch => (

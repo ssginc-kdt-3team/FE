@@ -24,8 +24,11 @@
 .sliderWrap > div label {
   color: var(--description);
 } 
+.sliderWrap > div p {
+  margin-bottom: 16px;
+} 
 .sliderWrap > div button {
-  margin: 16px 0 32px 0;
+  margin-top: 16px;
 }
 
 /* 안내 메세지 */

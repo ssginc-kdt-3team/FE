@@ -20,7 +20,7 @@ function BranchInfoCard({setBranchImg}) {
   }, [branchId, setBranchImg])
 
   return (
-    <div id={styles.cardWrap} className='box shadow-box'>
+    <div id={styles.cardWrap} className='flex flex-col flex-gap-20'>
       <BranchSelector branchId={branchId} setBranchId={setBranchId}/>
       {
         branchInfo && (
@@ -36,7 +36,7 @@ function BranchInfoCard({setBranchImg}) {
             <div id={styles.detailWrap}>
               <p><span>영업시간</span>{branchInfo.openTime} ~ {branchInfo.closeTime}</p>
               <p><span>대표전화</span>{branchInfo.phone}</p>
-              <p><span>위치</span>{branchInfo.address.address} {branchInfo.address.extraAddress} {branchInfo.address.detail}</p>
+              <p className='flex'><span>위치</span>{branchInfo.address.address} {branchInfo.address.extraAddress} {branchInfo.address.detail}</p>
             </div>
           </div>
         )

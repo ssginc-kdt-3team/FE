@@ -35,11 +35,6 @@ const Div = styled.div`
   }
 `;
 
-const buttonStyle = {
-  marginBottom: '65px',
-  float: 'right'
-};
-
 
 function Cash() {
   const loginInfo = useRecoilValue(loginState);
@@ -92,11 +87,16 @@ function Cash() {
     <>
       <div className='container'>
         <div className='center flex-col'>
-          <PageTitle title={cashFormat(remainedCash)} type="cash"/>
-          <div className='flex flex-gap-10'>
-            <Button className='button buttonReverse button-s' onClick={() => setIsModalOpen(true)} style={buttonStyle}>충전하기</Button>
-            <Button type='primary' className='button button-s' style={buttonStyle}>인출</Button>
-          </div>
+          <PageTitle 
+            title={cashFormat(remainedCash)} 
+            type="cash" 
+            button={
+              <div className='flex flex-gap-10'>
+                <Button className='button buttonReverse button-s' onClick={() => setIsModalOpen(true)}>충전하기</Button>
+                <Button type='primary' className='button button-s'>인출</Button>
+              </div>
+            }
+          />
           
           {/* 필터 */}
           <Div className='space-between'>

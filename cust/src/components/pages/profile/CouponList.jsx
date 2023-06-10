@@ -7,13 +7,13 @@ import CouponCard from '../../ui/profile/CouponCard';
 import styled from 'styled-components';
 
 const Ul = styled.ul`
-  max-width: 800px;
-  width: 75%;
+  width: calc(var(--coupon-width) * 2 + 40px);
   
   @media screen and (max-width: 768px) {
-    max-width: 100%;
     width: 100%;
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
     gap: 20px;
   }
@@ -38,7 +38,7 @@ function Coupon() {
   return (
     <div className='container background'>
       <div className='center flex-col'>
-        <PageTitle title='쿠폰' />
+        <PageTitle title='COUPON' phrase='쿠폰'/>
 
         <Ul className='grid-2c flex-gap-40'>
           {

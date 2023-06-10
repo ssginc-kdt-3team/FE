@@ -4,6 +4,12 @@
   left: 0;
   right: 0;
 }
+.fixed-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
 
 .flex {
   display: flex;
@@ -98,11 +104,11 @@
 .flex-gap-40 {
   gap: 40px;
 }
-.flex-gap-45 {
-  gap: 45px;
+.flex-gap-48 {
+  gap: 48px;
 }
-.flex-gap-50 {
-  gap: 50px;
+.flex-gap-56 {
+  gap: 56px;
 }
 .flex-gap-60 {
   gap: 60px;

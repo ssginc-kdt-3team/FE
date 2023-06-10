@@ -49,7 +49,7 @@ function FindId() {
   return (
     <div className='container'>
       <div className='center flex-col'>
-        <PageTitle title="아이디 찾기"/>
+        <PageTitle title='FIND ID' phrase='아이디 찾기'/>
         <form className={styles.loginForm}>
           <div>
             <label>NAME</label>

@@ -4,7 +4,7 @@ import styles from '../../assets/css/layout/MobNav.module.css';
 import menuData from "../../data/menuData";
 import { useRecoilState } from 'recoil';
 import { loginState } from '../../state/loginState';
-import MobNavMenu from '../ui/MobNavMenu';
+import MobNavMenu from '../ui/layout/MobNavMenu';
 
 function MobNav({isNavOpen, setIsNavOpen}) {
   const [loginInfo, setLoginInfo] = useRecoilState(loginState);

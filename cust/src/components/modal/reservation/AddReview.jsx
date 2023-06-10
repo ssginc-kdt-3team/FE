@@ -112,8 +112,8 @@ function AddReview({isModalOpen, setIsModalOpen, isReviewed, setIsReviewed}) {
       </form>
 
       <div id={styles.buttonWrap}>
-        <Button className='button buttonReverse' onClick={handleClose}>취소</Button>
-        <Button type="primary" className='button' onClick={handleReviewSubmit}>완료</Button>
+        <Button className='button buttonReverse button-s' onClick={handleClose}>취소</Button>
+        <Button type="primary" className='button button-s' onClick={handleReviewSubmit}>완료</Button>
       </div>
     </Modal>
   );

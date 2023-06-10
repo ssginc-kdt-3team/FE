@@ -11,24 +11,27 @@
 
 #topWrap > div {
   width: 320px;
+  position: relative;
 }
 #topWrap > div > p:first-child {
   margin-top: 0;
 }
-#topWrap > p {
+/* #topWrap > p {
   margin: 8px 0;
-}
+} */
 #topWrap p > span {
   color: var(--description);
   margin-right: 16px;
 }
+/* #topWrap p > span > ion-icon {
+  font-size: 20px;
+} */
 
 /* 버튼 */
 #topWrap button {
-  width: var(--button-width-s);
-  height: var(--button-height-s);
-  margin-top: 16px;
-  font-size: var(--button-fontSize-s);
+  position: absolute;
+  left: 0;
+  bottom: 0;
 }
 
 
@@ -52,6 +55,7 @@
   /* 상세 정보 */
   #topWrap > div {
     width: 100%;
+    position: static;
   }
   #topWrap > div > p:first-child {
     margin-top: 0;
@@ -64,6 +68,8 @@
   #topWrap button {
     width: 100%;
     height: var(--input-height);
+    margin-top: 32px;
     font-size: var(--button-fontSize);
+    position: static;
   }
 }

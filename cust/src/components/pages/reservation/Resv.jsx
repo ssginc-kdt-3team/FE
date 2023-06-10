@@ -53,7 +53,7 @@ function Resv() {
   return (
     <div className='container background'>
       <div className='center flex-col'>
-        <PageTitle title="예약 상세"/>
+        <PageTitle title='RESERVATION' phrase='예약 상세 조회'/>
         <div id={styles.detailWrap}>
           {/* 예약 정보 */}
           <ResvInfoCard data={resvInfo} resvId={resvId}/>

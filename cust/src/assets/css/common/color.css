@@ -5,6 +5,7 @@
   --bg: #f9fafc;
   --bg2: #f8f9fb;
   --input-bg: #f9f9f9;
+  --footer-bg: #1f1f1f;
 
   /* border */
   /* --input-border: #ccc; */
@@ -19,6 +20,7 @@
   --topMenu-font: #555555;
   --description: #999;
   --charge: #91caff;
+  --footer-font: #d1d1d1;
   
   /* scrollbar */
   --scrollbar: #ddd;
@@ -35,8 +37,4 @@
   --red: #ca3232;
 
   --price: #f95a00;
-
-
-  --footer-bg: #f4f4f4;
-
 }

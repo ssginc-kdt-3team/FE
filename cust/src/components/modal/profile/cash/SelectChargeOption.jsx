@@ -47,7 +47,7 @@ function SelectChargeOption({isModalOpen, setIsModalOpen}) {
       </form>
 
       <div id={styles.buttonWrap}>
-        <Button className='button buttonReverse' onClick={handleModalClose}>취소</Button>
+        <Button className='button buttonReverse button-s' onClick={handleModalClose}>취소</Button>
         <Charge chargeInfo={chargeInfo} windowSize={window.innerWidth}/>
       </div>
     </Modal>

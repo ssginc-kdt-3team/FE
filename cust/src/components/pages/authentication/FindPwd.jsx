@@ -50,7 +50,7 @@ function FindPwd() {
   return (
     <div className='container'>
       <div className='center flex-col'>
-        <PageTitle title="비밀번호 찾기"/>
+        <PageTitle title='FIND PASSWORD' phrase='비밀번호 찾기'/>
         <form className={styles.loginForm}>
           <div>
             <label>NAME</label>

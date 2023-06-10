@@ -25,6 +25,7 @@ import PointList from "./components/pages/profile/PointList";
 import CouponList from "./components/pages/profile/CouponList";
 import Event from "./components/pages/event/Event";
 import EventList from "./components/pages/event/EventList";
+import Footer from "./components/layout/Footer";
 
 function App() {
   return ( // 이 안에 JSX 문법 적용
@@ -69,6 +70,7 @@ function App() {
           {/* Charge */}
           <Route path="/chargeResult" element={<ChargeResult/>}/>
         </Routes>
+        <Footer/>
       </BrowserRouter>
     </RecoilRoot>
   );

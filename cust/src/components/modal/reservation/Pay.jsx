@@ -89,8 +89,8 @@ function Pay({isModalOpen, setIsModalOpen, data, setData, shopName}) {
           <p><span>예약금</span>{cashFormat(initialDeposit)}원</p>
           
           {/* 쿠폰 */}
-          <div className='grid-2c'>
-            <p className='flex'><span>쿠폰 할인</span><div>{cashFormat(couponDiscountValue)}원</div></p>
+          <div className='space-between'>
+            <p className='center-h'><span>쿠폰 할인</span><div>{cashFormat(couponDiscountValue)}원</div></p>
             <CouponSelector couponId={couponId} setCouponId={setCouponId} setCouponDiscountValue={setCouponDiscountValue}/>
           </div>
           
@@ -113,8 +113,8 @@ function Pay({isModalOpen, setIsModalOpen, data, setData, shopName}) {
       </div>
 
       <div id={styles.buttonWrap}>
-        <Button className='button buttonReverse' onClick={handleModalClose}>취소</Button>
-        <Button type="primary" className='button' onClick={handlePay}>결제</Button>
+        <Button className='button buttonReverse button-s' onClick={handleModalClose}>취소</Button>
+        <Button type="primary" className='button button-s' onClick={handlePay}>결제</Button>
       </div>
     </Modal>
   );

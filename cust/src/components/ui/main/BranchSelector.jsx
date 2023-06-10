@@ -2,10 +2,11 @@ import { Select } from 'antd';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
+import styles from '../../../assets/css/ui/main/BranchSelector.module.css';
 
 const Label = styled.label`
   color: var(--description);
-  margin: 0;
+  margin: 0 4px 0 0;
   display: inline-block;
 `;
 
@@ -33,7 +34,7 @@ function BranchSelector({branchId, setBranchId}) {
   return (
     <div className='center-h'>
       <Label>지점 선택</Label>
-      <Select bordered={false} size='large' value={branchId} onChange={(e) => handleBranchSelect(e)}>
+      <Select className={styles.selectWrap} bordered={false} size='large' value={branchId} onChange={(e) => handleBranchSelect(e)}>
         {/* <Option value={branchId}>점포 변경</Option> */}
         {
           branchList && branchList.map( branch => (

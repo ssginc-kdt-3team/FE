@@ -10,6 +10,17 @@ import { loginState } from '../../../state/loginState';
 import axios from 'axios';
 import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+
+const H2 = styled.h2`
+  width: 100%;
+  height: var(--pageTitle-fontSize);
+  font-size: var(--pageTitle-fontSize);
+  line-height: var(--pageTitle-fontSize);
+  font-weight: 500;
+  text-align: center;
+  margin: 64px 0 64px 0;
+`;
 
 const settings = {
   dots: false,
@@ -41,7 +52,7 @@ function ResvInfoCarousel() {
 
   return (
     <div id={styles.carouselWrap} className='box border-box center-h flex-col'>
-      <PageSubTitle title='예약 내역'/>
+      <H2>예약 내역</H2>
 
       {
         loginInfo.id !== -1 ? ( // 로그인 되어 있고
