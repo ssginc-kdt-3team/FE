@@ -10,10 +10,9 @@ import { Table } from 'antd';
 function DepositList({type, branchId, shopId}) {
   // const { id } = useParams();
   const [depositList, setDepositList] = useState(null);
-  
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   const [totalItems, setTotalItems] = useState(0); // 총 아이템 수
-  const [itemsPerPage, setItemsPerPage] = useState(8) // 페이지당 아이템 수
+  const [itemsPerPage, setItemsPerPage] = useState(10) // 페이지당 아이템 수
 
   useEffect(() => {
     axios.get(`http://localhost:8080/admin/deposit/${type}/${type === "branch" ? branchId : shopId}/${currentPage}`)

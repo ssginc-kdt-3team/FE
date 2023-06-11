@@ -11,7 +11,7 @@ import config from 'config';
 // ==============================|| MAIN LOGO ||============================== //
 
 const LogoSection = ({ sx, to }) => (
-    <ButtonBase disableRipple component={Link} to={!to ? config.defaultPath : to} sx={sx}>
+    <ButtonBase disableRipple sx={sx}>
         <Logo />
     </ButtonBase>
 );

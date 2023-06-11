@@ -23,9 +23,9 @@ const Logo = () => {
          * <img src={logo} alt="Mantis" width="100" />
          *
          */
-        <Link to="/">
-        <img src={logo} alt="Stafield" style={{ height: 'auto', width: '140px', marginLeft: '26px'}} /> 
-        </Link>
+        // <Link to="/">
+        <img src={logo} alt="Stafield" style={{ height: 'auto', width: '140px', marginLeft: '0'}} /> 
+        // </Link>
     );
 };
 

@@ -6,7 +6,7 @@ import Paging from "components/pagination/paging";
 
 function OwnerList() {
   const [ownerList, setOwnerList] = useState([]);
-  const [branchId, setBranchId] = useState(2);          // 기본값 branch1을 설정
+  const [branchId, setBranchId] = useState(1);          // 기본값 branch1을 설정
   const [currentPage, setCurrentPage] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(10);
@@ -46,7 +46,7 @@ function OwnerList() {
       dataIndex: "ownerName",
       key: "ownerName",
       render: (text, record) => (
-        <Link to={`/owner/detail/${record.ownerId}`}>{text}</Link>
+        <Link to={`/owner/detail/${record.ownerId}`} style={{ color: 'black' }}>{text}</Link>
       ),
     },
     {
@@ -61,8 +61,8 @@ function OwnerList() {
     },
     {
       title: "상태",
-      dataIndex: "status",
-      key: "status",
+      dataIndex: "userStatus",
+      key: "userStatus",
     }
   ];
 
