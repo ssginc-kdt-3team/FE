@@ -49,7 +49,7 @@ function Main() {
         </Div>
       </section>
 
-      <section id={styles.bottomWrap} className='background' style={{display: 'none'}}>
+      <section id={styles.bottomWrap} style={{display: 'none'}}>
         {/* <Div> */}
           <BranchInfoCard setBranchImg={setBranchImg}/>
         {/* </Div> */}

@@ -1,6 +1,6 @@
 #subMenuWrap {
   width: 100vw;
-  height: 120px;
+  /* height: 120px; */
   /* height: calc(100vh - var(--mob-header-height)); */
   background-color: white;
   border-bottom: 1px solid var( --gray-150);

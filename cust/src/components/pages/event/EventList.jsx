@@ -13,7 +13,7 @@ const Ul = styled.ul`
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 24px;
   }
 `;
 
@@ -21,7 +21,7 @@ function EventList() {
   const [eventList, setEventList] = useState(null);
 
   useEffect(() => {
-    axios.get(`event/banners/`)
+    axios.get(`/event/banners`)
     .then(res => {
       console.log(res.data);
       setEventList(res.data);

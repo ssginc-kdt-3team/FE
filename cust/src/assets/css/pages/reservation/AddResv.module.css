@@ -67,7 +67,7 @@
   #buttonWrap {
     margin: 0;
     flex-direction: column; 
-    gap: 10px;
+    gap: 8px;
   }
   #buttonWrap > button {
     width: 100%;

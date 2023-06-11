@@ -25,7 +25,6 @@ const Title = styled.div`
 const Img = styled.img`
   width: 100%;
   height: 100%;
-  border: 1px solid var(--border);
   border-radius: var(--border-radius);
   /*object-fit: contain; /* 여백 O */
   object-fit: cover; /* 여백 X */
@@ -41,6 +40,7 @@ const Price = styled.div`
 const Li = styled.li`
   /* width: 250px;
   height: 250px; */
+  border: 1px solid var(--border);
   border-radius: var(--border-radius);
   font-size: 20px;
   

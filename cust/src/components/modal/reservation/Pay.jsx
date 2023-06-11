@@ -52,12 +52,12 @@ function Pay({isModalOpen, setIsModalOpen, data, setData, shopName}) {
     console.log(data);
     console.log(shopName);
     
-    confirm('결제 하시겠습니까?', '', () => {   
+    confirm('결제 하시겠습니까?', () => {   
       axios.post('/customer/reservation/add', data)
       .then(res => {
         console.log(res);
         success('예약이 등록되었습니다.');
-        navigate("/resv", { replace: true });
+        navigate("/resv/active", { replace: true });
       })
       .catch(err => console.log(err))
       

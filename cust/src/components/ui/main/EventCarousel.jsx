@@ -48,7 +48,7 @@ function EventCarousel() {
             <Link to={`/event/${event.id}`}>
               <Img key={event.id} src={event.bannerUrl} alt={event.title}/>
             </Link>
-          ))
+          )).slice(0, 8)
         }
       </Slider>
     </div>
