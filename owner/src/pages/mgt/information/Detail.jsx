@@ -29,8 +29,7 @@ function ShopDetail({data}) {
       {
         data && (
           <Card 
-          // <Card style={{ width : '600px'}}
-          // 매장명
+          style={{ width: '100%', marginTop: '20px' }}
           title={
             <div style={{ textAlign: "center", marginBottom: "5px" }}>
               <Typography.Title level={3}>{data.shopName}</Typography.Title>
@@ -39,20 +38,21 @@ function ShopDetail({data}) {
             
             {/* 매장 이미지 */}
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-         <    Img src={data.shopImgUrl} alt={data.shopName} style={{ width: '100px', height: 'auto' }}/>
+         <    Img src={data.shopImgUrl} alt={data.shopName} style={{ width: '200px', height: 'auto' }}/>
           </div> 
 
           {/* 매장정보*/}
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <div style={{ whiteSpace: 'nowrap', textAlign: 'center' }}>
                <h3>{data.shopInfo}</h3>
-                <p><Span>점주명</Span>{data.ownerName}</p>
                 <p><Span>지점명</Span>{data.branchName}</p>
                 <p><Span>위치</Span>{data.location}</p>
                 <p><Span>좌석수</Span>{data.seat}</p>
                 <p><Span>오픈시간</Span>{data.openTime}</p>
-                <p><Span>닫는시간</Span>{data.closeTime}</p>
+                <p><Span>마감시간</Span>{data.closeTime}</p>
                 <p><Span>주문 마감 시간</Span>{data.orderCloseTime}</p>
+                <p><Span>카테고리</Span>{data.shopCategory}</p>
+                <p><Span>전화번호</Span>{data.businessNumber}</p>
                 {/* <p><Span>대표자명</Span>{data.businessCeo}</p> */}
                 {/* <p><Span>사업자등록번호</Span>{data.businessNumber}</p> */}
 

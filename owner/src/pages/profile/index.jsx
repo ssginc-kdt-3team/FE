@@ -12,16 +12,21 @@ import { Grid } from '../../../node_modules/@mui/material/index';
 function Profile() {
 
   return (
-    
-    <div className='grid-2c flex-gap-80'>
-     <Grid item >
-      <Typography variant="h3" marginBottom="20px" marginTop="30px" >내 프로필</Typography>  
-    <MyProfile/>
-    </ Grid>
+<Grid container spacing={4} style={{ minHeight: '100vh' }}>
+  <Grid item xs={12} md={6} lg={6}>
+    <Grid item>
+      <Typography.Title level={4} marginBottom="20px" marginTop="30px">매장 정보</Typography.Title>  
+      <ShopProfile/>
+    </Grid>
+  </Grid>
 
-
-    <ShopProfile/>
-    </div>
+  <Grid item xs={12} md={6} lg={6}>
+    <Grid item>
+      <Typography.Title level={4} marginBottom="20px" marginTop="30px">내 프로필</Typography.Title>  
+      <MyProfile/>
+    </Grid>
+  </Grid>
+</Grid>
   );
 }
 

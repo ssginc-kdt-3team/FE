@@ -31,7 +31,7 @@ function ShopProfile() {
 
   return (
     
-    <div className='grid-2c flex-gap-80'>
+    <div >
            {/* 매장정보 */}
          <div>
           <div >

@@ -1,10 +1,14 @@
-import axios from 'axios';
+import { axiosWithBaseUrl } from "App";
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Form, Input, Radio } from 'antd';
+import { useMediaQuery, Grid } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import Postcode from 'components/daumpostcode/postcode';
 
 const Join = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [name, setName] = useState(null);
   const [phone, setPhone] = useState(null);
   const [email, setEmail] = useState(null);
@@ -30,7 +34,7 @@ const Join = () => {
   };
 
   const validateMessages = {
-    required: '${label} is required!',
+    required: '${label}를 입력해주세요.',
     types: {
       email: '${label} 형식이 아닙니다.',
     },
@@ -79,8 +83,8 @@ const Join = () => {
       }
     };
 
-    axios
-      .post('http://localhost:8080/owner/join', data)
+    axiosWithBaseUrl
+      .post('/owner/join', data)
       .then((res) => {
         console.log(res.data);
         navigate('/');
@@ -100,19 +104,22 @@ const Join = () => {
   };
 
   return (
-    <div className='container'>
-      <div className='center flex-col'>
-        <Form
-          {...layout}
-          name='nest-messages'
-          onFinish={handleJoin}
-          style={{
-            width: 600,
-            alignItems: 'center',
-          }}
-          validateMessages={validateMessages}
-        >
-          {/* Form fields */}
+    
+    <Grid container style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <Grid item xs={12} style={{ justifyContent: 'center' }}>
+        {/* form 항목 전부 필수 값*/}
+          <Form
+            {...layout}
+            name='nest-messages'
+            onFinish={handleJoin}
+            style={{
+              width: isMobile ? '100' : '100%',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+            validateMessages={validateMessages}
+          >
+          {/* 이름 */}
           <Form.Item
             name='name'
             label='이름'
@@ -124,19 +131,18 @@ const Join = () => {
           >
             <Input placeholder='이름' onChange={handleInput} name='name' />
           </Form.Item>
-
+            {/* 전화 번호*/}
           <Form.Item
             name='phone'
-            label='휴대폰 번호'
+            label='전화 번호'
             rules={[
-              {
-                required: true,
-              },
+                { required: true, message: '전화번호를 입력해주세요.' },
+                { len: 11, message: '전화번호는 11자리여야 합니다.' },
             ]}
           >
-            <Input placeholder='휴대폰 번호' onChange={handleInput} name='phone' />
+            <Input placeholder='전화번호' onChange={handleInput} name='phone' />
           </Form.Item>
-
+          {/* 이메일 */}
           <Form.Item
             name='email'
             label='이메일'
@@ -158,6 +164,7 @@ const Join = () => {
               },
             ]}
           >
+            {/* 비밀번호 */}
             <Input.Password placeholder='비밀번호' onChange={handleInput} name='password' />
           </Form.Item>
 
@@ -167,7 +174,7 @@ const Join = () => {
             rules={[
               {
                 required: true,
-                message: 'Please confirm your password!',
+                message: '비밀번호를 한번 더 입력해주세요.',
               },
               ({ getFieldValue }) => ({
                 validator(_, value) {
@@ -184,34 +191,62 @@ const Join = () => {
             <Input.Password placeholder='비밀번호 확인' onChange={handleInput} name='confirmPassword'/>
           </Form.Item>
 
- 
-          <Form.Item name='birthday' label='생년월일'>
-            <Input type='date' onChange={handleInput} name='birthday'/>
+          {/* 생년월일 */}
+          <Form.Item
+            name='birthday'
+             label='생년월일'
+              rules={[
+              {
+                required: true,
+                validator: (_, value) => {
+                if (!value) {
+                return Promise.reject(new Error('생년월일을 입력해 주세요.'));
+                }
+                return Promise.resolve();
+                },
+              },
+            ]}
+            >
+            <Input type='date' onChange={handleInput} name='birthday' />
           </Form.Item>
-
-          <Form.Item name='gender' label='성별'>
-            <div style={{ display: 'flex' }}>
+          {/* 성별 */}
+          <Form.Item
+            name='gender'
+            label='성별'
+            rules={[
+              {
+                required: true,
+                validator: (_, value) => {
+                if (!value) {
+                return Promise.reject(new Error('성별을 선택해주세요.'));
+               }
+                return Promise.resolve();
+                },
+              },
+              ]}
+            >
+             <div>
               <Radio.Group onChange={handleInput} name='gender'>
                 <Radio value='true'>남</Radio>
                 <Radio value='false'>여</Radio>
               </Radio.Group>
             </div>
           </Form.Item>
-
-          <Form.Item name='address' label='주소'>
+          {/* 주소 */}
+          <Form.Item name='address' label='주소' required>
             <Postcode onChange={handleAddressChange} />
             <Input placeholder='우편번호' value={address.zipCode} disabled />
-            <Input placeholder='시' value={address.address} disabled />
-            <Input placeholder='구' value={address.extraAddress} disabled />
+            <Input placeholder='도로명주소' value={address.address} disabled />
+            <Input placeholder='건물명' value={address.extraAddress} disabled />
             <Input
               placeholder='상세주소'
               value={address.detail}
               onChange={(e) => setAddress({ ...address, detail: e.target.value })}
             />
           </Form.Item>
-
+          {/* 완료버튼 */}
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-            <Button type='primary' htmlType='submit' style={{ marginLeft: '120px', backgroundColor: '#cf1322' }}>
+            <Button type='primary' htmlType='submit' style={{ backgroundColor: '#cf1322' }}>
               완료
             </Button>
             <Button onClick={() => navigate('/')} style={{ marginLeft: '10px' }}>
@@ -219,8 +254,8 @@ const Join = () => {
             </Button>
           </Form.Item>
         </Form>
-      </div>
-    </div>
+      </Grid>
+    </Grid>
   );
 };
 

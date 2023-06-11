@@ -32,10 +32,10 @@ function MgtInfo() {
 
   return (
     <div>
-      <div className='grid-2c flex-gap-80' style={{ display: 'flex', justifyContent: 'center' }}>
+      <div style={{ display: 'flex', justifyContent: 'center',  minHeight: '100vh' }}>
         {/* 메뉴 정보 */}
         {shopInfo && (
-          <Grid >
+          <Grid item xs={12} md={7} lg={12} sx={{pl: 2, pr:2}}>
             <div className='space-between'>
               <h2>메뉴 목록</h2>
               <Button

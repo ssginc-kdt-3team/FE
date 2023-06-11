@@ -45,6 +45,12 @@ const barChartOptions = {
   }
 };
 
+const getPreviousMonthDate = (date, numMonths) => {
+  const d = new Date(date);
+  d.setMonth(d.getMonth() - numMonths);
+  return d.toISOString().slice(0, 7);
+};
+
 const MonthlyDepositChart = () => {
   const theme = useTheme();
   const id = useSelector((state) => state.user.id);  // 점주 id
@@ -59,8 +65,9 @@ const MonthlyDepositChart = () => {
   const [currentDate, setCurrentDate] = useState('');
   const [series, setSeries] = useState([{ name: '위약금', data: '' }]); // y축 data
   const [options, setOptions] = useState(barChartOptions);
-
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+
 
   // 점주 id - 월별 위약금 데이터 가져옴
   useEffect(() => {
@@ -78,12 +85,22 @@ const MonthlyDepositChart = () => {
   useEffect(() => {
     const { last3MonthPenalty, last2MonthPenalty, lastMonthPenalty, thisMonthPenalty } = monthlyData;
 
-    const monthLabels = ['2023.3', '2023.4', '2023.5', `${currentDate.slice(0, 6)}`];
+    
     const penaltyData = [last3MonthPenalty, last2MonthPenalty, lastMonthPenalty, thisMonthPenalty];
 
     const today = new Date();
     const formattedDate = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
     setCurrentDate(formattedDate);
+
+    const currentDate = new Date().toISOString().slice(0, 7);
+  setCurrentDate(currentDate);
+
+  const monthLabels = [
+    getPreviousMonthDate(currentDate, 3),
+    getPreviousMonthDate(currentDate, 2),
+    getPreviousMonthDate(currentDate, 1),
+    currentDate,
+  ];
 
     setOptions((prevState) => ({
       ...prevState,

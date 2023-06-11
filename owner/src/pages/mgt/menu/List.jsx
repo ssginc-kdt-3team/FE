@@ -1,5 +1,5 @@
 import React, {  useState } from 'react';
-import { Table, Button } from "antd";
+import { Table, Button, Card } from "antd";
 import { Link } from 'react-router-dom';
 import { axiosWithBaseUrl } from 'App';
 import axios from 'axios';
@@ -22,6 +22,7 @@ function MenuList({ menuList }) {
       dataIndex: "menuImgUrl",
       key: "menuImgUrl",
       align: 'center',
+      width: 200,
       render: (url, row) => {
         return <Img src={url} alt={row.menuName}/>;
       }
@@ -31,12 +32,14 @@ function MenuList({ menuList }) {
       dataIndex: "name",
       key: "name",
       align: 'center',
+      width: 200,
     },
     {
       title: "가격",
       dataIndex: "price",
       key: "price",
       align: 'center',
+      width: 200,
       render: price => {
         return price + '원'
       }
@@ -55,15 +58,23 @@ function MenuList({ menuList }) {
       )
     }
   ];
-
+  const pageSize = 5; // 한 페이지에 표시할 항목 수
 
   return (
+  <Card style={{width: '100%'}}>
     <Table
       columns={columns}
       dataSource={menuList}
-      pagination={false}
+      pagination={{
+        pageSize: pageSize,
+        showSizeChanger: false,
+        hideOnSinglePage: true,
+        size: 'small',
+        position: 'center'
+      }}
       loading={loading}
     />
+    </Card>
   );
 }
 
