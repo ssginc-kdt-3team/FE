@@ -6,10 +6,15 @@ import { setLoggedIn } from '../../../store/reducers/loginSilce';
 import { Form, Input, Button, Modal  } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { isEmailValid } from '../../../utils/auth';
+import { useMediaQuery } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+
 
 const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -38,13 +43,11 @@ const LoginForm = () => {
 
             dispatch(setUser({ id: res.data.id, name: res.data.name }));
             dispatch(setLoggedIn(true));
-
             // Modal.success({
             //   title: '로그인 성공',
             //   content: '로그인에 성공하였습니다.',
             //   okText: "닫기"
             // });
-
             navigate('/main', { replace: true });
           }
         })
@@ -72,7 +75,9 @@ const LoginForm = () => {
                 message: '이메일을 입력하세요.',
               },
             ]}
-           style={{ width: '250px', marginLeft: '10px' }} 
+           style={{ 
+            width: isMobile? '100%' : '250px',
+           marginLeft: isMobile? 'none':'10px' }} 
           >
             <Input
               type="email"
@@ -89,7 +94,6 @@ const LoginForm = () => {
             name="password"
             rules={[
               {
-                // required: true,
                 message: '비밀번호를 입력하세요.',
               },
               {
@@ -109,7 +113,7 @@ const LoginForm = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               sx={{
-                width: '200px', // 원하는 너비 값 설정
+                width: isMobile? '100%' : '200px', // 원하는 너비 값 설정
               }}
             />
           </Form.Item>
@@ -131,8 +135,8 @@ const LoginForm = () => {
         
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '5px', justifyContent: 'center' }}>          
-          <div onClick={() => navigate('/find-id')}>아이디 찾기</div>
-          <div onClick={() => navigate('/find-pw')}>비밀번호 찾기</div>
+          <div onClick={() => navigate('/findid')}>아이디 찾기</div>
+          <div onClick={() => navigate('/findpwd')}>비밀번호 찾기</div>
         </div>
       </div>
     </div>

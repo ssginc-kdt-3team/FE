@@ -7,6 +7,8 @@ import MinimalLayout from 'layout/MinimalLayout';
 // render - login
 const LoginForm = Loadable(lazy(() => import('pages/authentication/Login')));
 const JoinForm = Loadable(lazy(() => import('pages/authentication/Register')));
+const Findid = Loadable(lazy(() => import('pages/authentication/auth-forms/Findid')));
+const Findpwd = Loadable(lazy(() => import('pages/authentication/auth-forms/Findpwd')));
 
 // ==============================|| AUTH ROUTING ||============================== //
 
@@ -20,8 +22,16 @@ const LoginRoutes = {
             element: <LoginForm />
         },
         {
-            path: 'register',
+            path: '/register',
             element: <JoinForm />
+        },
+        {
+            path: '/findid',
+            element: <Findid />
+        },
+        {
+            path: '/findpwd',
+            element: <Findpwd />
         }
     ]
 };

@@ -118,7 +118,7 @@ const MonthlyBarChart = () => {
     const formattedDate = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
     setCurrentDate(formattedDate);
 
-    const monthLabels = ['이번달', '지난달', '분기'];
+    const monthLabels = ['이번달', '지난달', '작년(분기)'];
 
     setOptions((prevState) => ({
       ...prevState,

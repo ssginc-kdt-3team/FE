@@ -42,7 +42,7 @@ function FilterTemp({ type, setType, branchId, setBranchId }) {
   return (
     <>
       {/* 지점 선택 */}
-      <Select value={branchId} onChange={handleBranchSelect} style={{ width: '100px'}}>
+      <Select value={branchId} onChange={handleBranchSelect} style={{ width: '150px'}}>
         {branchList &&
           branchList.map((branch) => (
             <Option key={branch.id} value={branch.id}>

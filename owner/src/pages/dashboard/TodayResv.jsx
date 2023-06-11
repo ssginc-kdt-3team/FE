@@ -97,6 +97,7 @@ const MonthlyBarChart = () => {
             show: false
           },
           labels: {
+            show: !isMobile,
             style: {
               colors: [secondary]
             }
@@ -117,12 +118,6 @@ const MonthlyBarChart = () => {
     <>
     <Grid>
       <Grid item>
-        {/* <Typography variant="h4">오늘 예약 현황</Typography> */}
-        {/* <Typography variant="h6" color="textSecondary">
-        {`오늘 날짜 : ${currentDate}`}
-        </Typography> */}
-     
-      
         <Typography variant="h5"  align="center">총:{totalNum}건</Typography>
         
         <div id="chart">

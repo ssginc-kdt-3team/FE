@@ -3,6 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { Card, Typography, Button } from 'antd';
 import { axiosWithBaseUrl } from 'App';
 import { useSelector, useDispatch } from 'react-redux';
+import styled from 'styled-components';
+
+
+const Span = styled.span`
+  color: #999;
+  margin-right: 20px;
+`;
 
 function MyProfile() {
   const id = useSelector((state) => state.user.id);
@@ -17,6 +24,7 @@ function MyProfile() {
         axiosWithBaseUrl
         .get(`/owner/detail/${id}`); //owner id
         setOwnerData(res.data);
+        console.log(res.data);
       } catch (error) {
         console.log(error);
       }
@@ -28,30 +36,29 @@ function MyProfile() {
 
   return (
     
-    <div className='grid-2c flex-gap-80'>
+    <div>
     <div>
       {ownerData && (
         
         <Card
-        //   title={
-        //     <div style={{ textAlign: 'center', marginBottom: '5px' }}>
-        //       <Typography.Title level={4}>내 프로필</Typography.Title>
-        //     </div>
-        //   }
-          style={{ width: 400, marginTop: '20px' }}
+          style={{ width: '100%', marginTop: '20px' }}
         >
-          <p>점주명: {ownerData.ownerName}</p>
-          <p>이메일: {ownerData.ownerEmail}</p>
+          <div style={{ textAlign: 'center' }}>
+          <p><Span>점주명</Span> {ownerData.ownerName}</p>
+          <p><Span>이메일</Span> {ownerData.ownerEmail}</p>
           {/* <p>주소: {ownerData.ownerAddress}</p>  */}
-          <p>번호: {ownerData.ownerPhone}</p> 
-          <p>생년월일: {ownerData.ownerBirthday}</p>
+          <p><Span>전화번호</Span> {ownerData.ownerPhone}</p> 
+          <p><Span>생년월일</Span> {ownerData.ownerBirthday}</p>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
           <Button
             type='primary'
             onClick={() => navigate(`/profile/update/${id}`)}
-            style={{ backgroundColor: '#cf1322', marginTop: '10px' }}
+            style={{ backgroundColor: '#cf1322' }}
           >
             수정하기
           </Button>
+        </div>
         </Card>
       )}
     </div>
