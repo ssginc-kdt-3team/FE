@@ -1,4 +1,6 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+
 
 // material-ui
 import { Box, Grid } from '@mui/material';
@@ -19,13 +21,16 @@ const AuthWrapper = ({ children }) => (
         <Grid
             container
             direction="column"
-            justifyContent="flex-end"
+            justifyContent="center"
+            alignItems="center"
             sx={{
                 minHeight: '100vh'
             }}
         >
             <Grid item xs={12} sx={{ ml: 3, mt: 3 }}>
+            <Link to="/"> 
                 <Logo />
+                </Link>
             </Grid>
             <Grid item xs={12}>
                 <Grid

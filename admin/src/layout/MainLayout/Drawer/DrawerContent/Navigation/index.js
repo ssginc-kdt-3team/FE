@@ -7,24 +7,11 @@ import menuItems from 'menu-items';
 
 // ==============================|| DRAWER CONTENT - NAVIGATION ||============================== //
 
-const Navigation = ({ isLoggedIn }) => {
+const Navigation = () => {
     const navGroups = menuItems.items.map((item) => {
         switch (item.type) {
             case 'group':
                 return <NavGroup key={item.id} item={item} />;
-            case 'pages':
-                // 로그인 하기 전 login 보임
-                if (!isLoggedIn) {
-                    return item.component;
-                }
-                break;
-            case 'profile':
-                // 로그인 후 profile 보임
-                if (isLoggedIn) {
-                     return item.component;
-                } else {
-                     return null; // 로그인되지 않은 경우 프로필이 표시되지 않음
-                }
             default:
                 return (
                     <Typography key={item.id} variant="h6" color="error" align="center">

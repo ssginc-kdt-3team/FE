@@ -1,38 +1,40 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { Form, Input, Button, Modal  } from 'antd';
 
 function LoginForm() {
+  const navigate = useNavigate();
 
   const [id, setid] = useState('');
   const [password, setPassword] = useState('');
-  const [redirectTo, setRedirectTo] = useState(null); // 이동할 페이지 URL
-
-  // const [loginTitle, setLoginTitle] = useState('Login');
-  const navigate = useNavigate();
 
   const isInputEmpty = (id, password) => {
-    if(id === "" || password === "") {
-      alert('내용을 입력하세요.');
-      return true;
-    }
-    return false;
-  }
+    return id.trim() === '' || password.trim() === '';
+  };
 
   const handleLogin = (e) => {
     e.preventDefault(); // 기본 동작 방지
     if(!isInputEmpty(id, password)) {
-      axios.post('http://localhost:8080/admin/login', {
-        id: id,
+      axios
+      .post('http://localhost:8080/admin/login', {
+        loginId: id,
         password: password,
       })
       .then(res => {
-        if(res.data === "") {
-          alert('로그인에 실패하였습니다.\n아이디와 비밀번호를 확인하세요.');
+        if(res.data === '') {
+          // alert('로그인에 실패하였습니다.\n아이디와 비밀번호를 확인하세요.');
+          console.log(res.data);
         } else {
+          console.log(res.data);
+           Modal.success({
+            title: '로그인 성공',
+            content: '로그인에 성공하였습니다.',
+             okText: "닫기"
+           });
+
           alert('로그인에 성공하였습니다.');
-          setRedirectTo('/'); // 이동할 페이지 URL 설정
-          // setLoginTitle(res.data.adminName);
+          navigate('/main'); // 이동할 페이지 URL 설정
         }
       })
       .catch(err => {
@@ -41,24 +43,80 @@ function LoginForm() {
     }
   }
 
-  useEffect(() => {
-    if(redirectTo) {
-      navigate(redirectTo); // 페이지 이동
-      setRedirectTo(null); // 상태(state) 초기화
-    }
-  }, [redirectTo, navigate]);
-
-
   return (
     <div className='container'>
       <div className='center flex-col'>
-        <form onSubmit={handleLogin}>
-          <input  type='id' value={id} placeholder='아이디' onChange={(e) => setid(e.currentTarget.value)}/>
+      <Form>
+          <Form.Item
+            label="아이디"
+            name="id"
+            // rules={[
+            //   {
+            //     type: 'id',
+            //     message: '이메일 형식이 아닙니다.',
+            //   },
+            //   {
+            //     // required: true,
+            //     message: '이메일을 입력하세요.',
+            //   },
+            // ]}
+           style={{ width: '250px', marginLeft: '10px' }} 
+          >
+            <Input
+              type="id"
+              placeholder="아이디"
+              value={id}
+              autoComplete="id"
+              onChange={(e) => setid(e.target.value)}
+              
+            />
+          </Form.Item>
 
-          <input type='password' value={password} placeholder='비밀번호' onChange={(e) => setPassword(e.currentTarget.value)}/>
+          <Form.Item
+            label="비밀번호"
+            name="password"
+            // rules={[
+            //   {
+            //     // required: true,
+            //     message: '비밀번호를 입력하세요.',
+            //   },
+            //   {
+            //     min: 8,
+            //     message: '8자리 이상이어야 합니다.',
+            //   },
+            //   {
+            //     max: 16,
+            //     message: '16자리 이하여야 합니다.',
+            //   },
+            // ]}
+            style={{ width: '260px' }}
+          >
+            <Input.Password
+              autoComplete="current-password"
+              placeholder="비밀번호"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              sx={{
+                width: '200px', // 원하는 너비 값 설정
+              }}
+            />
+          </Form.Item>
 
-          <button type='submit'>로그인</button>
-        </form>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <Form.Item>
+          <Button
+            className="button"
+            type="primary"
+            onClick={handleLogin}
+            htmlType="submit"
+            style={{ marginTop: '10px', backgroundColor: '#cf1322' }}
+            >
+              로그인
+            </Button>
+          </Form.Item>
+          </div>
+        </Form>
+        
       </div>
     </div>
   );

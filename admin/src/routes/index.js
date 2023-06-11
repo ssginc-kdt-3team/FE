@@ -8,5 +8,5 @@ import DepositRoutes from './DepositRoutes';
 // ==============================|| ROUTING RENDER ||============================== //
 
 export default function ThemeRoutes() {
-    return useRoutes([MainRoutes, LoginRoutes, DepositRoutes]);
+    return useRoutes([LoginRoutes, MainRoutes, DepositRoutes]);
 }

@@ -15,7 +15,7 @@ import deposit from './Deposit';
 // ==============================|| MENU ITEMS ||============================== //
 
 const menuItems = {
-    items: [pages, resv, deposit, cust, owner, shop, branch, notitext, grade, cupon],
+    items: [ resv, deposit, cust, owner, shop, branch, notitext, grade, cupon],
     breadcrumbs: false
 };
 
