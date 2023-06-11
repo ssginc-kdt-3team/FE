@@ -15,7 +15,7 @@ const Ul = styled.ul`
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 20px;
+    gap: 24px;
   }
 `;
 
