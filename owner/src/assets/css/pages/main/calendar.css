@@ -46,6 +46,7 @@
   .react-calendar__navigation {
     display: flex;
     margin-bottom: 35px;
+
   }
   .react-calendar__navigation span {
     font-size: 15px;
@@ -161,10 +162,10 @@
   
   @media screen and (max-width: 768px) {
     .react-calendar {
-      max-width: calc(100vw - 40px);
-      width: calc(100vw - 40px);
-      /* max-height: auto;
-      height: auto; */
+      max-width: calc(100vw - 200px);
+      width: 100%;
+      max-height: auto;
+      height: auto; 
     }
   
     /* .react-calendar__navigation {

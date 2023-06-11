@@ -6,6 +6,7 @@ import storage from '../lib/storage';
 import menu from './menu';
 import userSlice from './userSlice';
 import loginSilce from './loginSilce';
+// import shopSlice from './shopslice';
 
 // ==============================|| COMBINE REDUCERS ||============================== //
 
@@ -19,27 +20,11 @@ const persistConfig = {
 const reducers = combineReducers({
   menu,
   user: userSlice.reducer,
-  loginstate: loginSilce.reducer
+  loginstate: loginSilce.reducer,
+  // shop: shopSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);
 
 export default persistedReducer;
 
-// // third-party
-// import { combineReducers } from 'redux';
-
-// // project import
-// import menu from './menu';
-// import userSlice  from './userSlice';
-// import storage from '../lib/storage'
-
-// // ==============================|| COMBINE REDUCERS ||============================== //
-
-// const reducers = combineReducers({
-//      menu,
-//      user: userSlice.reducer,
-//      storage
-// });
-
-// export default reducers;

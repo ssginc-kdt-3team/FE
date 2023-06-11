@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { Button, Typography} from 'antd';
+import { Grid } from '@mui/material';
+
 import { axiosWithBaseUrl } from 'App';
 import MenuList from '../menu/List';
 import ShopDetail from './Detail';
@@ -30,26 +32,10 @@ function MgtInfo() {
 
   return (
     <div>
-      <div className='grid-2c flex-gap-80'>
-        {/* 운영정보 */}
-        {/* <div>
-          <div className='space-between'>
-            {shopInfo ? (
-              <ShopDetail data={shopInfo} />
-            ) : (
-              <div style={{ textAlign: 'center' }}>
-              <Typography.Title level={5}>매장을 등록해주세요.</Typography.Title>
-              <Button type='primary' onClick={() => navigate(`/shop/register`)} style={{ backgroundColor: '#cf1322' }}>
-                매장 등록하기
-              </Button>
-            </div>
-            )}
-          </div>
-        </div> */}
-
+      <div className='grid-2c flex-gap-80' style={{ display: 'flex', justifyContent: 'center' }}>
         {/* 메뉴 정보 */}
         {shopInfo && (
-          <div>
+          <Grid >
             <div className='space-between'>
               <h2>메뉴 목록</h2>
               <Button
@@ -61,7 +47,7 @@ function MgtInfo() {
               </Button>
             </div>
             <MenuList menuList={menulist} />
-          </div>
+          </Grid>
         )}
       </div>
     </div>

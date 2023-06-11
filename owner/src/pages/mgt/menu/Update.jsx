@@ -12,9 +12,10 @@ const normFile = (e) => {
 };
 
 function MenuUpdate() {
-  const { state } = useLocation();
+  const { state } = useLocation();       // 이전 페이지(MENULIST)의 state를 받아옴
   const navigate = useNavigate();
-  const [name, setName] = useState(null);
+  //수정 상태변수
+  const [name, setName] = useState(null);   
   const [price, setPrice] = useState(null);
   const [menuImgUrl, setMenuImgUrl] = useState(null);
   const [id, setId] = useState(null);
@@ -47,11 +48,13 @@ function MenuUpdate() {
     const json = JSON.stringify(menuData);
     const blob = new Blob([json], { type: "application/json" });
     formData.append("menuData", blob);
+
     if (photos.length > 0) {
       formData.append('menuImg', photos[0].originFileObj);
     } else {
       formData.append('menuImg', null); // menuImg가 선택되지 않았을 때 null 값을 할당
     }
+
     try {
 
 

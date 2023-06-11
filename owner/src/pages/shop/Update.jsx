@@ -1,11 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { Card, Button, DatePicker, TimePicker, Form, Input, Upload, Modal, Select } from 'antd';
+import { useNavigate } from 'react-router-dom';
+import { Card, Button, DatePicker, TimePicker, Form, Input, Upload, Modal } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { axiosWithBaseUrl } from 'App';
-import dayjs from 'dayjs';
 import { useSelector } from 'react-redux';
-import FilterTemp from './FilterTemp';
 
 //시간 형식
 const format = 'HH:mm'; 
@@ -20,12 +18,13 @@ const normFile = (e) => {
 
 function ShopUpdate() {
   // form data 상태변수
-  const { state } = useLocation();
+  const [shopInfomation, setShopInfomation] =  useState();
   const id = useSelector((state) => state.user.id); 
-  const [ownerName,setOwnerName] = useSelector((state) => state.user.name); 
+  const ownerName = useSelector((state) => state.user.name);
+  const [branchId, setBranchId]= useState(null);
   const [shopName, setShopName] = useState(null);
   const [phone, setPhone] = useState(null);
-  const [branchId, setBranchId] = useState(null);
+  const [shopId, setShopId] = useState(null);
   const [shopInfo, setShopInfo] = useState(null);
   const [location, setLocation] = useState(null);
   const [businessCeo, setBusinessCeo] = useState(null);
@@ -44,29 +43,19 @@ function ShopUpdate() {
   const navigate = useNavigate();
   const formRef = useRef(null);
 
-//ownerid가 아니라 shopid 였다ㅏㅏㅏ
-  useEffect(() => {
-    if (state) {
-      setOwnerName(state.name);
-      setShopName(state.shopName);
-      setPhone(state.phone);
-      setBranchId(state.shopInfo);
-      setLocation(state.location);
-      setBusinessCeo(state.businessCeo);
-      setBusinessNumber(state.businessNumber);
-      setOrderCloseTime(state.orderCloseTime);
-      setSeat(state.seat);
-      setOpenTime(state.openTime);
-      setCloseTime(state.closeTime);
-      setOpenDay(state.openDay);
-      setShopCategory(state.setShopCategory);
-      setPhotos(state.photos);
-      setBusinessPhotos(state.businessPhotos);
-      setShopImgUrl(state.shopImgUrl);
-      setBusinessImgUrl(state.businessImgUrl);
-    }
-  }, [state]);
-
+useEffect(() => {
+  axiosWithBaseUrl
+    .get(`/owner/shop/detail/${id}`) //owner id
+    .then((res) => {
+      console.log(res.data);
+      console.log(res.data.shopId);
+      console.log(id);
+      setShopInfomation(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}, []);
 
   //등록하기
   const handleSubmit = async () => {
@@ -87,6 +76,8 @@ function ShopUpdate() {
       orderCloseTime: orderCloseTime.format(format),
       ownerId: id,                                    // ownerId
       branchId: branchId,                             // branchId
+      shopImgUrl: shopImgUrl,
+      businessImgUrl: businessImgUrl                       
     };
     // formData > shopData, shopImg, businessImg
     const formData = new FormData();
@@ -94,62 +85,53 @@ function ShopUpdate() {
     const blob = new Blob([json], { type: "application/json" });
     formData.append("shopData", blob);
     // shopImg 파일 추가
-    photos.forEach((file) => {
-      formData.append('shopImg', file.originFileObj);
-    });
+    if (photos.length > 0) {
+      formData.append('shopImg', photos[0].originFileObj);
+    } else {
+      formData.append('shopImg', null); // menuImg가 선택되지 않았을 때 null 값을 할당
+    }
     // businessImg 파일 추가
-    businessPhotos.forEach((file) => {
-      formData.append('businessImg', file.originFileObj);
-    });
+    if (businessPhotos.length > 0) {
+      formData.append('businessImg', businessPhotos[0].originFileObj);
+    } else {
+      formData.append('businessImg', null); // menuImg가 선택되지 않았을 때 null 값을 할당
+    }
 
     try {
       const response = await axiosWithBaseUrl
-      .post(`/owner/shop/update/${id}`, formData, {
+      .post(`/owner/shop/update/${shopId}`, formData, {
        headers: {
         'Content-Type': 'multipart/form-data',
         },
         });
       console.log(response);
       console.log(formData);
-      //등록되면 매장 정보 페이지로 이동
+      //수정 성공 시 매장 정보 페이지로 이동
       navigate('/mgt/info');
     } catch (error) {
-      console.error('Error adding shop:', error);
+      console.error('Error updating shop:', error);
     }
   };
 
   const onFinish = () => {
   };
-
   const handleFileChange = (info) => {
     const fileList = normFile(info);
     setPhotos(fileList);
     setBusinessPhotos(fileList);
   };
 
-  const handleBranchSelect = (branchId) => {
-    setBranchId(branchId);
-  };
-
-  
-  const handleCategorySelect = (shopCategory) => {
-    setShopCategory(shopCategory);
-  };
-
   //모달
   const showModal = () => {
     setIsModalOpen(true);
   };
-
   const handleOk = () => {
     setIsModalOpen(false);
     handleSubmit();
   };
-
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-
   // 정보 입력 폼
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -169,32 +151,27 @@ function ShopUpdate() {
         style={{
           maxWidth: 600,
         }}
-        initialValues={{
-          openTime: dayjs('state.openTime', format),
-          closeTime: dayjs('state.closeTime', format),
-          openDay: dayjs('state.openDay'),
-        }}
         onFinish={onFinish}
       >
     
         <Form.Item label="점주id" name="ownerId" required hidden>
-          <Input initialValue={id} onChange={(e) => id(e.target.value)} />
+          <Input initialValue={id} />
         </Form.Item>
         {/* 지점 id  */}
         <Form.Item label="지점id" name="branchId" required hidden>
-          <Input initialValue={state.branchId} onChange={(e) => setBranchId(e.target.value)} />
+          <Input initialValue={shopInfo.branchId} />
         </Form.Item>
                {/* 매장카테고리 */}
           <div >
          <Form.Item label="매장카테고리" name="shopCategory" required hidden  >
-          <Input initialValue={state.shopCategory} onChange={(e) => setShopCategory(e.target.value)} />
+          <Input initialValue={shopInfo.shopCategory} />
         </Form.Item>
         </div>
-        {/* 매장명 */}
+        {/* 매장명 , 수정가능*/}
         <Form.Item label="매장명" name="shopName" required  style={{ width: 'calc(135% - 0px)'}} >
-          <Input initialValue={state.shopName} onChange={(e) => setShopName(e.target.value)} style={{ width: '300px' }}/>
+          <Input initialValue={shopInfo.shopName} onChange={(e) => setShopName(e.target.value)} style={{ width: '300px' }}/>
         </Form.Item>
-        {/* 매장 설명 */}
+        {/* 매장 설명 , 수정가능*/}
         <Form.Item label="매장 설명"  name="shopInfo" required style={{ width: 'calc(170% - 0px)'}}
          rules={[
           {
@@ -203,37 +180,37 @@ function ShopUpdate() {
           message: '50자 이내로 입력해주세요.',
           },
           ]}>
-          <Input initialValue={state.shopInfo} onChange={(e) => setShopInfo(e.target.value)} />
+          <Input initialValue={shopInfo.shopInfo} onChange={(e) => setShopInfo(e.target.value)} />
         </Form.Item>
         {/* 지점 내 매장 위치 */}
         <Form.Item label="지점 내 위치"  name="location" required hidden >
-          <Input initialValue={state.location} onChange={(e) => setLocation(e.target.value)} />
+          <Input initialValue={shopInfo.location} onChange={(e) => setLocation(e.target.value)} />
         </Form.Item>
-        {/* 좌석 수  */}
+        {/* 좌석 수, 수정가능  */}
         <Form.Item label="좌석 수" name="seat" required  style={{ width: 'calc(140% - 0px)'}}>
-          <Input value={state.seat} onChange={(e) => setSeat(e.target.value)} />
+          <Input value={shopInfo.seat} onChange={(e) => setSeat(e.target.value)} />
         </Form.Item>
         {/* 점주 명 점주 id에서 name 가져오기  */}
         <Form.Item label="점주명" name="ownerName-" required hidden >
-        <Input value={state.ownerName} onChange={(e) => ownerName(e.target.value)} />
+        <Input value={shopInfo.ownerName} />
         </Form.Item>
         {/* 매장 전화번호 */}
          <Form.Item label="매장 전화번호" name="phone" hidden >
-          <Input value={state.phone} onChange={(e) => setPhone(e.target.value)} />
+          <Input value={shopInfo.phone}  />
         </Form.Item>  
         {/* 개업일 */}
         <Form.Item label="개업일" name="openDay" required hidden>
-          <DatePicker value={state.openDay} onChange={setOpenDay} />
+          <DatePicker initialValue={shopInfo.openDay} />
         </Form.Item>
-        {/* 오픈시간 */}
+        {/* 오픈시간 , 수정가능*/}
         <Form.Item label="오픈시간" name="openTime" required style={{ width: 'calc(160% - 0px)'}}>
-          <TimePicker format={format} value={state.openTime} onChange={setOpenTime} />
+          <TimePicker format={format} initialValue={shopInfo.openTime} value={openTime} onChange={setOpenTime} />
         </Form.Item>
-        {/* 마감시간 */}
+        {/* 마감시간, 수정가능 */}
         <Form.Item label="마감시간" name="closeTime" required style={{ width: 'calc(160% - 0px)'}}>
-          <TimePicker format={format} value={state.closeTime} onChange={setCloseTime} />
+          <TimePicker format={format} initialValue={shopInfo.closeTime} value={closeTime} onChange={setCloseTime} />
         </Form.Item>
-        {/* 주문마감시간 */}
+        {/* 주문마감시간, 수정가능 */}
         <Form.Item
           label="주문마감시간"
           name="orderCloseTime"
@@ -250,10 +227,10 @@ function ShopUpdate() {
             },
             }),
           ]}>
-        <TimePicker format={format} value={state.orderCloseTime} onChange={setOrderCloseTime} />
+        <TimePicker format={format} initialValue={shopInfo.orderCloseTime} value={orderCloseTime} onChange={setOrderCloseTime} />
       </Form.Item>
 
-      {/* 매장 사진 */}
+      {/* 매장 사진, 수정가능 */}
       <Form.Item
           label="매장 사진"
           name="shopImg"
@@ -281,19 +258,19 @@ function ShopUpdate() {
         </Form.Item>
         {/* 사업주이름 */}
         <Form.Item label="사업주 이름" name="businessCeo" required hidden>
-          <Input value={businessCeo} onChange={(e) => setBusinessCeo(e.target.value)} />
+          <Input initialValue={businessCeo} />
         </Form.Item>
         {/* 사업자 등록번호 */}
         <Form.Item label="사업자 등록번호" name="businessNumber" required hidden>
-          <Input value={businessNumber} onChange={(e) => setBusinessNumber(e.target.value)}/>
+          <Input initialValue={shopInfo.businessNumber}/>
         </Form.Item>
 
-        {/* 사업자 등록증 사진 */}
-        <Form.Item name="businessImgUrl" hidden initialValue={businessImgUrl}>
+        {/* 기존 사업자 등록증 사진 */}
+        <Form.Item name="businessImgUrl" hidden initialValue={shopInfo.businessImgUrl}>
           <Input />
         </Form.Item>
-
-        <Form.Item name="shopImgUrl" hidden initialValue={shopImgUrl}>
+          {/* 기존 매장 사진 */}
+        <Form.Item name="shopImgUrl" hidden initialValue={shopInfo.shopImgUrl}>
           <Input />
         </Form.Item>
 
