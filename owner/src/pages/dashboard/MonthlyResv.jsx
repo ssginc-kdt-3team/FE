@@ -173,6 +173,7 @@ const MonthlyBarChart = () => {
             series={series}
             type="bar"
             height={300}
+            width='100%'
           />
         </div>
       </Grid>

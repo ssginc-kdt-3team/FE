@@ -12,6 +12,8 @@ function MainCalendar() {
         onChange={onChange} 
         value={value}
         formatDay ={(locale, date) => dayjs(date).format('DD')}
+        width='100%'
+        height={400}
         /> 
     </div>
   );

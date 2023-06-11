@@ -4,7 +4,7 @@ import { axiosWithBaseUrl } from "App";
 
 // material-ui
 import { useTheme } from "@mui/material/styles";
-import { Grid, Typography } from "@mui/material";
+import { Grid, Typography, useMediaQuery } from "@mui/material";
 
 // third-party
 import ReactApexChart from "react-apexcharts";
@@ -60,6 +60,8 @@ const MonthlyDepositChart = () => {
   const [series, setSeries] = useState([{ name: '위약금', data: '' }]); // y축 data
   const [options, setOptions] = useState(barChartOptions);
 
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
   // 점주 id - 월별 위약금 데이터 가져옴
   useEffect(() => {
     axiosWithBaseUrl
@@ -110,11 +112,13 @@ const MonthlyDepositChart = () => {
 
   return (
     <>
-      <Grid item style={{padding:'10px'}}  justifyContent="center" alignItems="center" >
-      {/* <Typography variant="h6" color="textSecondary"  marginLeft='30px'>
-        {` ${currentDate.slice(0, 6)}`}
-      </Typography> */}
-      <Typography variant="h5" style={{marginLeft: '10px', marginBottom: '5px', textAlign: 'center' , color: '#8b8589'}}>이번달 위약금:{monthlyData.thisMonthPenalty.toLocaleString()}원</Typography>
+      <Grid item justifyContent="center" alignItems="center">
+        <Typography
+          variant={isMobile ? "h6" : "h5"}
+          style={{ marginLeft: isMobile ? "10px" : "20px", marginBottom: '5px', textAlign: 'center', color: '#8b8589' }}
+        >
+          이번달 위약금: {monthlyData.thisMonthPenalty.toLocaleString()}원
+        </Typography>
 
         <div id="chart">
           <ReactApexChart
@@ -122,7 +126,8 @@ const MonthlyDepositChart = () => {
             series={series}
             type="bar"
             height={300}
-            width={350}
+            // style={{overflowX: 'auto' }}
+            // width='100%'
           />
         </div>
       </Grid>

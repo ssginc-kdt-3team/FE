@@ -4,7 +4,7 @@ import { axiosWithBaseUrl } from "App";
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Typography, Grid } from '@mui/material';
+import { Typography, Grid, useMediaQuery } from '@mui/material';
 
 // third-party
 import ReactApexChart from 'react-apexcharts';
@@ -45,8 +45,10 @@ const barChartOptions = {
   }
 };
 
+
 const MonthlyBarChart = () => {
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const id = useSelector((state) => state.user.id);  // 점주 id
   const [todayresv, setTodayResv] = useState([]);
   const { primary, secondary } = theme.palette.text;
@@ -113,6 +115,7 @@ const MonthlyBarChart = () => {
   
   return (
     <>
+    <Grid>
       <Grid item>
         {/* <Typography variant="h4">오늘 예약 현황</Typography> */}
         {/* <Typography variant="h6" color="textSecondary">
@@ -120,24 +123,24 @@ const MonthlyBarChart = () => {
         </Typography> */}
      
       
-        <Typography variant="h4" style={{marginLeft: '5px', marginTop: '10px'}}>총:{totalNum}건</Typography>
+        <Typography variant="h5"  align="center">총:{totalNum}건</Typography>
         
         <div id="chart">
             <ReactApexChart
              options={options} 
              series={series} 
              type="bar" 
-             width={800}
+             width='100%'
              height={400} />
         </div>
         <Grid container justifyContent="flex-end">
-          <Typography variant="subtitle2" style={{ color: '#cccccc', marginLeft: '5px', marginBottom: '20px' }}>
+          <Typography variant= "subtitle2" style={{ color: '#cccccc', marginLeft: '5px', marginBottom: '20px', display: isMobile ? 'none' : 'block'}}>
             예상 노쇼율은 지난 3개월의 시간별 노쇼 평균치를 기준으로 계산된 수치입니다.
           </Typography>
         </Grid>
 
         </Grid>
-        
+        </Grid>
     </>
   );
 };

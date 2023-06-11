@@ -9,7 +9,7 @@ import MainLayout from 'layout/MainLayout';
 
 // render - 동적으로 모듈 불러오기(비동기적)
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard')));
-const MyProfile = Loadable(lazy(() => import('../pages/profile/Myprofile')));
+const Profile = Loadable(lazy(() => import('../pages/profile/index.jsx')));
 const ProfileUpdate = Loadable(lazy(() => import('../pages/profile/Update')));
 const ShopAdd = Loadable(lazy(() => import('../pages/shop/Add')));
 const MgtInfo = Loadable(lazy(() => import('../pages/mgt/information/index')));
@@ -44,7 +44,7 @@ const MainRoutes = {
                 
                 {
            		 path: '/profile',
-          		 element: <MyProfile />
+          		 element: <Profile />
         	       },
                 {
                     path: '/profile/update/:id',

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Button, Typography } from 'antd';
-import { useNavigate } from '../../../../node_modules/react-router-dom/dist/index';
+import {  useNavigate } from 'react-router-dom';
 // import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
@@ -19,8 +19,9 @@ const Span = styled.span`
 function ShopDetail({data}) {
   const navigate = useNavigate();
   const userId = useSelector((state) => state.user.id); // useSelector를 사용하여 Redux 상태에서 id 값을 가져옵니다.
-  // data 객체에 useSelector에서 가져온 id 값을 할당합니다.
+  // data 객체에 useSelector에서 가져온 id 값
   const updatedData = { ...data, id: userId };
+  
 
 
   return (
@@ -48,16 +49,17 @@ function ShopDetail({data}) {
                 <p><Span>점주명</Span>{data.ownerName}</p>
                 <p><Span>지점명</Span>{data.branchName}</p>
                 <p><Span>위치</Span>{data.location}</p>
+                <p><Span>좌석수</Span>{data.seat}</p>
                 <p><Span>오픈시간</Span>{data.openTime}</p>
                 <p><Span>닫는시간</Span>{data.closeTime}</p>
                 <p><Span>주문 마감 시간</Span>{data.orderCloseTime}</p>
-                <p><Span>대표자명</Span>{data.businessCeo}</p>
+                {/* <p><Span>대표자명</Span>{data.businessCeo}</p> */}
                 {/* <p><Span>사업자등록번호</Span>{data.businessNumber}</p> */}
 
           {/* 수정하기 버튼 */}
             <Button 
               type='primary' 
-              onClick={() => navigate(`/mgt/info/update/${userId}`)} 
+             onClick={() => navigate(`/mgt/info/update/${data.shopId}`)}
               style={{ backgroundColor: '#cf1322' }}>
               수정하기
             </Button>
