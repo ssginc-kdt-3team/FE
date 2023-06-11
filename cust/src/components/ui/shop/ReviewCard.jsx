@@ -35,7 +35,7 @@ function ReviewCard({data}) {
     <div className='box shadow-box' style={{ width: '100%' }}>
       <div id={styles.titleWrap} className='space-between'>
         <div className='center-h'>
-          <Rate disabled defaultValue={data.point} style={{ width: '132px' }}/>
+          <Rate disabled defaultValue={data.point}/>
           <h3>{data.title}</h3>
         </div>
 
@@ -54,7 +54,7 @@ function ReviewCard({data}) {
         
         {/* 이름, 삭제버튼 */}
         <div className='space-between'>
-          <div id={styles.name}>{data.userName.slice(0, 1)}{'O'.repeat(data.userName.length - 2)}{data.userName.slice(-1, )}</div>
+          <h3 id={styles.name}>{data.userName.slice(0, 1)}{'O'.repeat(data.userName.length - 2)}{data.userName.slice(-1, )}</h3>
           <div 
             id={styles.deleteBtn} 
             onClick={confirmReviewDelete}
