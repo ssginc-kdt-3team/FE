@@ -75,13 +75,13 @@ const Li = styled.li`
     z-index: 96;
   } */
   &:hover > ${Img} {
-    filter: brightness(50%); /* 이미지 어둡게 처리 */
+    filter: brightness(45%); /* 이미지 어둡게 처리 */
     transform: scale(1.05);
   }
 
   @media screen and (max-width: 768px) {
     ${Img} {
-      filter: brightness(50%); /* 이미지 어둡게 처리 */
+      filter: brightness(45%); /* 이미지 어둡게 처리 */
     }
   }
 `;

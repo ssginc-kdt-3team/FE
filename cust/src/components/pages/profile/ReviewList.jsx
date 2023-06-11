@@ -15,7 +15,7 @@ const Ul = styled.ul`
   @media screen and (max-width: 768px) {
     max-width: 100%;
     width: 100%;
-    gap: 20px;
+    gap: 24px;
   }
 `;
 
@@ -46,7 +46,7 @@ function Review() {
   return (
     <div className='container background'>
       <div className='center flex-col'>
-        <PageTitle title="Reviews" phrase='작성한 후기'/>
+        <PageTitle title="REVIEWS" phrase='작성한 후기'/>
 
         <Ul className='flex flex-col flex-gap-40'>
           {

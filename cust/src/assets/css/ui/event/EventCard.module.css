@@ -3,7 +3,7 @@
 }
 
 .eventCard > div {
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   border-radius: var(--border-radius);
   overflow: hidden;
 }

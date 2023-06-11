@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PageTitle from '../../ui/PageTitle';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 import { Button } from 'antd';
@@ -37,11 +37,13 @@ const BUTTON = styled(Button)`
 `;
 
 function Event() {
+  const navigate = useNavigate();
+
   const { eventId } = useParams();
   const [eventInfo, setEventInfo] = useState(null);
 
   useEffect(() => {
-    axios.get(`event/${eventId}`)
+    axios.get(`/event/${eventId}`)
     .then(res => {
       console.log(res.data);
       setEventInfo(res.data);
@@ -59,7 +61,7 @@ function Event() {
             <>
               <PageTitle title={eventInfo.title} phrase={`스타필드 ${eventInfo.branchName}`}/>
               
-              <Div className='center flex-col flex-gap-40'>
+              <Div className='center flex-col flex-gap-60'>
                 {/* 이미지 */}
                 <Img src={eventInfo.contentsUrl} alt={eventInfo.title}/>
 
@@ -71,7 +73,7 @@ function Event() {
 
                 {/* 버튼 */}
                 <div className='flex-start width-100'>
-                  <BUTTON type='primary' className='button button-s'>목록</BUTTON>
+                  <BUTTON type='primary' className='button button-s' onClick={() => navigate('/event')}>목록</BUTTON>
                 </div>
               </Div>
             </>

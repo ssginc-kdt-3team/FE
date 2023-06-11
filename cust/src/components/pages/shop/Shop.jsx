@@ -75,7 +75,7 @@ function Shop() {
         <div id={styles.menuWrap} className='center flex-col'>
           <PageSubTitle title='메뉴'/>
           <div style={{position: 'relative'}}>
-            <div id={isTileWrapOpen ? '' : styles.menuForegroud}></div>
+            <div id={isTileWrapOpen ? '' : styles.menuForegroud} style={menuList && menuList.length > 2 ? {display: 'block'} : {display: 'none'}}></div>
             <ul id={styles.tileWrap} className={`${styles.menuTileWrap} grid-4c flex-gap-10 ${isTileWrapOpen ? styles.open : styles.close}`}>
               {
                 menuList && menuList.map( menu => (
@@ -84,7 +84,7 @@ function Shop() {
               }
             </ul>
           </div>
-          <div id={styles.moreBtn} onClick={() => setIsTileWrapOpen(!isTileWrapOpen)} style={isTileWrapOpen ? { display: 'none' } : {}}>더보기</div>
+          <div id={styles.moreBtn} onClick={() => setIsTileWrapOpen(!isTileWrapOpen)} style={(menuList && menuList.length <= 2) || isTileWrapOpen ? { display: 'none' } : {}}>더보기</div>
         </div>
 
         {/* 후기 */}
