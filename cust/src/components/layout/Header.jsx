@@ -45,7 +45,7 @@ function Header() {
 
   return (
     <div className='fixed-top' style={{zIndex: '99'}}>
-      <header>
+      <header style={isSubMenuOpen || isNavOpen ? {boxShadow: 'none'} : {}}>
         <div id={styles.headerWrap}>
           {/* 로그인/회원가입/프로필 */}
           <div id={styles.topWrap} className='flex-end'>
