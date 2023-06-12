@@ -309,7 +309,7 @@ function ShopAdd() {
         </Form.Item>
         {/* 사업자 등록증 사진 */}
         <Form.Item
-          label="사업자등록증 사진"
+          label="등록증 사진"
           name="businessImg"
           required
           rules={[

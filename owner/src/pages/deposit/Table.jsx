@@ -7,7 +7,7 @@ import { DatePicker } from 'antd';
 import { useSelector } from 'react-redux';  //userSlice의 id 값 가져오기
 
 const DepositTable = () => {
-   const id = useSelector((state) => state.user.id);  
+  const id = useSelector((state) => state.user.id);  
   const [resvList, setResvList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -15,9 +15,11 @@ const DepositTable = () => {
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [selectedDate, setSelectedDate] = useState({year:"2023", month:"6"});   // 기본값 2023년 6월
   const [selectedStatus, setSelectedStatus] = useState("ALL");                  // 기본값 ALL
+  const [penalty, setPenalty] = useState(0);
 
   useEffect(() => {
     fetchResvList();
+    fetchPenalty(); 
   }, [currentPage, selectedDate, selectedStatus]);
 
   const fetchResvList = () => {
@@ -42,6 +44,21 @@ const DepositTable = () => {
       .catch((error) => {
         console.log(error);
         setLoading(false);
+      });
+  };
+  const fetchPenalty = () => {
+    const requestBody = {
+      year: selectedDate.year,
+      month: selectedDate.month,
+    };
+  
+    axiosWithBaseUrl
+      .post(`/owner/deposit/penalty/${id}`, requestBody)
+      .then((response) => {
+        setPenalty(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
 
@@ -167,6 +184,8 @@ const DepositTable = () => {
           {/* <Button onClick={() => handleStatusChange("cancel")}>정상취소</Button> */}
         
         <Divider style={{ marginTop: "30px", fontSize: '18px', fontWeight: 'bold' }}>예약금 목록</Divider>
+
+        {/* <Typography.Title level={5}>총 위약금: {penalty}</Typography.Title> */}
 
         <Table
           columns={columns}

@@ -162,11 +162,6 @@ const MonthlyBarChart = () => {
   return (
     <>
       <Grid item>
-
-        {/* <Typography variant="h6" color="textSecondary" marginLeft="10px">
-        {`이번 달: ${currentDate.slice(0, 6)}`}
-      </Typography> */}
-
         <div id="chart" style={{marginTop:'15px'}}>
           <ReactApexChart
             options={options}
