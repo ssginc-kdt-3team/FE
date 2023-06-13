@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { loginState } from '../../../state/loginState';
-import { useNavigate } from 'react-router-dom';
 import next from '../../../assets/images/icons/next.png';
 import axios from 'axios';
 import styled from 'styled-components';
 import Slider from 'react-slick';
 import RecdShopCard from './RecdShopCard';
 import styles from '../../../assets/css/ui/main/RecdShopCarousel.module.css';
+import { Empty } from 'antd';
 
 const Div = styled.div`
   max-width: var(--carousel-max-width);
@@ -44,8 +44,7 @@ const settings = {
 function RecdShopCarousel() {
   const loginInfo = useRecoilValue(loginState);
 
-  const navigate = useNavigate();
-
+  const [hasData, setHasData] = useState(false);
   const [recdShopList, setRecdShopList] = useState(null);
 
   useEffect(() => {
@@ -53,22 +52,31 @@ function RecdShopCarousel() {
     .then(res => {
       console.log(res.data);
       setRecdShopList(res.data);
+      console.log(res.data.length);
+      // setHasData(res.data.length > 0); // 메인에서 shopId 관련 오류 뜸
     })
     .catch(err => {
       console.log(err);
+      setHasData(false);
     })
   }, [loginInfo])
 
   return (
     <Div>
-      <Slider {...settings} className={styles.sliderWrap}>
-        {
-          recdShopList && recdShopList.map( shop => (
-            <RecdShopCard key={shop.shopId} data={shop}/>
-            // <img src={shop.shopImgUrl} alt={shop.name}/>
-          ))
-        }
-      </Slider>
+      {
+        hasData ? (
+          <Slider {...settings} className={styles.sliderWrap}>
+            {
+              recdShopList && recdShopList.map( shop => (
+                <RecdShopCard key={shop.shopId} data={shop}/>
+              ))
+            }
+          </Slider>
+        )
+        : (
+          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} /> 
+        )
+      }
     </Div>
   );
 }

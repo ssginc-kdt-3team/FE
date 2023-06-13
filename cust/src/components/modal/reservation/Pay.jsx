@@ -2,7 +2,7 @@ import { Button, Modal } from 'antd';
 import React, { useEffect, useState } from 'react';
 import styles from '../../../assets/css/modal/Modal.module.css';
 import axios from 'axios';
-import { confirm, error, success } from '../../../utils/notification';
+import { confirm, success } from '../../../utils/notification';
 import CouponSelector from '../../ui/reservation/CouponSelector';
 import ApplyPoint from '../../ui/reservation/ApplyPoint';
 import { cashFormat } from '../../../utils/format';

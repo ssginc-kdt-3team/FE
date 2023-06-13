@@ -5,6 +5,7 @@ import { useRecoilValue } from 'recoil';
 import { loginState } from '../../../state/loginState';
 import CouponCard from '../../ui/profile/CouponCard';
 import styled from 'styled-components';
+import { Empty } from 'antd';
 
 const Ul = styled.ul`
   width: calc(var(--coupon-width) * 2 + 40px);
@@ -22,6 +23,7 @@ const Ul = styled.ul`
 function Coupon() {
   const loginInfo = useRecoilValue(loginState);
 
+  const [hasData, setHasData] = useState(false);
   const [couponList, setCouponList] = useState(null);
 
   useEffect(() => {
@@ -29,9 +31,11 @@ function Coupon() {
     .then(res => {
       console.log(res.data);
       setCouponList(res.data);
+      setHasData(res.data.length > 0);
     })
     .catch(err => { // 오류 처리
       console.log(err);
+      setHasData(false);
     })
   }, [loginInfo])
 
@@ -40,13 +44,20 @@ function Coupon() {
       <div className='center flex-col'>
         <PageTitle title='COUPON' phrase='쿠폰'/>
 
-        <Ul className='grid-2c flex-gap-40'>
-          {
-            couponList && couponList.map( coupon => (
-              <CouponCard data={coupon}/>
-            ))
-          }
-        </Ul>
+        {
+          hasData ? (
+            <Ul className='grid-2c flex-gap-40'>
+              {
+                couponList && couponList.map( coupon => (
+                  <CouponCard data={coupon}/>
+                ))
+              }
+            </Ul>
+          )
+          : (
+            <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} /> 
+          )
+        }
         
       </div>
     </div>

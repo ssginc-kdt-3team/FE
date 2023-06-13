@@ -4,6 +4,7 @@ import noImage from '../../../assets/images/no_image.jpg';
 import styles from '../../../assets/css/pages/shop/Shop.module.css';
 
 const ContentWrap = styled.div`
+  width: 100%;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -16,7 +17,7 @@ const ContentWrap = styled.div`
 `;
 
 const Title = styled.div`
-  color: white;
+  color: #fff;
   transition: all 0.5s;
   /* opacity: 0; */
   z-index: 94;

@@ -1,7 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
-import { loginState } from '../../../state/loginState';
+import React from 'react';
 import styles from '../../../assets/css/pages/main/Main.module.css';
 import styled from 'styled-components';
 import ResvCarousel from '../../ui/main/ResvCarousel';
@@ -26,7 +23,7 @@ const Div = styled.div`
 `;
 
 function Main() {
-  const [branchImg, setBranchImg] = useState('');
+  // const [branchImg, setBranchImg] = useState('');
 
   return (
     <div id={styles.container} className='flex flex-col flex-gap-40'>
@@ -44,14 +41,14 @@ function Main() {
       {/* 추천 매장 */}
       <section id={styles.middleWrap}>
         <Div>
-          <PageTitle title='추천 매장'/>
+          <PageTitle title='추천 매장' phrase='스타필드의 다양한 매장을 만나보세요.'/>
           <RecdShopCarousel/>
         </Div>
       </section>
 
       <section id={styles.bottomWrap} style={{display: 'none'}}>
         {/* <Div> */}
-          <BranchInfoCard setBranchImg={setBranchImg}/>
+          <BranchInfoCard/>
         {/* </Div> */}
       </section>
       

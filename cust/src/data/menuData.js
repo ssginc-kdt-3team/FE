@@ -29,26 +29,26 @@ const menuData = [
     link: "/branch",
     icon: 'fast-food'
   },
+  // {
+  //   id: 4,
+  //   name: "이용 안내",
+  //   link: "/",
+  //   icon: 'information-circle',
+  //   subMenu : [
+  //     {
+  //       id: 1,
+  //       name: '예약 서비스 안내',
+  //       link: "/"
+  //     },
+  //     {
+  //       id: 2,
+  //       name: '리워드 안내',
+  //       link: "/"
+  //     }
+  //   ]
+  // },
   {
     id: 4,
-    name: "이용 안내",
-    link: "/",
-    icon: 'information-circle',
-    subMenu : [
-      {
-        id: 1,
-        name: '예약 서비스 안내',
-        link: "/"
-      },
-      {
-        id: 2,
-        name: '리워드 안내',
-        link: "/"
-      }
-    ]
-  },
-  {
-    id: 5,
     name: "이벤트",
     link: "/event",
     icon: 'gift'

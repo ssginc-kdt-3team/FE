@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { loginState } from '../../../state/loginState';
-import { error } from '../../../utils/notification';
 import { Select } from 'antd';
 import axios from 'axios';
 
@@ -33,8 +32,7 @@ function SelectCoupon({couponId, setCouponId, setCouponDiscountValue}) {
       })
       .catch(err => { // 오류 처리
         console.log(err);
-        // alert(err.response.data);
-        error(err.response.data);
+        // error(err.response.data.error);
       })
   }, [loginInfo, setCouponId])
 

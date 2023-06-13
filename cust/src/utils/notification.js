@@ -42,7 +42,7 @@ export const success = (title) => {
 
   success({
     title: title,
-    icon: <CheckCircleFilled  style={{ color: 'var(--main)' }}/>,
+    icon: <CheckCircleFilled  style={{ color: 'var(--yellow)' }}/>,
     okButtonProps: {
       className: `button button-xs`,
     },
