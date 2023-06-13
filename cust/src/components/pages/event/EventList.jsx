@@ -3,6 +3,7 @@ import axios from 'axios';
 import PageTitle from '../../ui/PageTitle';
 import EventCard from '../../ui/event/EventCard';
 import styled from 'styled-components';
+import { Empty } from 'antd';
 
 const Ul = styled.ul`
   max-width: 800px;
@@ -18,6 +19,7 @@ const Ul = styled.ul`
 `;
 
 function EventList() {
+  const [hasData, setHasData] = useState(false);
   const [eventList, setEventList] = useState(null);
 
   useEffect(() => {
@@ -25,9 +27,11 @@ function EventList() {
     .then(res => {
       console.log(res.data);
       setEventList(res.data);
+      setHasData(res.data.length > 0);
     })
     .catch(err => { // 오류 처리
       console.log(err);
+      setHasData(false);
     })
   }, [])
 
@@ -36,13 +40,21 @@ function EventList() {
       <div className='center flex-col'>
         <PageTitle title='EVENTS' phrase='이벤트'/>
 
-        <Ul className='grid-2c flex-gap-40'>
-          {
-            eventList && eventList.map( event => (
-              <EventCard data={event}/>
-            ))
-          }
-        </Ul>
+        {
+          hasData ? (
+            <Ul className='grid-2c flex-gap-40'>
+              {
+                eventList && eventList.map( event => (
+                  <EventCard data={event}/>
+                ))
+              }
+            </Ul>
+          )
+          : (
+            <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} /> 
+          )
+        }
+
         
       </div>
     </div>

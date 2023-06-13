@@ -3,7 +3,7 @@ import BranchSelector from './BranchSelector';
 import axios from 'axios';
 import styles from '../../../assets/css/ui/main/BranchInfoCard.module.css';
 
-function BranchInfoCard({setBranchImg}) {
+function BranchInfoCard() {
   const [branchId, setBranchId] = useState(1);
   const [branchInfo, setBranchInfo] = useState(null);
 
@@ -12,12 +12,12 @@ function BranchInfoCard({setBranchImg}) {
     .then(res => {
       console.log(res);
       setBranchInfo(res.data);
-      setBranchImg(res.data.branchImgUrl); // 지점 이미지 설정
+      // setBranchImg(res.data.branchImgUrl); // 지점 이미지 설정
     })
     .catch(err => {
       console.log(err);
     })
-  }, [branchId, setBranchImg])
+  }, [branchId])
 
   return (
     <div id={styles.cardWrap} className='flex flex-col flex-gap-20'>

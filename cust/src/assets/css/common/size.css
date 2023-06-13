@@ -58,7 +58,11 @@
   --modal-gap: 45px;
 
   /* coupon */
-  --coupon-width: 312px
+  --coupon-width: 312px;
+
+  /* pageTitle */
+  --pageTitle-height: 220px;
+
 }
 
 /* 너비 */
@@ -70,6 +74,11 @@
 }
 .width-30 {
   width: 30%;
+}
+
+/* 높이 */
+.height-100 {
+  height: 100%;
 }
 
 /* 마진 */
@@ -119,8 +128,11 @@
   :root {  
     /* font */
     --input-fontSize: 16px;
-
     --pageTitle-fontSize: 24px;
+
+    
+    /* pageTitle */
+    --pageTitle-height: 200px;
   }
   
 }

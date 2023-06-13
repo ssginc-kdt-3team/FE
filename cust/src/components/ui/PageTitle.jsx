@@ -1,14 +1,14 @@
-import { Button } from "antd";
 import React from "react";
 import styled from 'styled-components';
 
 const Div = styled.div`
   width: 100%;
-  height: 220px;
+  height: var(--pageTitle-height);
+  /* height: 220px; */
   /* padding: 56px 0; */
 
   @media screen and (max-width: 768px) {
-    height: 200px;
+    /* height: 200px; */
     /* padding: 48px 0; */
   }
 `;
@@ -45,6 +45,8 @@ const Span = styled.span`
 
 const P = styled.p`
   margin: 0;
+  text-align: center;
+  /* white-space: pre-line; */
 `;
 
 function PageTitle({title, type="default", phrase='문구가 표시될 공간 입니다.', button=''}) {
