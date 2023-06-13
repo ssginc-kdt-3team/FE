@@ -6,7 +6,7 @@ import axios from 'axios';
 import { useRecoilValue } from 'recoil';
 import { loginState } from '../../../state/loginState';
 import styled from 'styled-components';
-import { error } from '../../../utils/notification';
+import { Empty } from 'antd';
 
 const Ul = styled.ul`
   max-width: 800px;
@@ -22,6 +22,7 @@ const Ul = styled.ul`
 function Review() {
   const loginInfo = useRecoilValue(loginState);
 
+  const [hasData, setHasData] = useState(false);
   const [reviewList, setReviewList] = useState();
   
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
@@ -34,12 +35,14 @@ function Review() {
     .then(res => {
       console.log(res.data);
       setReviewList(res.data.content);
+      setHasData(res.data.length > 0);
       setTotalItems(res.data.totalElements); // 총 아이템 수 설정
       setItemsPerPage(res.data.pageable.pageSize); // 페이지당 아이템 수 설정
     })
     .catch(err => { // 오류 처리
-      error("오류가 발생하였습니다.");
+      // error("오류가 발생하였습니다.");
       console.log(err);
+      setHasData(false);
     })
   }, [loginInfo.id, currentPage])
 
@@ -48,16 +51,25 @@ function Review() {
       <div className='center flex-col'>
         <PageTitle title="REVIEWS" phrase='작성한 후기'/>
 
-        <Ul className='flex flex-col flex-gap-40'>
-          {
-            reviewList && reviewList.map( (review, index) => (
-              <ReviewCard key={index} data={review}/>
-            ))
-          }
-        </Ul>
-        
-        {/* 페이지 */}
-        <Paging currentPage={currentPage} totalItems={totalItems} itemsPerPage={itemsPerPage} setCurrentPage={setCurrentPage}/>
+        {
+          hasData ? (
+            <>
+              <Ul className='flex flex-col flex-gap-40'>
+                {
+                  reviewList && reviewList.map( (review, index) => (
+                    <ReviewCard key={index} data={review}/>
+                  ))
+                }
+              </Ul>
+              
+              {/* 페이지 */}
+              <Paging currentPage={currentPage} totalItems={totalItems} itemsPerPage={itemsPerPage} setCurrentPage={setCurrentPage}/>
+            </>
+          )
+          : (
+            <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} /> 
+          )
+        }
       </div>
 
     </div>

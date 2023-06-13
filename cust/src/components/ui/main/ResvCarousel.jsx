@@ -24,7 +24,7 @@ const H2 = styled.h2`
 
 const settings = {
   dots: false,
-  infinite: true,
+  infinite: false,
   autoplay: false,
   slidesToShow: 1,
   slidesToScroll: 1,

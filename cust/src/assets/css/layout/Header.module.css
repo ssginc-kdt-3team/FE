@@ -46,9 +46,53 @@
   width: 25px;
   transition: 0.5s;
 }
-
 .navBtn img {
   width: 25px;
+}
+.navBtn .line {
+  width: 25px;
+  height: 3px;
+  margin: 7px auto;
+  background-color: var(--main);
+  border-radius: 3px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  /* z-index: 99999; */
+}
+
+.active {
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition-delay: 0.6s;
+  -o-transition-delay: 0.6s;
+  transition-delay: 0.6s;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  /* z-index: 9991; */
+}
+.active .line:nth-child(1) {
+  -webkit-transform: translateY(10px);
+  -ms-transform: translateY(10px);
+  -o-transform: translateY(10px);
+  transform: translateY(10px);
+}
+.active .line:nth-child(2) {
+  width: 0px;
+}
+.active .line:nth-child(1), .active .line:nth-child(3) {
+  -webkit-transition-delay: 0.3s;
+  -o-transition-delay: 0.3s;
+  transition-delay: 0.3s;
+}
+.active .line:nth-child(3) {
+  -webkit-transform: translateY(-10px) rotate(90deg);
+  -ms-transform: translateY(-10px) rotate(90deg);
+  -o-transform: translateY(-10px) rotate(90deg);
+  transform: translateY(-10px) rotate(90deg);
 }
 
 /* 메뉴 */

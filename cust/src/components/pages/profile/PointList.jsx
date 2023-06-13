@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components'
 import PageTitle from '../../ui/PageTitle';
 import { cashFormat } from '../../../utils/format';
-import { Button } from 'antd';
+import { Empty } from 'antd';
 import TypeFilter from '../../ui/profile/TypeFilter';
 import DateFilter from '../../ui/profile/DateFilter';
 import moment from 'moment';
@@ -34,14 +34,10 @@ const Div = styled.div`
   }
 `;
 
-const buttonStyle = {
-  marginBottom: '65px',
-  float: 'right'
-};
-
 function Point() {
   const loginInfo = useRecoilValue(loginState);
 
+  const [hasData, setHasData] = useState(false);
   const [pointList, setPointList] = useState(null);
   
   const [type, setType] = useState('all'); // all / get / lost
@@ -61,12 +57,14 @@ function Point() {
     .then(res => {
       console.log(res.data);
       setPointList(res.data.content);
+      setHasData(res.data.content.length > 0);
       setTotalItems(res.data.totalElements); // 총 아이템 수 설정
       setItemsPerPage(res.data.pageable.pageSize); // 페이지당 아이템 수 설정
     })
     .catch(err => { // 오류 처리
       console.log(err);
       error("오류가 발생하였습니다.");
+      setHasData(false);
     })
   }, [loginInfo.id, type, dateRange, currentPage])
 
@@ -101,17 +99,26 @@ function Point() {
           <span>{moment(new Date()).clone().subtract(dateRange, 'month').format("YYYY-MM-DD")} ~ {moment(new Date()).format("YYYY-MM-DD")}</span>
         </Div>
 
-        {/* 리스트 */}
-        <Ul className='flex flex-col' style={{ borderTop: '0px solid var(--input-border)' }}>
-          {
-            pointList && pointList.map( point => (
-              <CashPointInfoCard key={point.id} data={point} remained={remainedPoint} isCash={false}/>
-            ))
-          }
-        </Ul>
-    
-        {/* 페이지 */}
-        <Paging currentPage={currentPage} totalItems={totalItems} itemsPerPage={itemsPerPage} setCurrentPage={setCurrentPage}/>
+        {
+          hasData ? (
+            <>
+              {/* 리스트 */}
+              <Ul className='flex flex-col' style={{ borderTop: '0px solid var(--input-border)' }}>
+                {
+                  pointList && pointList.map( point => (
+                    <CashPointInfoCard key={point.id} data={point} remained={remainedPoint} isCash={false}/>
+                  ))
+                }
+              </Ul>
+          
+              {/* 페이지 */}
+              <Paging currentPage={currentPage} totalItems={totalItems} itemsPerPage={itemsPerPage} setCurrentPage={setCurrentPage}/>
+            </>
+          )
+          : (
+            <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} /> 
+          )
+        }
       </div>
     </div>
   );

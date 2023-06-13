@@ -38,16 +38,18 @@
   color: var(--main);
 } */
 
-/* 로그아웃 */
-#mobNavWrap > div > span:last-child {
-  color: var(--description);
-}
-
 /* 메뉴 */
-#mobNavWrap > ul:last-child {
+#mobNavWrap ul {
   display: flex;
   gap: 24px;
   flex-direction: column;
+}
+
+/* 로그아웃 */
+#mobNavWrap > div > span:last-child {
+  width: fit-content;
+  margin: 0 auto;
+  color: var(--description);
 }
 
 /* #background {

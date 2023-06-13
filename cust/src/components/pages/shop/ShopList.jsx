@@ -26,7 +26,7 @@ function ShopList() {
   return (
     <div className='container'>
       <div className='center flex-col'>
-        <PageTitle title='SHOP'/>
+        <PageTitle title='SHOP' phrase='캐주얼한 음식부터 정통 다이닝까지 다양하고 맛있는 세상의 별의 별맛을 만나보세요.'/>
         <ul id={styles.tileWrap} className='grid-4c flex-gap-10'>
           {
             shopList && shopList.map( shop => (

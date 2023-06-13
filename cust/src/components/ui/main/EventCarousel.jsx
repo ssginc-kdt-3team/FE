@@ -45,8 +45,8 @@ function EventCarousel() {
       <Slider {...settings} dotsClass='slick-dots' className={styles.sliderWrap}>
         {
           eventList && eventList.map( event => (
-            <Link to={`/event/${event.id}`}>
-              <Img key={event.id} src={event.bannerUrl} alt={event.title}/>
+            <Link to={`/event/${event.id}`} key={event.id}>
+              <Img src={event.bannerUrl} alt={event.title}/>
             </Link>
           )).slice(0, 8)
         }

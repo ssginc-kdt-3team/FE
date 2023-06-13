@@ -19,7 +19,7 @@ import ShopList from "./components/pages/shop/ShopList";
 import Shop from "./components/pages/shop/Shop";
 import ReviewList from "./components/pages/profile/ReviewList";
 import Profile from "./components/pages/profile/Profile";
-import Cash from "./components/pages/profile/cash/Cash";
+import CashList from "./components/pages/profile/cash/CashList";
 import ChargeResult from "./components/pages/profile/cash/ChargeResult";
 import PointList from "./components/pages/profile/PointList";
 import CouponList from "./components/pages/profile/CouponList";
@@ -59,7 +59,7 @@ function App() {
           {/* profile */}
           <Route path="/profile" element={<Profile/>}/>
           <Route path="/profile/review" element={<ReviewList/>}/>
-          <Route path="/cash" element={<Cash/>}/>
+          <Route path="/cash" element={<CashList/>}/>
           <Route path="/point" element={<PointList/>}/>
           <Route path="/coupon" element={<CouponList/>}/>
 

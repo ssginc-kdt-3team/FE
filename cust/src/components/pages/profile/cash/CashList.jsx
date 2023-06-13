@@ -7,7 +7,7 @@ import axios from 'axios';
 import moment from 'moment';
 import Paging from '../../../ui/Paging';
 import CashPointInfoCard from '../../../ui/profile/CashPointInfoCard';
-import { Button } from 'antd';
+import { Button, Empty } from 'antd';
 import TypeFilter from '../../../ui/profile/TypeFilter';
 import DateFilter from '../../../ui/profile/DateFilter';
 import SelectChargeOption from '../../../modal/profile/cash/SelectChargeOption';
@@ -39,6 +39,7 @@ const Div = styled.div`
 function Cash() {
   const loginInfo = useRecoilValue(loginState);
 
+  const [hasData, setHasData] = useState(false);
   const [cashList, setCashList] = useState(null);
   
   const [type, setType] = useState('all'); // all / get / lost
@@ -60,12 +61,14 @@ function Cash() {
     .then(res => {
       console.log(res.data);
       setCashList(res.data.content);
+      setHasData(res.data.content.length > 0);
       setTotalItems(res.data.totalElements); // 총 아이템 수 설정
       setItemsPerPage(res.data.pageable.pageSize); // 페이지당 아이템 수 설정
     })
     .catch(err => { // 오류 처리
       console.log(err);
       error("오류가 발생하였습니다.");
+      setHasData(false);
     })
   }, [loginInfo.id, type, dateRange, currentPage])
 
@@ -110,17 +113,26 @@ function Cash() {
             <span>{moment(new Date()).clone().subtract(dateRange, 'month').format("YYYY-MM-DD")} ~ {moment(new Date()).format("YYYY-MM-DD")}</span>
           </Div>
 
-          {/* 리스트 */}
-          <Ul className='flex flex-col' style={{ borderTop: '0px solid var(--input-border)' }}>
-            {
-              cashList && cashList.map( cash => (
-                <CashPointInfoCard key={cash.id} data={cash} remained={remainedCash} isCash={true}/>
-              ))
-            }
-          </Ul>
-      
-          {/* 페이지 */}
-          <Paging currentPage={currentPage} totalItems={totalItems} itemsPerPage={itemsPerPage} setCurrentPage={setCurrentPage}/>
+          {
+            hasData ? (
+              <>
+                {/* 리스트 */}
+                <Ul className='flex flex-col' style={{ borderTop: '0px solid var(--input-border)' }}>
+                  {
+                    cashList && cashList.map( cash => (
+                      <CashPointInfoCard key={cash.id} data={cash} remained={remainedCash} isCash={true}/>
+                    ))
+                  }
+                </Ul>
+            
+                {/* 페이지 */}
+                <Paging currentPage={currentPage} totalItems={totalItems} itemsPerPage={itemsPerPage} setCurrentPage={setCurrentPage}/>
+              </>
+            )
+            : (
+              <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} /> 
+            )
+          }
         </div>
       </div>
 

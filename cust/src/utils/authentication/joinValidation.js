@@ -1,11 +1,12 @@
 import axios from "axios";
 import { isEmailValid } from "./emailValidation";
+import { error } from "../notification";
 
 // 빈 칸 처리
 export const isInputEmpty = (userInfo) => {
   for (let key in userInfo) {
     if(userInfo[key] === "" || userInfo[key] === null) {
-      alert('내용을 입력하세요.');
+      error('내용을 입력하세요.');
       return true;
     }
   }

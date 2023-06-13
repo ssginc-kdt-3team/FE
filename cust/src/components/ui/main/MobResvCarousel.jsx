@@ -13,7 +13,7 @@ import MobResvCard from './MobResvCard';
 
 const settings = {
   dots: false,
-  infinite: true,
+  infinite: false,
   autoplay: false,
   slidesToShow: 1,
   slidesToScroll: 1,
