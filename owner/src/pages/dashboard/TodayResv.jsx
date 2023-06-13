@@ -53,15 +53,15 @@ const MonthlyBarChart = () => {
   const [todayresv, setTodayResv] = useState([]);
   const { primary, secondary } = theme.palette.text;
   const info = theme.palette.info.light;
-  const [currentDate, setCurrentDate] = useState('');
-  const [series, setSeries] = useState(
+  const [series, setSeries] = useState(     //y축 data
     [{ name: '예약 수', data: [] }],
     [{ name: '노쇼율', data: [] }],
-    ); //y축 data
+    ); 
   const [options, setOptions] = useState(barChartOptions);
   const [totalNum, setTotalNum] = useState(0);
+  const [totalNoshow, setTotalNoshow] = useState(0);  // 예상 방문 수 = 총 예약 수 - 총 예상 노쇼수 expectationNoShowNum
 
-  // 점주 id - 오늘 예약 데이터 가져옴
+  // 점주 id - 오늘 시간별 예약 현황 데이터 가져옴
   useEffect(() => {
     axiosWithBaseUrl
       .get(`/owner/main/today/${id}`)
@@ -74,16 +74,16 @@ const MonthlyBarChart = () => {
       });
   }, [id]);
 
+
   useEffect(() => {
     if (todayresv.length > 0) {
-      const timeCategories = todayresv.map((resv) => resv.time);
-      const numData = todayresv.map((resv) => parseInt(resv.num));
-      const noShowData = todayresv.map((resv) => parseInt(resv.expectationNoShowNum));
-      const total = numData.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+      const timeCategories = todayresv.map((resv) => resv.time);                                            //영업시간
+      const numData = todayresv.map((resv) => parseInt(resv.num));                                          //예약 수
+      const noShowData = todayresv.map((resv) => parseInt(resv.expectationNoShowNum));                      //노쇼 수 
+      const total = numData.reduce((accumulator, currentValue) => accumulator + currentValue, 0);           //총 예약 수 
+      const totalNoshow = noShowData.reduce((accumulator, currentValue) => accumulator + currentValue, 0);  //총 노쇼 수
+
       
-      const today = new Date();
-      const formattedDate = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
-      setCurrentDate(formattedDate);
 
       setOptions((prevState) => ({
         ...prevState,
@@ -97,7 +97,7 @@ const MonthlyBarChart = () => {
             show: false
           },
           labels: {
-            show: !isMobile,
+            show: !isMobile,          //모바일 아닐 때만 라벨 보이게
             style: {
               colors: [secondary]
             }
@@ -109,7 +109,7 @@ const MonthlyBarChart = () => {
         }
       }));
 
-      setSeries([{ data: numData },  { name: '예상 노쇼율', data: noShowData  }]);
+      setSeries([{ data: numData },  { name: '예상 노쇼율', data: noShowData  }]);    // 예약 수 , 예상 노쇼 수 
       setTotalNum(total);
     }
   }, [info, secondary, todayresv]);
@@ -118,8 +118,8 @@ const MonthlyBarChart = () => {
     <>
     <Grid>
       <Grid item>
-        <Typography variant="h5"  align="center">총:{totalNum}건</Typography>
-        
+        <Typography variant="h5" align="center">총:{totalNum}건</Typography>
+        <Typography variant="h6" align="center"> (예상 방문 수: {totalNum - totalNoshow}건)</Typography>
         <div id="chart">
             <ReactApexChart
              options={options} 
@@ -128,6 +128,7 @@ const MonthlyBarChart = () => {
              width='100%'
              height={400} />
         </div>
+        {/* 안내문구 */}
         <Grid container justifyContent="flex-end">
           <Typography variant= "subtitle2" style={{ color: '#cccccc', marginLeft: '5px', marginBottom: '20px', display: isMobile ? 'none' : 'block'}}>
             예상 노쇼율은 지난 3개월의 시간별 노쇼 평균치를 기준으로 계산된 수치입니다.

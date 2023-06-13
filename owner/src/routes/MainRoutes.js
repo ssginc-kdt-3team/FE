@@ -25,7 +25,6 @@ const DepositTable = Loadable(lazy(() => import('../pages/deposit/Table')));
 const ResvDetail = Loadable(lazy(() => import('../pages/resv/detail/index')));
 const DepositDetail =  Loadable(lazy(() => import('../pages/deposit/Detail')));
 
-
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {

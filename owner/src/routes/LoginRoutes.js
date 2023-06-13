@@ -9,7 +9,7 @@ const LoginForm = Loadable(lazy(() => import('pages/authentication/Login')));
 const JoinForm = Loadable(lazy(() => import('pages/authentication/Register')));
 const Findid = Loadable(lazy(() => import('pages/authentication/auth-forms/Findid')));
 const Findpwd = Loadable(lazy(() => import('pages/authentication/auth-forms/Findpwd')));
-
+const NoAccess = Loadable(lazy(() => import('pages/authentication/auth-forms/NoAccess')));
 // ==============================|| AUTH ROUTING ||============================== //
 
 const LoginRoutes = {
@@ -32,7 +32,11 @@ const LoginRoutes = {
         {
             path: '/findpwd',
             element: <Findpwd />
-        }
+        } ,   
+        {
+          path: '/noaccess',
+          element: <NoAccess />
+        }    
     ]
 };
 
