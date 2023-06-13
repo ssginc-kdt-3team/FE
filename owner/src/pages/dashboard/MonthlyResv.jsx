@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { axiosWithBaseUrl } from "App";
 
 import { useTheme } from "@mui/material/styles";
-import { Typography, Grid } from "@mui/material";
+import { Typography, Grid, useMediaQuery } from "@mui/material";
 
 import ReactApexChart from "react-apexcharts";
 
@@ -36,7 +36,7 @@ const barChartOptions = {
     },
   },
   dataLabels: {
-    enabled: false,
+    enabled: true,
   },
   xaxis: {
     categories: [],
@@ -58,29 +58,30 @@ const barChartOptions = {
 
 const MonthlyBarChart = () => {
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const id = useSelector((state) => state.user.id);              // 점주 id
   const { secondary } = theme.palette.text;
   const info = theme.palette.info.light;
   const [monthlyresv, setMonthlyResv] = useState([]);
   const [currentDate, setCurrentDate] = useState('');
   const [previousMonths, setPreviousMonths] = useState([]);
-  const [ labels, setLabels ] = useState({});
+  const [labels, setLabels ] = useState({});
   //y축 데이터
   const [series, setSeries] = useState([
     {
       name: "완료",
       group: "resv",
-      data: 'doneValue',
+      data: 'doneRate',
     },
     {
       name: "노쇼",
       group: "resv",
-      data: 'noShowValue'
+      data: 'noShowRate'
     },
     {
       name: "취소",
       group: "resv",
-      data: 'cancelValue',
+      data: 'cancelRate',
     },
     {
       data: 'whole'
@@ -105,18 +106,13 @@ const MonthlyBarChart = () => {
     // const { cancelValue, doneValue, noShowValue, whole } = monthlyresvData;
   
     if (monthlyresv.length > 0) {
-    const doneData = monthlyresv.map((resv) => parseInt(resv.doneValue));
-    const noshowData = monthlyresv.map((resv) => parseInt(resv.noShowValue));
-    const cancelData = monthlyresv.map((resv) => parseInt(resv.cancelValue));
-    const wholeData = monthlyresv.map((resv) => parseInt(resv.whole));
-    const doneRate = monthlyresv.map((resv) => parseInt(resv.doneRate));
-    const noshowRate  = monthlyresv.map((resv) => parseInt(resv.noshowRate));
-    const cancelRate = monthlyresv.map((resv) => parseInt(resv.cancelRate)); 
-
-
-    const today = new Date();
-    const formattedDate = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
-    setCurrentDate(formattedDate);
+      const doneRate = monthlyresv.map((resv) => parseInt(resv.doneRate));
+      const noShowRate  = monthlyresv.map((resv) => parseInt(resv.noShowRate));
+      const cancelRate = monthlyresv.map((resv) => parseInt(resv.cancelRate)); 
+      const doneData = monthlyresv.map((resv) => parseInt(resv.doneValue));
+      const noshowData = monthlyresv.map((resv) => parseInt(resv.noShowValue));
+      const cancelData = monthlyresv.map((resv) => parseInt(resv.cancelValue));
+      const wholeData = monthlyresv.map((resv) => parseInt(resv.whole));
 
     const monthLabels = ['이번달', '지난달', '작년(분기)'];
 
@@ -137,20 +133,20 @@ const MonthlyBarChart = () => {
     }));
 
     setSeries(
-      [ {data:doneData}, {data:noshowData}, {data:cancelData}], 
+      [ {data:doneRate}, {data:noShowRate}, {data:cancelRate}], 
       (prevState) => {
-      prevState[0].data = [doneData];
-      prevState[1].data = [noshowData];
-      prevState[2].data = [cancelData];
+      prevState[0].data = [doneRate];
+      prevState[1].data = [noShowRate];
+      prevState[2].data = [cancelRate];
       return [...prevState];
     });
 
     setLabels(
-      [ {data:doneRate}, {data:noshowRate}, {data:cancelRate}], 
+      [ {data:doneRate}, {data:noShowRate}, {data:cancelRate}], 
       (prevState) => {
-      prevState[0].data = [doneData];
-      prevState[1].data = [noshowData];
-      prevState[2].data = [cancelData];
+      prevState[0].data = [doneRate];
+      prevState[1].data = [noShowRate];
+      prevState[2].data = [cancelRate];
       return [...prevState];
     });
 
@@ -171,6 +167,11 @@ const MonthlyBarChart = () => {
             width='100%'
           />
         </div>
+        <Grid container justifyContent="flex-end" >
+          <Typography variant= "subtitle2" style={{ color: '#cccccc', marginRight: '10px', marginBottom: '20px', display: isMobile ? 'none' : 'block'}}>
+             (완료, 노쇼, 취소 비율)
+          </Typography>
+        </Grid>
       </Grid>
     </>
   );

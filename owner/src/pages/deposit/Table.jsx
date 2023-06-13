@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { axiosWithBaseUrl } from "App";
 import { Table, Tag, Button, Typography, Divider } from "antd";
+import {  Grid,  } from '@mui/material';
 import { Link } from "react-router-dom";
 import Paging from "components/pagination/Paging";
 import { DatePicker } from 'antd';
@@ -22,6 +23,7 @@ const DepositTable = () => {
     fetchPenalty(); 
   }, [currentPage, selectedDate, selectedStatus]);
 
+  //월별 위약금 조회
   const fetchResvList = () => {
     setLoading(true);
     const currentPageInt = parseInt(currentPage, 10); 
@@ -33,12 +35,12 @@ const DepositTable = () => {
 
     axiosWithBaseUrl
        .post(`/owner/deposit/${id}/${currentPageInt}`, requestBody)
-      .then((response) => {
-        setResvList(response.data.content);
-        console.log(response.data.content);
+      .then((res) => {
+        setResvList(res.data.content);
+        console.log(res.data.content);
         console.log(id);
-        setTotalItems(response.data.totalElements);
-        setItemsPerPage(response.data.numberOfElements);
+        setTotalItems(res.data.totalElements);
+        setItemsPerPage(res.data.numberOfElements);
         setLoading(false);
       })
       .catch((error) => {
@@ -46,6 +48,8 @@ const DepositTable = () => {
         setLoading(false);
       });
   };
+
+  //월별 총 위약금 조회
   const fetchPenalty = () => {
     const requestBody = {
       year: selectedDate.year,
@@ -54,8 +58,9 @@ const DepositTable = () => {
   
     axiosWithBaseUrl
       .post(`/owner/deposit/penalty/${id}`, requestBody)
-      .then((response) => {
-        setPenalty(response.data);
+      .then((res) => {
+        setPenalty(parseInt(res.data.result));
+       console.log(res.data)
       })
       .catch((error) => {
         console.log(error);
@@ -71,7 +76,10 @@ const DepositTable = () => {
     setSelectedStatus(status);
     console.log(status);
   };
-  
+
+  const formatNumber = (number) => {
+    return number ? number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') : "0";
+  };
 
   const columns = [
     {
@@ -180,13 +188,13 @@ const DepositTable = () => {
           <Button onClick={() => handleStatusChange("RECEIVE")}>완료</Button>
           <Button onClick={() => handleStatusChange("ALL_PENALTY")}>전액</Button>
           <Button onClick={() => handleStatusChange("HALF_PENALTY")}>반액</Button>
-          <Button onClick={() => handleStatusChange("RETURN")}>환불</Button>
-          {/* <Button onClick={() => handleStatusChange("cancel")}>정상취소</Button> */}
+          <Button onClick={() => handleStatusChange("RETURN")}>환불</Button>      
         
         <Divider style={{ marginTop: "30px", fontSize: '18px', fontWeight: 'bold' }}>예약금 목록</Divider>
-
-        {/* <Typography.Title level={5}>총 위약금: {penalty}</Typography.Title> */}
-
+        
+        <Grid container justifyContent="flex-end">
+        <Typography.Title level={5}>총 위약금: {formatNumber(penalty)}</Typography.Title>
+        </Grid>
         <Table
           columns={columns}
           dataSource={resvList}

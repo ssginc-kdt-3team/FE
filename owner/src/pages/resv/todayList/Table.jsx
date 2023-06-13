@@ -5,22 +5,21 @@ import Paging from "components/pagination/Paging";
 import { axiosWithBaseUrl } from "App";
 import Enter from "pages/resv/todayList/Enterbtn";
 import Noshow from "pages/resv/todayList/Noshowbtn";
-import { useSelector } from 'react-redux';               // userSlice의 id 값 가져오기
+import { useSelector } from 'react-redux';               
 
 //오늘 예약 조회 테이블
 const ResvTdTable = () => {
- const id = useSelector((state) => state.user.id);  
-  const [resvList, setResvList] = useState([]);           // 현재 페이지의 예약 목록을 저장 
-  const [loading, setLoading] = useState(false);          // 데이터를 불러오는 동안의 로딩 상태를 저장
-  const [currentPage, setCurrentPage] = useState(1);      // 현재 페이지 번호를 저장
-  const [totalItems, setTotalItems] = useState(0);        // 전체 고객 수를 저장
-  const [itemsPerPage, setItemsPerPage] = useState(10);   // 한 페이지에 보여줄 고객 수 저장
+ const id = useSelector((state) => state.user.id);        // userSlice의 id 값 가져오기
+  const [resvList, setResvList] = useState([]);           // 현재 페이지의 예약 목록
+  const [loading, setLoading] = useState(false);          // 데이터를 불러오는 동안의 로딩 상태
+  const [currentPage, setCurrentPage] = useState(1);      // 현재 페이지 번호
+  const [totalItems, setTotalItems] = useState(0);       
+  const [itemsPerPage, setItemsPerPage] = useState(10);   // 한 페이지에 보여줄 예약 수 
   const [selectedType, setSelectedType] = useState("E");   // 기본 값 E
 
   useEffect(() => {
-    fetchResTdvList();                                     // 함수를 호출하여 페이지가 변경될 때마다 고객 목록을 가져옴
-  }, [currentPage, selectedType]);                         //currentPage가 변경될 때마다 fetchResTdvList 함수 호출
-
+    fetchResTdvList();                                     
+  }, [currentPage, selectedType]);                         
   const fetchResTdvList = () => {
     setLoading(true);
     axiosWithBaseUrl

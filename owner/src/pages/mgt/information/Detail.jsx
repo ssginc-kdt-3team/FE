@@ -1,7 +1,6 @@
 import React from 'react';
 import { Card, Button, Typography } from 'antd';
 import {  useNavigate } from 'react-router-dom';
-// import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 
@@ -18,11 +17,24 @@ const Span = styled.span`
 
 function ShopDetail({data}) {
   const navigate = useNavigate();
-  const userId = useSelector((state) => state.user.id); // useSelector를 사용하여 Redux 상태에서 id 값을 가져옵니다.
-  // data 객체에 useSelector에서 가져온 id 값
-  const updatedData = { ...data, id: userId };
-  
-
+  const userId = useSelector((state) => state.user.id); // useSelector id 값
+  const updatedData = { ...data, id: userId };    
+  const getTranslatedCategory = (category) => {    //카레고리명 치환
+    switch (category) {
+      case 'KOREA':
+        return '한식';
+      case 'CHINA':
+        return '중식';
+      case 'JAPAN':
+        return '일식';
+      case 'WEST':
+        return '양식';
+      case 'ASIAN':
+        return '아시안';
+      default:
+        return category;
+    }
+  };
 
   return (
     <>
@@ -51,10 +63,8 @@ function ShopDetail({data}) {
                 <p><Span>오픈시간</Span>{data.openTime}</p>
                 <p><Span>마감시간</Span>{data.closeTime}</p>
                 <p><Span>주문 마감 시간</Span>{data.orderCloseTime}</p>
-                <p><Span>카테고리</Span>{data.shopCategory}</p>
+                <p><Span>카테고리</Span>{getTranslatedCategory(data.shopCategory)}</p>               
                 <p><Span>전화번호</Span>{data.businessNumber}</p>
-                {/* <p><Span>대표자명</Span>{data.businessCeo}</p> */}
-                {/* <p><Span>사업자등록번호</Span>{data.businessNumber}</p> */}
 
           {/* 수정하기 버튼 */}
             <Button 
