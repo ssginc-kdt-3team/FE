@@ -15,6 +15,7 @@ function MobNav({isNavOpen, setIsNavOpen}) {
       name: '',
       isLoggedin: false
     });
+    setIsNavOpen(false);
   }
 
   return (

@@ -57,7 +57,7 @@ function Header() {
 
           {/* 로고 */}
           <div id={styles.middleWrap} className='center'>
-            <Link to="/">
+            <Link to="/" onClick={() => setIsNavOpen(false)}>
               <img id={styles.logo} src={logo} alt="logo" />
               <h1>스타필드 예약시스템</h1> {/* h1 태그는 있으면 좋다, css로 텍스트 숨김 */}
             </Link>
@@ -75,8 +75,11 @@ function Header() {
           </ul>
             
           {/* 모바일 */}
-          <div className={styles.navBtn} onClick={handleNav}>
-            <img src={!isNavOpen ? hamburger : close} alt="navBtn"/>
+          <div className={`${styles.navBtn} ${isNavOpen ? styles.active : ''}`} onClick={handleNav}>
+            <div className={styles.line}></div>
+            <div className={styles.line}></div>
+            <div className={styles.line}></div>
+            {/* <img src={!isNavOpen ? hamburger : close} alt="navBtn"/> */}
           </div>
           
         </div>
