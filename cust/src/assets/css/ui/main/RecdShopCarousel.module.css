@@ -1,0 +1,73 @@
+/* 버튼 */
+.sliderWrap > img {
+  width: 40px;
+  height: 40px;
+  right: -75px;
+}
+
+/* 이전 버튼 */
+.sliderWrap > img:first-child {
+  transform: translate(0, -50%) rotate(180deg);
+  left: -75px;
+  right: auto;
+}
+
+/* 카드 너비 설정 */
+.sliderWrap > div > div > div {
+  max-width: calc(var(--carousel-max-width) / 4) !important;
+  width: calc(var(--carousel-width) / 4) !important;
+  /* max-height: calc(var(--device-width-ml) / 4) !important;
+  height: calc(85vw / 4) !important; */
+}
+
+.sliderWrap > div > div > div > div {
+  max-width: calc(var(--carousel-max-width) / 4) !important;
+  width: calc(var(--carousel-width) / 4) !important;
+  /* max-height: calc(var(--device-width-ml) / 4) !important;
+  height: calc(85vw / 4) !important; */
+  padding: 20px;
+}
+
+
+/* 버튼 */
+/* ion-icon {
+  width: 45px;
+  height: 45px;
+  --ionicon-stroke-width: 20px;
+  color: var(--font);
+} */
+
+
+@media screen and (max-width: 768px) {
+  /* 버튼 */
+  .sliderWrap > img {
+    display: none !important;
+  }
+
+  /* 카드 너비 설정 */
+  .sliderWrap > div > div > div {
+    max-width: calc((100vw - 20px) / 2) !important;
+    width: calc((100vw - 20px) / 2) !important;
+    /* max-height: calc(var(--device-width-ml) / 4) !important;
+    height: calc(85vw / 4) !important; */
+    /* margin-right: 20px; */
+  }
+  /* 홀수 */
+  /* .sliderWrap > div > div > div:nth-child(odd) {
+    padding-right: 10px;
+  } */
+  /* 짝수 */
+  /* .sliderWrap > div > div  > div:nth-child(even) {
+    padding-left: 10px;
+  } */
+
+  .sliderWrap > div > div > div > div {
+    /* max-width: calc((100vw - 40px) / 2) !important; */
+    /* width: calc((100vw - 40px) / 2) !important; */
+    max-width: 100% !important;
+    width: 100% !important;
+    /* max-height: calc(var(--device-width-ml) / 4) !important;
+    height: calc(85vw / 4) !important; */
+    padding: 10px;
+  }
+}

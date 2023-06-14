@@ -2,24 +2,39 @@
   --main: #C30E2D;
 
   /* bg */
+  --bg: #f9fafc;
+  --bg2: #f8f9fb;
   --input-bg: #f9f9f9;
+  --footer-bg: #1f1f1f;
+
+  /* border */
+  /* --input-border: #ccc; */
+  --input-border: #d9d9d9;
+  --header-border: #aeaeae;
+  /* --devide-border: #e5e7ea; */
+  --border: #ebebeb;
+  /* --button-border: #d9d9d9; */
+
+  /* font */
+  --font: #333;
+  --topMenu-font: #555555;
+  --description: #999;
+  --charge: #91caff;
+  --footer-font: #d1d1d1;
+  
+  /* scrollbar */
+  --scrollbar: #ddd;
+
 
 
   
+
+
   --black: #222222;
   --yellow: #f9bb00;
   --gray: #9e9e9e;
   --gray-150: #f3f5f7;
   --red: #ca3232;
 
-  --bg: #f9fafc;
-  --font: #333;
-  --border: #ebebeb;
   --price: #f95a00;
-
-  --description: #999;
-
-  --footer-bg: #f4f4f4;
-
-  --scrollbar: #ddd;
 }

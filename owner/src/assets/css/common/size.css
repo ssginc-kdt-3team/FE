@@ -1,0 +1,69 @@
+:root {
+  --device-s: 768px;
+
+  /* header */
+  --header-height: 180px;
+  --mob-header-height: 90px;
+
+  /* footer */
+  --footer-height: 334px;
+
+  /* size */
+  --input-fontSize: 18px;
+  --input-height: 50px;
+  --button-width: 180px;
+  --button-width-sm: 100px;
+  --button-height-sm: 40px;
+
+
+  /* resvForm */
+  --resvForm-max-width: 1024px;
+  --resvForm-width: 75vw;
+
+  /* Calendar */
+  --calendar-max-width: calc((var(--resvForm-max-width) - 80px) / 2);
+  --calendar-width: calc((var(--resvForm-width) - 80px) / 2);
+}
+
+/* 너비 */
+.width-100 {
+  width: 100%;
+}
+.width-50 {
+  width: 50%;
+}
+.width-30 {
+  width: 30%;
+}
+
+/* 마진 */
+.mt-45 {
+  margin-top: 45px;
+}
+.mt-75 {
+  margin-top: 75px;
+}
+.mt-90 {
+  margin-top: 90px;
+}
+
+/* 패딩 */
+.pl-25 {
+  padding-left: 25px !important;
+}
+.pl-50 {
+  padding-left: 50px !important;
+}
+.pl-75 {
+  padding-left: 75px !important;
+}
+
+.pr-25 {
+  padding-right: 25px !important;
+}
+.pr-50 {
+  padding-right: 50px !important;
+}
+.pr-75 {
+  padding-right: 75px !important;
+}

@@ -2,16 +2,70 @@
   --device-s: 768px;
 
   /* header */
-  --header-height: 90px;
+  --header-height: 180px;
+  --mob-header-height: 80px;
 
   /* footer */
-  --footer-height: 334px;
+  --footer-height: 264px;
 
   /* size */
-  --input-btn-height: 65px;
+  --input-height: 50px;
+
+  --button-width: 180px;
+  --button-width-s: 100px;
+  --button-height-s: 40px;
+  --button-width-xs: 70px;
+  --button-height-xs: 33px;
+
+  --border-radius : 10px;
+  --border-radius-m: 8px;
+  --border-radius-s: 6px;
+
+  /* font */
+  --header-top-fontSize: 13px;
+
+  --input-fontSize: 18px;
+
+  --button-fontSize: 18px;
+  --button-fontSize-s: 16px;
+  --button-fontSize-xs: 14px;
+
   
+  --pageTitle-fontSize: 26px;
+  --title-fontSize: 22px;
+  --info-fontSize: 12px;
+
+
+  /* device */
+  --device-width-sm: 800px;
+  --device-width-m: 992px;
+  --device-width-ml: 1024px;
+  --device-width-l: 1200px;
+
+  /* resvForm */
+  --resvForm-max-width: 1024px;
+  --resvForm-width: 75vw;
+
+  /* Calendar */
+  --calendar-max-width: calc((var(--resvForm-max-width) - 80px) / 2);
+  --calendar-width: calc((var(--resvForm-width) - 80px) / 2);
+
+  /* Carousel */
+  --carousel-max-width: calc(var(--device-width-l) * 0.8);
+  --carousel-width: 70vw;
+
+  /* Modal */
+  --modal-gap: 45px;
+
+  /* coupon */
+  --coupon-width: 312px;
+
+  /* pageTitle */
+  --pageTitle-height: 220px;
+
 }
 
+/* 너비 */
 .width-100 {
   width: 100%;
 }
@@ -20,4 +74,65 @@
 }
 .width-30 {
   width: 30%;
+}
+
+/* 높이 */
+.height-100 {
+  height: 100%;
+}
+
+/* 마진 */
+.mt-5 {
+  margin-top: 5px;
+}
+.mt-8 {
+  margin-top: 8px;
+}
+.mt-10 {
+  margin-top: 10px;
+}
+.mt-45 {
+  margin-top: 45px;
+}
+.mt-75 {
+  margin-top: 75px;
+}
+.mt-90 {
+  margin-top: 90px;
+}
+
+/* 패딩 */
+.pl-25 {
+  padding-left: 25px !important;
+}
+.pl-50 {
+  padding-left: 50px !important;
+}
+.pl-75 {
+  padding-left: 75px !important;
+}
+
+.pr-25 {
+  padding-right: 25px !important;
+}
+.pr-50 {
+  padding-right: 50px !important;
+}
+.pr-75 {
+  padding-right: 75px !important;
+}
+
+
+
+@media screen and (max-width: 768px) {
+  :root {  
+    /* font */
+    --input-fontSize: 16px;
+    --pageTitle-fontSize: 24px;
+
+    
+    /* pageTitle */
+    --pageTitle-height: 200px;
+  }
+  
 }

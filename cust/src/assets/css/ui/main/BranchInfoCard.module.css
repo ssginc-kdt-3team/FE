@@ -1,0 +1,61 @@
+#cardWrap {
+  max-width: var(--device-width-l);
+  width: 85vw;
+  height: 100%;
+  /* margin: -60px auto 60px auto; */
+  margin: 0 auto;
+  padding: 40px 80px;
+}
+
+/* 매장명 */
+#nameWrap {
+  width: 20%;
+}
+#nameWrap > p {
+  /* font-size: var(--input-fontSize); */
+  color: var(--footer-font);
+}
+#nameWrap > h1 {
+  font-size: 36px;
+  color: var(--footer-font);
+}
+
+/* 매장 정보 */
+#detailWrap > p {
+  color: var(--footer-font);
+}
+#detailWrap > p > span {
+  color: var(--description);
+  margin-right: 16px;
+}
+#detailWrap > p:last-child > span:first-child {
+  flex-shrink: 0
+}
+
+
+@media screen and (max-width: 768px) {
+  #cardWrap {    
+    max-width: 100%;
+    width: 100%;
+    gap: 20px;
+    /* margin: -60px auto 40px auto; */
+    padding: 20px 20px 32px 20px;
+  }
+
+  #infoWrap {
+    /* flex-direction: column; */
+    justify-content: space-between;
+    padding: 0 10px;
+    gap: 20px;
+  }
+  /* 매장명 */
+  #nameWrap {
+    width: 40%;
+  }
+  #nameWrap > p {
+    margin-bottom: 4px;
+  }
+  #nameWrap > h1 {  
+    font-size: 30px;
+  }
+}

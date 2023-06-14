@@ -1,0 +1,75 @@
+#resvForm {
+  max-width: var(--resvForm-max-width);
+  width: var(--resvForm-width);
+}
+
+/* #resvForm label {
+  margin-bottom: 5px;
+} */
+#resvForm label > span {
+  font-size: 12px;
+  margin-left: 10px;
+  color: var(--main);
+}
+
+/* 요청사항 */
+#resvForm textarea {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid var(--input-border);
+  border-radius: var(--border-radius-m);
+  /* margin-bottom: 10px; */
+  resize: none;
+}
+#resvForm textarea:focus {
+  outline: 1px solid var(--main);
+}
+
+
+/* 취소/확인 버튼 */
+#buttonWrap {
+  margin-top: 40px;
+}
+#buttonWrap > button {
+  width: var(--button-width);
+}
+
+
+@media screen and (max-width: 768px) {
+  #resvForm {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  /* 지점/매장 선택 */
+  #topWrap {
+    gap: 20px;
+  }
+
+  /* 메인 */
+  #middleWrap {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  /* #detailWrap {
+    gap: 20px;
+  } */
+
+  /* 카운터 */
+  #detailWrap > div:first-child > div {
+    justify-content: space-between;
+    align-items: center;
+    gap: 0;
+  }
+
+  /* 취소/확인 버튼 */
+  #buttonWrap {
+    margin: 0;
+    flex-direction: column; 
+    gap: 8px;
+  }
+  #buttonWrap > button {
+    width: 100%;
+  }
+}

@@ -1,0 +1,171 @@
+/* 태그 */
+* {
+  font-family: 'Noto Sans KR', sans-serif;
+  box-sizing: border-box;
+
+  /* 터치 시 파란 배경 제거 */
+  -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); 
+}
+
+html {
+  /* width: 100vw; */
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  /* background-color: var(--bg); */
+}
+
+body {
+  /* width: 100%; */
+  height: calc(100% - var(--header-height));
+  margin: 0;
+  padding: 0;
+}
+body::-webkit-scrollbar {
+  width: 10px;  /* 스크롤바의 너비 */
+}
+body::-webkit-scrollbar-thumb {
+  height: 10px; /* 스크롤바의 길이 */
+  background: var(--scrollbar); /* 스크롤바의 색상 */
+  border-radius: 10px;
+}
+
+#root {
+  /* width: 100vw; */
+  height: 100%;
+  margin-top: var(--header-height);
+  color: var(--font);
+}
+
+header {
+  width: 100%;
+  height: var(--header-height);
+  background-color: #fff;
+  /* background: rgba(255, 255, 255, 0.85); */
+  /* opacity: 0.5; */
+  /* backdrop-filter: blur(10px); */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 98;
+  transition: 0.5s;
+}
+
+footer {
+  width: 100%;
+  height: var(--footer-height);
+  background-color: var(--footer-bg);
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: var(--font);
+}
+
+/* input:focus {
+  outline: 1px solid var(--main);
+} */
+
+/* input {
+  box-sizing: border-box;
+} */
+input {
+  /* appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none; */
+  background-color: #fff;
+}
+input:focus {
+  outline: none;
+}
+
+.select {
+  width: 200px;
+  /* padding: 5px 0; */
+  background-color: white;
+  /*화살표 배경 넣기*/
+  /* background: url('../../images/icons/down.png') no-repeat 100% 50% #fff; /* 화살표 select박스 오른쪽 중앙 배치, 배경 흰색 */
+  /* background-size: 20px; */
+  
+  border: 0;
+  border-bottom: 1px solid var(--input-border);
+  /* border-radius: 10px; */
+  font-size: var(--input-fontSize);
+  outline: none;
+  
+  /* 기본 효과 제거 */
+  -webkit-appearance: none;
+  -moz-appearance: none; 
+  appearance: none;
+}
+/* .select:active {
+  border-bottom: 1px solid var(--main);
+} */
+
+label {
+  margin-bottom: 5px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+  white-space: nowrap; /* 텍스트가 한 줄로 표시되도록 설정 */
+  overflow: hidden; /* 너비를 초과하는 부분을 숨김 */
+  text-overflow: ellipsis; /* 너비를 초과하는 부분을 "..."으로 표시 */
+  margin: 0;
+}
+
+p {
+  margin: 4px 0;
+  word-wrap: break-word; /* 긴 단어를 줄바꿈할 때 단어 내에서 줄바꿈 처리 */
+  overflow-wrap: break-word; /* word-wrap의 대체 속성 */
+}
+
+/* 클래스 */
+.container {
+  width: 100%;
+  min-height: 100%;
+  margin: 0 auto;
+  /* padding: 20px 20px 60px 20px; */
+  padding: 0 20px 56px 20px;
+}
+
+.background {
+  background-color: var(--bg2);
+}
+
+/* .list-2c {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-row-gap: 40px;
+  grid-column-gap: 20px;
+} */
+
+
+@media screen and (max-width: 768px) {
+  #root {
+    margin-top: var(--mob-header-height);
+  }
+  
+  header {
+    height: var(--mob-header-height);
+  }
+
+  footer {
+    height: fit-content;
+  }
+
+  .container {
+    width: 100vw;
+    min-height: calc(100vh - var(--mob-header-height));
+    padding-bottom: 32px;
+  }
+}

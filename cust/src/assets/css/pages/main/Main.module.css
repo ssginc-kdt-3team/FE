@@ -1,0 +1,71 @@
+#container {
+  padding-bottom: 80px;
+}
+
+/* 예약 정보 */
+#topWrap {
+  height: calc(85vh - var(--header-height));
+  /* background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url(../../images/background.jpg) no-repeat center;
+  background-size: cover; */
+}
+#topWrap > div:first-child {
+  padding-top: 80px;
+}
+
+
+/* #middleWrap {
+  height: calc(100vh - var(--header-height));
+  border-top: 1px solid #fff;
+} */
+
+/* #bottomWrap > div {
+  background-position: right;
+  background-size: contain;
+  background-repeat: no-repeat;
+} */
+
+#bottomWrap {
+  margin-top: 60px;
+}
+/* #bottomWrap > div:first-child {
+  margin: -60px auto 60px auto;
+  padding: 40px 80px;
+} */
+
+
+@media screen and (max-width: 768px) {
+  #container {
+    /* padding: 0 20px 20px 20px; */
+    padding: 20px 0 32px 0;
+    gap: 24px;
+  }
+
+  /* 상단 */
+  #topWrap {
+    height: auto;
+    padding: 0 10px;
+  }
+  #topWrap > div:first-child {
+    flex-direction: column;
+    padding: 0;
+  }
+
+  /* 중간 */
+  #middleWrap {
+    padding: 0 10px;
+    /* overflow: hidden; */
+  }
+  #middleWrap > div:first-child {
+    padding: 0;
+  }
+
+  /* 하단 */
+  #bottomWrap {
+    margin-top: 40px;
+    padding: 20px;
+  }
+  /* #bottomWrap > div:first-child {
+    margin: -60px auto 40px auto;
+    padding: 20px;
+  } */
+}

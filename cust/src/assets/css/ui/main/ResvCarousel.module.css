@@ -1,0 +1,52 @@
+#carouselWrap {
+  width: calc(30% - 20px);
+  height: 100%;
+  padding: 0 40px;
+  /* background-color: #fff; */
+  z-index: 93;
+}
+
+.sliderWrap {
+  width: 100%;
+  margin: 0 auto;
+  border-top: 1px solid var(--input-border);
+}
+/* 이전 버튼 */
+.sliderWrap > img:first-child {
+  transform: translate(0, -50%) rotate(180deg);
+}
+.sliderWrap > div {
+  text-align: center;
+} 
+.sliderWrap > div h2 {
+  margin: 32px 0;
+} 
+.sliderWrap > div label {
+  color: var(--description);
+} 
+.sliderWrap > div p {
+  margin-bottom: 16px;
+} 
+.sliderWrap > div button {
+  margin-top: 16px;
+}
+
+/* 안내 메세지 */
+.infoMessageWrap {
+  width: 100%;
+  height: calc(100% - 1 * (var(--pageTitle-fontSize) + 120px));
+  /* line-height: calc(100% - var(--pageTitle-fontSize) - 120px); */
+  border-top: 1px solid var(--input-border);
+}
+
+
+@media screen and (max-width: 768px) {
+  #carouselWrap {
+    display: none;
+  }
+
+  .infoMessageWrap {
+    height: calc(100% - 1 * (var(--pageTitle-fontSize) + 80px));
+    /* line-height: calc(100% - var(--pageTitle-fontSize) - 80px); */
+  }
+}

@@ -1,0 +1,52 @@
+#radioWrap {
+  max-width: var(--calendar-max-width);
+  width: var(--calendar-width);
+}
+
+/* #amWrap {
+
+} */
+
+.radioButton {
+  width: 100%;
+  height: 50px;
+  margin: 0;
+  background-color: white;
+  border: 1px solid var(--input-border);
+  border-radius: var(--border-radius-m);
+  color: var(--font);
+  font-size: var(--button-fontSize-s);
+  /* font-weight: bold; */
+  cursor: pointer;
+}
+
+.radioButton.selected { /* 두 개의 클래스가 동시에 적용된 요소 */
+  background-color: var(--main);
+  border-color: var(--main);
+  color: white;
+}
+
+/* 라디오버튼 제거 */
+.radioButton input[type="radio"] {
+  display: none;
+}
+
+/* .radioButton input[type="radio"]:checked+label::before {
+  content: "";
+  display: block;
+  position: relative;
+  width: 16px;
+  height: 16px;
+  margin-right: 10px;
+  border-radius: 50%;
+  background-color: red;
+} */
+
+
+@media screen and (max-width: 768px) {
+  #radioWrap {
+    max-width: 100%;
+    width: 100%;
+  }
+  
+}

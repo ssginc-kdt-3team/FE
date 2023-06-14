@@ -1,20 +1,91 @@
-.button {
-  height: var(--input-btn-height);
-  padding: 0;
-  font-size: 22px;
-  font-weight: 500;
-  line-height: var(--input-btn-height);
-  text-align: center;
-  background: var(--main);
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  box-sizing: border-box;
-  transition: 0.5s;
+.box {
+  background-color: white;
+  border-radius: var(--border-radius);
+  padding: 20px;
+}
+.border-box {
+  border: 1px solid var(--input-border);
+}
+.shadow-box {
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.05);
 }
 
+/* 버튼 */
+.button {
+  height: var(--input-height);
+  padding: 0;
+  font-size: var(--button-fontSize);
+  font-weight: 500;
+  /* line-height: calc(var(--input-height) - 2px); */
+  text-align: center;
+  background-color: var(--main) !important;
+  /* color: #fff; */
+  /* border: 1px solid var(--main); */
+  border-radius: var(--border-radius-m);
+  /* cursor: pointer; */
+  /* transition: 0.5s; */
+  /* box-shadow: 0 2px 0 rgba(255, 38, 5, 0.06); */
+}
 .button:hover {
-  background-color: #fff;
+  /* background-color: #fff; */
+  background-color: #ff4d4f !important;
+  /* color: var(--main); */
+}
+.button:disabled {
+  color: #fff;
+}
+.button:disabled:hover {
+  background-color: var(--main) !important;
+}
+
+ /* button 클래스보다 우선순위 높다 << 뒤에 위치 */
+.buttonReverse {
+  background-color: #fff !important;
   color: var(--main);
-  border: 1px solid var(--main);
+}
+.buttonReverse:hover {
+  background-color: #fff !important;
+  /* color: #fff; */
+  color: var(--main) !important;
+  border-color: var(--main) !important;
+}
+.buttonReverse:disabled {
+  color: var(--main);
+}
+.buttonReverse:disabled:hover {
+  background-color: #fff !important;
+  /* color: var(--main); */
+  border-color: var(--input-border) !important;
+}
+
+.buttonTransparent {
+  color: #fff; 
+  border-color: #fff;
+  background-color: rgba(0, 0, 0, 0) !important;
+}
+.buttonTransparent:hover {
+  color: var(--main);
+  border-color: var(--main);
+  background-color: rgba(0, 0, 0, 0) !important;
+}
+.buttonTransparent:disabled {
+  color: #fff !important;
+  border-color: #fff;
+}
+.buttonTransparent:disabled:hover {
+  color: #fff;
+  border-color: #fff !important;
+  background-color: rgba(0, 0, 0, 0) !important;
+}
+
+.button-s {
+  width: var(--button-width-s);
+  height: var(--button-height-s);
+  font-size: var(--button-fontSize-s);
+}
+
+.button-xs {
+  width: var(--button-width-xs);
+  height: var(--button-height-xs);
+  font-size: var(--button-fontSize-xs);
 }

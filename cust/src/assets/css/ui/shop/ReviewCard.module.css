@@ -1,0 +1,86 @@
+/* 상단 */
+#titleWrap > div:first-child {
+  width: calc(100% - 20px);
+}
+/* 제목 */
+#titleWrap h3 {
+  /* min-width: calc(100% - 110px);
+  max-width: 80%; */
+  /* width: calc(100% - 162px); */
+  margin-left: 20px;
+}
+/* 별점 */
+#titleWrap ul {
+  font-size: 16px;
+  flex-shrink: 0
+}
+#titleWrap ul > li {
+  margin-right: 6px;
+}
+#titleWrap ul > li:last-child {
+  margin-right: 0px;
+}
+/* 토글 버튼 */
+#titleWrap > div:last-child {
+  width: 20px;
+  height: 20px;
+  background-image: url('../../../images/icons/down.png');
+  background-position: center;
+  background-size: cover; 
+  cursor: pointer;
+}
+
+/* 본문 */
+#contentWrap {
+  width: 100%;
+  margin-top: 15px;
+  border-top: 0.5px solid var(--border);
+}
+/* 작성일 */
+#contentWrap span {
+  font-size: 13px;
+  font-weight: lighter;
+  color: var(--description);
+  margin: 5px 0;
+}
+/* 이름 */
+/* #name {
+  font-size: 20px;
+} */
+/* 삭제 버튼 */
+#deleteBtn {
+  /* font-weight: lighter; */
+  color: var(--description);
+  cursor: pointer;
+}
+/* 내용 */
+#contentWrap p {
+  width: 100%;
+}
+
+
+.open {
+  display: block;
+}
+
+.close {
+  display: none;
+}
+
+
+@media screen and (max-width: 768px) {
+  #titleWrap > div:first-child {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  /* 별점 */
+  #titleWrap ul {
+    font-size: 12px;
+  }
+  /* 제목 */
+  #titleWrap h3 {
+    margin-left: 0;
+  }
+}

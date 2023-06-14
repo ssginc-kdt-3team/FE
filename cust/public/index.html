@@ -3,13 +3,23 @@
   <head>
     <meta charset="utf-8" />
     <!-- <link rel="icon" href="%PUBLIC_URL%/favicon.ico" /> -->
-    <link rel="icon" href="https://www.starfield.co.kr/images/icon/favicon/Starfield_favicon.png" />
+    <link rel="icon" type="image/png" href="%PUBLIC_URL%/icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" /> <!-- 애플 주소바 없애기 -->
+    <meta name="mobile-web-app-capable" content="yes" /> <!-- 안드로이드 주소바 없애기 -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" /> <!-- 애플 상태바 -->
+
+    <meta name="format-detection" content="telephone=no"> <!-- 전화번호 자동 링크 없애기 -->
+
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/icon.png" /> <!-- 애플 아이콘 -->
+    <link rel="shortcut icon" href="%PUBLIC_URL%/icon.png" /> <!-- 안드로이드 아이콘 -->
+
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
-      content="mini_project_fe"
+      content="final_project_fe"
     />
+    <!-- style.css가 public 안에 있을 때 --> 
     <!-- <link rel="stylesheet" href="./assets/css/style.css"> -->
 
     <!-- font -->
@@ -32,6 +42,7 @@
       <img src="https://emart24.co.kr/assets/assets/imgs/emartBack.png" alt="이마트 배경" style="transition: unset;">
     </div> -->
     
+    <!-- 페이지 -->
     <div id="root"></div>
 
     <!-- React Bootstrap -->

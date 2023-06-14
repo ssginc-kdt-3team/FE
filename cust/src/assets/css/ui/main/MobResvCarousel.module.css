@@ -1,0 +1,41 @@
+#carouselWrap {
+  display: none;
+}
+
+/* 버튼 */
+.sliderWrap > button {
+  display: none !important;
+}
+
+/* 마커 */
+.sliderWrap li::marker {
+  content: none;
+} 
+
+/* 로그인 카드, 예약 없음 카드 */
+.infoMessageWrap {
+  margin: 0 10px;
+}
+/* 버튼 */
+.infoMessageWrap  button {
+  width: var(--button-width);
+}
+
+
+@media screen and (max-width: 768px) {
+  #carouselWrap {
+    display: block;
+    z-index: 93;
+  }
+
+  .infoMessageWrap {
+    height: 162px;
+  }
+  
+  /* 버튼 */
+  .infoMessageWrap button {
+    width: var(--button-width-s);
+    height: var(--button-height-s);
+    font-size: var(--button-fontSize-s);
+  }
+}

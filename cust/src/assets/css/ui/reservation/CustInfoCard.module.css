@@ -1,0 +1,19 @@
+#custInfoWrap {
+  width: 100%;
+  height: fit-content; /* 높이 내용에 맞게 */
+  /* padding: 20px; */
+}
+
+/* 상단 */
+#topWrap {
+  font-size: var(--title-fontSize);
+}
+
+/* 하단 */
+/* #bottomWrap > p {
+  margin: 8px 0;
+} */
+#bottomWrap > p > span {
+  color: var(--description);
+  margin-right: 16px;
+}

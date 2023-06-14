@@ -1,0 +1,136 @@
+#headerWrap {
+  max-width: 1280px;
+  width: 100%;
+  height: var(--header-height);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* 로그인/회원가입 */
+#topWrap {
+  /* height: 30px; */
+  height: 15%;
+  padding: 0 20px;
+}
+#topWrap > a, #topWrap > span {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  color: var(--topMenu-font);
+}
+/* 구분선 */
+#topWrap > a:first-child::after, #topWrap > span:last-child::before {
+  width: 1px;
+  height: 10px;
+  content: "";
+  background: var(--header-border);
+  margin: 0 15px;
+  display: inline-block;
+}
+
+/* 로고 */
+#middleWrap {
+  /* height: 90px; */
+  height: 50%;
+}
+#middleWrap > a, #logo {
+  height: 80px;
+}
+#middleWrap h1 {
+  display: none;
+}
+
+/* nav 버튼 */
+.navBtn {
+  display: none;
+  width: 25px;
+  transition: 0.5s;
+}
+.navBtn img {
+  width: 25px;
+}
+.navBtn .line {
+  width: 25px;
+  height: 3px;
+  margin: 7px auto;
+  background-color: var(--main);
+  border-radius: 3px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  /* z-index: 99999; */
+}
+
+.active {
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition-delay: 0.6s;
+  -o-transition-delay: 0.6s;
+  transition-delay: 0.6s;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  /* z-index: 9991; */
+}
+.active .line:nth-child(1) {
+  -webkit-transform: translateY(10px);
+  -ms-transform: translateY(10px);
+  -o-transform: translateY(10px);
+  transform: translateY(10px);
+}
+.active .line:nth-child(2) {
+  width: 0px;
+}
+.active .line:nth-child(1), .active .line:nth-child(3) {
+  -webkit-transition-delay: 0.3s;
+  -o-transition-delay: 0.3s;
+  transition-delay: 0.3s;
+}
+.active .line:nth-child(3) {
+  -webkit-transform: translateY(-10px) rotate(90deg);
+  -ms-transform: translateY(-10px) rotate(90deg);
+  -o-transform: translateY(-10px) rotate(90deg);
+  transform: translateY(-10px) rotate(90deg);
+}
+
+/* 메뉴 */
+#bottomWrap {
+  /* height: 60px; */
+  height: 35%;
+  font-weight: bold;
+}
+#bottomWrap > a {
+  flex-basis: 120px;
+  text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  #headerWrap {
+    height: var(--mob-header-height);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #topWrap, #bottomWrap {
+    display: none;
+  }
+
+  /* 로고 */
+  #middleWrap {
+    height: 100%;
+    width: calc(100% - 25px);
+    margin-left: 25px;
+    /* background-color: white; */
+  }
+  #middleWrap > a, #logo {
+    height: 65px;
+  }
+
+  /* nav 버튼 */
+  .navBtn {
+    display: block;
+  }
+}

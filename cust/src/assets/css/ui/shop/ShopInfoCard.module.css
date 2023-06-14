@@ -1,0 +1,75 @@
+/* 매장 이미지 */
+#topWrap > img {
+  width: 320px;
+  height: 240px;
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius);
+
+  /* object-fit: contain; /* 여백 O */
+  object-fit: cover; /* 여백 X */
+}
+
+#topWrap > div {
+  width: 320px;
+  position: relative;
+}
+#topWrap > div > p:first-child {
+  margin-top: 0;
+}
+/* #topWrap > p {
+  margin: 8px 0;
+} */
+#topWrap p > span {
+  color: var(--description);
+  margin-right: 16px;
+}
+/* #topWrap p > span > ion-icon {
+  font-size: 20px;
+} */
+
+/* 버튼 */
+#topWrap button {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+
+@media screen and (max-width: 768px) {
+  #shopInfoWrap {
+    width: calc(100% - 40px);
+  }
+  
+  #topWrap {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* 매장 이미지 */
+  #topWrap > img {
+    width: calc(100vw - 40px);
+    height: calc((100vw - 40px) * 0.75);
+  }
+
+  /* 상세 정보 */
+  #topWrap > div {
+    width: 100%;
+    position: static;
+  }
+  #topWrap > div > p:first-child {
+    margin-top: 0;
+  }
+  #topWrap > div > p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* 버튼 */
+  #topWrap button {
+    width: 100%;
+    height: var(--input-height);
+    margin-top: 32px;
+    font-size: var(--button-fontSize);
+    position: static;
+  }
+}

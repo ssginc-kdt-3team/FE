@@ -1,0 +1,46 @@
+/* 사용자 정보 */
+#profileInfoWrap {
+  width: 100%;
+  padding: 30px 40px;
+}
+#profileInfoWrap h1 {
+  font-size: var(--pageTitle-fontSize);
+  line-height: var(--pageTitle-fontSize);
+}
+
+
+#profileInfoWrap > div:nth-child(2) img {
+  width: 16px;
+  margin-left: 8px;
+}
+
+
+/* 요약 정보 */
+/* #summaryWrap > div {
+  border-right: 1px solid var(--input-border);
+}
+#summaryWrap > div:last-child {
+  border-right: 0;
+} */
+#summaryWrap label {
+  font-size: var(--input-fontSize);
+  font-weight: normal;
+  margin: 0;
+}
+#summaryWrap a {
+  margin-top: 16px;
+  font-size: var(--title-fontSize);
+  color: var(--main);
+}
+
+@media screen and (max-width: 768px) {
+  #profileInfoWrap {
+    padding: 20px;
+    gap: 32px;
+  }
+
+  /* 요약 정보 */
+#summaryWrap a {
+  font-size: var(--input-fontSize);
+}
+}
