@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Card, Button, Form, Input, Upload, Modal, Typography } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { axiosWithBaseUrl } from 'App';
+import { useSelector } from 'react-redux';
 
 const normFile = (e) => {
   if (Array.isArray(e)) {
@@ -12,10 +13,10 @@ const normFile = (e) => {
 };
 
 function MenuAdd() {
+  const ownerId = useSelector((state) => state.user.id); 
   // form data 상태변수
   const [menuName, setMenuName] = useState(null);
   const [menuPrice, setMenuPrice] = useState(null);
-  const [ownerId, setOwenrId] = useState(14);
   const [photos, setPhotos] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
@@ -107,7 +108,7 @@ function MenuAdd() {
         onFinish={onFinish}
       >
         <Form.Item label="점주id" name="shopName" required  style={{ display: 'none' }}>
-          <Input value={ownerId} onChange={(e) => setOwenrId(e.target.value)} style={{ display: 'none' }} />
+          <Input value={ownerId} onChange={(e) => ownerId(e.target.value)}  style={{ display: 'none' }} />
         </Form.Item>
         <Form.Item label="메뉴명" name="menuName" required>
           <Input value={menuName} onChange={(e) => setMenuName(e.target.value)} />
