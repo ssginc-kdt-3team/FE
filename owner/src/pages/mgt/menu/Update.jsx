@@ -4,6 +4,7 @@ import { Card, Button, Form, Input, Upload, Modal } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { axiosWithBaseUrl } from 'App';
 
+
 const normFile = (e) => {
   if (Array.isArray(e)) {
     return e;
@@ -13,7 +14,7 @@ const normFile = (e) => {
 
 function MenuUpdate() {
   const { state } = useLocation();       // 이전 페이지(MENULIST)의 state를 받아옴
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
   //수정 상태변수
   const [name, setName] = useState(null);   
   const [price, setPrice] = useState(null);
