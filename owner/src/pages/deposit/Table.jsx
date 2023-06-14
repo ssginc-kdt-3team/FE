@@ -15,7 +15,7 @@ const DepositTable = () => {
   const [totalItems, setTotalItems] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [selectedDate, setSelectedDate] = useState({year:"2023", month:"6"});   // 기본값 2023년 6월
-  const [selectedStatus, setSelectedStatus] = useState("ALL");                  // 기본값 ALL
+  const [selectedStatus, setSelectedStatus] = useState("all");                  // 기본값 ALL
   const [penalty, setPenalty] = useState(0);
 
   useEffect(() => {
@@ -39,6 +39,7 @@ const DepositTable = () => {
         setResvList(res.data.content);
         console.log(res.data.content);
         console.log(id);
+        console.log(currentPageInt);
         setTotalItems(res.data.totalElements);
         setItemsPerPage(res.data.numberOfElements);
         setLoading(false);

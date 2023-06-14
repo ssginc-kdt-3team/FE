@@ -69,6 +69,7 @@ const DashboardDefault = () => {
     
   <Grid container justifyContent="center" alignItems="center">
   <Grid item xs={15} md={7} lg={12} sx={{pl: 2, pr: 2, ml: isMobile ? 0 : 5}} >
+    
     {/* 4. 달력 */}
     <Grid container columnSpacing={4} >
       <Grid item xs={14} md={5} lg={3.7} marginTop="30px">
@@ -81,7 +82,8 @@ const DashboardDefault = () => {
           p: isMobile ? 0 : 6, // isMobile이 true일 때 p값을 0으로 설정
         }}
         content={false}
->          <Box sx={{ justifyContent: 'center', alignItems: "center"}} >
+        >          
+          <Box sx={{ justifyContent: 'center', alignItems: "center"}} >
             <MainCalendar />
           </Box>
         </MainCard>
@@ -102,7 +104,7 @@ const DashboardDefault = () => {
         <Typography variant={isMobile ? "h5" : "h4"} marginBottom="20px">위약금 통계</Typography>
         <MainCard sx={{ mt: 2, width: '100%', height: '400px' }} content={false}>
           <Box sx={{ p: 4, pb: 0 }} alignItems="center">
-          <MonthlyDepositChart  style={{overflowX: 'auto' }}/>
+          <MonthlyDepositChart  />
           </Box>
         </MainCard>
       </Grid>
