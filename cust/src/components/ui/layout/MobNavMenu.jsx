@@ -23,7 +23,7 @@ function MobNavMenu({data, setIsNavOpen}) {
             </div>
             {
               data.subMenu ? (
-                <ul id={styles.bottomWrap} className='flex flex-col flex-gap-20'>
+                <ul id={styles.bottomWrap} className='flex flex-col'>
                   {
                     data.subMenu.map( subData => (
                       <li key={subData.id} onClick={()=> handleNavigate(subData.link)}>{subData.name}</li>

@@ -1,6 +1,5 @@
 import { Modal } from 'antd';
 import { ExclamationCircleFilled, CloseCircleFilled, CheckCircleFilled } from '@ant-design/icons';
-import styles from '../assets/css/modal/Modal.module.css'
 
 export const confirm = (title, func) => {
   const { confirm } = Modal;

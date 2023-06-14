@@ -126,6 +126,7 @@ h1, h2, h3, h4, h5, h6 {
 p {
   margin: 4px 0;
   word-wrap: break-word; /* 긴 단어를 줄바꿈할 때 단어 내에서 줄바꿈 처리 */
+  /* word-break: keep-all; */
   overflow-wrap: break-word; /* word-wrap의 대체 속성 */
 }
 

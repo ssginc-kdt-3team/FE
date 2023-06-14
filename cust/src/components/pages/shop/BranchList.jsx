@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import BranchShopCard from '../../ui/shop/BranchShopCard';
 import PageTitle from '../../ui/PageTitle';
 import styles from '../../../assets/css/pages/shop/Shop.module.css';
