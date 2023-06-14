@@ -42,9 +42,14 @@ function ProfileInfoCard() {
 
   return (
     <div id={styles.profileInfoWrap} className='box shadow-box flex flex-col flex-gap-56'>
-      <div className='flex flex-gap-16'>
-        <h1>{loginInfo.name} 님</h1>
-        <GradeTag status={grade}/>
+      <div className='flex flex-col flex-gap-10'>
+        <div className='flex flex-gap-16'>
+          <h1>{loginInfo.name} 님</h1>
+          <GradeTag status={grade}/>
+          {/* <GradeTag status={'Gold'}/> */}
+        </div>
+
+        {/* <div>Gold 등급까지 <span style={{color: 'var(--main)', fontWeight: '500'}}>7</span>번 남았습니다.</div> */}
       </div>
 
       {/* <div className='flex flex-gap-32'>

@@ -1,5 +1,4 @@
 import { Button, Modal } from 'antd';
-import React, { useEffect, useState } from 'react';
 import styles from '../../../../assets/css/modal/Modal.module.css';
 import axios from 'axios';
 import { confirm, error, success } from '../../../../utils/notification';
@@ -7,13 +6,15 @@ import { cashFormat } from '../../../../utils/format';
 
 // const { confirm } = Modal;
 
-function Refund({isModalOpen, setIsModalOpen, data, remainedCash}) {
+function Refund({isModalOpen, setIsModalOpen, data, remainedCash, setNeedReRender}) {
   const handleRefund = () => {
     confirm('환불 하시겠습니까?', () => { 
       axios.post(`/customer/charge/refund/${data.id}`)
       .then(res => {
         console.log(res);
         success('환불이 완료되었습니다.');
+        setNeedReRender(true); // 리렌더링 상태 변경, CashList에서 사용
+        setIsModalOpen(false);
       })
       .catch(err => { // 오류 처리
         console.log(err);

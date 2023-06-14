@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import PageSubTitle from '../../ui/PageSubTitle';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
@@ -47,7 +46,7 @@ function MobResvCarousel() {
             <Slider {...settings} className={styles.sliderWrap}>
               {
                 resvList.map( data => (
-                  <MobResvCard data={data}/>
+                  <MobResvCard key={data.reservationId} data={data}/>
                 ))
               }
             </Slider>

@@ -10,7 +10,7 @@ const TAG = styled(Tag)`
 
 function CashStatusTag({status, isCash}) {
   return (
-    <TAG color={status ? 'blue' : 'green'}>{status ? isCash ? '충전' : '적립' : '사용'}</TAG>
+    <TAG color={status ? 'blue' : 'green'}>{status ? (isCash ? '충전' : '적립') : '사용'}</TAG>
   );
 }
 

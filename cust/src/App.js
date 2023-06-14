@@ -26,11 +26,14 @@ import CouponList from "./components/pages/profile/CouponList";
 import Event from "./components/pages/event/Event";
 import EventList from "./components/pages/event/EventList";
 import Footer from "./components/layout/Footer";
+import ScrollToTop from './components/pages/ScrollToTop';
 
 function App() {
   return ( // 이 안에 JSX 문법 적용
     <RecoilRoot>
       <BrowserRouter>
+        <ScrollToTop/>
+        
         <Header/>
         <Routes>
           {/* 메인 */}

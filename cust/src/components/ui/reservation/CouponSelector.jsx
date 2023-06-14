@@ -37,7 +37,7 @@ function SelectCoupon({couponId, setCouponId, setCouponDiscountValue}) {
   }, [loginInfo, setCouponId])
 
   return (
-    <Select bordered={false} size='large' value={couponId} onChange={handleCouponSelect} style={{ width: '150px' }}>
+    <Select bordered={false} size='large' value={couponId} onChange={handleCouponSelect} style={{ marginLeft: '-13px' }}>
       <Option value={-1}>사용 안 함</Option>
       {
         couponList && couponList.map( coupon => (
