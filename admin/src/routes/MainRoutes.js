@@ -25,7 +25,7 @@ import ShopMenu from '../pages/shop/menu';
 import ShopReg from '../pages/shop/reg';
 import BranchList from '../pages/branch/list';
 import BranchDetail from 'pages/branch/detail';
-import BranchAdd from '../pages/branch/add'
+import BranchAdd from '../pages/branch/Add'
 import BranchUpdate from '../pages/branch/update'
 import NotitextList from '../pages/notitext/list';
 import NotitextReg from '../pages/notitext/reg';
