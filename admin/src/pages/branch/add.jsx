@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, Button, DatePicker, TimePicker, Form, Input, Upload, Modal } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-import axios from 'axios';
+import { axiosWithBaseUrl } from "App";
 import dayjs from 'dayjs';
 import Postcode from 'components/daumpostcode/postcode';
 
@@ -59,7 +59,9 @@ function BranchAdd() {
     });
   
     try {
-      const response = await axios.post('http://localhost:8080/admin/branch/add', formData, {
+      const response = await 
+      axiosWithBaseUrl
+      .post('/admin/branch/add', formData, {
         headers: {
           "Content-Type": "multipart/form-data"
         }

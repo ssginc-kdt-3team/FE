@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { axiosWithBaseUrl } from "App";
 import { Link, useParams } from "react-router-dom";
 import { Table } from 'antd';
 
@@ -9,8 +9,8 @@ function BranchList() {
 
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:8080/admin/branch/list`)
+    axiosWithBaseUrl
+      .get(`/admin/branch/list`)
       .then((response) => {
         setBranchList(response.data);
         console.log(response.data);

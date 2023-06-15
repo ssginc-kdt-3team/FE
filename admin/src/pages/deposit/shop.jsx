@@ -1,7 +1,7 @@
 //list에 넣고 지우기
 
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { axiosWithBaseUrl } from "App";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import Paging from "components/pagination/paging";
@@ -15,8 +15,8 @@ function DepositShopList() {
 
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:8080/admin/deposit/shop/${shopID}/${page}`)
+    axiosWithBaseUrl
+      .get(`/admin/deposit/shop/${shopID}/${page}`)
       .then((response) => {
         setDepositList(response.data.content);
         console.log(response.data.content);
