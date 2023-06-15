@@ -53,6 +53,8 @@ function Cash() {
   
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태
 
+  const [needReRender, setNeedReRender] = useState(false); // 렌더링 위한 요소
+
   // 충전금 내역 가져오기
   useEffect(() => {
     console.log('type: ' + type + ' / dateRange: ' + dateRange);
@@ -64,13 +66,14 @@ function Cash() {
       setHasData(res.data.content.length > 0);
       setTotalItems(res.data.totalElements); // 총 아이템 수 설정
       setItemsPerPage(res.data.pageable.pageSize); // 페이지당 아이템 수 설정
+      setNeedReRender(false); // 리렌더링 상태 초기화
     })
     .catch(err => { // 오류 처리
       console.log(err);
       error("오류가 발생하였습니다.");
       setHasData(false);
     })
-  }, [loginInfo.id, type, dateRange, currentPage])
+  }, [loginInfo.id, type, dateRange, currentPage, needReRender])
 
   // 충전금 현황 가져오기
   useEffect(() => {
@@ -84,7 +87,7 @@ function Cash() {
       console.log(err);
       error(err.response.data.error);
     })
-  }, [loginInfo.id])
+  }, [loginInfo.id, needReRender])
 
   return (
     <>
@@ -120,7 +123,7 @@ function Cash() {
                 <Ul className='flex flex-col' style={{ borderTop: '0px solid var(--input-border)' }}>
                   {
                     cashList && cashList.map( cash => (
-                      <CashPointInfoCard key={cash.id} data={cash} remained={remainedCash} isCash={true}/>
+                      <CashPointInfoCard key={cash.id} data={cash} remained={remainedCash} isCash={true} setNeedReRender={setNeedReRender}/>
                     ))
                   }
                 </Ul>

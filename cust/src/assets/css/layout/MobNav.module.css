@@ -39,11 +39,12 @@
 } */
 
 /* 메뉴 */
-#mobNavWrap ul {
+#mobNavWrap > div > ul {
   display: flex;
   gap: 24px;
   flex-direction: column;
 }
+
 
 /* 로그아웃 */
 #mobNavWrap > div > span:last-child {

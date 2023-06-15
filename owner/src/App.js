@@ -8,9 +8,13 @@ import './App.css';
 
 // ==============================|| APP - THEME, ROUTER, LOCAL  ||============================== //
 
+
 export const axiosWithBaseUrl = axios.create({
-    baseURL: 'http://10.10.10.65:8080',
+    baseURL: 'https://www.teamyes.xyz',
   });
+// export const axiosWithBaseUrl = axios.create({
+//     baseURL: 'http://10.10.10.65:8080',
+//   });
 
 // export const axiosWithBaseUrl = axios.create({
 //     baseURL: 'http://localhost:8080',

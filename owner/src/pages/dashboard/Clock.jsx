@@ -18,6 +18,7 @@ const Clock = () => {
     <div  style={{ textAlign: 'center' }} >
       <h3>현재시간</h3>
       <span style={{ fontSize: '24px' }}>{time.toLocaleTimeString()}</span>
+      {/* <span style={{ fontSize: '24px' }}>오후 6:21:37</span> */}
     </div>
   );
 };

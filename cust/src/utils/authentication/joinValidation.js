@@ -1,6 +1,6 @@
 import axios from "axios";
 import { isEmailValid } from "./emailValidation";
-import { error } from "../notification";
+import { error, success } from "../notification";
 
 // 빈 칸 처리
 export const isInputEmpty = (userInfo) => {
@@ -43,18 +43,18 @@ export const checkEmailDup = (email, stateSetter, emailSetter) => {
     .then(res => { // 받아오는 정보가 있다
       console.log(res.data);
       if(res.data === true) { // DB에 없다
-        alert("사용가능한 이메일 입니다.");
+        success("사용가능한 이메일 입니다.");
         stateSetter(true);
       }
       else { // DB에 있다
-        alert('이미 사용중인 이메일 입니다.');
+        error('이미 사용중인 이메일 입니다.');
         // email = ""; // 이메일 정보 초기화
         emailSetter("");
         stateSetter(false);
       }
     })
     .catch(err => { // 오류 처리
-      alert("오류가 발생하였습니다.");
+      error("오류가 발생하였습니다.");
       console.log(err);
     });
   }

@@ -28,6 +28,7 @@ const H1 = styled.h1`
   }
 
   @media screen and (max-width: 768px) {
+    width: 100%;
     /* font-size: 24px; */
   }
 `;
@@ -39,8 +40,22 @@ const H1_1 = styled.h1`
 `;
 
 const Span = styled.span`
+  width: 100%;
   color: var(--main);
   font-weight: 500;
+
+  word-break: keep-all;
+  overflow-wrap: break-word; /* word-wrap의 대체 속성 */
+`;
+
+const SPAN = styled.span`
+  word-break: keep-all;
+  overflow-wrap: break-word; /* word-wrap의 대체 속성 */
+  white-space: pre-line; /* 줄바꿈을 위한 속성 추가 */
+
+  @media screen and (max-width: 768px) {
+    max-width: calc(100% - 48px - 64px);
+  }
 `;
 
 const P = styled.p`
@@ -68,7 +83,7 @@ function PageTitle({title, type="default", phrase='문구가 표시될 공간 �
     default:
       result = (
           <>
-            <H1><span className="center-h" style={{fontWeight: '500'}}>{title}</span></H1>
+            <H1><span className="center" style={{fontWeight: '500'}}><SPAN>{title}</SPAN></span></H1>
             <P>{phrase}</P>
           </>
         );

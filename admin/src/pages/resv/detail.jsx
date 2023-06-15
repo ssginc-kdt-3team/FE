@@ -1,7 +1,5 @@
-//아직 안된거임 !!!!!!!
-
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { axiosWithBaseUrl } from "App";
 import { useParams } from "react-router-dom";
 
 function ResvDetail() {
@@ -10,8 +8,8 @@ function ResvDetail() {
   const [reserve, setReserve] = useState(null);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:8080/admin/reserve/detail/${id}`)
+    axiosWithBaseUrl
+      .get(`/admin/reservation/detail/${id}`)
       .then((res) => {
         setReserve(res.data);
       })

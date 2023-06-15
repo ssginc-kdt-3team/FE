@@ -3,23 +3,27 @@ const menuData = [
     id: 1,
     name: "예약하기",
     link: "/resv/add",
-    icon: 'calendar'
+    icon: 'calendar',
+    needLogin: true
   },
   {
     id: 2,
     name: "예약 내역",
     link: "/resv",
     icon: 'albums',
+    needLogin: true,
     subMenu : [
       {
         id: 1,
         name: '전체 예약 내역',
-        link: "/resv"
+        link: "/resv",
+        needLogin: true
       },
       {
         id: 2,
         name: '현재 예약 내역',
-        link: "/resv/active"
+        link: "/resv/active",
+        needLogin: true
       }
     ]
   },
@@ -27,7 +31,8 @@ const menuData = [
     id: 3,
     name: "매장 안내",
     link: "/branch",
-    icon: 'fast-food'
+    icon: 'fast-food',
+    needLogin: false
   },
   // {
   //   id: 4,
@@ -51,7 +56,8 @@ const menuData = [
     id: 4,
     name: "이벤트",
     link: "/event",
-    icon: 'gift'
+    icon: 'gift',
+    needLogin: false
   }
 ]
 

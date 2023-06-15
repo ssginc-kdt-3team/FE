@@ -22,7 +22,7 @@ const barChartOptions = {
   plotOptions: {
     bar: {
       columnWidth: '45%',
-      borderRadius: 4
+      borderRadius: 5
     }
   },
   dataLabels: {
@@ -49,11 +49,11 @@ const barChartOptions = {
 const MonthlyBarChart = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const id = useSelector((state) => state.user.id);  // 점주 id
+  const id = useSelector((state) => state.user.id);                 // 점주 id
   const [todayresv, setTodayResv] = useState([]);
   const { primary, secondary } = theme.palette.text;
   const info = theme.palette.info.light;
-  const [series, setSeries] = useState(     //y축 data
+  const [series, setSeries] = useState(                              //y축 data
     [{ name: '예약 수', data: [] }],
     [{ name: '노쇼율', data: [] }],
     ); 
@@ -97,7 +97,7 @@ const MonthlyBarChart = () => {
             show: false
           },
           labels: {
-            show: !isMobile,          //모바일 아닐 때만 라벨 보이게
+            // show: !isMobile,          //모바일 아닐 때만 라벨 보이게
             style: {
               colors: [secondary]
             }
@@ -111,13 +111,14 @@ const MonthlyBarChart = () => {
 
       setSeries([{ data: numData },  { name: '예상 노쇼율', data: noShowData  }]);    // 예약 수 , 예상 노쇼 수 
       setTotalNum(total);
+      setTotalNoshow(totalNoshow)
     }
   }, [info, secondary, todayresv]);
   
   return (
     <>
     <Grid>
-      <Grid item>
+      <Grid item style={{overflowX: 'auto' }}>
         <Typography variant="h5" align="center">총:{totalNum}건</Typography>
         <Typography variant="h6" align="center"> (예상 방문 수: {totalNum - totalNoshow}건)</Typography>
         <div id="chart">
@@ -125,12 +126,15 @@ const MonthlyBarChart = () => {
              options={options} 
              series={series} 
              type="bar" 
-             width='100%'
+             width='750px'
              height={400} />
+             
         </div>
         {/* 안내문구 */}
         <Grid container justifyContent="flex-end">
-          <Typography variant= "subtitle2" style={{ color: '#cccccc', marginLeft: '5px', marginBottom: '20px', display: isMobile ? 'none' : 'block'}}>
+          <Typography variant= "subtitle2" style={{ color: '#cccccc', marginLeft: '5px', marginBottom: '20px', display: 'block'}}>
+          {/* <Typography variant= "subtitle2" style={{ color: '#cccccc', marginLeft: '5px', marginBottom: '20px', display: isMobile ? 'none' : 'block'}}> */}
+
             예상 노쇼율은 지난 3개월의 시간별 노쇼 평균치를 기준으로 계산된 수치입니다.
           </Typography>
         </Grid>

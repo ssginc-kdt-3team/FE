@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { axiosWithBaseUrl } from "App";
 import { useParams, useNavigate  } from "react-router-dom";
 import { Card, Button, Typography } from 'antd';
 
@@ -11,8 +11,8 @@ function  BranchDetail() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:8080/admin/branch/detail/${id}`)
+    axiosWithBaseUrl
+      .get(`/admin/branch/detail/${id}`)
       .then((res) => {
         setBranch(res.data);
         console.log(res.data);

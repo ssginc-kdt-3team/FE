@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { axiosWithBaseUrl } from "App";
 import { useParams } from "react-router-dom";
 
 function OwnerDetail() {
@@ -8,8 +8,8 @@ function OwnerDetail() {
   const [owner, setOwner] = useState(null);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:8080/admin/owner/findOne/${id}`)
+    axiosWithBaseUrl
+      .get(`/admin/owner/findOne/${id}`)
       .then((res) => {
         setOwner(res.data);
       })

@@ -7,10 +7,9 @@ import { loginState } from '../../../state/loginState';
 import { useNavigate } from 'react-router-dom';
 import next from '../../../assets/images/icons/next.png';
 import { isEmailValid } from '../../../utils/authentication/emailValidation';
-import { axiosWithToken } from '../../../index';
 import { isInputEmpty } from '../../../utils/authentication/loginValidation';
 import { Button } from 'antd';
-import { error, success } from '../../../utils/notification';
+import { error } from '../../../utils/notification';
 
 function Login() {
   const setLoginState = useSetRecoilState(loginState);
@@ -58,8 +57,8 @@ function Login() {
           }
         })
         .catch(err => { // 오류 처리
-          error("오류가 발생하였습니다.");
           console.log(err);
+          error(err.message);
         });
       }
     }

@@ -1,6 +1,6 @@
 import { Table, Tag, Radio, Input } from "antd";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import { axiosWithBaseUrl } from "App";
 import { useEffect, useState } from "react";
 import Paging from "components/pagination/paging";
 
@@ -21,8 +21,8 @@ const CustList = () => {
 
   const fetchCustomerList = () => {
     setLoading(true);
-    axios
-      .get(`http://localhost:8080/admin/customer/findAll/${currentPage}`, {
+    axiosWithBaseUrl
+      .get(`/admin/customer/findAll/${currentPage}`, {
         params: {
           filter,
           searchText, // Pass the searchText value as a query parameter

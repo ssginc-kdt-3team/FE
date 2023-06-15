@@ -2,7 +2,7 @@ import { Button, Modal } from 'antd';
 import React, { useEffect, useState } from 'react';
 import styles from '../../../assets/css/modal/Modal.module.css';
 import axios from 'axios';
-import { confirm, success } from '../../../utils/notification';
+import { confirm, error, success } from '../../../utils/notification';
 import CouponSelector from '../../ui/reservation/CouponSelector';
 import ApplyPoint from '../../ui/reservation/ApplyPoint';
 import { cashFormat } from '../../../utils/format';
@@ -32,7 +32,7 @@ function Pay({isModalOpen, setIsModalOpen, data, setData, shopName}) {
     setData( prevData => ({ // setResvInfo 함수를 호출하면 현재의 resvInfo 상태값을 이전 상태값인 prevResvInfo 매개변수로 전달
       ...prevData, // 기존 값 복사
       couponId: couponId,
-      pointValue: pointValue
+      pointValue: parseInt(pointValue)
     }))
   }, [setData, couponId, pointValue])
 
@@ -59,7 +59,10 @@ function Pay({isModalOpen, setIsModalOpen, data, setData, shopName}) {
         success('예약이 등록되었습니다.');
         navigate("/resv/active", { replace: true });
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err);
+        error(err.response.data);
+      })
       
     })
   }
@@ -89,9 +92,12 @@ function Pay({isModalOpen, setIsModalOpen, data, setData, shopName}) {
           <p><span>예약금</span>{cashFormat(initialDeposit)}원</p>
           
           {/* 쿠폰 */}
-          <div className='space-between'>
-            <p className='center-h'><span>쿠폰 할인</span><div>{cashFormat(couponDiscountValue)}원</div></p>
-            <CouponSelector couponId={couponId} setCouponId={setCouponId} setCouponDiscountValue={setCouponDiscountValue}/>
+          <div className='flex' style={{alignItems: 'stretch'}}>
+            <p className=''><span>쿠폰 할인</span></p>
+            <div className='flex flex-col' style={{margin: '4px 0'}}>
+              {cashFormat(couponDiscountValue)}원
+              <CouponSelector couponId={couponId} setCouponId={setCouponId} setCouponDiscountValue={setCouponDiscountValue}/>
+            </div>
           </div>
           
           {/* 포인트 */}

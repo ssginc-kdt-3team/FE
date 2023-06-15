@@ -5,7 +5,7 @@ import { loginState } from '../../../state/loginState';
 import { error } from '../../../utils/notification';
 import { Button } from 'antd';
 import styles from '../../../assets/css/modal/Modal.module.css';
-import { canUsePoint, isPointValid } from '../../../utils/reservation/pointValidation';
+import { isPointValid } from '../../../utils/reservation/pointValidation';
 import { cashFormat, onlyNum } from '../../../utils/format';
 import { styled } from 'styled-components';
 
@@ -38,7 +38,7 @@ function ApplyPoint({pointValue, setPointValue, initialDeposit, finalDeposit, is
     const enteredPoint = parseInt(e.target.value);
 
     console.log('isCouponUsed: ' + isCouponUsed);
-    if(canUsePoint(enteredPoint)) { // 입력한 포인트가 1000 이상
+    // if(canUsePoint(enteredPoint)) { // 입력한 포인트가 1000 이상
       if(isPointValid(enteredPoint, remainedPoint, isCouponUsed ? initialDeposit - couponDiscountValue : initialDeposit)) {
         // 포인트 범위 내
         setPointValue(e.target.value);
@@ -47,10 +47,10 @@ function ApplyPoint({pointValue, setPointValue, initialDeposit, finalDeposit, is
         // 포인트 범위 넘어감
         applyAllPoint();
       }
-    }
-    else {
-      setPointValue(0);
-    }
+    // }
+    // else { // 1000점 미만이면
+    //   setPointValue(0); // 0으로 설정
+    // }
     
     // console.log('enteredPoint: ' + enteredPoint + ' / remainingPoint: ' + remainedPoint + ' / finalDeposit: ' + finalDeposit);
     // if (enteredPoint > parseInt(remainedPoint) || enteredPoint > parseInt(finalDeposit)) { // 포인트 사용 가능 범위를 넘어서면
@@ -91,7 +91,7 @@ function ApplyPoint({pointValue, setPointValue, initialDeposit, finalDeposit, is
           />
           <Button className='button buttonReverse button-s' onClick={applyAllPoint}>전액 사용</Button>
         </div>
-        <Span>* 포인트는 1,000P 이상 사용 가능합니다.</Span>
+        <Span>* 포인트는 1P 단위로 사용 가능합니다.</Span>
       </div>
     </p>
   );

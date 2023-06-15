@@ -8,12 +8,12 @@ const StatusFilter = ({ onStatusFilter }) => {
 
   return (
     <div>
-      <Button onClick={() => handleFilterClick(null)}>전체</Button>
-      <Button onClick={() => handleFilterClick("NOSHOW")}>노쇼</Button>
-      <Button onClick={() => handleFilterClick("DONE")}>완료</Button>
-      <Button onClick={() => handleFilterClick("CANCEL")}>취소</Button>
-      <Button onClick={() => handleFilterClick("IMMINENT")}>취소</Button>
-      <Button onClick={() => handleFilterClick("RESERVED")}>예약 중</Button>
+      <Button onClick={() => handleFilterClick("all")}>전체</Button>
+      <Button onClick={() => handleFilterClick("noshow")}>노쇼</Button>
+      <Button onClick={() => handleFilterClick("done")}>완료</Button>
+      <Button onClick={() => handleFilterClick("cancel")}>정상취소</Button>
+      <Button onClick={() => handleFilterClick("imminent")}>취소</Button>
+      <Button onClick={() => handleFilterClick("reservation")}>예약 중</Button>
     </div>
   );
 };

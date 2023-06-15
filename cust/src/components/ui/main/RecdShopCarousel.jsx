@@ -53,7 +53,7 @@ function RecdShopCarousel() {
       console.log(res.data);
       setRecdShopList(res.data);
       console.log(res.data.length);
-      // setHasData(res.data.length > 0); // 메인에서 shopId 관련 오류 뜸
+      setHasData(res.data.length >= 8); // 메인에서 shopId 관련 오류 뜸
     })
     .catch(err => {
       console.log(err);
@@ -68,7 +68,9 @@ function RecdShopCarousel() {
           <Slider {...settings} className={styles.sliderWrap}>
             {
               recdShopList && recdShopList.map( shop => (
-                <RecdShopCard key={shop.shopId} data={shop}/>
+                shop ? 
+                  <RecdShopCard key={shop.shopId} data={shop}/>
+                : ''
               ))
             }
           </Slider>

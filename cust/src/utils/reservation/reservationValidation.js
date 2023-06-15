@@ -10,3 +10,10 @@ export const canUpdate = (resvDate) => {
 
   return hoursDiff > 24;
 }
+
+// textarea 최대 입력
+export const maxLengthCheck = (text) => {
+  console.log(text)
+  if (text.length > text.max.length)
+    text.value = text.value.slice(0, text.max.length)
+}

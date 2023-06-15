@@ -4,7 +4,7 @@ import styles from '../../../assets/css/ui/reservation/ResvCard.module.css'
 import ResvStatusTag from '../../ui/reservation/ResvStatusTag';
 
 function MobResvCard({data}) {
-  console.log(data);
+  // console.log(data);
 
   return (
     <li style={{padding: '0 10px'}}>

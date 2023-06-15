@@ -1,33 +1,39 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { axiosWithBaseUrl } from "App";
 import { Table, } from "antd";
 import { Link } from "react-router-dom";
 import Paging from "components/pagination/paging";
 
 function ShopList() {
   const [shopList, setShopList] = useState([]);
-  const [branchId, setBranchId] = useState(2);          // 기본값 branch1을 설정
+  const [branchId, setBranchId] = useState(1);          // 기본값 branch1을 설정
   const [currentPage, setCurrentPage] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [ownerName, setOwnerName] = useState('');
+
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/admin/shop/findAll/${branchId}/${currentPage}`)
-      .then((response) => {
-        console.log(response);
-        setShopList(response.data.content);
-        setTotalItems(response.data.totalElements);
-        setItemsPerPage(response.data.numberOfElements);
+    axiosWithBaseUrl
+    .get(`/admin/shop/findAll/${branchId}/${currentPage}`)
+      .then((res) => {
+        console.log(res);
+        setShopList(res.data.content);
+        console.log(res.data.content);
+        setTotalItems(res.data.totalElements);
+        setItemsPerPage(res.data.numberOfElements);
+        setOwnerName(res.data.content.owner.name); 
       })
       .catch((error) => {
         console.log(error);
       });
   }, [currentPage, branchId]);
 
+
    const columns = [
     {
       title: "지점명",
-      dataIndex: "branchName",
+      dataIndex: "{branch.name}",
       key: "branchName",
     },
     {
@@ -48,8 +54,8 @@ function ShopList() {
     },
     {
       title: "점주 전화번호",
-      dataIndex: "ownerPhone",
-      key: "ownerPhone",
+      dataIndex: "phone",
+      key: "phone",
     },
     {
       title: "매장 위치",
@@ -64,7 +70,7 @@ function ShopList() {
   ];
 
   return (
- <>
+      <>
       <h1>매장 리스트</h1>
       <Table 
       columns={columns} 
@@ -78,7 +84,7 @@ function ShopList() {
         setPage={setCurrentPage}
      
       />
-  </>
+      </>
   );
 }
 export default ShopList;

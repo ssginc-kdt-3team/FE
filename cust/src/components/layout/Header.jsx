@@ -2,23 +2,26 @@ import React, { useState } from 'react';
 import styles from '../../assets/css/layout/Header.module.css';
 import menuData from "../../data/menuData";
 import logo from '../../assets/images/logo.png';
-import hamburger from '../../assets/images/icons/hamburger.png';
-import close from '../../assets/images/icons/close.png';
-import { Link, Outlet, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import MobNav from './MobNav';
 import SubMenu from './SubMenu';
 import { useRecoilState } from 'recoil';
 import { loginState } from '../../state/loginState';
+import { confirm } from '../../utils/notification';
 
 function Header() {
+  const navigate = useNavigate();
+
   const [loginInfo, setLoginInfo] = useRecoilState(loginState);
 
+  // 로그아웃 처리
   const handleLogout = () => {
     setLoginInfo({
       id: -1,
       name: '',
       isLoggedin: false
     });
+    navigate('/'); // 홈 화면으로 이동
   }
 
   // 모바일 Nav 상태
@@ -41,6 +44,26 @@ function Header() {
 
   if (hideHeader) {
     return null; // Header를 숨김
+  }
+
+  // 헤더 메뉴 이동
+  const handleMove = (data) => {
+    console.log(data.needLogin);
+    console.log(data.link);
+    
+    if(data.needLogin) {
+      if(loginInfo.isLoggedin) {
+        navigate(data.link);
+        return;
+      }
+      else {
+        confirm('로그인이 필요합니다.', () => { navigate('/login'); });
+        return;
+      }
+    }
+    console.log('needLogin false')
+    navigate(data.link);
+    return;
   }
 
   return (
@@ -67,7 +90,11 @@ function Header() {
           <ul id={styles.bottomWrap} className='center flex-gap-48' onMouseOver={() => setIsSubMenuOpen(true)} onMouseOut={() => setIsSubMenuOpen(false)}>
             {
               menuData && menuData.map( data => (
-                <Link to={data.link} key={data.id}>
+                <Link 
+                  to={data.link}
+                  key={data.id} 
+                  // onClick={() => handleMove(data)}
+                >
                   <li>{data.name}</li>
                 </Link>
               ))

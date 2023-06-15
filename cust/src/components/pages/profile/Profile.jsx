@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import { Switch } from 'antd';
-import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styles from '../../../assets/css/pages/profile/Profile.module.css';
-import GradeTag from '../../ui/profile/GradeTag';
 import ProfileInfoCard from '../../ui/profile/ProfileInfoCard';
 import next from '../../../assets/images/icons/next.png';
 
 function Profile() {
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(true);
 
   const handleSwitch = (checked) => {
     setChecked(checked);

@@ -15,7 +15,7 @@ const ResvTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(10);
-  const [selectedDate, setSelectedDate] = useState({start:"1990-01-01", end:"2300-01-01"});
+  const [selectedDate, setSelectedDate] = useState({start:"2010-01-01", end:"2024-12-31"});
   const [selectedType, setSelectedType] = useState("all");
 
   useEffect(() => {
@@ -36,6 +36,8 @@ const ResvTable = () => {
         setResvList(response.data.content);
         console.log(response.data.content);
         console.log(id);
+        console.log(selectedType);
+        console.log(currentPageInt);
         setTotalItems(response.data.totalElements);
         setItemsPerPage(response.data.numberOfElements);
         setLoading(false);
@@ -154,7 +156,7 @@ const ResvTable = () => {
         <div style={{ marginTop: '10px' }}></div>
 
          {/* selectedType */}
-         <StatusFilter />
+         <StatusFilter onStatusFilter={handleTypeChange}/>
         
         <Divider style={{ marginTop: "30px", fontSize: '18px', fontWeight: 'bold' }}>전체 예약 목록</Divider>
 

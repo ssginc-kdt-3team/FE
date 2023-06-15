@@ -5,7 +5,6 @@ import axios from 'axios';
 import { useRecoilValue } from 'recoil';
 import { loginState } from '../../../state/loginState';
 import { cashFormat } from '../../../utils/format';
-import next from '../../../assets/images/icons/next.png';
 import { Link } from 'react-router-dom';
 
 function ProfileInfoCard() {
@@ -16,6 +15,12 @@ function ProfileInfoCard() {
   const [remainedPoint, setRemainedPoint] = useState(0); // 포인트 현황
   const [coupon, setCoupon] = useState(0); // 쿠폰 현황
   const [activeResv, setActiveResv] = useState(0); // 현재 예약 현황
+
+  const [isInfoOpen, setIsInfoOpen] = useState(false);
+
+  // const showInfo = () => {
+  //   setIsInfoOpen(true);
+  // }
 
   useEffect(() => {
     axios.all([
@@ -41,10 +46,15 @@ function ProfileInfoCard() {
   }, [loginInfo])
 
   return (
-    <div id={styles.profileInfoWrap} className='box shadow-box flex flex-col flex-gap-56'>
-      <div className='flex flex-gap-16'>
-        <h1>{loginInfo.name} 님</h1>
-        <GradeTag status={grade}/>
+    <div id={styles.profileInfoWrap} className='box shadow-box flex flex-col flex-gap-48'>
+      <div className='flex flex-col flex-gap-10'>
+        <div className='flex flex-gap-16'>
+          <h1>{loginInfo.name} 님</h1>
+          <GradeTag status={grade} isInfoOpen={isInfoOpen} setIsInfoOpen={setIsInfoOpen}/>
+          {/* <GradeTag status={'Gold'}/> */}
+        </div>
+
+        {/* <div style={isInfoOpen ? {visibility: 'visible'} : {visibility: 'hidden'}}>Green 등급까지 <span style={{color: 'var(--main)', fontWeight: '500'}}>3</span>번 남았습니다.</div> */}
       </div>
 
       {/* <div className='flex flex-gap-32'>

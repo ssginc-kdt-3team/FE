@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import CashPointStatusTag from './CashPointStatusTag';
 import { Button } from 'antd';
-import axios from 'axios';
 import Refund from '../../modal/profile/cash/Refund';
 import { cashFormat } from '../../../utils/format';
 
@@ -17,15 +16,16 @@ const P = styled.p`
   margin: 16px 0 16px 16px;
 `;
 
-function CashInfoCard({data, remained, isCash}) {
+function CashInfoCard({data, remained, isCash, setNeedReRender}) {
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태
+  console.log(data);
 
   return (
     <>
       <Li className='space-between' style={{ padding: '5px 0' }}>
         <div>
           <div className='flex center-h'>
-            <CashPointStatusTag status={data.type}/>
+            <CashPointStatusTag status={data.type} isCash={isCash}/>
             <P>{data.dateTime}</P>
           </div>
           <h3 style={{ paddingBottom: '16px' }}>{data.reason}</h3>
@@ -45,7 +45,7 @@ function CashInfoCard({data, remained, isCash}) {
         </div>
       </Li>
       
-      <Refund isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} data={data} remainedCash={remained}/>
+      <Refund isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} data={data} remainedCash={remained} setNeedReRender={setNeedReRender}/>
     </>
   );
 }
