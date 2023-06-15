@@ -92,7 +92,7 @@ function ShopAdd() {
       console.log(response);
       console.log(formData);
       //등록되면 매장 정보 페이지로 이동
-      navigate('/mgt/info');
+      navigate('/profile');
     } catch (error) {
       console.error('Error adding shop:', error);
     }
