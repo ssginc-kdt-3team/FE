@@ -3,7 +3,7 @@ import { error } from "../notification"
 // 포인트 범위 검증
 export const isPointValid = (enteredPoint, remainedPoint, finalDeposit) => {
   if(enteredPoint > remainedPoint || enteredPoint > finalDeposit) {
-    error('포인트 값 넘어감', '');
+    error('가용 포인트 범위를 벗어났습니다.', '');
     return false;
   }
   return true;

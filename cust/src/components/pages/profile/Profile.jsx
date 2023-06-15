@@ -6,7 +6,7 @@ import ProfileInfoCard from '../../ui/profile/ProfileInfoCard';
 import next from '../../../assets/images/icons/next.png';
 
 function Profile() {
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(false);
 
   const handleSwitch = (checked) => {
     setChecked(checked);

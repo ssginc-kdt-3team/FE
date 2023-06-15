@@ -27,11 +27,13 @@ import Event from "./components/pages/event/Event";
 import EventList from "./components/pages/event/EventList";
 import Footer from "./components/layout/Footer";
 import ScrollToTop from './components/pages/ScrollToTop';
+import CheckLogin from "./components/pages/CheckLogin";
 
 function App() {
   return ( // 이 안에 JSX 문법 적용
     <RecoilRoot>
       <BrowserRouter>
+        <CheckLogin/>
         <ScrollToTop/>
         
         <Header/>
