@@ -19,7 +19,7 @@ function MgtReview() {
   const [modalVisible, setModalVisible] = useState(false);                 // 모달
   const [selectedReview, setSelectedReview] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [selectedDate, setSelectedDate] = useState({start:"1990-01-01", end:"2300-01-01"});
+  const [selectedDate, setSelectedDate] = useState({start:"2010-01-01", end:"2050-01-01"});
   const [selectedType, setSelectedType] = useState("pointDesc");
 
 
