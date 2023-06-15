@@ -6,7 +6,8 @@ import { Button } from 'antd';
 import { isInputEmpty } from '../../../utils/authentication/joinValidation';
 import { onlyNum } from '../../../utils/format';
 import axios from 'axios';
-import { error, success } from '../../../utils/notification';
+import { confirm, error } from '../../../utils/notification';
+import { isEmailValid } from '../../../utils/authentication/emailValidation';
 
 function FindPwd() {
   const navigate = useNavigate();
@@ -36,8 +37,9 @@ function FindPwd() {
       .then(res => { // 받아오는 정보가 있다
         console.log(res);
         if(res.data !== null) {
-          success('비밀번호 찾기에 성공하였습니다.');
-          navigate(`/find-pwd/result`, { replace: true, state: { name: inputInfo.name, password: res.data } });
+          confirm('비밀번호 찾기에 성공하였습니다.', () => {
+            navigate(`/find-pwd/result`, { replace: true, state: { name: inputInfo.name, password: res.data } });
+          });
         }
       })
       .catch(err => { // 오류 처리
@@ -59,7 +61,7 @@ function FindPwd() {
 
           <div>
             <label>EMAIL</label>
-            <input className={styles.loginInput} type='email' name='email' value={inputInfo.email} placeholder='이메일' onChange={handleInput}/>
+            <input className={styles.loginInput} type='email' name='email' value={inputInfo.email} placeholder='이메일' onChange={handleInput} onBlur={(e) => isEmailValid(e.target.value)}/>
           </div>
 
           <div>

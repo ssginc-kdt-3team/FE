@@ -2,7 +2,7 @@ import { Button, Modal } from 'antd';
 import React, { useEffect, useState } from 'react';
 import styles from '../../../assets/css/modal/Modal.module.css';
 import axios from 'axios';
-import { confirm, success } from '../../../utils/notification';
+import { confirm, error, success } from '../../../utils/notification';
 import CouponSelector from '../../ui/reservation/CouponSelector';
 import ApplyPoint from '../../ui/reservation/ApplyPoint';
 import { cashFormat } from '../../../utils/format';
@@ -59,7 +59,10 @@ function Pay({isModalOpen, setIsModalOpen, data, setData, shopName}) {
         success('예약이 등록되었습니다.');
         navigate("/resv/active", { replace: true });
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err);
+        error(err.response.data);
+      })
       
     })
   }

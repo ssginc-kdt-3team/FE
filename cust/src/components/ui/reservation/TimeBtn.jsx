@@ -4,7 +4,7 @@ import styles from '../../../assets/css/ui/reservation/TimePicker.module.css';
 
 function TimeBtn({time, selectedOption, handleOptionChange, selectedDate}) {
   // const date = moment(new Date()).format("YYYY-MM-DD"); // 오늘 날짜
-  const dateTime = moment(new Date()).format("YYYY-MM-DD HH:mm:SS"); // 현재 시간
+  const dateTime = moment(new Date()).add(30, 'minutes').format("YYYY-MM-DD HH:mm:SS"); // 현재 시간
   
   // console.log('selectedDate : ' + selectedDate);
   // console.log('selectedOption : ' + selectedOption);
