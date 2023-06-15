@@ -1,7 +1,7 @@
 .pagination {
   list-style: none;
   margin: 0;
-  padding: 48px 0 24px 0;
+  padding-top: 48px;
   /* padding-top: 60px; */
   display: flex;
   justify-content: center;
@@ -63,4 +63,11 @@
 
 .pagination > li a:hover, .pagination > a.active {
   color: var(--main);
+}
+
+
+@media screen and (max-width: 768px) {
+  .pagination {
+    padding-bottom: 24px;
+  }
 }

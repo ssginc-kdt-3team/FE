@@ -3,12 +3,11 @@ import React, { useEffect, useReducer, useRef, useState } from 'react';
 import PageTitle from '../../ui/PageTitle';
 import styles from '../../../assets/css/pages/authentication/Join.module.css';
 import { useNavigate } from 'react-router-dom';
-import { isEmailValid } from '../../../utils/authentication/emailValidation';
 import { isInputEmpty, isPasswordValid, checkEmailDup } from '../../../utils/authentication/joinValidation';
 import { onlyNum } from '../../../utils/format';
 import Postcode from '../../popUp/authentication/PostCode';
 import { Button } from 'antd';
-import { error, success } from '../../../utils/notification';
+import { confirm, error } from '../../../utils/notification';
 
 // action에 따라 안에 데이터를 어떻게 변화시킬지 설정
 const reducer = (state, action) => {
@@ -126,8 +125,9 @@ function Join() {
         if(res.data === "")
           error("회원가입에 실패하였습니다.");
         else {
-          success('회원가입에 성공하였습니다.');
-          navigate('/login', { replace: true });
+          confirm('회원가입에 성공하였습니다.', () => {
+            navigate('/login', { replace: true });
+          });
         }
       })
       .catch(err => { // 오류 처리

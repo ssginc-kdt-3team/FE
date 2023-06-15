@@ -21,9 +21,9 @@ const TAG = styled(Tag)`
   padding: 3px 7px;
 `;
 
-function GradeTag({status}) {
+function GradeTag({status, isInfoOpen, setIsInfoOpen}) {
   return (
-    <TAG color={getStatusColor(status)}>{status}</TAG>
+    <TAG color={getStatusColor(status)} onClick={() => setIsInfoOpen(!isInfoOpen)}>{status}</TAG>
   );
 }
 
