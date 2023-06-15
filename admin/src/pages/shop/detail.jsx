@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { axiosWithBaseUrl } from "App";
 import { useParams } from "react-router-dom";
 
 function  ShopDetail() {
@@ -8,8 +8,8 @@ function  ShopDetail() {
   const [shop, setShop] = useState(null);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:8080/admin/shop/findById/${id}`)
+    axiosWithBaseUrl
+      .get(`/admin/shop/findById/${id}`)
       .then((res) => {
         setShop(res.data);
       })

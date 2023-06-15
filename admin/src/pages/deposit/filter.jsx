@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { axiosWithBaseUrl } from "App";
 import { Select, Button } from "antd";
 import DepositShopList from "../deposit/shop";
 import DepositList from "../deposit/list";
@@ -19,8 +19,8 @@ function Filter() {
   const [depositBranchID, setDepositBranchID] = useState("");
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8080/branch/all")
+    axiosWithBaseUrl
+      .get("/branch/all")
       .then((response) => {
         setBranchOptions(response.data);
       })
@@ -36,8 +36,8 @@ function Filter() {
     setShopID("");
     setSelectedShopName("");
     if (value) {
-      axios
-        .get(`http://localhost:8080/admin/deposit/branch/${value}`)
+      axiosWithBaseUrl
+        .get(`/admin/deposit/branch/${value}`)
         .then((response) => {
           setShopOptions(response.data.content);
           console.log(response.data.content);

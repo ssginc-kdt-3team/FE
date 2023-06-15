@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { axiosWithBaseUrl } from "App";
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Form, Input, Button, Modal  } from 'antd';
@@ -16,14 +16,18 @@ function LoginForm() {
   const handleLogin = (e) => {
     e.preventDefault(); // 기본 동작 방지
     if(!isInputEmpty(id, password)) {
-      axios
-      .post('http://localhost:8080/admin/login', {
+      axiosWithBaseUrl
+      .post('/admin/login', {
         loginId: id,
         password: password,
       })
       .then(res => {
         if(res.data === '') {
-          // alert('로그인에 실패하였습니다.\n아이디와 비밀번호를 확인하세요.');
+          Modal.error({
+            title: '로그인 실패',
+            content: '아이디와 비밀번호를 확인해주세요.',
+            okText: "닫기"
+          });
           console.log(res.data);
         } else {
           console.log(res.data);
@@ -32,8 +36,6 @@ function LoginForm() {
             content: '로그인에 성공하였습니다.',
              okText: "닫기"
            });
-
-          alert('로그인에 성공하였습니다.');
           navigate('/main'); // 이동할 페이지 URL 설정
         }
       })

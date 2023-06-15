@@ -1,5 +1,5 @@
 import React, { useState, useEffect  } from "react";
-import axios from "axios";
+import { axiosWithBaseUrl } from "App";
 import { useParams } from "react-router-dom";
 import { Card } from 'antd';
 
@@ -11,8 +11,8 @@ function CustDetail() {
 
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:8080/admin/customer/findById/${id}`)
+    axiosWithBaseUrl
+      .get(`/admin/customer/findById/${id}`)
       .then((res) => {
         setCust(res.data);
         console.log(res.data);

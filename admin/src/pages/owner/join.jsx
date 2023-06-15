@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { axiosWithBaseUrl } from "App";
 import React, { useEffect, useReducer, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -88,7 +88,8 @@ function Join() {
         alert("비밀번호를 확인해주세요.");
         return;
       }
-      axios.post('http://localhost:8080/owner/join', userInfo)
+      axiosWithBaseUrl
+      .post('/owner/join', userInfo)
       .then(res => { // 받아오는 정보가 있다
         console.log(res.data);
         if(res.data === "")
