@@ -6,7 +6,7 @@ import { axiosWithBaseUrl } from "App";
 import dayjs from 'dayjs';
 import Postcode from 'components/daumpostcode/postcode';
 
-//시간 형식
+// 시간 형식
 const format = 'HH:mm';
 
 const normFile = (e) => {
@@ -22,8 +22,8 @@ function BranchAdd() {
   const [phone, setPhone] = useState(null);
   const [address, setAddress] = useState({
     zipCode: null,
-    city: null,
-    district: null,
+    address: null,
+    extraAddress: null,
     detail: null,
   });
   const [openingTime, setOpeningTime] = useState(dayjs('12:00', format));
@@ -37,8 +37,8 @@ function BranchAdd() {
   const onFileUpload = async () => {
     const branchData = {
       address: {
-        city: address.city,
-        district: address.district,
+        address: address.address,
+        extraAddress: address.extraAddress,
         detail: address.detail,
         zipCode: address.zipCode,
       },
@@ -48,28 +48,39 @@ function BranchAdd() {
       closeTime: closingTime.format(format),
       openDay: openingDate.format('YYYY-MM-DD'),
     };
-  //form data > branchData, branchImg
+
+    // form data > branchData, branchImg
     const formData = new FormData();
     const json = JSON.stringify(branchData);
     const blob = new Blob([json], { type: "application/json" });
     formData.append("branchData", blob);
-  
+
     photos.forEach((file) => {
       formData.append('branchImg', file.originFileObj);
     });
-  
+
     try {
-      const response = await 
-      axiosWithBaseUrl
-      .post('/admin/branch/add', formData, {
+      const res = await axiosWithBaseUrl.post('/admin/branch/add', formData, {
         headers: {
           "Content-Type": "multipart/form-data"
         }
       });
-      console.log(response);
-      navigate('/branch/list');
+      console.log(res);
+      Modal.success({
+        title: '지점등록 성공',
+        content: '지점등록에 성공하였습니다.',
+        okText: "닫기",
+        onOk: () => {
+          navigate('/branch/list');
+        }
+      });
     } catch (error) {
-      console.error('Error adding branch:', error);
+      Modal.error({
+        title: '지점등록 실패',
+        content: '등록정보를 확인해주세요.',
+        okText: "닫기"
+      });
+      console.error('오류가 발생하였습니다.');
     }
   };
 
@@ -82,7 +93,7 @@ function BranchAdd() {
     setPhotos(fileList);
   };
 
-  //모달
+  // 모달
   const handleSubmit = () => {
     onFileUpload();
   };
@@ -99,16 +110,21 @@ function BranchAdd() {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  
-  //주소검색
+
+  // 주소검색
   const handleAddressChange = (value) => {
     setAddress({
       zipCode: value.zonecode,
-      city: value.city,
-      district: value.district,
+      address: value.address,
+      extraAddress: value.extraAddress,
       detail: value.detail,
     });
   };
+
+  const onlyNum = (input) => {
+    return input.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+  };
+  
 
   return (
     <Card
@@ -136,8 +152,13 @@ function BranchAdd() {
         }}
         onFinish={onFinish}
       >
-
-        <Form.Item label="지점명" name="branchName" required>
+        <Form.Item
+          label="지점명"
+          name="branchName"
+          rules={[
+            { required: true, message: '지점명을 입력해주세요.' }
+          ]}
+        >
           <Input value={branchName} onChange={(e) => setBranchName(e.target.value)} />
         </Form.Item>
         <Form.Item
@@ -148,24 +169,64 @@ function BranchAdd() {
             { len: 11, message: '전화번호는 11자리여야 합니다.' },
           ]}
         >
-          <Input value={phone} onChange={(e) => setPhone(e.target.value)} />
-        </Form.Item>
+          <Input 
+          value={phone} 
+          onInput={(e) => { e.target.value = onlyNum(e.target.value) }}
+          onChange={(e) => setPhone(e.target.value)} 
+           />
 
-        <Form.Item name="address" label="주소">
+        </Form.Item>
+        <Form.Item
+          name="Postcode"
+          label="주소"
+          rules={[
+            { required: true, message: '주소를 입력해주세요.' }
+          ]}
+        >
           <Postcode onChange={handleAddressChange} />
           <Input placeholder="우편번호" name="zipCode" value={address.zipCode} disabled />
-          <Input placeholder="시" name="city" value={address.city} disabled />
-          <Input placeholder="구" name="district" value={address.district} disabled />
-          <Input placeholder="상세주소" name="detail" value={address.detail} onChange={(e) => setAddress({ ...address, detail: e.target.value })} />
-        </Form.Item>
-
-        <Form.Item label="개장시간" name="openingTime" required>
+          <Input placeholder="도로명주소" name="city" value={address.address} disabled />
+          <Input placeholder="건물명" name="extraAddress" value={address.extraAddress} disabled />
+          <Input
+              placeholder='상세주소'
+              value={address.detail}
+              onChange={(e) => setAddress({ ...address, detail: e.target.value })}
+            />       
+             </Form.Item>
+        <Form.Item
+          label="개장시간"
+          name="openingTime"
+          rules={[
+            { required: true, message: '개장시간을 입력해주세요.' },
+            ({ getFieldValue }) => ({
+              validator(_, value) {
+               const closeTimeValue = getFieldValue('closingTime');
+               if (!value || closeTimeValue.isAfter(value)) {
+               return Promise.resolve();
+               }
+               return Promise.reject(new Error('개장시간은 폐장시간 이전이어야 합니다.'));
+               },
+               }),
+          ]}
+        >
           <TimePicker format={format} value={openingTime} onChange={setOpeningTime} />
         </Form.Item>
-        <Form.Item label="폐장시간" name="closingTime" required>
+        <Form.Item
+          label="폐장시간"
+          name="closingTime"
+          rules={[
+            { required: true, message: '폐장시간을 입력해주세요.' }
+          ]}
+        >
           <TimePicker format={format} value={closingTime} onChange={setClosingTime} />
         </Form.Item>
-        <Form.Item label="개점일" name="openingDate" required>
+        <Form.Item
+          label="개점일"
+          name="openingDate"
+          rules={[
+            { required: true, message: '개점일을 입력해주세요.' }
+          ]}
+        >
           <DatePicker value={openingDate} onChange={setOpeningDate} />
         </Form.Item>
         <Form.Item

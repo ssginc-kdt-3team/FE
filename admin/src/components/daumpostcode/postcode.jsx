@@ -22,8 +22,8 @@ const Postcode = ({ onChange }) => {
     }
     onChange({ 
       zonecode: data.zonecode, 
-      city: data.address, 
-      district: data.buildingName,  
+      address: data.address, 
+      extraAddress: data.buildingName,  
       
     });
     console.log(fullAddress);   // 예: '서울 성동구 왕십리로2길 20 (성수동1가)'
