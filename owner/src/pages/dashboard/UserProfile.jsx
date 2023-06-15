@@ -34,7 +34,9 @@ function UserProfile() {
         <Card
           title={
             <div style={{ textAlign: 'center', marginBottom: '5px' }}>
-              <Typography.Title level={4}>{ownerData.ownerName} 점주님 환영합니다.</Typography.Title>
+              {/* <Typography.Title level={4}>{ownerData.ownerName} 점주님 환영합니다.</Typography.Title> */}
+              <Typography.Title level={4}>CI/CD 테스트</Typography.Title>
+
             </div>
           }
           style={{ width: 400, marginTop: '20px' }}
