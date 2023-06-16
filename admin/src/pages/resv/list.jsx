@@ -25,10 +25,10 @@ const ResvList = () => {
     };
   
     axiosWithBaseUrl
-      .get("/admin/reservation", { params: requestData })
+      .get(`/admin/reservation/${'branch'}/${1}/${'ALL'}/${currentPage}`)
       .then((response) => {
-        console.log(response.data);
-        setResvList(response.data);
+        console.log(response);
+        setResvList(response.data.content);
         setTotalItems(response.data.totalElements);
         setItemsPerPage(response.data.numberOfElements);
         setLoading(false);
@@ -70,7 +70,7 @@ const ResvList = () => {
       key: 'customerName',
       width: 50,
       render: (text, record) => (
-        <Link to={`/customer/${record.customerId}`}>{text}</Link>
+        <Link to={`/cust/detail/${record.customerId}`}>{text}</Link>
       ),
     },
     {
