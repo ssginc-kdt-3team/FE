@@ -50,9 +50,9 @@ function RecdShopCarousel() {
   useEffect(() => {
     axios.post(`/shop/list/${loginInfo.id}`)
     .then(res => {
-      console.log(res.data);
+      // console.log(res.data);
       setRecdShopList(res.data);
-      console.log(res.data.length);
+      // console.log(res.data.length);
       setHasData(res.data.length >= 8); // 메인에서 shopId 관련 오류 뜸
     })
     .catch(err => {

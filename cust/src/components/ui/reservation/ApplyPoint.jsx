@@ -37,7 +37,7 @@ function ApplyPoint({pointValue, setPointValue, initialDeposit, finalDeposit, is
   const handlePointOnBlur = (e) => {
     const enteredPoint = parseInt(e.target.value);
 
-    console.log('isCouponUsed: ' + isCouponUsed);
+    // console.log('isCouponUsed: ' + isCouponUsed);
     // if(canUsePoint(enteredPoint)) { // 입력한 포인트가 1000 이상
       if(isPointValid(enteredPoint, remainedPoint, isCouponUsed ? initialDeposit - couponDiscountValue : initialDeposit)) {
         // 포인트 범위 내
@@ -66,7 +66,7 @@ function ApplyPoint({pointValue, setPointValue, initialDeposit, finalDeposit, is
   useEffect(() => {
     axios.get(`/customer/point/check/${loginInfo.id}`)
     .then(res => {
-      console.log(res);
+      // console.log(res);
       setRemainedPoint(res.data.value);
     })
     .catch(err => { // 오류 처리

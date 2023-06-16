@@ -1,6 +1,4 @@
 import React from 'react';
-import plus from '../../../assets/images/icons/plus.png';
-import minus from '../../../assets/images/icons/minus.png';
 import { error } from '../../../utils/notification';
 
 function Count({title, peopleCount, setPeopleCount, childCount, setChildCount, isPeopleCount}) {

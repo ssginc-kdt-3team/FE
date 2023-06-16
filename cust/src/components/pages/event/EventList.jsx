@@ -25,7 +25,7 @@ function EventList() {
   useEffect(() => {
     axios.get(`/event/banners`)
     .then(res => {
-      console.log(res.data);
+      // console.log(res.data);
       setEventList(res.data);
       setHasData(res.data.length > 0);
     })

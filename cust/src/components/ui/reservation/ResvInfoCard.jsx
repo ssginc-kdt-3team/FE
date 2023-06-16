@@ -20,7 +20,7 @@ function ResvInfoCard({data, resvId}) {
     // if(data)
     //   canUpdate(data.expectedTime.slice(0, 19));
 
-    console.log('isDisabled :' + status);
+    // console.log('isDisabled :' + status);
     if(status === 'RESERVATION')
       return false;
 

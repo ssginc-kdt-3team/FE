@@ -10,7 +10,7 @@ function Profile() {
 
   const handleSwitch = (checked) => {
     setChecked(checked);
-    console.log(checked)
+    // console.log(checked);
   };
 
   return (

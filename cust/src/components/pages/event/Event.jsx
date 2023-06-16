@@ -45,7 +45,7 @@ function Event() {
   useEffect(() => {
     axios.get(`/event/${eventId}`)
     .then(res => {
-      console.log(res.data);
+      // console.log(res.data);
       setEventInfo(res.data);
     })
     .catch(err => { // 오류 처리

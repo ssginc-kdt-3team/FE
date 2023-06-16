@@ -23,7 +23,7 @@ function BranchSelector({branchId, setBranchId}) {
   useEffect(() => {
     axios.get('/branch/all')
     .then(res => {
-      console.log(res.data);
+      // console.log(res.data);
       setBranchList(res.data);
     })
     .catch(err => {

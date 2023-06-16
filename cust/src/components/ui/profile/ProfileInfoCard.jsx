@@ -32,7 +32,7 @@ function ProfileInfoCard() {
       // axios.get(url3)
     ])
     .then(axios.spread((res1, res2, res3, res4, res5) => {
-      console.log(res1);
+      // console.log(res1);
       setGrade(res1.data.name);
       setRemainedCash(res2.data.value);
       setRemainedPoint(res3.data.value);

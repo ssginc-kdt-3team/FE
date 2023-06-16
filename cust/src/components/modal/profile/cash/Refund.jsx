@@ -11,7 +11,7 @@ function Refund({isModalOpen, setIsModalOpen, data, remainedCash, setNeedReRende
     confirm('환불 하시겠습니까?', () => { 
       axios.post(`/customer/charge/refund/${data.id}`)
       .then(res => {
-        console.log(res);
+        // console.log(res);
         success('환불이 완료되었습니다.');
         setNeedReRender(true); // 리렌더링 상태 변경, CashList에서 사용
         setIsModalOpen(false);

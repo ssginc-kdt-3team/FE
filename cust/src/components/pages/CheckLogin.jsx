@@ -23,7 +23,7 @@ export default function CheckLogin() {
 
   useEffect(() => {
     if(!loginInfo.isLoggedin) {
-      console.log(pathname);
+      // console.log(pathname);
 
       if(!whiteList.includes(pathname)) {
         // error('로그인이 필요합니다.');

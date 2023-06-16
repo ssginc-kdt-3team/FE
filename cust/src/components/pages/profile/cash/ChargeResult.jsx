@@ -1,5 +1,3 @@
-import { Button } from 'antd';
-
 function ChargeResult() {
   // 창 닫기
   window.close();  
@@ -11,14 +9,10 @@ function ChargeResult() {
   //   window.opener.location.reload();
   // }
   
-  window.opener.location.reload();
+  window.opener.location.reload(); // 부모창 새로고침
 
   return (
     <></>
-    // <div>
-    //   결제가 완료되었습니다.
-    //   <Button onClick={() => window.close()}>닫기</Button>
-    // </div>
   );
 }
 

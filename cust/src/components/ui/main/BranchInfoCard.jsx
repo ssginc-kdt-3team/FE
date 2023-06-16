@@ -10,7 +10,7 @@ function BranchInfoCard() {
   useEffect(() =>{
     axios.get(`/admin/branch/detail/${branchId}`)
     .then(res => {
-      console.log(res);
+      // console.log(res);
       setBranchInfo(res.data);
       // setBranchImg(res.data.branchImgUrl); // 지점 이미지 설정
     })

@@ -31,8 +31,8 @@ function MobResvCarousel() {
     if(loginInfo.id !== -1) {
       axios.get(`/customer/reservation/listActive/${loginInfo.id}/1`) // 2는 사용자 id
       .then(res => {
-        console.log(res.data);
-        setResvList(res.data.content); // 
+        // console.log(res.data);
+        setResvList(res.data.content);
       })
       .catch(err => console.log(err))
     }
