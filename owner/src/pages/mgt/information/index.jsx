@@ -7,6 +7,8 @@ import { axiosWithBaseUrl } from 'App';
 import MenuList from '../menu/List';
 import { useSelector } from 'react-redux';             //userSlice의 id 값 가져오기
 
+// ==================================|| MgtInfo, 매장, 메뉴정보 ||================================== //
+
 function MgtInfo() {
   const id = useSelector((state) => state.user.id);  
   const navigate = useNavigate();

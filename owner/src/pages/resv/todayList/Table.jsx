@@ -5,9 +5,10 @@ import Paging from "components/pagination/Paging";
 import { axiosWithBaseUrl } from "App";
 import Enter from "pages/resv/todayList/Enterbtn";
 import Noshow from "pages/resv/todayList/Noshowbtn";
-import { useSelector } from 'react-redux';               
+import { useSelector } from 'react-redux';     
 
-//오늘 예약 조회 테이블
+// ==================================|| ResvTdTable, 오늘 예약 조회 테이블 ||================================== //
+
 const ResvTdTable = () => {
  const id = useSelector((state) => state.user.id);        // userSlice의 id 값 가져오기
   const [resvList, setResvList] = useState([]);           // 현재 페이지의 예약 목록
@@ -42,7 +43,7 @@ const ResvTdTable = () => {
     setSelectedType(type);
   };
   
-  //table columns
+  //테이블 columns
   const columns = [
     {
       title: "예약일자",

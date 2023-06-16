@@ -1,12 +1,13 @@
 import { Outlet } from 'react-router-dom';
 import Table from "./Table";
-import Filter from "./Filter";
+
+// ==================================|| ResvTdList, 오늘예약리스트 ||================================== //
+
 
 const ResvTdList = () => {
   return (
   <div>
   <Outlet/>
-  {/* <Filter/> */}
   <Table />
   </div>
   )

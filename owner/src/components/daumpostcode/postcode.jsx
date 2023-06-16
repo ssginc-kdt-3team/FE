@@ -1,6 +1,9 @@
 import React from 'react';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 
+// ==============================|| 주소선택 ||============================== //
+
+
 const Postcode = ({ onChange }) => {
   //다음 우편번호 서비스 스크립트 url
   const scriptUrl = 'https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js'; 
@@ -27,8 +30,8 @@ const Postcode = ({ onChange }) => {
       
     });
     console.log(fullAddress);   // 예: '서울 성동구 왕십리로2길 20 (성수동1가)'
-    console.log(data.address); 
-    console.log(extraAddress);  
+    console.log(data.address);  // 도로명 주소
+    console.log(extraAddress);  // 건물명
   };
 
   const handleClick = () => {

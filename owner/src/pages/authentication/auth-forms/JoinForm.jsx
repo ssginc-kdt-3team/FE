@@ -6,6 +6,9 @@ import { useMediaQuery, Grid } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import Postcode from 'components/daumpostcode/postcode';
 
+// ==============================|| Joinform||============================== //
+
+
 const Join = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));

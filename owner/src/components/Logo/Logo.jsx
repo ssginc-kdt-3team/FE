@@ -4,7 +4,7 @@ import { useTheme } from '@mui/material/styles';
 // project
 import logo from 'assets/images/logo.png';
 
-// ================================|| LOGO  ||================================= //
+//=================================|| LOGO  ||==================================//
 
 const Logo = () => {
     const theme = useTheme();

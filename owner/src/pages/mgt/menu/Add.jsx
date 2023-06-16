@@ -5,6 +5,8 @@ import { PlusOutlined } from '@ant-design/icons';
 import { axiosWithBaseUrl } from 'App';
 import { useSelector } from 'react-redux';
 
+// ==================================|| MenuAdd,메뉴등록 ||================================== //
+
 const normFile = (e) => {
   if (Array.isArray(e)) {
     return e;
@@ -122,7 +124,7 @@ function MenuAdd() {
           name="photos"
           required
           rules={[
-            { required: true, message: '지점 사진을 업로드해주세요.' },
+            { required: true, message: '메뉴 사진을 업로드해주세요.' },
           ]}
           valuePropName="fileList"
           getValueFromEvent={normFile}

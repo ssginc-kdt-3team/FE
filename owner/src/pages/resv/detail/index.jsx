@@ -4,9 +4,11 @@ import { axiosWithBaseUrl } from 'App';
 import { Card, Typography, Divider, Tag } from 'antd';
 import Reject from "pages/resv/detail/Rejectbtn";
 
+// ==================================|| ResvDetail, 예약상세페이지 ||================================== //
+
 //예약 상세 정보
 function ResvDetail() {
-  //resvlist 에서  예약id 받아오기 
+  //resvlist 에서  예약id 받아옴
   const { id } = useParams();
   const [resv, setResv] = useState(null);
   
@@ -47,6 +49,7 @@ function ResvDetail() {
     return <Tag color={color}>{content}</Tag>;
   }
 
+  // 예약 상세 정보
   return (
     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
       <Card

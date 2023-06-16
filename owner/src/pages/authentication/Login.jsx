@@ -20,18 +20,21 @@ const Login = () => {
     <AuthWrapper>
       <Grid container spacing={3}>
         <Grid item xs={12}>
+        {/* 회원가입 */}
           <Stack direction="row" sx={{ justifyContent: 'flex-end', alignItems: 'baseline', mb: { xs: -0.5, sm: 0.5 } }}>
             <Typography component={Link} to="/register" variant="body1" sx={{ textDecoration: 'none' }} color="BLACK">
               회원가입
             </Typography>
           </Stack>
           <Stack direction="row" sx={{ justifyContent: 'center', alignItems: 'baseline', mb: { xs: -0.5, sm: 0.5 } }}>
+             {/* 로그인 title */} 
             <Typography variant="h3">
               로그인
             </Typography>
           </Stack>
         </Grid>
         <Grid item xs={12}>
+          {/* import 로그인 Form  */}
           <LoginForm />
         </Grid>
       </Grid>

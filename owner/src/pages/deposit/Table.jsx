@@ -6,6 +6,9 @@ import Paging from "components/pagination/Paging";
 import { Table, Tag, Button, Typography, Divider, DatePicker } from "antd";
 import { Grid } from '@mui/material';
 
+// ==================================|| DepositTable,위약금 목록 ||================================== //
+
+
 const DepositTable = () => {
   const id = useSelector((state) => state.user.id);  
   const [resvList, setResvList] = useState([]);

@@ -3,6 +3,9 @@ import { useParams } from "react-router-dom";
 import { axiosWithBaseUrl } from 'App';
 import { Card, Typography, Divider, Tag } from 'antd';
 
+// ==============================|| DepositDetail, 예약 상세 정보 ||============================== //
+
+
 //예약 상세 정보
 function DepositDetail() {
   //deposittable 에서  예약id 받아오기 

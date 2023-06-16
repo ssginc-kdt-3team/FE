@@ -10,11 +10,13 @@ import MainCalendar from './Calendar';
 import { useSelector } from 'react-redux';
 import MgtInfo from './MgtInfo';
 
+// ==================================||메인 페이지 레이아웃||================================== //
+
 const DashboardDefault = () => {
   const [currentDate, setCurrentDate] = useState('');
-  const name = useSelector((state) => state.user.name);       //store에 저장된 user id 가져오기
+  const name = useSelector((state) => state.user.name);           //store에 저장된 user id 가져오기
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));    //mobile 설정
 
 
   useEffect(() => {
@@ -34,6 +36,7 @@ const DashboardDefault = () => {
         <Grid item justifyContent="center" alignItems="center" marginTop="34px" >
           <Typography variant="h5" style={{ marginBottom: '20px', textAlign: 'center' }}>{name}님 좋은 하루 보내세요!</Typography>
           <MainCard sx={{ mt: 2, width: '100%', height: '150px', padding: '20px'}} content={false}  >
+          {/* import 시계 */}
          <Clock />
         </MainCard>
         </Grid>
@@ -41,6 +44,7 @@ const DashboardDefault = () => {
         <Grid item >
           <Typography variant="h5" marginBottom="20px" marginTop="32px" >매장 운영 정보</Typography>
           <MainCard sx={{ mt: 2, width: '100%', height: '295px' }} content={false} >
+            {/* import 매장정보 */}
           <MgtInfo/>
         </MainCard>
         </Grid>
@@ -53,7 +57,7 @@ const DashboardDefault = () => {
           <Box sx={{ p: 4, pb: 0 }}>
             <Stack spacing={2}>
               <Grid container alignItems="center">
-                {/* 오늘 예약 차트 */}
+                {/* import 오늘 예약 차트 */}
                 <Box sx={{width: '100%'}}>
                 <MonthlyBarChart  style={{overflowX: 'auto' }}/>
                 </Box>
@@ -65,8 +69,8 @@ const DashboardDefault = () => {
     </Grid>
     </Grid>
 
-      {/* 하단 구역 */}
-    
+  
+  {/* 하단 구역 */}
   <Grid container justifyContent="center" alignItems="center">
   <Grid item xs={15} md={7} lg={12} sx={{pl: 2, pr: 2, ml: isMobile ? 0 : 5}} >
     
@@ -84,6 +88,7 @@ const DashboardDefault = () => {
         content={false}
         >          
           <Box sx={{ justifyContent: 'center', alignItems: "center"}} >
+              {/* import 달력 */}
             <MainCalendar />
           </Box>
         </MainCard>
@@ -95,6 +100,7 @@ const DashboardDefault = () => {
         <MainCard sx={{ mt: 2, width: '100%', height: '400px'}} content={false}>
           <Box sx={{ p: 5, pb: 0 }} alignItems="center">
           </Box>
+         {/* import 예약 통계 */}
           <IncomeAreaChart />
         </MainCard>
       </Grid>
@@ -104,6 +110,7 @@ const DashboardDefault = () => {
         <Typography variant={isMobile ? "h5" : "h4"} marginBottom="20px">위약금 통계</Typography>
         <MainCard sx={{ mt: 2, width: '100%', height: '400px' }} content={false}>
           <Box sx={{ p: 4, pb: 0 }} alignItems="center">
+         {/* import 위약금 통계 */}
           <MonthlyDepositChart  />
           </Box>
         </MainCard>
