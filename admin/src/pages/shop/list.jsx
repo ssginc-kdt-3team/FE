@@ -33,12 +33,12 @@ function ShopList() {
    const columns = [
     {
       title: "지점명",
-      dataIndex: "{branch.name}",
+      dataIndex: ["branch", "name"],
       key: "branchName",
     },
     {
       title: "매장명",
-      dataIndex: "shopName",
+      dataIndex: "name",
       key: "shopName",
       render: (text, record) => (
         <Link to={`/owner/detail/${record.shopId}`}>{text}</Link>
@@ -46,7 +46,7 @@ function ShopList() {
     },
     {
       title: "점주명",
-      dataIndex: "ownerName",
+      dataIndex: ["owner", "name"],
       key: "ownerName",
       render: (text, record) => (
         <Link to={`/owner/detail/${record.ownerId}`}>{text}</Link>
@@ -59,7 +59,7 @@ function ShopList() {
     },
     {
       title: "매장 위치",
-      dataIndex: "shopLocation",
+      dataIndex: ["owner", "name"],
       key: "shopLocation",
     },
     {

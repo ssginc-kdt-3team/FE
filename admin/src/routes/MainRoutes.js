@@ -3,7 +3,6 @@ import { lazy } from 'react';
 // project import
 import Loadable from 'components/Loadable';
 import MainLayout from 'layout/MainLayout';
-import Profile from '../pages/admin/profile';
 import ResvList from '../pages/resv/list';
 import ResvDetail from '../pages/resv/detail';
 // import Deposit from '../pages/deposit/index';
@@ -51,10 +50,6 @@ const MainRoutes = {
         {
             path: '/main',
             element: <DashboardDefault />
-        },
-        {
-            path: '/admin/profile',
-            element: <Profile />
         },
         {
             path: '/cust',
