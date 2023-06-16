@@ -1,14 +1,12 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import ResvTable from "./Table";
-import DateFilter from "./Datefilter";
-import StatusFilter from "./Statusfilter";
+
+// ==================================|| ResvList, 전체 예약 목록||================================== //
 
 function ResvList() {
   return ( 
           <div>    
-             {/* <DateFilter /> */}
-            {/* <StatusFilter />  */}
             <ResvTable />
             <Outlet />
           </div>

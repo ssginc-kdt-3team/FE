@@ -6,6 +6,8 @@ import Paging from "components/pagination/Paging";
 import { useSelector } from 'react-redux';   //userSlice의 id 값 가져오기
 import StatusFilter from "./Statusfilter";
 
+// ==================================|| ResvTable, 예약목록테이블 ||================================== //
+
 const { RangePicker } = DatePicker;
 
 const ResvTable = () => {
@@ -60,7 +62,6 @@ const ResvTable = () => {
     // fetchResvList(); 
   };
   
-
   const columns = [
     {
       title: "예약일자",

@@ -2,6 +2,7 @@ import { Button, Modal } from 'antd';
 import { useState } from 'react';
 import { axiosWithBaseUrl } from "App";
 
+// ==================================|| Noshowbtn, 노쇼처리버튼 ||================================== //
 
 const Noshow = ({ id, fetchResTdvList, reservationDate }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);

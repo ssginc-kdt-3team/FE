@@ -1,6 +1,9 @@
 import React from "react";
 import { Pagination } from 'antd';
 
+
+//=================================|| Paging  ||==================================//
+
 const Paging = ({ page, itemsPerPage, totalItems, setPage }) => {
 
   const handlePageChange = (newPage) => {

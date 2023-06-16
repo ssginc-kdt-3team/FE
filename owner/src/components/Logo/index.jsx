@@ -8,10 +8,9 @@ import { ButtonBase } from '@mui/material';
 import Logo from './Logo';
 import config from 'config';
 
-// ==============================|| MAIN LOGO ||============================== //
+// ==============================|| 스타필드 LOGO ||============================== //
 
 const LogoSection = ({ sx, to }) => (
-    // <ButtonBase disableRipple component={Link} to={!to ? config.defaultPath : to} sx={sx}>
     <ButtonBase disableRipple sx={sx}>
         <Logo />
     </ButtonBase>

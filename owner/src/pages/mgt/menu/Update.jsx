@@ -4,6 +4,8 @@ import { Card, Button, Form, Input, Upload, Modal } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { axiosWithBaseUrl } from 'App';
 
+// ==================================|| MenuUpdate, 메뉴 수정 ||================================== //
+
 
 const normFile = (e) => {
   if (Array.isArray(e)) {
@@ -38,7 +40,7 @@ function MenuUpdate() {
   };
 
   const handleSubmit = async () => {
-    //이름 , 가격, 기존 이미지 필수값
+    //이름 , 가격, 기존 이미지url필수값
     const menuData  = {
       name: name,
       price: price,
@@ -59,7 +61,8 @@ function MenuUpdate() {
     try {
 
 
-     const response = await axiosWithBaseUrl
+     const response = await 
+     axiosWithBaseUrl
      .post(`/owner/menu/update/${state.id}`, formData, {
         headers: {
             //  contentType : 'application/json'
@@ -68,14 +71,12 @@ function MenuUpdate() {
       });
       console.log(response);
       navigate('/mgt/info');
-      // Handle success
     } catch (error) {
       console.error('Error updating menu:', error);
-      console.log(formData.menuData);
-      // Handle error
     }
   };
 
+// 모달
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -98,7 +99,7 @@ function MenuUpdate() {
         <Form.Item label="가격" name="price" initialValue={state.price}>
           <Input onChange={(e) => setPrice(e.target.value)} />
         </Form.Item>
-
+        
         <Form.Item
           label="메뉴 사진"
           name="menuImg"
@@ -115,7 +116,7 @@ function MenuUpdate() {
           >
             <div>
               <PlusOutlined />
-              <div style={{ marginTop: 8 }}>Upload</div>
+            <div style={{ marginTop: 8 }}>Upload</div>
             </div>
           </Upload>
         </Form.Item>
@@ -129,7 +130,7 @@ function MenuUpdate() {
             수정하기
           </Button>
           <Modal
-           title="수정"
+            title="수정"
             open={isModalOpen} 
             onOk={handleOk} 
             onCancel={handleCancel}

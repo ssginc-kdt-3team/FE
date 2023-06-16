@@ -6,6 +6,8 @@ import { axiosWithBaseUrl } from 'App';
 import styles from '../../../assets/css/pages/mgt/review.module.css';
 import { useSelector } from 'react-redux';           //userSlice의 id 값 가져오기
 
+// ==================================|| MgtReview, 후기 리스트 ||================================== //
+
 const { RangePicker } = DatePicker;
 //매장 후기 리스트
 function MgtReview() {

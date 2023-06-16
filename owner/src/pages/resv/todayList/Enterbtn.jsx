@@ -2,6 +2,8 @@ import { Button, Modal } from 'antd';
 import { useState } from 'react';
 import { axiosWithBaseUrl } from "App";
 
+// ==================================|| Enterbtn, 입장처리버튼 ||================================== //
+
 const Enter = ({ id, fetchResTdvList, reservationDate }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 

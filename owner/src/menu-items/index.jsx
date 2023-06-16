@@ -3,9 +3,7 @@ import profile from './Profile';
 import resv from './Resv';
 import mgt from './Mgt';
 
-
 // ==============================|| MENU ITEMS ||============================== //
-
 
 const menuItems = {
 

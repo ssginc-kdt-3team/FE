@@ -2,6 +2,7 @@ import { Button, Modal, Select } from 'antd';
 import { useState } from 'react';
 import { axiosWithBaseUrl } from 'App';
 
+// ==================================|| Rejectbtn, 예약거절버튼 ||================================== //
 
 const Reject = ({id, fetchResvDetail}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);    // 모달 오픈

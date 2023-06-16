@@ -5,22 +5,22 @@ import { clearUser } from '../../../store/reducers/userSlice';
 import { Modal } from 'antd';
 import { LogoutOutlined } from '@ant-design/icons';
 
+// ==============================|| Logout ||============================== //
 
 const Logout = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const id = useSelector((state) => state.user.id);      
+  const id = useSelector((state) => state.user.id);     
 
   const handleLogout = () => {
-    dispatch(clearUser());
-    dispatch(setLoggedIn(false));
+    dispatch(clearUser());          //userslice의 clearUser -> id, name ''
+    dispatch(setLoggedIn(false));   //loginslice의 setLoggedIn
     console.log(id);
     // Modal.success({
     //   title: '로그아웃 성공',
     //   content: '로그아웃 되었습니다.',
     //   okText: "닫기"
     // });
-
     navigate('/');
   };
 

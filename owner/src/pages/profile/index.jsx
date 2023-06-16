@@ -6,8 +6,8 @@ import { useSelector } from 'react-redux';
 import ShopProfile from './ShopProfile';
 import MyProfile from './MyProfile';
 import { Grid } from '../../../node_modules/@mui/material/index';
-// import { setShopInfo } from 'store/reducers/shopslice';
 
+// ==================================|| Profile, 매장정보, 점주정보 ||================================== //
 
 function Profile() {
 

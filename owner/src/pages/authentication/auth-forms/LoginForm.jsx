@@ -9,6 +9,7 @@ import { isEmailValid } from '../../../utils/auth';
 import { useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
+// ==============================|| LoginForm ||============================== //
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -62,6 +63,7 @@ const LoginForm = () => {
     <div className="container">
       <div className="center flex-col">
         <Form>
+          {/* 이메일 */}
           <Form.Item
             label="이메일"
             name="email"
@@ -71,7 +73,7 @@ const LoginForm = () => {
                 message: '이메일 형식이 아닙니다.',
               },
               {
-                // required: true,
+                required: true,
                 message: '이메일을 입력하세요.',
               },
             ]}
@@ -88,12 +90,13 @@ const LoginForm = () => {
               
             />
           </Form.Item>
-
+          {/* 비밀번호 */}
           <Form.Item
             label="비밀번호"
             name="password"
             rules={[
               {
+                required: true,
                 message: '비밀번호를 입력하세요.',
               },
               {
@@ -113,11 +116,11 @@ const LoginForm = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               sx={{
-                width: isMobile? '100%' : '200px', // 원하는 너비 값 설정
+                width: isMobile? '100%' : '200px', 
               }}
             />
           </Form.Item>
-
+          {/* 로그인 버튼 */}
           <div style={{ display: 'flex', justifyContent: 'center' }}>
           <Form.Item>
           <Button

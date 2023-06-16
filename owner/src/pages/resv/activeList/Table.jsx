@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Paging from "components/pagination/Paging";
 import { axiosWithBaseUrl } from "App";
-
-//userSlice의 id 값 가져오기
 import { useSelector } from 'react-redux';
+
+// ==================================|| ShopProfile, 매장프로필 ||================================== //
 
 const ResvAcList = () => {
   const id = useSelector((state) => state.user.id);       //store에 저장된 user id 가져오기
