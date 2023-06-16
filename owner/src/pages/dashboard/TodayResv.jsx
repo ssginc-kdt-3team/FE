@@ -10,7 +10,7 @@ import { Typography, Grid, useMediaQuery } from '@mui/material';
 import ReactApexChart from 'react-apexcharts';
 
 // ==============================||메인2 오늘 예약 현황 ||============================== //
-// chart options
+// 차트 options
 const barChartOptions = {
   chart: {
     type: 'bar',
@@ -44,7 +44,6 @@ const barChartOptions = {
     show: true
   }
 };
-
 
 const MonthlyBarChart = () => {
   const theme = useTheme();
@@ -97,7 +96,7 @@ const MonthlyBarChart = () => {
             show: false
           },
           labels: {
-            // show: !isMobile,          //모바일 아닐 때만 라벨 보이게
+            // show: !isMobile,          //모바일 아닐 때만 라벨 보이게-> 모바일 가로 스크롤으로 변경, 다 보이게
             style: {
               colors: [secondary]
             }
@@ -110,9 +109,9 @@ const MonthlyBarChart = () => {
       }));
 
       setSeries([{ data: numData },  { name: '예상 노쇼율', data: noShowData  }]);    // 예약 수 , 예상 노쇼 수 
-      setTotalNum(total);
-      setTotalNoshow(totalNoshow)
-    }
+      setTotalNum(total);                                                            //총 예약 수
+      setTotalNoshow(totalNoshow)                                                    //총 노쇼 수
+    } 
   }, [info, secondary, todayresv]);
   
   return (
@@ -120,7 +119,8 @@ const MonthlyBarChart = () => {
     <Grid>
       <Grid item style={{overflowX: 'auto' }}>
         <Typography variant="h5" align="center">총:{totalNum}건</Typography>
-        <Typography variant="h6" align="center"> (예상 방문 수: {totalNum - totalNoshow}건)</Typography>
+        {/* 예상방문 수 = 총 예약 수 - 노쇼 수  */}
+        <Typography variant="h6" align="center"> (예상 방문 수: {totalNum - totalNoshow}건)</Typography>  
         <div id="chart">
             <ReactApexChart
              options={options} 
@@ -134,11 +134,9 @@ const MonthlyBarChart = () => {
         <Grid container justifyContent="flex-end">
           <Typography variant= "subtitle2" style={{ color: '#cccccc', marginLeft: '5px', marginBottom: '20px', display: 'block'}}>
           {/* <Typography variant= "subtitle2" style={{ color: '#cccccc', marginLeft: '5px', marginBottom: '20px', display: isMobile ? 'none' : 'block'}}> */}
-
             예상 노쇼율은 지난 3개월의 시간별 노쇼 평균치를 기준으로 계산된 수치입니다.
           </Typography>
         </Grid>
-
         </Grid>
         </Grid>
     </>

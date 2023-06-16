@@ -24,7 +24,7 @@ const ResvAcList = () => {
     axiosWithBaseUrl
       .get(`/owner/reservation/active/${id}/${currentPage}`)         //axios를 사용하여 API 엔드포인트로 GET 요청
       .then((response) => {                               //응답받은 데이터를 사용하여 업데이트                                  
-        console.log(response.data.content)                     //responese.data: 전체 data, respone.data.content : 특정 data
+        // console.log(response.data.content)                     //responese.data: 전체 data, respone.data.content : 특정 data
         setResvAcList(response.data.content);
         setTotalItems(response.data.totalElements);
         setItemsPerPage(response.data.numberOfElements);
@@ -71,6 +71,7 @@ const ResvAcList = () => {
         return <Tag color={color}>{content}</Tag>;
       },
     },
+    //예약 상세로 이동
     {
       title: "예약자명",
       dataIndex: "name",
@@ -113,6 +114,5 @@ const ResvAcList = () => {
     </>
   );
 };
-
 
 export default ResvAcList;

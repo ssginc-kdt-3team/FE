@@ -15,13 +15,15 @@ const store = configureStore({
 });
 
 store.subscribe(() => {
-    saveState(store.getState()); // 상태 변경 시 localStorage에 저장
+    saveState(store.getState());   // 상태 변경 시 localStorage에 저장
   });
 
   
 const persistor = persistStore(store);
 
 export { store, persistor };
+
+
 // const store = configureStore({
 //   reducer: persistedReducer,
 //   middleware: (getDefaultMiddleware) =>
