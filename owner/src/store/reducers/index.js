@@ -13,7 +13,7 @@ import loginSilce from './loginSilce';
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['user', 'loginstate'], // state to persist
+  whitelist: ['user', 'loginstate'], //persist 처리 할 state
   serialize: true, 
 };
 

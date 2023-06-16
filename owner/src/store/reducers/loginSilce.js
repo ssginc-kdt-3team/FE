@@ -1,11 +1,11 @@
-//localsotorage에 저장
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';   //localsotorage에 저장
 
-
+// initial state
 const loginInitialState  = {
   isLoggedIn: false,
 };
 
+// ==============================|| SLICE - LOGIN ||============================== //
 const loginSlice = createSlice({
   name: 'loginstate',
   initialState: loginInitialState,
