@@ -14,7 +14,7 @@ const P = styled.p`
 
 function FindIdResult() {
   const { state } = useLocation();
-  console.log(state);
+  // console.log(state);
   // const location = useLocation();
   // console.log(location);
   // console.log(location.search.slice(8, ));

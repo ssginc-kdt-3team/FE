@@ -1,12 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-// import styles from '../../../assets/css/ui/main/RecdShopCard.module.css';
 import { Link } from 'react-router-dom';
 
-const Div = styled.div`
-  width: 100%;
-  height: 100%;
-`;
 
 const Img = styled.img`
   max-width: calc(var(--carousel-max-width) / 4 - 40px) !important;

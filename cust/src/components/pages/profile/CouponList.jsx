@@ -29,7 +29,7 @@ function Coupon() {
   useEffect(() => {
     axios.get(`customer/coupon/${loginInfo.id}`)
     .then(res => {
-      console.log(res.data);
+      // console.log(res.data);
       setCouponList(res.data);
       setHasData(res.data.length > 0);
     })

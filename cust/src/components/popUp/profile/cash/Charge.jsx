@@ -1,10 +1,8 @@
-  import React, { useEffect, useState } from 'react';
+  import React from 'react';
   import { Button } from 'antd';
   import axios from 'axios';
-  import { useLocation, useNavigate } from 'react-router-dom';
 
   function Charge({chargeInfo, windowSize}) {
-    const navigate = useNavigate();
 
     const chargePopup = (url) => {
       let popHeight = 600; // 띄울 팝업창 높이   
@@ -16,14 +14,14 @@
       let popY = winY + (winHeight - popHeight) / 4;
       let popX = winX + (winWidth - popWidth) / 8;
 
-      console.log(winHeight);
+      // console.log(winHeight);
       window.open(url, '카카오페이 결제', 'top='+popY+', left='+popX+', width='+popWidth+', height='+popHeight+', scrollbars=no, resizable=no');
     }
 
     const handleCharge = () => {
       axios.post('/customer/charge/ready', chargeInfo)
       .then(res => {
-        console.log(res);
+        // console.log(res);
 
         if (windowSize <= 768) { // 모바일에서는
           chargePopup(res.data.next_redirect_mobile_url); // 모바일 결제창 연다

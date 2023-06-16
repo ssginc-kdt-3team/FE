@@ -35,7 +35,7 @@ function FindPwd() {
     if(!isInputEmpty(inputInfo)) {
       axios.post(`/customer/findPwd`, inputInfo)
       .then(res => { // 받아오는 정보가 있다
-        console.log(res);
+        // console.log(res);
         if(res.data !== null) {
           confirm('비밀번호 찾기에 성공하였습니다.', () => {
             navigate(`/find-pwd/result`, { replace: true, state: { name: inputInfo.name, password: res.data } });

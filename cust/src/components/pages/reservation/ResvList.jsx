@@ -24,8 +24,8 @@ function ResvList({isActiveList}) {
   useEffect(() => {
     axios.get(`/customer/reservation/${isActiveList ? 'listActive' : 'listAll'}/${userId}/${currentPage}`) // 2는 사용자 id
     .then(res => {
-      console.log(res.data);
-      setResvList(res.data.content); // 
+      // console.log(res.data);
+      setResvList(res.data.content);
       setHasData(res.data.content.length > 0);
       setTotalItems(res.data.totalElements); // 총 아이템 수 설정
       setItemsPerPage(res.data.pageable.pageSize); // 페이지당 아이템 수 설정
@@ -36,7 +36,7 @@ function ResvList({isActiveList}) {
     })
   }, [isActiveList, userId, currentPage]);
 
-  console.log(totalItems);
+  // console.log(totalItems);
   return (
     <div className='container background'>
       <div className='center flex-col'>

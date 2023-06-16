@@ -29,7 +29,7 @@ function Shop() {
   useEffect(() => {
     axios.get(`/shop/detail/${shopId}`)    
     .then(res => {
-      console.log(res.data);
+      // console.log(res.data);
       setShopInfo({
         shopId: res.data.shopId,
         shopName: res.data.shopName,
@@ -57,7 +57,7 @@ function Shop() {
   useEffect(() => {
     axios.get(`/shop/detail/review/${shopId}/${currentPage}`)    
     .then(res => {
-      console.log(res.data);
+      // console.log(res.data);
       setHasReviewData(res.data.content.length > 0);
       setReviewList(res.data.content);
       setTotalItems(res.data.totalElements); // 총 아이템 수 설정

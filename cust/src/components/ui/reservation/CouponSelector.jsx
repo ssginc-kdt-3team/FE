@@ -26,7 +26,7 @@ function SelectCoupon({couponId, setCouponId, setCouponDiscountValue}) {
   useEffect(() => {
     axios.get(`customer/coupon/${loginInfo.id}`)
       .then(res => {
-        console.log(res);
+        // console.log(res);
         setCouponList(res.data);
         // setCouponId(res.data[0].discountValue);
       })

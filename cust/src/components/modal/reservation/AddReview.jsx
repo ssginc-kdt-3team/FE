@@ -58,11 +58,11 @@ function AddReview({isModalOpen, setIsModalOpen, isReviewed, setIsReviewed}) {
   const handleReviewSubmit = () => {
     if(!isEmpty(reviewInfo.title, reviewInfo.contents)) { // 내용이 입력되어 있고
       if(isPointSelected(reviewInfo.point)) { // 별점이 선택되어 있으면
-        console.log(reviewInfo);
+        // console.log(reviewInfo);
     
         axios.post('customer/review/add', reviewInfo)
         .then(res => {
-          console.log(res);
+          // console.log(res);
           if(res.data) {
             success('후기가 등록되었습니다.');
             handleClose();

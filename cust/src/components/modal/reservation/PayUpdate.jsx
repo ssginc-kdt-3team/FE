@@ -2,9 +2,7 @@ import { Button, Modal } from 'antd';
 import React, { useEffect, useState } from 'react';
 import styles from '../../../assets/css/modal/Modal.module.css';
 import axios from 'axios';
-import { confirm, error, success } from '../../../utils/notification';
-import CouponSelector from '../../ui/reservation/CouponSelector';
-import ApplyPoint from '../../ui/reservation/ApplyPoint';
+import { confirm, success } from '../../../utils/notification';
 import { cashFormat } from '../../../utils/format';
 import CashInfo from '../../ui/reservation/CashInfo';
 import { useNavigate } from 'react-router-dom';
@@ -25,13 +23,13 @@ function Pay({isModalOpen, setIsModalOpen, data, setData, payedDeposit}) {
   }
 
   const handlePay = () => {
-    console.log(data);
+    // console.log(data);
     
     confirm('결제 하시겠습니까?', () => {   
       axios.post(`/customer/reservation/update/${data.reservationId}`, data)
       .then(res => {
         console.log(res);
-        success('예약이 변경되었습니다.');
+        success('예약이 수정되었습니다.');
         navigate("/resv/active", { replace: true });
       })
       .catch(err => console.log(err))

@@ -31,8 +31,8 @@ const initialResvInfo = { // 초기값을 가지는 객체
 
 function AddResv() {
   const { state } = useLocation();
-  if(state)
-    console.log('[넘어온 state] 지점id:' + state.branchId + ' / 매장id: ' + state.shopId);
+  // if(state)
+  //   console.log('[넘어온 state] 지점id:' + state.branchId + ' / 매장id: ' + state.shopId);
   
   // const [locationState, setLocationState] = useState(state === null ? null : state); // 받아온 state 값을 useState로 관리
   // setLocationState(null);
@@ -82,7 +82,7 @@ function AddResv() {
   // 메모 처리
   const handleTextArea = (e) => {
     let { name, value } = e.target;
-    console.log('name: ' + name + ' / value: ' + value);
+    // console.log('name: ' + name + ' / value: ' + value);
 
     setResvInfo({
       ...resvInfo,
@@ -92,10 +92,10 @@ function AddResv() {
 
   // 예약하기 처리
   const handlePayModal = () => {
-    console.log(resvInfo);
-    console.log(shopName);
+    // console.log(resvInfo);
+    // console.log(shopName);
 
-    console.log(resvInfo.reservationDate.slice(11, ));
+    // console.log(resvInfo.reservationDate.slice(11, ));
     if(resvInfo.reservationDate.slice(11, ) === "00:00:00") { // 시간 선택 검증
       error("시간을 선택하세요.");
       return;

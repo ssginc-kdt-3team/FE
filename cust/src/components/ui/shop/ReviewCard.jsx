@@ -7,7 +7,7 @@ import axios from 'axios';
 import { confirm, error, success } from '../../../utils/notification';
 
 function ReviewCard({data}) {
-  console.log(data);
+  // console.log(data);
 
   const loginInfo = useRecoilValue(loginState);
   // console.log(loginInfo.id);
@@ -19,7 +19,7 @@ function ReviewCard({data}) {
     confirm('후기를 삭제하시겠습니까?', () => {
       axios.post(`/customer/review/delete/${data.reviewId}`)
       .then(res => {
-        console.log(res);
+        // console.log(res);
         if(res.data === true)
           success("후기가 삭제되었습니다.");
         // navigate('/resv');

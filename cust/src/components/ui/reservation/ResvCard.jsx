@@ -4,7 +4,7 @@ import styles from '../../../assets/css/ui/reservation/ResvCard.module.css'
 import ResvStatusTag from '../../ui/reservation/ResvStatusTag';
 
 function ResvCard({data}) {
-  console.log(data);
+  // console.log(data);
   return (
     <li>
       <Link to={`/resv/${data.reservationId}`}>

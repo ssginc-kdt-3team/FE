@@ -12,7 +12,7 @@ function ShopInfoCard({data}) {
 
   // const loginInfo = useRecoilValue(loginState);
 
-  const handleMoveToReserve = () => {
+  const handleMoveToResv = () => {
     // console.log(loginInfo.isLoggedin);
 
     // if(loginInfo.isLoggedin) {
@@ -38,7 +38,7 @@ function ShopInfoCard({data}) {
                 <Button 
                   type="primary"
                   className='button button-s'
-                  onClick={handleMoveToReserve}
+                  onClick={handleMoveToResv}
                 >
                   예약하기
                 </Button>

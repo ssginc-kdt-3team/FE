@@ -36,9 +36,9 @@ function Pay({isModalOpen, setIsModalOpen, data, setData, shopName}) {
     }))
   }, [setData, couponId, pointValue])
 
-  useEffect(() => {
-    console.log('couponDiscountValue: ' + couponDiscountValue);
-  }, [couponDiscountValue])
+  // useEffect(() => {
+  //   console.log('couponDiscountValue: ' + couponDiscountValue);
+  // }, [couponDiscountValue])
 
   const handleModalClose = () => {
     setIsModalOpen(false); // 모달 닫기
@@ -49,13 +49,13 @@ function Pay({isModalOpen, setIsModalOpen, data, setData, shopName}) {
   }
 
   const handlePay = () => {
-    console.log(data);
-    console.log(shopName);
+    // console.log(data);
+    // console.log(shopName);
     
     confirm('결제 하시겠습니까?', () => {   
       axios.post('/customer/reservation/add', data)
       .then(res => {
-        console.log(res);
+        // console.log(res);
         success('예약이 등록되었습니다.');
         navigate("/resv/active", { replace: true });
       })
