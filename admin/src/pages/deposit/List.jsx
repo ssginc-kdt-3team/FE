@@ -1,11 +1,11 @@
-//list에 넣고 지우기
-
 import React, { useState, useEffect } from "react";
 import { axiosWithBaseUrl } from "App";
 import { Link } from "react-router-dom";
-// import { useParams } from "react-router-dom";
 import Paging from "components/pagination/paging";
 import { Table } from 'antd';
+
+// ==============================|| DepositList - 예약금 리스트 ||============================== //
+
 
 function DepositList({type, branchId, shopId}) {
   // const { id } = useParams();
@@ -18,12 +18,12 @@ function DepositList({type, branchId, shopId}) {
     axiosWithBaseUrl
     .get(`/admin/deposit/${type}/${type === "branch" ? branchId : shopId}/${currentPage}`)
     .then(res => {
-      console.log(res);
-      console.log('넘어온 데이터 ▼');console.log(res.data.content);
+      // console.log(res);
+      // console.log('넘어온 데이터 ▼');console.log(res.data.content);
       setDepositList(res.data.content);
       setTotalItems(res.data.totalElements); // 총 아이템 수 설정
-      console.log(`/admin/deposit/${type}/${type === "branch" ? branchId : shopId}/${currentPage}`);
-      console.log('type: ' + type + ' / branchId: ' + branchId + ' / shopId: ' + shopId + ' / 총 아이템 수: ' + res.data.totalElements);
+      // console.log(`/admin/deposit/${type}/${type === "branch" ? branchId : shopId}/${currentPage}`);
+      // console.log('type: ' + type + ' / branchId: ' + branchId + ' / shopId: ' + shopId + ' / 총 아이템 수: ' + res.data.totalElements);
       setItemsPerPage(res.data.pageable.pageSize); // 페이지당 아이템 수 설정
     })
     .catch(err => {

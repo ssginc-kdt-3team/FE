@@ -1,13 +1,13 @@
 import React, { useRef, useState, useEffect  } from 'react';
 import { useNavigate, useParams, useLocation  } from 'react-router-dom';
-import { Card, Button, DatePicker, TimePicker, Form, Input, Upload, Modal } from 'antd';
+import { Card, Button,  TimePicker, Form, Input, Upload, Modal } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { axiosWithBaseUrl } from 'App';
-
 import dayjs from 'dayjs';
 
-//시간 형식
-const format = 'HH:mm';
+// ==============================|| BranchUpdate - 지점수정, 미완성||============================== //
+
+const format = 'HH:mm';  //시간 형식
 
 const normFile = (e) => {
   if (Array.isArray(e)) {
@@ -21,10 +21,6 @@ function BranchUpdate() {
   const { state } = useLocation(); 
   const [branchName, setBranchName] = useState(null);
   const [phone, setPhone] = useState(null);
-  const [zipCode, setZipCode] = useState(null);
-  const [address, setAddress] = useState(null);
-  const [extraAddress, setExtraAddress] = useState(null);
-  const [detail, setDetail] = useState(null);
   const [openingTime, setOpeningTime] = useState(dayjs('12:00', format));
   const [closingTime, setClosingTime] = useState(dayjs('12:00', format));
   const [openingDate, setOpeningDate] = useState(dayjs()); 
@@ -43,12 +39,11 @@ function BranchUpdate() {
       setOpeningTime(state.openingTime);
       setClosingTime(state.closingTime);
       setId(state.id);
-      console.log(state.id);
+      // console.log(state.id);
       setBranchImgUrl(state.branchImgUrl)
     }
   }, [state]);
   
-
   const onFileUpload = async () => {
     const branchData = {
       phone: phone,
@@ -57,6 +52,7 @@ function BranchUpdate() {
       openDay: openingDate.format('YYYY-MM-DD'),
     };
   
+    // updateDTO + form-data(branchImg) 형식으로 수정하기
     const formData = new FormData();
     const json = JSON.stringify(branchData);
     const blob = new Blob([json], { type: "application/json" });
@@ -106,9 +102,10 @@ function BranchUpdate() {
     setIsModalOpen(false);
   };
 
+
+  // updateDTO : 전화번호, 개장시간, 폐장시간, formdata : 사진, 만 수정가능
   return (
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
-
     <Card
       title="지점 정보 수정"
       style={{
@@ -141,6 +138,7 @@ function BranchUpdate() {
         {/* <Form.Item label="지점명" name="name" >
           <Input name="name" initialValue={branchName} onChange={(e) => setBranchName(e.target.value)} readOnly/>
         </Form.Item> */}
+       {/* 지점 전화번호  */}
         <Form.Item
           label="전화번호"
           name="phone"
@@ -151,23 +149,15 @@ function BranchUpdate() {
         >
           <Input   name="phone" initialValue={phone} onChange={(e) => setPhone(e.target.value)} />
         </Form.Item>
-
-        {/* <Form.Item name="address" label="주소" >
-          <Input placeholder="우편번호" name="zipCode" value={zipCode} onChange={(e) => setZipCode(e.target.value)} readOnly/>
-          <Input placeholder="시" name="address" value={address} onChange={(e) => setAddress(e.target.value)} readOnly/>
-          <Input placeholder="구" name="detail" value={detail} onChange={(e) => setDetail(e.target.value)} readOnly/>
-          <Input placeholder="상세주소" name="extraAddress" value={extraAddress} onChange={(e) => setExtraAddress(e.target.value)} readOnly/>
-        </Form.Item> */}
-
+        {/* 개장시간 */}
         <Form.Item label="개장시간" name="openingTime" required >
           <TimePicker format={format} value={openingTime} onChange={setOpeningTime}  />
         </Form.Item>
+        {/* 폐장시간 */}
         <Form.Item label="폐장시간" name="closingTime" required>
           <TimePicker format={format} value={closingTime} onChange={setClosingTime} />
         </Form.Item>
-        {/* <Form.Item label="개점일" name="openingDate"  readOnly>
-          <DatePicker value={openingDate} onChange={setOpeningDate} readOnly/>
-        </Form.Item> */}
+        {/* 지점사진 */}
         <Form.Item
           label="지점 사진"
           name="photos"
@@ -191,13 +181,14 @@ function BranchUpdate() {
             </div>
           </Upload>
         </Form.Item>
+        {/* 수정하기 버튼 */}
         <Form.Item>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <Button type="primary" onClick={showModal}  style={{ backgroundColor: '#cf1322' }}>
             수정하기
           </Button>
           </div>
-          <Modal title="등록" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+          <Modal title="지점수정" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
             <p>지점 정보를 수정하시겠습니까?</p>
           </Modal>
         </Form.Item>

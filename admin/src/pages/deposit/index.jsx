@@ -1,11 +1,10 @@
-import React, { useEffect, useState} from "react";
-// import { Outlet } from 'react-router-dom';
-// import Filter from './filter';
-import DepositList from './list';
+import React, { useState } from "react";
+import DepositList from './List';
 import FilterTemp from "./FilterTemp";
 
+// ==============================|| DepositList - 예약금 리스트 ||============================== //
+
 const Deposit = () => {
-  // const [depositBranchID, setDepositBranchID] = useState("");
   const [type, setType] = useState("branch");
   const [branchId, setBranchId] = useState(1);
   const [shopId, setShopId] = useState(-1);
@@ -16,9 +15,9 @@ const Deposit = () => {
 
   return (
     <div>
-      {/* <Filter setDepositBranchID={setDepositBranchID} /> */}
+      {/* 필터 */}
       <FilterTemp type={type} setType={setType} branchId={branchId} setBranchId={setBranchId} shopId={shopId} setShopId={setShopId} />
-      {/* <Button onClick={}>조회</Button> */}
+      {/* 목록 */}
       <DepositList type={type} branchId={branchId} shopId={shopId}/>
     </div>
   );

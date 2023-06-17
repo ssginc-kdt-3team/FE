@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Select } from "antd";
 import { axiosWithBaseUrl } from 'App';
-// import branch from 'menu-items/Branch';
+
+// ==============================|| FilterTemp - 지점, 매장 선택 필터 ||============================== //
 
 const { Option } = Select;
 
@@ -35,8 +36,8 @@ function FilterTemp({type, setType, branchId, setBranchId, shopId, setShopId}) {
           axiosWithBaseUrl.get('/branch/all'),
           axiosWithBaseUrl.get(`/branch/shops/${branchId}`),
         ]);
-        console.log(res1.data);
-        console.log(res2.data);
+        // console.log(res1.data);
+        // console.log(res2.data);
         setBranchList(res1.data);
         setShopList(res2.data);
       }
@@ -58,7 +59,6 @@ function FilterTemp({type, setType, branchId, setBranchId, shopId, setShopId}) {
           ))
         }
       </Select>
-      
       {/* 매장 선택 */}
       <Select value={shopId} onChange={handleShopSelect}>
         <Option value={-1}>매장을 선택하세요.</Option>

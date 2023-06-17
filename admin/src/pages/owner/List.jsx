@@ -1,80 +1,79 @@
 import React, { useState, useEffect } from "react";
-import { axiosWithBaseUrl } from "App";
-import { Table, } from "antd";
+import axios from "axios";
 import { Link } from "react-router-dom";
+import { Table, Tag, Space } from "antd";
 import Paging from "components/pagination/paging";
 
-function ShopList() {
-  const [shopList, setShopList] = useState([]);
+// ==============================|| OwnerList - 점주 목록 ||============================== //
+
+function OwnerList() {
+  const [ownerList, setOwnerList] = useState([]);
   const [branchId, setBranchId] = useState(1);          // 기본값 branch1을 설정
   const [currentPage, setCurrentPage] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(10);
-  const [ownerName, setOwnerName] = useState('');
-
 
   useEffect(() => {
-    axiosWithBaseUrl
-    .get(`/admin/shop/findAll/${branchId}/${currentPage}`)
-      .then((res) => {
-        console.log(res);
-        setShopList(res.data.content);
-        console.log(res.data.content);
-        setTotalItems(res.data.totalElements);
-        setItemsPerPage(res.data.numberOfElements);
-        setOwnerName(res.data.content.owner.name); 
+    axios
+      .get(`http://localhost:8080/admin/owner/findAll/${branchId}/${currentPage}`)
+      .then((response) => {
+        setOwnerList(response.data.content);
+        setTotalItems(response.data.totalElements);
+        setItemsPerPage(response.data.numberOfElements);
+        // console.log(response);
       })
       .catch((error) => {
         console.log(error);
       });
   }, [currentPage, branchId]);
 
+  // branch id 변경 함수
+  // const handleChangeBranchId = (newBranchId) => {
+  //   setBranchId(newBranchId);
+  // };
 
-   const columns = [
+  const columns = [
     {
       title: "지점명",
-      dataIndex: ["branch", "name"],
+      dataIndex: "branchName",
       key: "branchName",
     },
     {
       title: "매장명",
-      dataIndex: "name",
+      dataIndex: "shopName",
       key: "shopName",
-      render: (text, record) => (
-        <Link to={`/owner/detail/${record.shopId}`}>{text}</Link>
-      ),
     },
     {
       title: "점주명",
-      dataIndex: ["owner", "name"],
+      dataIndex: "ownerName",
       key: "ownerName",
       render: (text, record) => (
-        <Link to={`/owner/detail/${record.ownerId}`}>{text}</Link>
+        <Link to={`/owner/detail/${record.ownerId}`} style={{ color: 'black' }}>{text}</Link>
       ),
     },
     {
       title: "점주 전화번호",
-      dataIndex: "phone",
-      key: "phone",
+      dataIndex: "ownerPhone",
+      key: "ownerPhone",
     },
     {
       title: "매장 위치",
-      dataIndex: ["owner", "name"],
+      dataIndex: "shopLocation",
       key: "shopLocation",
     },
     {
       title: "상태",
-      dataIndex: "status",
-      key: "status",
+      dataIndex: "userStatus",
+      key: "userStatus",
     }
   ];
 
   return (
-      <>
-      <h1>매장 리스트</h1>
+    <>
+      <h1>점주 리스트</h1>
       <Table 
       columns={columns} 
-      dataSource={shopList} 
+      dataSource={ownerList} 
       pagination={false}
       />
       <Paging
@@ -84,7 +83,8 @@ function ShopList() {
         setPage={setCurrentPage}
      
       />
-      </>
+  </>
   );
 }
-export default ShopList;
+
+export default OwnerList;
