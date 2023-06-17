@@ -4,6 +4,8 @@ import { Table } from 'antd';
 import { Link } from "react-router-dom";
 import Paging from "components/pagination/paging";
 
+// ==============================||  ResvList - 예약 목록||============================== //
+
 const ResvList = () => {
   const [resvList, setResvList] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -27,7 +29,7 @@ const ResvList = () => {
     axiosWithBaseUrl
       .get(`/admin/reservation/${'branch'}/${1}/${'ALL'}/${currentPage}`)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         setResvList(response.data.content);
         setTotalItems(response.data.totalElements);
         setItemsPerPage(response.data.numberOfElements);

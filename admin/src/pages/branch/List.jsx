@@ -3,23 +3,25 @@ import { axiosWithBaseUrl } from "App";
 import { Link, useParams } from "react-router-dom";
 import { Table } from 'antd';
 
-function BranchList() {
-  const { id } = useParams();
-  const [branchList, setBranchList] = useState([]);
+// ==============================|| BranchList - 지점목록||============================== //
 
+function BranchList() {
+  const { id } = useParams();                       // id 값을 가져옴
+  const [branchList, setBranchList] = useState([]);
 
   useEffect(() => {
     axiosWithBaseUrl
       .get(`/admin/branch/list`)
-      .then((response) => {
-        setBranchList(response.data);
-        console.log(response.data);
+      .then((res) => {
+        setBranchList(res.data);
+        // console.log(res.data);
       })
       .catch((error) => {
         console.log(error);
       });
   }, [id]);
 
+  // 테이블 columns
   const columns = [
     {
       title: "지점ID",
@@ -63,7 +65,10 @@ function BranchList() {
       {branchList.length > 0 ? (
         <>
           <h1>지점 리스트</h1>
-          <Table dataSource={branchList} columns={columns} bordered />
+          <Table 
+          dataSource={branchList} 
+          columns={columns} 
+          bordered />
         </>
       ) : (
         <p>Loading branch list...</p>

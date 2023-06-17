@@ -1,11 +1,11 @@
-//list에 넣고 지우기
-
 import React, { useState, useEffect } from "react";
 import { axiosWithBaseUrl } from "App";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import Paging from "components/pagination/paging";
 import { Table } from 'antd';
+
+// ==============================|| DepositShopList - 예약금 리스트 ||============================== //
 
 function DepositShopList() {
   const { shopID } = useParams(); 
@@ -19,7 +19,7 @@ function DepositShopList() {
       .get(`/admin/deposit/shop/${shopID}/${page}`)
       .then((response) => {
         setDepositList(response.data.content);
-        console.log(response.data.content);
+        // console.log(response.data.content);
       })
       .catch((error) => {
         console.log(error);

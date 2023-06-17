@@ -2,16 +2,18 @@ import React, { useState, useEffect } from "react";
 import { axiosWithBaseUrl } from "App";
 import { useParams } from "react-router-dom";
 
+// ==============================||  ResvDetail - 예약상세 ||============================== //
+
 function ResvDetail() {
-  const { id } = useParams(); // useParams을 사용해서 id 값을 가져옴
-  console.log(id);
+  const { id } = useParams();                       //  id 값을 가져옴
+  // console.log(id);
   const [reserve, setReserve] = useState(null);
 
   useEffect(() => {
     axiosWithBaseUrl
       .get(`/admin/reservation/detail/${id}`)
       .then((res) => {
-        console.log(res.data[0]);
+        // console.log(res.data[0]);
         setReserve(res.data[0]);
       })
       .catch((error) => {

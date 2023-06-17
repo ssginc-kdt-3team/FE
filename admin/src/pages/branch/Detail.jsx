@@ -3,10 +3,11 @@ import { axiosWithBaseUrl } from "App";
 import { useParams, useNavigate  } from "react-router-dom";
 import { Card, Button, Typography } from 'antd';
 
+// ==============================|| BranchDetail - 지점상세||============================== //
 
 function  BranchDetail() {
-  const { id } = useParams(); // useParams을 사용해서 id 값을 가져옴
-  console.log(id);
+  const { id } = useParams(); // id 값을 가져옴
+  // console.log(id);
   const [branch, setBranch] = useState(null);
   const navigate = useNavigate();
 
@@ -26,9 +27,9 @@ function  BranchDetail() {
     navigate(`/branch/update/${id}`);
   };
 
-
   return (
     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
+    {/* branch 정보 있을 때 */}
     {branch ? (
       <Card  
       style={{
@@ -59,8 +60,8 @@ function  BranchDetail() {
           <li><p>개점일: {branch.openDay}</p></li>
           <li><p>폐점일: {branch.outDay}</p></li>
           </li>
-          
         </ul>
+        {/* 지점수정으로 이동 */}
         <div style={{ display: "flex", justifyContent: "center" }}>
         <Button type="primary" onClick={handleEdit} style={{ backgroundColor: '#cf1322' }}>수정하기</Button>
       </div>

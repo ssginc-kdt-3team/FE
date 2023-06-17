@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { axiosWithBaseUrl } from "App";
 import { Select, Button } from "antd";
-import DepositShopList from "../deposit/shop";
-import DepositList from "../deposit/list";
+import DepositShopList from "./Shop";
+import DepositList from "./List";
+
+
+// ==============================|| Filter - 지점, 매장 선택 필터 ||============================== //
 
 const { Option } = Select;
 
@@ -14,10 +17,9 @@ function Filter() {
   const [selectedBranchName, setSelectedBranchName] = useState("");
   const [selectedShopName, setSelectedShopName] = useState("");
   const [isFiltering, setIsFiltering] = useState(false);
-  
-  // Define the state and setState function for depositBranchID
-  const [depositBranchID, setDepositBranchID] = useState("");
+    const [depositBranchID, setDepositBranchID] = useState("");
 
+  //지점, 매장 선택
   useEffect(() => {
     axiosWithBaseUrl
       .get("/branch/all")
@@ -29,7 +31,6 @@ function Filter() {
       });
   }, []);
 
-
   const handleBranchIDChange = (value) => {
     setBranchID(value);
     setSelectedBranchName(branchOptions.find((branch) => branch.id === value)?.name || "");
@@ -40,7 +41,7 @@ function Filter() {
         .get(`/admin/deposit/branch/${value}`)
         .then((response) => {
           setShopOptions(response.data.content);
-          console.log(response.data.content);
+          // console.log(response.data.content);
         })
         .catch((error) => {
           console.log(error);
@@ -48,7 +49,6 @@ function Filter() {
     } else {
       setShopOptions([]);
     }
-    // Update the branchID value in DepositList component
     setDepositBranchID(value);
   };
 
