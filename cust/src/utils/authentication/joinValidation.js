@@ -34,14 +34,14 @@ export const isPasswordValid = (password, target, stateSetter) => {
 
 // 이메일 중복 확인
 export const checkEmailDup = (email, stateSetter, emailSetter) => {
-  console.log('중복 확인용 이메일: ' + email);
+  // console.log('중복 확인용 이메일: ' + email);
 
   if(isEmailValid(email)) { // 이메일 형식이 맞으면
     axios.post('/customer/emailCheck', { // 이메일 중복 확인 수행
       email: email
     })
     .then(res => { // 받아오는 정보가 있다
-      console.log(res.data);
+      // console.log(res.data);
       if(res.data === true) { // DB에 없다
         success("사용가능한 이메일 입니다.");
         stateSetter(true);

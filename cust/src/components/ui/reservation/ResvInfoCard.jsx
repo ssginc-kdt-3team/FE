@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import styles from '../../../assets/css/ui/reservation/ResvInfoCard.module.css';
 import ResvStatusTag from '../../ui/reservation/ResvStatusTag';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import AddReview from '../../modal/reservation/AddReview';
 import { Button } from 'antd';
 import { canUpdate } from '../../../utils/reservation/reservationValidation';
@@ -20,7 +20,7 @@ function ResvInfoCard({data, resvId}) {
     // if(data)
     //   canUpdate(data.expectedTime.slice(0, 19));
 
-    console.log('isDisabled :' + status);
+    // console.log('isDisabled :' + status);
     if(status === 'RESERVATION')
       return false;
 

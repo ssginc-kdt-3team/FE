@@ -2,9 +2,7 @@
 import { DashboardOutlined } from '@ant-design/icons';
 
 // icons
-const icons = {
-    DashboardOutlined
-};
+const icons = { DashboardOutlined };
 
 // ==============================|| MENU ITEMS - DASHBOARD ||============================== //
 

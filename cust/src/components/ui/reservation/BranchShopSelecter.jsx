@@ -5,7 +5,7 @@ import { Select } from 'antd';
 const { Option } = Select;
 
 function Filter({isFromShop, setIsFromShop, branchId, setBranchId, shopId, setShopId, resvInfo, setResvInfo, shopName, setShopName}) {
-  console.log('[Filter] isFromShop: ' + isFromShop);
+  // console.log('[Filter] isFromShop: ' + isFromShop);
   const [branchList, setBranchList] = useState(null);
   const [shopList, setShopList] = useState(null);
   
@@ -17,7 +17,7 @@ function Filter({isFromShop, setIsFromShop, branchId, setBranchId, shopId, setSh
 
   // 매장 선택 처리
   const handleShopSelect = (e) => { // 매장 정보가 변경될 때 마다
-    console.log(e);
+    // console.log(e);
 
     // const selectedShop = shopList.find(shop => shop.id === e); // 선택된 매장을 shopList에서 찾아서
     // if(selectedShop) {
@@ -33,13 +33,13 @@ function Filter({isFromShop, setIsFromShop, branchId, setBranchId, shopId, setSh
   }
   
   // console.log(state);
-  console.log('[Filter] 지점id: ' + branchId + ' / 매장id: ' + shopId  + ' / 매장명: ' + shopName);
+  // console.log('[Filter] 지점id: ' + branchId + ' / 매장id: ' + shopId  + ' / 매장명: ' + shopName);
 
   // 지점 정보 가져오기
   useEffect(() => {
     axios.get('/branch/all')
     .then(res => {
-      console.log(res.data);
+      // console.log(res.data);
       setBranchList(res.data);
     })
     .catch(err => {
@@ -52,11 +52,11 @@ function Filter({isFromShop, setIsFromShop, branchId, setBranchId, shopId, setSh
   useEffect(() => {
     axios.get(`/branch/shops/${branchId}`)
     .then(res => {
-      console.log(res.data);
+      // console.log(res.data);
       setShopList(res.data);
 
       if(!isFromShop) { // 매장 선택 없이 들어오면
-        console.log('매장 선택 X');
+        // console.log('매장 선택 X');
         setShopId(res.data[0].id); // shopId를 각 지점별 매장 리스트의 첫 번째 원소로
         setShopName(res.data[0].name); // 매장명 설정
       }

@@ -33,9 +33,9 @@ function Review() {
     // axios.get(`/shop/detail/review/${loginState.id}/${currentPage}`)
     axios.get(`/customer/review/all/${loginInfo.id}/${currentPage}`)
     .then(res => {
-      console.log(res.data);
+      // console.log(res.data);
       setReviewList(res.data.content);
-      setHasData(res.data.length > 0);
+      setHasData(res.data.content.length > 0);
       setTotalItems(res.data.totalElements); // 총 아이템 수 설정
       setItemsPerPage(res.data.pageable.pageSize); // 페이지당 아이템 수 설정
     })

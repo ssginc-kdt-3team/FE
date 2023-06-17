@@ -6,7 +6,6 @@ import PageTitle from '../../ui/PageTitle';
 import ShopInfoCardR from '../../ui/reservation/ShopInfoCard';
 import CustInfoCard from '../../ui/reservation/CustInfoCard';
 import ResvInfoCard from '../../ui/reservation/ResvInfoCard';
-// import { axiosWithBaseUrl } from '../../../App'
 
 function Resv() {
   const { resvId } = useParams();
@@ -18,7 +17,7 @@ function Resv() {
   useEffect(() => {
     axios.get(`customer/reservation/${resvId}`)
     .then(res => {
-      console.log(res.data);
+      // console.log(res.data);
 
       // 예약 정보 저장
       setResvInfo({

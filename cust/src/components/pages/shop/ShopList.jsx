@@ -15,7 +15,7 @@ function ShopList() {
   useEffect(() => {
     axios.get(`/shop/list/${branchId}`)
     .then(res => {
-      console.log(res.data);
+      // console.log(res.data);
       setShopList(res.data);
     })
     .catch(err => {

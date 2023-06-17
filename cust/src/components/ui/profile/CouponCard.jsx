@@ -1,6 +1,5 @@
 import React from 'react';
 import { cashFormat } from '../../../utils/format';
-import couponRight from '../../../assets/images/coupon_right_t.png';
 import coupon from '../../../assets/images/coupon.png';
 import styled from 'styled-components';
 

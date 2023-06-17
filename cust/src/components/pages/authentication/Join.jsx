@@ -82,7 +82,7 @@ function Join() {
   
   // 주소 검색
   const handleAddressChange = (data) => {
-    console.log(data);
+    // console.log(data);
     
     dispatch({ 
       name: 'address', 
@@ -117,11 +117,11 @@ function Join() {
         return;
       }
       
-      console.log(userInfo);
+      // console.log(userInfo);
 
       axios.post('/customer/join', userInfo)
       .then(res => { // 받아오는 정보가 있다
-        console.log(res.data);
+        // console.log(res.data);
         if(res.data === "")
           error("회원가입에 실패하였습니다.");
         else {

@@ -5,6 +5,8 @@ import { axiosWithBaseUrl } from 'App';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
+// ==================================|| MyProfile, 점주프로필 ||================================== //
+
 
 const Span = styled.span`
   color: #999;

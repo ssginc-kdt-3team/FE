@@ -29,7 +29,7 @@ function Login() {
           password: password, // password
         })
         .then(res => { // 받아오는 정보가 있다
-          console.log(res.data);
+          // console.log(res.data);
           // console.log('res.data.token: ' + res.data.token);
           
           // const accessToken = res.data.token;

@@ -29,7 +29,7 @@ function Shop() {
   useEffect(() => {
     axios.get(`/shop/detail/${shopId}`)    
     .then(res => {
-      console.log(res.data);
+      // console.log(res.data);
       setShopInfo({
         shopId: res.data.shopId,
         shopName: res.data.shopName,
@@ -57,8 +57,8 @@ function Shop() {
   useEffect(() => {
     axios.get(`/shop/detail/review/${shopId}/${currentPage}`)    
     .then(res => {
-      console.log(res.data);
-      setHasReviewData(res.data.length > 0);
+      // console.log(res.data);
+      setHasReviewData(res.data.content.length > 0);
       setReviewList(res.data.content);
       setTotalItems(res.data.totalElements); // 총 아이템 수 설정
       setItemsPerPage(res.data.pageable.pageSize); // 페이지당 아이템 수 설정
@@ -89,7 +89,7 @@ function Shop() {
                     {
                       menuList && menuList.map( menu => (
                         <MenuCard key={menu.menuId} data={menu}/>
-                      )).slice(0, 8)
+                      ))
                     }
                   </ul>
                 </div>

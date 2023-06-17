@@ -1,12 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+// initial state
 const userInitialState  = {
     id:'',
     name: ''
 };
 
-//createSlice : reducer, action 생성 (둘을 캡슐화한 버전이 createSlice)
-const userSlice = createSlice({
+// ==============================|| SLICE - USER ||============================== //
+const userSlice = createSlice({                             //createSlice : reducer, action 생성 (둘을 캡슐화한 버전이 createSlice)
     name: 'user',
     initialState: userInitialState,
     reducers: {

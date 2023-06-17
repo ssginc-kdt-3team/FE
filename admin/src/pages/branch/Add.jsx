@@ -1,10 +1,12 @@
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { axiosWithBaseUrl } from "App";
 import { Card, Button, DatePicker, TimePicker, Form, Input, Upload, Modal } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-import { axiosWithBaseUrl } from "App";
 import dayjs from 'dayjs';
 import Postcode from 'components/daumpostcode/postcode';
+
+// ==============================|| BranchAdd - 지점등록 ||============================== //
 
 // 시간 형식
 const format = 'HH:mm';
@@ -60,7 +62,9 @@ function BranchAdd() {
     });
 
     try {
-      const res = await axiosWithBaseUrl.post('/admin/branch/add', formData, {
+      const res = await 
+      axiosWithBaseUrl
+      .post('/admin/branch/add', formData, {
         headers: {
           "Content-Type": "multipart/form-data"
         }
@@ -85,7 +89,6 @@ function BranchAdd() {
   };
 
   const onFinish = () => {
-    // Handle form submission if needed
   };
 
   const handleFileChange = (info) => {
@@ -120,12 +123,13 @@ function BranchAdd() {
       detail: value.detail,
     });
   };
-
+  
+// 숫자만 입력가능
   const onlyNum = (input) => {
     return input.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
   };
   
-
+// 지점등록 input 전부 not null
   return (
     <Card
       title="지점 등록"
@@ -152,6 +156,7 @@ function BranchAdd() {
         }}
         onFinish={onFinish}
       >
+        {/* 지점명 */}
         <Form.Item
           label="지점명"
           name="branchName"
@@ -161,6 +166,7 @@ function BranchAdd() {
         >
           <Input value={branchName} onChange={(e) => setBranchName(e.target.value)} />
         </Form.Item>
+        {/* 전화번호 */}
         <Form.Item
           label="전화번호"
           name="phone"
@@ -176,6 +182,7 @@ function BranchAdd() {
            />
 
         </Form.Item>
+        {/* 지점 주소 */}
         <Form.Item
           name="Postcode"
           label="주소"
@@ -193,6 +200,7 @@ function BranchAdd() {
               onChange={(e) => setAddress({ ...address, detail: e.target.value })}
             />       
              </Form.Item>
+        {/* 개장시간 */}
         <Form.Item
           label="개장시간"
           name="openingTime"
@@ -211,6 +219,7 @@ function BranchAdd() {
         >
           <TimePicker format={format} value={openingTime} onChange={setOpeningTime} />
         </Form.Item>
+        {/* 폐장시간 */}
         <Form.Item
           label="폐장시간"
           name="closingTime"
@@ -229,6 +238,7 @@ function BranchAdd() {
         >
           <DatePicker value={openingDate} onChange={setOpeningDate} />
         </Form.Item>
+        {/* 지점 사진 */}
         <Form.Item
           label="지점 사진"
           name="photos"
@@ -253,11 +263,13 @@ function BranchAdd() {
             </div>
           </Upload>
         </Form.Item>
+
+        {/* 등록하기 버튼 */}
         <Form.Item>
           <Button type="primary" onClick={showModal}>
             등록하기
           </Button>
-          <Modal title="등록" visible={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+          <Modal title="지점 등록" visible={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
             <p>지점을 등록하시겠습니까?</p>
           </Modal>
         </Form.Item>

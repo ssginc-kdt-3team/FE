@@ -4,8 +4,8 @@ import { Card, Typography, Button } from 'antd';
 import { axiosWithBaseUrl } from 'App';
 import { useSelector, useDispatch } from 'react-redux';
 import ShopDetail from '../mgt/information/Detail';
-// import { setShopInfo } from 'store/reducers/shopslice';
 
+// ==================================|| ShopProfile, 매장프로필 ||================================== //
 
 function ShopProfile() {
   const id = useSelector((state) => state.user.id);

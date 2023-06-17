@@ -36,9 +36,9 @@ const Postcode = ({ onChange }) => {
       district: data.buildingName,  
       
     });
-    console.log(fullAddress);   // 예: '서울 성동구 왕십리로2길 20 (성수동1가)'
-    console.log(data.address); 
-    console.log(extraAddress);  
+    // console.log(fullAddress);   // 예: '서울 성동구 왕십리로2길 20 (성수동1가)'
+    // console.log(data.address); 
+    // console.log(extraAddress);  
   };
 
   const handleClick = () => {

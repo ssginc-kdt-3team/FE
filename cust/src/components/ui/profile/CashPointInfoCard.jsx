@@ -18,7 +18,7 @@ const P = styled.p`
 
 function CashInfoCard({data, remained, isCash, setNeedReRender}) {
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태
-  console.log(data);
+  // console.log(data);
 
   return (
     <>

@@ -16,19 +16,19 @@ function TimePicker({shopId, defaultValue, setSelectedTime, selectedDate}) {
   // console.log('넘어온 defaultValue : ' + defaultValue);
   // console.log('selectedOption : ' + selectedOption);
 
-  const onChange = (value) => {
-    console.log(`선택된 시간값: ${value}`);
+  // const onChange = (value) => {
+  //   console.log(`선택된 시간값: ${value}`);
     // console.log(moment(new Date()).format("HH:mm:SS"));
-  };
+  // };
 
   const handleOptionChange = (e) => {
     const value = e.target.value;
     setSelectedOption(value);
     setSelectedTime(value);
     
-    if (onChange) {
-      onChange(value);
-    }
+    // if (onChange) {
+    //   onChange(value);
+    // }
   };
   
   // 매장별 예약 가능 시간 정보 가져오기
@@ -39,7 +39,7 @@ function TimePicker({shopId, defaultValue, setSelectedTime, selectedDate}) {
         date: moment(selectedDate).format("YYYY-MM-DD")
       })
       .then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         setPossibleTimeList(res.data);
       })
       .catch(err => {

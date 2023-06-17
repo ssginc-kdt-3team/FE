@@ -17,7 +17,7 @@ function CashInfo() {
   useEffect(() => {
     axios.get(`/customer/charge/check/${loginInfo.id}`)
     .then(res => {
-      console.log(res);
+      // console.log(res);
       setRemainedCash(res.data.value);
     })
     .catch(err => { // 오류 처리

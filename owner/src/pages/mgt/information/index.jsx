@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { Button, Typography} from 'antd';
 import { Grid } from '@mui/material';
 
 import { axiosWithBaseUrl } from 'App';
 import MenuList from '../menu/List';
-import ShopDetail from './Detail';
-//userSlice의 id 값 가져오기
-import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';             //userSlice의 id 값 가져오기
+
+// ==================================|| MgtInfo, 매장, 메뉴정보 ||================================== //
 
 function MgtInfo() {
   const id = useSelector((state) => state.user.id);  
@@ -20,8 +19,8 @@ function MgtInfo() {
     axiosWithBaseUrl
       .get(`/owner/shop/detail/${id}`)
       .then((res) => {
-        console.log(res.data);
-        console.log(id);
+        // console.log(res.data);
+        // console.log(id);
         setShopInfo(res.data);
         setMenuList(res.data.menus);
       })
@@ -46,6 +45,7 @@ function MgtInfo() {
                 등록하기
               </Button>
             </div>
+            {/* import 메뉴 리스트 */}
             <MenuList menuList={menulist} />
           </Grid>
         )}

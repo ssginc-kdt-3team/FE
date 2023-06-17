@@ -8,9 +8,9 @@
 }
 
 /* 매장명 */
-#nameWrap {
+/* #nameWrap {
   width: 20%;
-}
+} */
 #nameWrap > p {
   /* font-size: var(--input-fontSize); */
   color: var(--footer-font);

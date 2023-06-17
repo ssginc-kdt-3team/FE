@@ -1,8 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+// initial state
 const shopinitialState = {
   shopId: '',
 };
+
+// ==============================|| SLICE - SHOP ||============================== //
 
 const shopSlice = createSlice({
   name: 'shop',

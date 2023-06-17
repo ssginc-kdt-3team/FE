@@ -7,7 +7,7 @@ import MobNav from './MobNav';
 import SubMenu from './SubMenu';
 import { useRecoilState } from 'recoil';
 import { loginState } from '../../state/loginState';
-import { confirm } from '../../utils/notification';
+// import { confirm } from '../../utils/notification';
 
 function Header() {
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ function Header() {
   const [isNavOpen, setIsNavOpen] = useState(false);
  
   const handleNav = () => {
-    console.log(isNavOpen)
+    // console.log(isNavOpen);
     setIsNavOpen(!isNavOpen);
   };
 
@@ -47,24 +47,24 @@ function Header() {
   }
 
   // 헤더 메뉴 이동
-  const handleMove = (data) => {
-    console.log(data.needLogin);
-    console.log(data.link);
+  // const handleMove = (data) => {
+  //   console.log(data.needLogin);
+  //   console.log(data.link);
     
-    if(data.needLogin) {
-      if(loginInfo.isLoggedin) {
-        navigate(data.link);
-        return;
-      }
-      else {
-        confirm('로그인이 필요합니다.', () => { navigate('/login'); });
-        return;
-      }
-    }
-    console.log('needLogin false')
-    navigate(data.link);
-    return;
-  }
+  //   if(data.needLogin) {
+  //     if(loginInfo.isLoggedin) {
+  //       navigate(data.link);
+  //       return;
+  //     }
+  //     else {
+  //       confirm('로그인이 필요합니다.', () => { navigate('/login'); });
+  //       return;
+  //     }
+  //   }
+  //   console.log('needLogin false')
+  //   navigate(data.link);
+  //   return;
+  // }
 
   return (
     <div className='fixed-top' style={{zIndex: '99'}}>

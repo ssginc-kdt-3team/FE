@@ -3,6 +3,9 @@ import { useParams } from "react-router-dom";
 import { axiosWithBaseUrl } from 'App';
 import { Card, Typography, Divider, Tag } from 'antd';
 
+// ==============================|| DepositDetail, 예약 상세 정보 ||============================== //
+
+
 //예약 상세 정보
 function DepositDetail() {
   //deposittable 에서  예약id 받아오기 
@@ -51,9 +54,12 @@ function DepositDetail() {
       <Card
         title={
           <div style={{ textAlign: "center", marginBottom: "5px" }}>
-            <Typography.Title level={4}>예약금 상세 정보</Typography.Title>
+            <Typography.Title level={4}>예약금 상세정보</Typography.Title>
           </div>
         }
+        style={{
+          width: 800,
+        }}
       >
         {resv ? (
           <div>
@@ -62,6 +68,19 @@ function DepositDetail() {
                 예약 상태 {getStatusTag(resv.status)}
             </p>            
             </li>
+            <Divider>예약금 정보</Divider>
+            <ul>
+              <li style={{ listStyle: "none" }}>
+                <p>예약자명: {resv.name}</p>
+              </li>
+              <li style={{ listStyle: "none" }}>
+                <p>예약금: {resv.originValue}</p>
+              </li>
+              <li style={{ listStyle: "none" }}>
+                <p>위약금: {resv.penaltyValue}</p>
+              </li>
+            </ul>
+
             <Divider>예약 정보</Divider>
             <ul>
               <li style={{ listStyle: "none" }}>
@@ -81,22 +100,6 @@ function DepositDetail() {
               </li>
               <li style={{ listStyle: "none" }}>
                 <p>취소사유: {resv.cancelReason}</p>
-              </li>
-            </ul>
-
-            <Divider>예약자 정보</Divider>
-            <ul>
-              <li style={{ listStyle: "none" }}>
-                <p>예약자명: {resv.name}</p>
-              </li>
-              <li style={{ listStyle: "none" }}>
-                <p>예약자 번호: {resv.phoneNumber}</p>
-              </li>
-              <li style={{ listStyle: "none" }}>
-                <p>예약금: {resv.deposit}</p>
-              </li>
-              <li style={{ listStyle: "none" }}>
-                <p>위약금: {resv.penalty}</p>
               </li>
             </ul>
           </div>

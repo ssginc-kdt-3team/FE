@@ -7,7 +7,7 @@ import { Grid, Stack, Typography, Button } from '@mui/material';
 import AuthWrapper from '../AuthWrapper';
 import LoginForm from '../auth-forms/LoginForm';
 
-// ================================|| LOGIN ||================================ //
+// ================================|| NoAccess ||================================ //
 
 const NoAccess = () => (
     <AuthWrapper>

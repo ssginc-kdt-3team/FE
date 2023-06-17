@@ -7,12 +7,10 @@ import styles from '../../../assets/css/pages/reservation/AddResv.module.css';
 import '../../../assets/css/ui/reservation/Calendar.css'; // css import
 import Counter from '../../ui/reservation/Counter';
 import { useNavigate, useParams } from 'react-router-dom';
-// import { axiosWithBaseUrl } from '../../../App'
 import TimePicker from '../../ui/reservation/TimePicker';
 import { blockCalendar } from '../../../utils/reservation/blockCalendar';
 import PageTitle from '../../ui/PageTitle';
 import { Button, Select } from 'antd';
-// import { success } from '../../../utils/notification';
 import PayUpdate from '../../modal/reservation/PayUpdate';
 
 const { Option } = Select;
@@ -53,7 +51,7 @@ function UpdateResv() {
   useEffect(() => {
     axios.get(`/customer/reservation/update/${resvId}`)
     .then(res => {
-      console.log(res.data);
+      // console.log(res.data);
       setPreviousResvInfo(res.data);
       setResvInfo(prevResvInfo => ({
         ...prevResvInfo,
@@ -79,7 +77,7 @@ function UpdateResv() {
 
   useEffect(() => {
     previousResvInfo && setPayedDeposit((parseInt(previousResvInfo.people) - parseInt(previousResvInfo.child)) * 2000);
-    console.log('지불된 예약금: ' + payedDeposit);
+    // console.log('지불된 예약금: ' + payedDeposit);
   }, [previousResvInfo])
 
   // 시간, 날짜, 예약인원, 유아 수가 바뀔 때마다 resvInfo 업데이트
@@ -186,7 +184,7 @@ function UpdateResv() {
             {/* 버튼 */}
             <div id={styles.buttonWrap} className='center width-100 flex-gap-20'>
               <Button className='button buttonReverse' onClick={() => navigate(-1)}>취소</Button>
-              <Button type='primary' className='button' onClick={() => setIsModalOpen(true)}>완료</Button>
+              <Button type='primary' className='button' onClick={() => setIsModalOpen(true)}>결제하기</Button>
             </div>
             
           </form>

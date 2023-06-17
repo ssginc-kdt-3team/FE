@@ -51,11 +51,11 @@ function Point() {
 
   // 포인트 내역 가져오기
   useEffect(() => {
-    console.log('type: ' + type + ' / dateRange: ' + dateRange);
+    // console.log('type: ' + type + ' / dateRange: ' + dateRange);
     // axios.get(`/customer/review/all/${loginInfo.id}/${currentPage}`)
     axios.get(`/customer/point/list/${loginInfo.id}/${type}/${dateRange}/${currentPage}`)
     .then(res => {
-      console.log(res.data);
+      // console.log(res.data);
       setPointList(res.data.content);
       setHasData(res.data.content.length > 0);
       setTotalItems(res.data.totalElements); // 총 아이템 수 설정
@@ -73,7 +73,7 @@ function Point() {
     // axios.get(`/customer/charge/check/${2}`)
     axios.get(`/customer/point/check/${loginInfo.id}`)
     .then(res => {
-      console.log(res);
+      // console.log(res);
       setRemainedPoint(res.data.value);
     })
     .catch(err => { // 오류 처리

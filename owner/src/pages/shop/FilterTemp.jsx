@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { Select } from "antd";
 import { axiosWithBaseUrl } from 'App';
 
+// ==================================||FilterTemp, 지점 선택 필터||================================== //
+
 const { Option } = Select;
 
 function FilterTemp({ type, setType, branchId, setBranchId }) {
@@ -28,7 +30,8 @@ function FilterTemp({ type, setType, branchId, setBranchId }) {
     const fetchData = async () => {
       try {
         const [res1] = await Promise.all([
-          axiosWithBaseUrl.get('/branch/all'),
+          axiosWithBaseUrl
+          .get('/branch/all'),
         ]);
         setBranchList(res1.data);
       } catch (err) {

@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { axiosWithBaseUrl } from 'App';
 import { useNavigate } from 'react-router-dom';
 
-
+// ==================================|| 메인2. 매장정보 ||================================== //
 
 const Span = styled.span`
   color: #999;

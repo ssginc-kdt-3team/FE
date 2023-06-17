@@ -33,7 +33,7 @@ function FindId() {
     if(!isInputEmpty(inputInfo)) {
       axios.post(`/customer/findEmail`, inputInfo)
       .then(res => { // 받아오는 정보가 있다
-        console.log(res);
+        // console.log(res);
         if(res.data !== null) {
           confirm('아이디 찾기에 성공하였습니다.', () => {
             navigate(`/find-id/result`, { replace: true, state: { name: inputInfo.name, email: res.data } });

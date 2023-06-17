@@ -32,7 +32,7 @@ function EventCarousel() {
   useEffect(() => {
     axios.get('/event/banners')
     .then(res => {
-      console.log(res.data);
+      // console.log(res.data);
       setEventList(res.data);
     })
     .catch(err => {

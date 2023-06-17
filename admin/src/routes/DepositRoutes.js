@@ -6,8 +6,8 @@ import MainLayout from 'layout/MainLayout/index';
 
 // render - deposit
 const Deposit = Loadable(lazy(() => import('pages/deposit/index')));
-const DepositFilter = Loadable(lazy(() => import('pages/deposit/filter')));
-const DepositList = Loadable(lazy(() => import('pages/deposit/list')));
+const DepositFilter = Loadable(lazy(() => import('pages/deposit/Filter')));
+const DepositList = Loadable(lazy(() => import('pages/deposit/List')));
 
 // ==============================|| Deposit ROUTING ||============================== //
 

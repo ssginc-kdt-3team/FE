@@ -4,6 +4,7 @@ import {  useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 
+// ==================================|| ShopDetail, 매장상세 ||================================== //
 
 const Img = styled.img`
   width: 100%;

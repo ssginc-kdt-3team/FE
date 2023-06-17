@@ -3,34 +3,32 @@ import { lazy } from 'react';
 // project import
 import Loadable from 'components/Loadable';
 import MainLayout from 'layout/MainLayout';
-import Profile from '../pages/admin/profile';
-import ResvList from '../pages/resv/list';
-import ResvDetail from '../pages/resv/detail';
+import ResvList from '../pages/resv/List';
+import ResvDetail from '../pages/resv/Detail';
 // import Deposit from '../pages/deposit/index';
 // import DepositList from '../pages/deposit/list';
 // import DepositLayout from '../pages/deposit/Layout'; // 추가된 부분
 import Deposit from '../pages/deposit/index';
-import DepositList from '../pages/deposit/list';
-import DepositFilter from '../pages/deposit/filter'; 
-import DepositShopList from '../pages/deposit/shop';
-import CustList from '../pages/cust/list';
-import CustDetail from '../pages/cust/detail';
-import OwnerList from '../pages/owner/list';
-import OwnerDetail from '../pages/owner/detail';
-import OwnerJoin from '../pages/owner/join';
-import ShopList from '../pages/shop/list';
-import ShopDetail from '../pages/shop/detail';
-import ShopReview from '../pages/shop/review';
-import ShopMenu from '../pages/shop/menu';
-import ShopReg from '../pages/shop/reg';
-import BranchList from '../pages/branch/list';
-import BranchDetail from 'pages/branch/detail';
+import DepositList from '../pages/deposit/List';
+import DepositFilter from '../pages/deposit/Filter'; 
+import DepositShopList from '../pages/deposit/Shop';
+import CustList from '../pages/cust/List';
+import CustDetail from '../pages/cust/Detail';
+import OwnerList from '../pages/owner/List';
+import OwnerDetail from '../pages/owner/Detail';
+import ShopList from '../pages/shop/List';
+import ShopDetail from '../pages/shop/Detail';
+// import ShopReview from '../pages/shop/review';
+// import ShopMenu from '../pages/shop/menu';
+// import ShopReg from '../pages/shop/reg';
+import BranchList from '../pages/branch/List';
+import BranchDetail from 'pages/branch/Detail';
 import BranchAdd from '../pages/branch/Add'
-import BranchUpdate from '../pages/branch/update'
-import NotitextList from '../pages/notitext/list';
-import NotitextReg from '../pages/notitext/reg';
-import GradeList from '../pages/grade/list';
-import CuponList from '../pages/cupon/list';
+import BranchUpdate from '../pages/branch/Update'
+import NotitextList from '../pages/notitext/List';
+import NotitextReg from '../pages/notitext/Reg';
+import GradeList from '../pages/grade/List';
+import CuponList from '../pages/cupon/List';
 
 
 
@@ -51,10 +49,6 @@ const MainRoutes = {
         {
             path: '/main',
             element: <DashboardDefault />
-        },
-        {
-            path: '/admin/profile',
-            element: <Profile />
         },
         {
             path: '/cust',
@@ -98,10 +92,6 @@ const MainRoutes = {
                     element: <OwnerList />
                 },
                 {
-                    path: '/owner/reg',
-                    element: <OwnerJoin />
-                },
-                {
                     path: '/owner/detail/:id',
                     element: <OwnerDetail />
                 },
@@ -131,18 +121,14 @@ const MainRoutes = {
             path: '/shop/detail/:id',
             element: <ShopDetail />
         },
-        {
-            path: '/shop/review',
-            element: <ShopReview />
-        },
-        {
-            path: '/shop/menu',
-            element: <ShopMenu/>
-        },
-        {
-            path: '/shop/reg',
-            element: <ShopReg/>
-        },
+        // {
+        //     path: '/shop/review',
+        //     element: <ShopReview />
+        // },
+        // {
+        //     path: '/shop/reg',
+        //     element: <ShopReg/>
+        // },
             ]
         },
         {
