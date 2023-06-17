@@ -25,7 +25,7 @@ function Pay({isModalOpen, setIsModalOpen, data, setData, payedDeposit}) {
   const handlePay = () => {
     // console.log(data);
     
-    confirm('결제 하시겠습니까?', () => {   
+    confirm(' ', () => {   
       axios.post(`/customer/reservation/update/${data.reservationId}`, data)
       .then(res => {
         console.log(res);
