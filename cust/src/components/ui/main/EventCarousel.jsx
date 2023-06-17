@@ -18,7 +18,7 @@ const settings = {
   dots: true,
   infinite: true,
   speed: 500,
-  autoplay: false,
+  autoplay: true,
   autoplaySpeed: 4000,
   pauseOnHover : true, // 슬라이드 이동	시 마우스 호버하면 슬라이더 멈추게 설정
   // vertical : true, // 세로 방향 슬라이드 옵션
