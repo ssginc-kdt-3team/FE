@@ -7,9 +7,9 @@ import './App.css';
 // ==============================|| APP - THEME, ROUTER, LOCAL  ||============================== //
 
 // 도메인서버
-// export const axiosWithBaseUrl = axios.create({
-//     baseURL: 'https://www.teamyes.xyz',
-//   });
+export const axiosWithBaseUrl = axios.create({
+    baseURL: 'https://www.teamyes.xyz',
+  });
   
 // 모바일 테스트용
 // export const axiosWithBaseUrl = axios.create({
@@ -17,9 +17,9 @@ import './App.css';
 //   });
 
 // 로컬서버
-export const axiosWithBaseUrl = axios.create({
-    baseURL: 'http://localhost:8080',
-  });
+// export const axiosWithBaseUrl = axios.create({
+//     baseURL: 'http://localhost:8080',
+//   });
 
 const App = () => (
     <ThemeCustomization> 

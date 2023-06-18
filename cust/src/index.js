@@ -4,9 +4,9 @@ import App from './App';
 import axios from 'axios';
 
 // axios.defaults.baseURL = 'http://10.10.10.67:8080';
-// axios.defaults.baseURL = 'https://www.teamyes.xyz';
+axios.defaults.baseURL = 'https://www.teamyes.xyz';
 // axios.defaults.baseURL = 'http://192.168.10.16:8080';
-axios.defaults.baseURL = 'http://localhost:8080';
+// axios.defaults.baseURL = 'http://localhost:8080';
 // axios.defaults.withCredentials = true;
 
 export const axiosWithToken = axios.create({
